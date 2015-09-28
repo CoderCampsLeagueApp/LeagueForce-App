@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>My App</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/site.css">
+</head>
+<body >	
+	<div ng-controller='NavController as vm'>
+		<div id="navHolder"></div>
+		<nav>
+			<ul>
+				<li class="logo1"><a class="logo" href="#">Mighty Leagues</a></li>
+				
+				<li><a ui-sref="Register">Sign up</a></li>
+				<li><a ui-sref="Login">Login</a></li>
+				<li><a ui-sref="Leagues">Leagues</a></li>
+				<li><a ui-sref="About">About</a></li>
+				<li><a ui-sref="Home">Home</a></li>
+			</ul>
+		</nav>
+		<ui-view></ui-view>
+	</div>
+	<!-- Ext Libs -->
+	<script src="angular/angular.min.js"></script>
+	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
+	<!-- Global Src -->
+	<script src="/javascript/app.js"></script>
+	<!-- Factories -->
+	<script src="/javascript/services/HomeFactory.js"></script>
+	<!-- Controllers -->
+	<script src="/javascript/controllers/HomeController.js"></script>
+	<script src="/javascript/controllers/NavController.js"></script>
+</body>
+</html>
