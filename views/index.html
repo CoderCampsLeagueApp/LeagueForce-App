@@ -8,10 +8,10 @@
 	<link rel="stylesheet" href="/css/animate.css">
 </head>
 <body >	
-	<div ng-controller='NavController as vm'>
+	<div ng-controller="NavController as nav">
 		<div id="navHolder"></div>
 		<nav>
-			<ul>
+			<ul ng-show="!nav.status.id">
 				<li class="logo1"><a class="logo" href="#">Mighty Leagues</a></li>
 				
 				<li><a ui-sref="Register">Sign up</a></li>
@@ -21,6 +21,16 @@
 				<li><a ui-sref="Home">Home</a></li>
 				<li><a ui-sref="TestView">Test</a></li>
 			</ul>
+
+			<ul ng-show="nav.status.id">
+				<li class="logo1"><a class="logo" href="#">Mighty Leagues</a></li>
+				<li><a ng-click="nav.logout()">Logout</a></li>
+				<li><a ui-sref="Profile">{{nav.status.username}}</a></li>
+				<li><a ui-sref="Leagues">Leagues</a></li>
+				<li><a ui-sref="About">About</a></li>
+				<li><a ui-sref="Home">Home</a></li>
+			</ul>
+
 		</nav>
 		<ui-view></ui-view>
 	</div>
