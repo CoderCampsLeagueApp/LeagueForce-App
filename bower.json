@@ -2,19 +2,21 @@
   "name": "appname",
   "version": "0.0.0",
   "authors": [
-  "--"
+    "--"
   ],
   "license": "MIT",
   "ignore": [
-  "**/.*",
-  "node_modules",
-  "bower_components",
-  "test",
-  "tests"
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
   ],
   "dependencies": {
     "bootstrap": "~3.3.5",
     "angular": "~1.4.3",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-modal-service": "~0.6.9",
+    "angular-ui-bootstrap": "~0.13.4"
   }
 }

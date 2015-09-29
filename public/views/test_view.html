@@ -11,8 +11,7 @@
 <div style="clear: both;">
 	<div class="well col-md-3" ng-repeat="l in vm.leagues | orderBy: 'createdate': true">
 		<strong>{{l.name}}</strong> <br>{{l.about}}<br>
-		<!-- have fun with edit
-		<button ng-click="pm.editPicture({id: picture._id})" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-cog"></span></button> -->
+		<button ng-click="vm.editLeague({id: l._id})" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-cog"></span></button>
 		<button class="btn btn-sm btn-danger" ng-click="vm.deleteLeague(l._id)"><span class="glyphicon glyphicon-remove"></span></button>
 	</div>
 </div>

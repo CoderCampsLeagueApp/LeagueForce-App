@@ -42,6 +42,14 @@
 			return q.promise;
 		}
 
+		o.editLeague = function(oldLeague, league) {
+			var q = $q.defer();
+			$http.put('/api/league' + oldLeague._id, league).success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise;
+		};
+
 		o.deleteLeague = function(league) {
 			var q = $q.defer();
 			$http.delete('/api/league/' + league).success(function(res) {

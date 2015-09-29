@@ -47,6 +47,12 @@
 
 		vm.getLeagues();
 
+		vm.editLeague = function(league) {
+			LeagueFactory.editLeague(vm.oldLeague, vm.league).then(function() {
+				vm.getLeagues();
+			})
+		}
+
 		vm.deleteLeague = function(league) {
 			LeagueFactory.deleteLeague(league).then(function(res) {
 				vm.leagues.splice(vm.leagues.indexOf(league), 1);
