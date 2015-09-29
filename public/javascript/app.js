@@ -22,6 +22,11 @@
 		}).state('AdminRegister', {
 			url: '/admin/register',
 			templateUrl: 'views/admin_register.html'
+		}).state('TestView', {
+			url: '/test',
+			templateUrl: 'views/test_view.html',
+			controller: 'LeagueController',
+			controllerAs: 'vm'
 		})
 		$urlRouterProvider.otherwise('/');
 	}

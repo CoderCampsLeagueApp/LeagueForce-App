@@ -18,6 +18,7 @@
 				<li><a ui-sref="Leagues">Leagues</a></li>
 				<li><a ui-sref="About">About</a></li>
 				<li><a ui-sref="Home">Home</a></li>
+				<li><a ui-sref="TestView">Test</a></li>
 			</ul>
 
 			<ul ng-show="nav.status.id">
@@ -48,10 +49,14 @@
 	<!-- Global Src -->
 	<script src="/javascript/app.js"></script>
 	<!-- Factories -->
-	<script src="/javascript/services/HomeFactory.js"></script>
+	<script src="/javascript/services/LeagueFactory.js"></script>
 	<script src="/javascript/services/UserFactory.js"></script>
+	<script src="/javascript/services/ProfileFactory.js"></script>
 	<!-- Controllers -->
-	<script src="/javascript/controllers/HomeController.js"></script>
+	<script src="/javascript/controllers/ProfileController.js"></script>
+	<script src="/javascript/controllers/LeagueController.js"></script>
+	<script src="/javascript/controllers/TeamController.js"></script>
+	<script src="/javascript/controllers/PlayerController.js"></script>
 	<script src="/javascript/controllers/NavController.js"></script>
 </body>
 </html>

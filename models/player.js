@@ -1,8 +1,8 @@
  var mongoose = require('mongoose');
 
-var PlayerSchema = new mongoose.Schema({
-	name: String,
-	position: String,
+ var PlayerSchema = new mongoose.Schema({
+ 	name: String,
+ 	position: String,
 	Images: Array, //Bson or imgurl. posted by either the admin, coach, player.
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},  //incase the player signs up
 	stats: {
@@ -15,4 +15,4 @@ var PlayerSchema = new mongoose.Schema({
 	Schedule: [{type: mongoose.Schema.Types.ObjectId, ref: 'Schedule'}]
 });
 
-mongoose.model('Player', PlayerSchema);
+ mongoose.model('Player', PlayerSchema);

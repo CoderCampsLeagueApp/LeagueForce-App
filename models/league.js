@@ -1,4 +1,4 @@
- var mongoose = require('mongoose')
+var mongoose = require('mongoose')
 
 var LeagueSchema = new mongoose.Schema({
 	division: String,  //U5-U19
