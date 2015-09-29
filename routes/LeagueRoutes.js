@@ -34,14 +34,23 @@ router.param('id', function(req, res, next, id) {
 	});
 });
 
-
 //------------Getting a League------------
 router.get('/:id', function(req, res) {
 	res.send(req.league)
 });
 
+router.get('/', function(req, res) {
+	League.find({})
+	.exec(function(err, league) {
+		if(err) return res.status(500).send({err: "Error getting all leagues"});
+		if(!league) return res.status(400).send({err: "Leagues do not exist"});
+		res.send(league);
+	});
+});
+
 //------------Creating a League-----------
-router.post('/', auth, function(req, res) {
+//add auth later
+router.post('/', function(req, res) {
 	var league = new League(req.body);
 	league.save(function(err, league) {
 		if(err) return res.status(500).send({err: "Issues with the server"});
@@ -61,14 +70,14 @@ router.put('/:id', function(req, res) {
 });
 
 //------------Deleting a League-----------
-router.delete(':/id', function(req, res) {
+router.delete('/:id', function(req, res) {
 	League.remove({_id: req._id})
 	.exec(function(err, league) {
 		if(err) return res.status(500).send({err: "Error with deleting the league"});
 		if(!league) return res.status(400).send({err: "League does not exist"});
 		res.send();
-	})
-})
+	});
+});
 
 
 

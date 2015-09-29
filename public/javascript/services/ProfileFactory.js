@@ -5,7 +5,7 @@
 
 	ProfileFactory.$inject = ['$http', '$q'];
 
-	function LeagueFactory($http, $q) {
+	function ProfileFactory($http, $q) {
 		var o = {};
 		
 		return o;
