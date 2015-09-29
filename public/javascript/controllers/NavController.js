@@ -2,9 +2,9 @@
 	angular.module('app')
 	.controller('NavController', NavController);
 
-	NavController.$inject = [];
+	NavController.$inject = ['$state', '$stateParams', '$rootScope', 'UserFactory'];
 
-	function NavController(){
+	function NavController($state, $stateParams, $rootScope, UserFactory){
 		var vm = this;
 		
 	} 
