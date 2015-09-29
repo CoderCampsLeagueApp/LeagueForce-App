@@ -5,9 +5,10 @@ var UserSchema = new mongoose.Schema({
 	email: {type:String, lowercase:true, unique:true},
 	images: Array, //array of images either bson or img url.
 	bio: String,
+	cell: String,
 	passwordHash: String,
 	salt: String,
-	created: String, //date user created.
+	created: Date, //date user created.
 	leagueSubscribed: [{type: mongoose.Schema.Types.ObjectId, ref: 'League'}],
 	teamSubscribed: [{type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
 	Comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comments'}],
