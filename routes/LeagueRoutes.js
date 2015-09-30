@@ -37,11 +37,11 @@ router.param('id', function(req, res, next, id) {
 //------------Getting a League------------
 router.get('/:id', function(req, res) {
 	League.findOne({_id: req._id})
-	.populate(
+	.populate({
 		path: 'teams',
 		model: 'Team',
 		select: 'logo name'
-		)
+	})
 	res.send(req.league)
 });
 
