@@ -4,8 +4,6 @@ var bodyParser = require('body-parser');
 var app = express();
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
-
-var mongoose = require('mongoose') ;
 var passport = require('passport') ;
 
 
