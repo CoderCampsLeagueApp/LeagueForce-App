@@ -22,7 +22,25 @@
 		}).state('AdminRegister', {
 			url: '/admin/register',
 			templateUrl: 'views/admin_register.html'
-		})
+		}).state('Admin', {
+			url: '/admin/manager',
+			templateUrl: 'views/admin.html'
+		}).state('AdminLeague',{
+			url: '/admin/creatLeague',
+			templateUrl: '../admin_views/league_form.html',
+			controller: 'LeagueController',
+			controllerAs: 'vm'
+		}).state('AdminTeam',{
+			url: '/admin/creatTeams',
+			templateUrl: '../admin_views/team_form.html',
+			controller: 'LeagueController',
+			controllerAs: 'vm'
+		}).state('AdminPlayers',{
+			url: '/admin/creatTeams',
+			templateUrl: '../admin_views/player_form.html',
+			controller: 'LeagueController',
+			controllerAs: 'vm'
+		});
 		$urlRouterProvider.otherwise('/');
 	}
 })();

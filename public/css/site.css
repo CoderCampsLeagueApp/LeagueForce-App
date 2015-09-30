@@ -94,3 +94,6 @@ nav a.logo {
 	text-decoration: none;
 	color: #121212;
 }
+.pointer{
+	cursor: pointer;
+}

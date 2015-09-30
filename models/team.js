@@ -4,6 +4,7 @@ var TeamSchema = new mongoose.Schema({
 	Coach: String,
 	name: String,
 	images: String, //or bson
+	logo: String, //or bson
 	players: [{type: mongoose.Schema.Types.ObjectId, ref: 'Player'}],
 	league: {type: mongoose.Schema.Types.ObjectId, ref: 'League'},
 	matches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Schedule'}],
