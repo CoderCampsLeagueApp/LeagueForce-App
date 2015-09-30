@@ -2,7 +2,7 @@
 <html ng-app="app">
 <head>
 
-	<title>My App</title>
+	<title>League Force</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
@@ -12,7 +12,7 @@
 			<div id="navHolder"></div>
 			<nav>
 				<ul ng-show="!nav.status.id">
-					<li class="logo1"><a class="logo" ui-sref="Home">Mighty Leagues</a></li>
+					<li class="logo1"><a class="logo" ui-sref="Home">League Force</a></li>
 					<!--fix logo leading to home-->
 					<li><a ui-sref="Register">Sign up</a></li>
 					<li><a ui-sref="Login">Login</a></li>
@@ -29,6 +29,7 @@
 					<li><a ui-sref="Profile">{{nav.status.username}}</a></li>
 					<li><a ui-sref="Leagues">Leagues</a></li>
 					<li><a ui-sref="About">About</a></li>
+					<li><a ui-sref="Admin">Inbox</a></li>
 					<li><a ui-sref="Admin">Admin</a></li>
 					<li><a ui-sref="Home">Home</a></li>
 				</ul>
@@ -53,6 +54,7 @@
 		<script src="/javascript/controllers/PlayerController.js"></script>
 		<script src="/javascript/controllers/NavController.js"></script>
 		<script src="/javascript/controllers/LeagueController.js"></script>
+		<script src="/javascript/controllers/InboxController.js"></script>
 		<script src="/javascript/controllers/AdminController.js"></script>
 	</body>
 	</html>
