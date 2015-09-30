@@ -1,79 +1,84 @@
-<form class="form-horizontal">
-<fieldset>
+<form class="form-horizontal" ng-submit='vm.addLeague(vm.league)'>
+  <fieldset>
 
-<!-- Form Name -->
-<legend>Form Name</legend>
+    <!-- Form Name -->
+    <legend>Create a League</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="">League Name</label>  
-  <div class="col-md-4">
-  <input type="text" placeholder="League name" class="form-control input-md">
-  </div>
-</div>
-
-<!-- Select Basic -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="">Division</label>
-  <div class="col-md-4">
-    <select id="" name="" class="form-control">
-      <option value="U5">U5</option>
-      <option value="U6">U6</option>
-      <option value="U7">U7</option>
-      <option value="U8">U8</option>
-      <option value="U9">U9</option>
-      <option value="U10">U10</option>
-      <option value="U11">U11</option>
-      <option value="U12">U12</option>
-      <option value="U13">U13</option>
-      <option value="U14">U14</option>
-      <option value="U15">U15</option>
-      <option value="U16">U16</option>
-      <option value="U17">U17</option>
-      <option value="U18">U18</option>
-      <option value="U19">U19</option>
-    </select>
-  </div>
-</div>
-
-<!-- Appended Input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="">League Features</label>
-  <div class="col-md-4">
-    <div class="input-group">
-      <input id="" name="" class="form-control" placeholder="features" type="text">
-      <span class="input-group-addon">Add feature</span>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">League Name</label>  
+      <div class="col-md-4">
+        <input type="text" ng-model='vm.league.name' placeholder="League name" class="form-control input-md">
+      </div>
     </div>
-    
-  </div>
-</div>
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="">Icon</label>  
-  <div class="col-md-4">
-  <input id="" name="" type="text" placeholder="url for now.." class="form-control input-md">
-    
-  </div>
-</div>
 
-<!-- Appended Input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="">League Images</label>
-  <div class="col-md-4">
-    <div class="input-group">
-      <input id="" name="" class="form-control" placeholder="images" type="text">
-      <span class="input-group-addon">Add Image</span>
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label">League Division</label>
+      <div class="col-md-4">
+        <select ng-model='vm.league.division' class="form-control">
+          <option value="U5">U5</option>
+          <option value="U6">U6</option>
+          <option value="U7">U7</option>
+          <option value="U8">U8</option>
+          <option value="U9">U9</option>
+          <option value="U10">U10</option>
+          <option value="U11">U11</option>
+          <option value="U12">U12</option>
+          <option value="U13">U13</option>
+          <option value="U14">U14</option>
+          <option value="U15">U15</option>
+          <option value="U16">U16</option>
+          <option value="U17">U17</option>
+          <option value="U18">U18</option>
+          <option value="U19">U19</option>
+        </select>
+      </div>
     </div>
-    <p class="help-block">help</p>
-  </div>
-</div>
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="">Bio</label>
-  <div class="col-md-4">                     
-    <textarea class="form-control" id="" name=""></textarea>
-  </div>
-</div>
 
-</fieldset>
+    <!-- Appended Input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">League Features</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input ng-model='vm.feature' class="form-control" placeholder="features" type="text">
+          <span ng-click='vm.addFeature(vm.feature); vm.feature = ""' class="input-group-addon pointer">Add feature</span>
+          
+        </div>
+        <p>{{vm.league.features}}</p>
+      </div>
+    </div>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">League Logo</label>  
+      <div class="col-md-4">
+        <input ng-model='vm.league.logo' type="text" placeholder="url for now.." class="form-control input-md">   
+      </div>
+    </div>
+
+    <!-- Appended Input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label">League Images</label>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input ng-model='vm.image' class="form-control" placeholder="images" type="text">
+          <span ng-click='vm.addImage(vm.image); vm.image = ""' class="input-group-addon pointer">Add Image</span>
+        </div>
+        <p>{{vm.league.images}}</p> 
+      </div> 
+    </div>  
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label">League description</label>
+      <div class="col-md-4">                     
+        <textarea ng-model='vm.league.about' class="form-control" placeholder='what the league can offer'></textarea>
+      </div>
+    </div>
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-4">                     
+      <input style=" margin-top: 15px" class="btn btn-success btn-block" type="submit" value="Submit" />
+    </div>
+
+  </fieldset>
 </form>
+

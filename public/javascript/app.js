@@ -24,22 +24,18 @@
 			templateUrl: 'views/admin_register.html'
 		}).state('Admin', {
 			url: '/admin/manager',
-			templateUrl: 'views/admin.html'
-		}).state('AdminLeague',{
-			url: '/admin/creatLeague',
+			templateUrl: 'views/admin.html',
+			controller: 'AdminController',
+			controllerAs: 'vm'
+		}).state('Admin.League',{
+			url: '/admin/createLeague',
 			templateUrl: '../admin_views/league_form.html',
-			controller: 'AdminController',
-			controllerAs: 'vm'
-		}).state('AdminTeam',{
-			url: '/admin/creatTeams',
+		}).state('Admin.Team',{
+			url: '/admin/createTeams',
 			templateUrl: '../admin_views/team_form.html',
-			controller: 'AdminController',
-			controllerAs: 'vm'
-		}).state('AdminPlayers',{
-			url: '/admin/creatTeams',
+		}).state('Admin.Player',{
+			url: '/admin/createPlayers',
 			templateUrl: '../admin_views/player_form.html',
-			controller: 'AdminController',
-			controllerAs: 'vm'
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html',
@@ -50,3 +46,4 @@
 		$urlRouterProvider.otherwise('/');
 	}
 })();
+

@@ -9,15 +9,15 @@ body
 }
 #navHolder{
 	width: 100%;
-    height: 50px;
-    background: #DBDBDB;
+	height: 50px;
+	background: #DBDBDB;
 }
 nav {
 	width: 100%;
-    height: 50px;
-   background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(17,17,17,1) 17%,rgba(28,28,28,1) 35%,rgba(35,35,35,1) 63%,rgba(43,43,43,1) 83%,rgba(51,51,51,1) 100%);
-    position: absolute;
-    top: 0;
+	height: 50px;
+	background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(17,17,17,1) 17%,rgba(28,28,28,1) 35%,rgba(35,35,35,1) 63%,rgba(43,43,43,1) 83%,rgba(51,51,51,1) 100%);
+	position: absolute;
+	top: 0;
 }
 nav li {
 	display: inline-block;
@@ -79,16 +79,18 @@ nav a.logo {
 	height: 150px;
 	border: solid #E8EAEB;
 }
+
 .button{
-    border: solid 2px #ff8432;
-    color: #fff;
-    display: inline-block;
-    font-weight: 700;
-    line-height: 2.75em;
-    padding: 0 1.65em;
-    background-color: #FF6801;
+	border: solid 2px #ff8432;
+	color: #fff;
+	display: inline-block;
+	font-weight: 700;
+	line-height: 2.75em;
+	padding: 0 1.65em;
+	background-color: #FF6801;
 
 }
+
 .button:hover{
 	background-color: #e0e0e0;
 	text-decoration: none;

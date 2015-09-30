@@ -3,97 +3,105 @@
   <div class="col-md-4">
     <select name="multipleSelect" ng-model="vm.data"  
     class="form-control">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
-      <option value="13">13</option>
-      <option value="14">14</option>
-      <option value="15">15</option>
-      <option value="16">16</option>
-      <option value="17">17</option>
-      <option value="18">18</option>
-      <option value="19">19</option>
-      <option value="20">20</option>
-      <option value="21">21</option>
-      <option value="22">22</option>
-      <option value="23">23</option>
-      <option value="24">24</option>
-    </select>
-    <button ng-click='vm.formSize(vm.data)'>Select</button>
-  </div>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+    <option value="21">21</option>
+    <option value="22">22</option>
+    <option value="23">23</option>
+    <option value="24">24</option>
+  </select>
+  <button ng-click='vm.formSize(vm.data)'>Select</button>
+</div>
 </div>
 <br>
 <hr>
 <br>
 <div ng-repeat='l in vm.leagueSize track by $index'>
   <form class="form-horizontal">
-  <fieldset>
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Team {{$index + 1}}</legend>
 
-  <!-- Form Name -->
-  <legend>Team {{$index + 1}}</legend>
-
-  <!-- Appended Input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="">Coaches</label>
-    <div class="col-md-4">
-      <div class="input-group">
-        <input ng-model='vm.coach'  class="form-control" placeholder="Coaches" type="text">
-        <span ng-click='vm.addCoach(vm.coach); vm.coach = ""' class="input-group-addon pointer">Add Coach</span>
+      <!-- Appended Input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Coaches</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            
+            <input ng-model='vm.coach'  class="form-control" placeholder="Coaches" type="text">
+            <span ng-click='vm.teams[$index].coachdef = false;vm.addCoach(vm.coach, $index); vm.coach = ""' class="input-group-addon pointer">Add Coach</span>
+          </div>
+          <p>{{vm.team.coach}}</p>
+        </div>
       </div>
-      <p>{{vm.team.coach}}</p>
-    </div>
-  </div>
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label">Team Name</label>  
-    <div class="col-md-4">
-    <input ng-model='vm.team.name'  type="text" placeholder="team name" class="form-control input-md">  
-    </div>
-    <p>{{vm.team.name}}</p>
-  </div>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label">Team Name</label>  
+        <div class="col-md-4">
+          <input ng-model='vm.teams[$index].name'  type="text" placeholder="team name" class="form-control input-md">  
+        </div>
+        <p>{{vm.team.name}}</p>
+      </div>
 
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="">Logo</label>  
-    <div class="col-md-4">
-    <input ng-model='vm.team.logo'  type="text" placeholder="url or bson" class="form-control input-md">
-      
-    </div>
-    <p>{{vm.team.logo}}</p>
-  </div>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="">Logo</label>  
+        <div class="col-md-4">
+          <input ng-model='vm.teams[$index].logo'  type="text" placeholder="url or bson" class="form-control input-md">
+          
+        </div>
+        <p>{{vm.team.logo}}</p>
+      </div>
 
-  <!-- File Button --> 
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="">Images</label>
-    <div class="col-md-4">
-      <input ng-model='vm.team.images'  class="input-file" type="file">
-    </div>
-    <p>{{vm.team.images}}</p>
-  </div>
+      <!-- File Button --> 
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="">Images</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input ng-model='vm.teamImage'  class="form-control" placeholder="Url for now.." type="text">
+            <span ng-click='vm.teams[$index].imagedef = false;vm.addTeamImage(vm.teamImage, $index); vm.teamImage = ""' class="input-group-addon pointer">Add Image</span>
+          </div>
+        </div>
+      </div>
 
-  <!-- Appended Input-->
-  <div class="form-group">
+
+      <!-- Appended Input-->
+      <!-- Adding more inputs for playes -->
+  <!-- <div class="form-group">
     <label class="col-md-4 control-label" for="">Players</label>
     <div class="col-md-4">
       <div class="input-group">
         <input ng-model='vm.player'  class="form-control" placeholder="player" type="text">
-        <span ng-click='vm.addPlayer(vm.player);vm.player = ""' class="input-group-addon pointer">Add Player</span>
+        <span ng-click='vm.addPlayer(vm.player, $index);vm.player = ""' class="input-group-addon pointer">Add Player</span>
       </div>
       <p>{{vm.team.player}}</p>
       <button style="margin-top: 20px;" ng-click='vm.addTeam(vm.team)' class="btn btn default btn-block">Add team</button>
     </div>
 
+  </div> -->
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">                     
+    <input ng-click='vm.playerForm()' style=" margin-top: 15px" class="btn btn-success btn-block" type="submit" value="Add players" />
   </div>
-  </fieldset>
- 
-  </form>
+</fieldset>
+
+</form>
 </div>
