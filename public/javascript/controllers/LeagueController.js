@@ -10,18 +10,18 @@
 		var vm = this;
 		vm.league = {};
 
-		if($stateParams.id) { //if the ID exists here, we go to the factory and find the specific pictures
+		if($stateParams.id) { //if the ID exists here, we go to the factory and find the specific League
 			LeagueFactory.getLeague($stateParams.id).then(function(res) {
 				vm.league = res;
 				vm.oldLeague = angular.copy(res);
 			});
 		};
 
-		if($rootScope._user) {
-			LeagueFactory.getAdminLoggedIn($rootScope._user.id).then(function(res) {
-				vm.adminLoggedIn = res;
-			})
-		}
+		// if($rootScope._user) {
+		// 	LeagueFactory.getAdminLoggedIn($rootScope._user.id).then(function(res) {
+		// 		vm.adminLoggedIn = res;
+		// 	})
+		// }
 
 		//----------League CRUD----------
 		vm.createLeague = function(league) {

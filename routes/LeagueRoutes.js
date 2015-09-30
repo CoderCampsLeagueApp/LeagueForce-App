@@ -4,22 +4,9 @@ var mongoose = require('mongoose');
 var League = mongoose.model('League');
 var jwt = require('express-jwt');
 
-// var LeagueSchema = new mongoose.Schema({
-// 	division: String,  //U5-U19
-// 	name: String, //league name
-// 	about: String, //description about the league
-// 	features: Array, //list of features the leahue offers.
-// 	images: Array, //bson or img url.
-// 	teams: [{type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
-// 	matches: {type: mongoose.Schema.Types.ObjectId, ref: 'Schedule'},
-// 	admin: {type: mongoose.Schema.Types.ObjectId, ref: 'User'} //Admin
-// });
-
-//add teams as array on league, can populate
-
 var auth = jwt({
 	userProperty: 'payload',
-	secret: 'secretsauce'
+	secret: '_secret_sauce'
 });
 
 //------------Params----------------------
@@ -41,7 +28,7 @@ router.get('/:id', function(req, res) {
 		path: 'teams',
 		model: 'Team',
 		select: 'logo name'
-	})
+	});
 	res.send(req.league)
 });
 
@@ -55,8 +42,8 @@ router.get('/', function(req, res) {
 });
 
 //------------Creating a League-----------
-//add auth later
-router.post('/', function(req, res) {
+
+router.post('/', auth, function(req, res) {
 	var league = new League(req.body);
 	league.save(function(err, league) {
 		if(err) return res.status(500).send({err: "Issues with the server"});
@@ -84,7 +71,6 @@ router.delete('/:id', function(req, res) {
 		res.send();
 	});
 });
-
 
 
 module.exports = router;
