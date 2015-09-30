@@ -1,0 +1,17 @@
+<div class="col-md-6">
+	<form class="well container col-sm-12" ng-submit="vm.createLeague()">
+		<h3>Make A League</h3>
+		<label>Name: </label>
+		<input class="form-control" ng-model="vm.league.name" placeholder="Enter Name Here..." required/>
+		<label>About</label>
+		<input class="form-control" ng-model="vm.league.about" placeholder="Enter About Here..." required/><br>
+		<button type="submit" class="btn btn-success btn-lg">Create League</button>
+	</form>
+</div>
+<div style="clear: both;">
+	<div class="well col-md-3" ng-repeat="l in vm.leagues | orderBy: 'createdate': true">
+		<strong>{{l.name}}</strong> <br>{{l.about}}<br>
+		<button ng-click="vm.editLeague({id: l._id})" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-cog"></span></button>
+		<button class="btn btn-sm btn-danger" ng-click="vm.deleteLeague(l._id)"><span class="glyphicon glyphicon-remove"></span></button>
+	</div>
+</div>

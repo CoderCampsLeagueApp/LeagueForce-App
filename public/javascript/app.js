@@ -28,19 +28,25 @@
 		}).state('AdminLeague',{
 			url: '/admin/creatLeague',
 			templateUrl: '../admin_views/league_form.html',
-			controller: 'LeagueController',
+			controller: 'AdminController',
 			controllerAs: 'vm'
 		}).state('AdminTeam',{
 			url: '/admin/creatTeams',
 			templateUrl: '../admin_views/team_form.html',
-			controller: 'LeagueController',
+			controller: 'AdminController',
 			controllerAs: 'vm'
 		}).state('AdminPlayers',{
 			url: '/admin/creatTeams',
 			templateUrl: '../admin_views/player_form.html',
-			controller: 'LeagueController',
+			controller: 'AdminController',
+			controllerAs: 'vm'
+		}).state('TestView', {
+			url: '/test',
+			templateUrl: 'views/test_view.html',
+			controller: 'AdminController',
 			controllerAs: 'vm'
 		});
+
 		$urlRouterProvider.otherwise('/');
 	}
 })();

@@ -5,13 +5,17 @@ var app = express();
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
 
+var mongoose = require('mongoose') ;
+var passport = require('passport') ;
+
+
 require('./models/User');
 require('./models/Inbox');
 require('./models/League');
 require('./models/Team');
 require('./models/Player');
 require('./models/Schedule');
-
+require('./config/passport') ;
 
 mongoose.connect('mongodb://localhost/league');
 
@@ -31,6 +35,7 @@ app.set('view options', {
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+
 var userRoutes = require('./routes/UserRoutes');
 var inboxRoutes = require('./routes/InboxRoutes');
 var leagueRoutes = require('./routes/LeagueRoutes');
@@ -42,6 +47,7 @@ var scheduleRoutes = require('./routes/ScheduleRoutes');
 app.get('/', function(req, res) {
 	res.render('index');
 });
+
 
 app.use('/api/user', userRoutes);
 app.use('/api/inbox', inboxRoutes);

@@ -3,36 +3,55 @@
 	angular.module('app')
 	.controller('LeagueController', LeagueController);
 
-	LeagueController.$inject = [];
 
-	function LeagueController() {
+	LeagueController.$inject = ['$state', '$stateParams', '$rootScope', 'LeagueFactory'];
+
+	function LeagueController($state, $stateParams, $rootScope, LeagueFactory) {
 		var vm = this;
-		vm.title = 'Welcome to our App!';
-		vm.leagueSize = [0];
-		vm.team = [];
-		vm.team.coach = [];
-		vm.team.player = [];
+		vm.league = {};
 
-		//teams on the league
-		vm.formSize = function(size){  
-			console.log(size);
-			vm.leagueSize = [0];
-			for(var i = 1; i < size;i++){
-				vm.leagueSize.push(i);
-				console.log(i);
-			}
-		};
-		vm.addTeam = function(team){
-			console.log(team);
-		};
-		vm.addCoach = function(coach){
-			console.log(coach);
-			vm.team.coach.push(coach);
-		};
-		vm.addPlayer = function(player){
-			console.log(player);
-			vm.team.player.push(player);
+		if($stateParams.id) { //if the ID exists here, we go to the factory and find the specific pictures
+			LeagueFactory.getLeague($stateParams.id).then(function(res) {
+				vm.league = res;
+				vm.oldLeague = angular.copy(res);
+			});
 		};
 
-	};
+		if($rootScope._user) {
+			LeagueFactory.getAdminLoggedIn($rootScope._user.id).then(function(res) {
+				vm.adminLoggedIn = res;
+			})
+		}
+
+		//----------League CRUD----------
+		vm.createLeague = function(league) {
+			//	vm.league.admin = $rootScope._user.id ------ for specific admin logged in
+			LeagueFactory.createLeague(vm.league).then(function(res) {
+				vm.getLeagues();
+				delete vm.league;
+			});
+		};
+
+		vm.getLeagues = function() {
+			LeagueFactory.getLeagues().then(function(res) {
+				vm.leagues = res;
+			});
+		};
+
+		vm.getLeagues();
+
+		vm.editLeague = function(league) {
+			LeagueFactory.editLeague(vm.oldLeague, vm.league).then(function() {
+				vm.getLeagues();
+			})
+		}
+
+		vm.deleteLeague = function(league) {
+			LeagueFactory.deleteLeague(league).then(function(res) {
+				vm.leagues.splice(vm.leagues.indexOf(league), 1);
+			});
+		};
+
+	}
+
 })();
