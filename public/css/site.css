@@ -42,3 +42,72 @@ body
 .pointer{
 	cursor: pointer;
 }
+
+/* Player and Coach Cards */
+.playerCard {
+	background: green;
+
+}
+
+.cardImage {
+	float: left;
+	height: 75px;
+}
+
+/* Codepen */
+
+body {
+	margin: 0 auto;
+	padding: 0;
+}
+
+.left {
+	right: 65px;
+}
+
+.right {
+	right: 15px;
+}
+
+.center {
+	text-align: center;
+}
+
+.bottom {
+	position: absolute;
+	bottom: 15px;
+}
+
+#card {
+	position: absolute;
+	width: 300px;
+	height: 100px;
+	padding-left: 5px;
+	padding-top: 0;
+	padding-bottom: 0;
+	left: 50%;
+	top: 67.5px;
+	margin-left: -250px;
+	background: #E9E2D0;
+	box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
+	z-index: 5;
+}
+
+#card img {
+	margin-top: 5px;
+	width: 75px;
+	height: 75px;
+	float: left;
+	/*border-radius: 25px 25px;*/
+	margin-right: 10px;
+}
+
+#card p {
+
+}
+
+#card h2 {
+	margin-top: 25px auto;
+	padding: 0;
+	font-size: 1em;
+}
