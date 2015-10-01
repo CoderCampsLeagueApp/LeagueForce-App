@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-	<title>My App</title>
+	<title>League Force</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
@@ -14,7 +14,6 @@
 					<!-- fix navbar extending 100%-->
 					<li class="logo1"><a class="logo" ui-sref="Home">Mighty Leagues</a></li>
 					<li><a ui-sref="About">About</a></li>
-
 					<li><a ui-sref="Leagues">Leagues</a></li>
 					<li><a ui-sref="TestView">Test</a></li>
 					<li ng-show="!nav.status.id"><a ui-sref="Register">Sign Up</a></li>
@@ -48,6 +47,7 @@
 		<script src="/javascript/controllers/PlayerController.js"></script>
 		<script src="/javascript/controllers/NavController.js"></script>
 		<script src="/javascript/controllers/LeagueController.js"></script>
+		<script src="/javascript/controllers/InboxController.js"></script>
 		<script src="/javascript/controllers/AdminController.js"></script>
 	</body>
 	</html>
