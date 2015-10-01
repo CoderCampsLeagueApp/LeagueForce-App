@@ -13,6 +13,8 @@ require('./models/League');
 require('./models/Team');
 require('./models/Player');
 require('./models/Schedule');
+require('./models/Comments');
+require('./models/News');
 require('./config/passport') ;
 
 mongoose.connect('mongodb://localhost/league');
@@ -40,6 +42,9 @@ var leagueRoutes = require('./routes/LeagueRoutes');
 var teamRoutes = require('./routes/TeamRoutes');
 var playerRoutes = require('./routes/PlayerRoutes');
 var scheduleRoutes = require('./routes/ScheduleRoutes');
+//added later
+// var commentRoutes = require('./routes/CommentRoutes');
+// var newsRoutes = require('./routes/NewsRoutes');
 
 //on homepage load, render the index page
 app.get('/', function(req, res) {
@@ -53,6 +58,9 @@ app.use('/api/league', leagueRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/player', playerRoutes);
 app.use('/api/schedule', scheduleRoutes);
+//added later
+// app.use('/api/comment', commentRoutes);
+// app.use('/api/news', newsRoutes);
 
 var server = app.listen(port, function() {
 	var host = server.address().address;

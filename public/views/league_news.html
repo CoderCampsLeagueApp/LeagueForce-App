@@ -1,0 +1,21 @@
+<div class="container">
+	<h2>Subject!!!</h2>
+	<img class="leagueLogo" style="float: left;" src="http://www.cadworxlive.com/imageCache/07F649F4-8229-4586-8576-89EEC6784C08.jpg" /> <p style=""><strong>Username Creator</strong> - 10/01/2015 8:40 AM<p>
+	<img class="newsImage img-thumbnail" src="https://pbs.twimg.com/media/CLx83ohUMAAStiN.jpg" /><br>
+	<br>
+	<!-- possibly find a more visually appealing place for league logo -->
+	<!-- Advanced feature: have every news/post repeat but have a "read more" after a certain amount of characters. Clicking the subject line does a ui-sref="Newsletter({id: news._id})" to a new page -->
+
+	<p class="article">
+		<!-- make sure the output of the article is wrapped and goes to a certain width -->
+		<!-- after an admin submits an article, it should lead either to /leaguenews/
+		or /leaguenews/:id -->
+
+	</p>
+	<div style="clear: both;" class="well container">
+		<div style="text-align:center;">
+			<input class="form-control" style="width: 80%" ng-model="vm.comment.body" placeholder="Comment..."><br>
+			<button class="btn btn-success" ng-click="vm.createComment();">Submit</button>
+		</div>
+	</div>
+</div>

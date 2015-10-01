@@ -73,5 +73,7 @@
 			//show form with drop down of players.
 		}
 
+		//news article stuff is this controller and admin factory
+
 	};
 })();

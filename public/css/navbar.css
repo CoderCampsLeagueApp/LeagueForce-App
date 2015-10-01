@@ -149,7 +149,7 @@ nav a.logo {
 	background-color: #c0392b;
 }
 .nav ul .dropdown:hover ul {
-	left: 220px;
+	left: 180px;
 	top: 0;
 }
 .nav ul .dropdown a:after{

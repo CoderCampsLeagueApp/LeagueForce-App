@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken') ;
 
 var UserSchema = new mongoose.Schema({
 	name: {type:String, lowercase:true, unique:true},
-	username: {type:String, lowercase:true, unique:true},
+	username: {type: String, lowercase:true, unique:true},
 	images: Array, //array of images either bson or img url.
 	bio: String,
 	passwordHash: String,

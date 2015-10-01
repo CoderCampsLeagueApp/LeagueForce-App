@@ -41,6 +41,11 @@
 			templateUrl: 'views/test_view.html',
 			controller: 'AdminController',
 			controllerAs: 'vm'
+		}).state('Newsletter', {
+			url: '/leaguenews', //possibly convert it to /leaguenews/:id once we have that working
+			templateUrl: 'views/league_news.html',
+			controller: 'ProfileController',
+			controllerAs: 'vm'
 		});
 
 		$urlRouterProvider.otherwise('/');
