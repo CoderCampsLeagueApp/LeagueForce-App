@@ -1,0 +1,27 @@
+<h1>Admin Home!!</h1>
+
+
+
+<ul> 
+	<li>Logo:</li>
+	<img width="200" height="200" ng-src="{{vm.adminLeague.logo}}">
+	<li>Name: {{vm.adminLeague.name}}</li>
+	<li>Division: {{vm.adminLeague.division}}</li>
+	<li>About: {{vm.adminLeague.about}}</li>
+	<li>features: </li>
+	<ul>
+  		<div style="padding-left:20px">
+    		<li ng-repeat='feature in vm.adminLeague.features track by $index'>{{feature}}</li>
+  		</div>
+	</ul>
+  	<li>Images: </li>
+  	<div class="row">
+    	<div class="col-md-2" ng-repeat='image in vm.adminLeague.images track by $index'><img  width="200" height="" ng-src="{{image}}">
+  		</div>
+  	</div>
+</ul>
+<button class="btn btn-lg btn-info" ng-click='vm.startLeagueEdit(vm.adminLeague._id)'>Edit League</button>
+<button class="btn btn-lg btn-warning" ng-click='vm.startTeamEdit(vm.adminLeague._id)'>ADD or EDIT teams</button>
+
+
+

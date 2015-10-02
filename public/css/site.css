@@ -99,3 +99,24 @@ nav a.logo {
 .pointer{
 	cursor: pointer;
 }
+.card {
+	width: 300px;
+	height: 100px;
+	padding-left: 5px;
+	padding-top: 0;
+	padding-bottom: 0;
+	left: 50%;
+	top: 67.5px;
+	background: #E9E2D0;
+	box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
+	/* make z-index stack more efficient or not needed if possible */
+}
+
+.card img {
+	margin-top: 5px;
+	width: 75px;
+	height: 75px;
+	float: left;
+	/*border-radius: 25px 25px;*/
+	margin-right: 10px;
+}

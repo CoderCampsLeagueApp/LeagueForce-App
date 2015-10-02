@@ -4,11 +4,17 @@
 	.controller('AdminController', AdminController);
 
 
-	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'LeagueFactory'];
+	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory'];
 
-	function AdminController() {
+	function AdminController($state, $stateParams, $rootScope, AdminFactory) {
 		var vm = this;
 		vm.title = 'Welcome to our App!';
+
+		$state.go('Admin.home');
+		AdminFactory.getLeague($rootScope._user.id).then(function(res){
+			vm.adminLeague = res;
+		})
+
 		//league
 		vm.league = {};
 		vm.league.features = [];
@@ -16,12 +22,22 @@
 		vm.leagueSize = [0];
 
 		//team
+		vm.team = {};
 		vm.teams = [];	
 
 
-		//league
-		vm.addLeague = function(league){
-			console.log(league);
+		//league ----------------------------------------
+		//creating League
+		vm.createLeague = function(league){
+			if(!league._id){
+			AdminFactory.createLeague(league).then(function(res){
+				console.log('created league!');
+			});
+			}
+			else{
+				AdminFactory.editLeague(league).then(function(res)
+				{console.log('edited!')}
+			)};
 		}
 		vm.addFeature = function(feature){
 			vm.league.features.push(feature);
@@ -37,41 +53,78 @@
 			console.log(idx);
 			vm.league.images.splice(idx, 1);
 		}
+		//creating League finished 
 
-		//teams on the league
-		vm.formSize = function(size){ 
-			
-			console.log(size);
-			vm.leagueSize = [];
-			for(var i = 0; i < size;i++){
-				vm.leagueSize.push(i);
-				console.log(i);
-			}
+		//Editing League ------------------------------------------------
+
+		vm.startLeagueEdit = function(id){
+			AdminFactory.getLeague($rootScope._user.id).then(function(res){
+			vm.league = res;
+			$state.go('Admin.league');
+		});
 		};
-		vm.addTeam = function(team){
-			console.log(team);
-		};
-		vm.addCoach = function(coach, idx){
-			if (vm.teams[idx].coachdef !== true) {
-				if(!vm.teams[idx]) vm.teams[idx] = {};
-				if (!vm.teams[idx].coaches) vm.teams[idx].coaches = [];
-				vm.teams[idx].coachdef = true;
-			}
-			vm.teams[idx].coaches.push(coach);
-		};
-		vm.addTeamImage = function(image, idx){
-			if (vm.teams[idx].imagedef !== true) {
-				if(!vm.teams[idx]) vm.teams[idx] = {};
-				if (!vm.teams[idx].images) vm.teams[idx].images = [];
-				vm.teams[idx].imagedef = true;
-			}
-			vm.teams[idx].images.push(image);
-		};
-		// players
-		vm.playerForm = function(){
-			console.log(vm.teams)
-			//show form with drop down of players.
+
+
+		vm.startTeamEdit = function(id){
+			$state.go('Admin.team');
 		}
+
+		vm.team.teamMembers = [];
+
+		//Creating & Editing Team---------------------------------------------
+		vm.createTeam = function(team){
+			team.league = vm.adminLeague._id;
+			AdminFactory.createTeam(team).then(function(res){
+				console.log('has been added to database!');
+				$state.go('Home');
+			})
+		}
+
+		vm.addTeam = function(team){
+			var copy = angular.copy(team);
+			vm.teams.push(copy);
+			delete vm.team;
+			delete vm.coach;
+			delete vm.player;
+			vm.team = {};
+			vm.team.teamMembers = [];
+			vm.coach = {};
+			vm.player = {};
+			console.log(vm.team);
+			console.log(vm.coach);
+			console.log(vm.player);
+		};
+
+		vm.addCoach = function(coach){
+			console.log(coach);
+			if (coach.isCoach  != true) coach.isSubCoach = true;
+			var copy = angular.copy(coach);
+			vm.team.teamMembers.push(copy);
+			vm.coach.name = "";
+			vm.coach.isCoach = "";
+			vm.coach.pic = "";
+			vm.coach.bio = "";
+		};
+		vm.addPlayer = function(player){
+			player.isPlayer = true;
+			var copy = angular.copy(player);
+			vm.team.teamMembers.push(copy);
+			console.log(player);
+			vm.player.name = '';
+			vm.player.teamMember = '';
+			vm.player.position = '';
+			vm.player.pic = '';
+			vm.player.dob = '';
+		};
+		vm.addTeamImage = function(image){
+			if (vm.team.imagedef !== true) {
+				if(!vm.team) vm.team = {};
+				if (!vm.team.images) vm.team.images = [];
+				vm.team.imagedef = true;
+			}
+			vm.team.images.push(image);
+		};
+	
 
 	};
 })();

@@ -11,7 +11,6 @@ require('./models/User');
 require('./models/Inbox');
 require('./models/League');
 require('./models/Team');
-require('./models/Player');
 require('./models/Schedule');
 require('./config/passport') ;
 
@@ -38,7 +37,6 @@ var userRoutes = require('./routes/UserRoutes');
 var inboxRoutes = require('./routes/InboxRoutes');
 var leagueRoutes = require('./routes/LeagueRoutes');
 var teamRoutes = require('./routes/TeamRoutes');
-var playerRoutes = require('./routes/PlayerRoutes');
 var scheduleRoutes = require('./routes/ScheduleRoutes');
 
 //on homepage load, render the index page
@@ -51,7 +49,6 @@ app.use('/api/user', userRoutes);
 app.use('/api/inbox', inboxRoutes);
 app.use('/api/league', leagueRoutes);
 app.use('/api/team', teamRoutes);
-app.use('/api/player', playerRoutes);
 app.use('/api/schedule', scheduleRoutes);
 
 var server = app.listen(port, function() {

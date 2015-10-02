@@ -27,15 +27,15 @@
 			templateUrl: 'views/admin.html',
 			controller: 'AdminController',
 			controllerAs: 'vm'
-		}).state('Admin.League',{
-			url: '/admin/createLeague',
+		}).state('Admin.league',{
+			url: '/createLeague',
 			templateUrl: '../admin_views/league_form.html',
-		}).state('Admin.Team',{
-			url: '/admin/createTeams',
+		}).state('Admin.team',{
+			url: '/createTeams',
 			templateUrl: '../admin_views/team_form.html',
-		}).state('Admin.Player',{
-			url: '/admin/createPlayers',
-			templateUrl: '../admin_views/player_form.html',
+		}).state('Admin.home',{
+			url: '/home',
+			templateUrl: '../admin_views/admin_home.html',
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html',

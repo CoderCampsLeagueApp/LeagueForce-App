@@ -12,6 +12,7 @@ var UserSchema = new mongoose.Schema({
 	passwordHash: String,
 	salt: String,
 	created: String, //date user created.
+	affiliation: {type: mongoose.Schema.Types.ObjectId, ref: 'Team'}, //Player or coach can affiliate accounts to users
 	leagueSubscribed: [{type: mongoose.Schema.Types.ObjectId, ref: 'League'}],
 	teamSubscribed: [{type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
 	Comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comments'}],
