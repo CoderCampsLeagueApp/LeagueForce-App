@@ -4,7 +4,6 @@
 	.controller('AdminController', AdminController);
 
 
-<<<<<<< HEAD
 	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory'];
 
 	function AdminController($state, $stateParams, $rootScope, AdminFactory) {
@@ -15,17 +14,11 @@
 		AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.adminLeague = res;
 		})
-
-=======
-	AdminController.$inject = ['$state', '$stateParams', '$sce', '$rootScope', 'LeagueFactory', 'AdminFactory'];
-
-	function AdminController($state, $stateParams, $sce, $rootScope, LeagueFactory, AdminFactory) {
-		var vm = this;
 		//news
 		vm.newsletter = {};
 		vm.edit = {};
 		vm.editBox = false;
->>>>>>> 0a102342a33b16bfc9133f3f63eda7ede53224b0
+
 		//league
 		vm.league = {};
 		vm.league.features = [];

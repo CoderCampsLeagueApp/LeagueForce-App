@@ -44,7 +44,11 @@
 			console.log(league);
 			var q = $q.defer();
 			$http.put('/api/league/' + league._id, league).success(function(res) {
-
+				console.log('league edited');
+				q.resolve();
+			});
+			return q.promise;
+		};
 
 
 		o.getNewsletters = function() {

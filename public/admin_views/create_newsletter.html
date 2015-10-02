@@ -30,9 +30,3 @@
 			<button ng-click="vm.editBox=false" class="btn btn-lg btn-info">Cancel</button>
 		</div>
 	</div>
-
-
-	image: String,
-	leagueName: {type: mongoose.Schema.Types.ObjectId, ref: "League"},
-	comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comments"}],
-	username: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
