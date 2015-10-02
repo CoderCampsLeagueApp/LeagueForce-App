@@ -9,7 +9,6 @@
 		var vm = this;
 		vm.user = {} ;
 		vm.status = $rootScope._user ;
-		console.log('navcontroller');
 
 		vm.register = function() {
 			console.log("DEBUG: NavController vm.register called.") ;
@@ -29,8 +28,9 @@
 
 		vm.logout = function() {
 			UserFactory.logout() ;
-			vm.status = $rootScope._user ;
-			$state.go('Home') ;
+			vm.status = $rootScope._user;
+			//delete vm.user;
+			$state.go('Home');
 		} ;
 
 	} ;

@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-
-	<title>My App</title>
+	<title>League Force</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
 	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" href="/css/navbar.css">
 	<body >	
 		<div ng-controller="NavController as nav">
-			<div id="navHolder"></div>
-			<nav>
-				<ul ng-show="!nav.status.id">
-					<li class="logo1"><a class="logo" ui-sref="Home">Mighty Leagues</a></li>
-					<!--fix logo leading to home-->
-					<li><a ui-sref="Register">Sign up</a></li>
-					<li><a ui-sref="Login">Login</a></li>
-					<li><a ui-sref="Leagues">Leagues</a></li>
-					<li><a ui-sref="About">About</a></li>
-					<li><a ui-sref="Admin">Admin</a></li>
-					<li><a ui-sref="Home">Home</a></li>
-					<li><a ui-sref="TestView">Test</a></li>
-				</ul>
+			<div id="nav" class="fluid">
+				<ul class="nav">
+					<!-- fix navbar extending 100%-->
+					<li class="logo1">
+						<a class="logo" ui-sref="Home">Mighty Leagues</a>
+					</li>
+					<li>
+						<a ui-sref="About">About</a>
+					</li>
+					<li class="dropdown">
+						<a ui-sref="Leagues">Leagues</a>
+						<ul>
+							<li>
+								<a ui-sref="Home">League Search</a>
+							</li>
+							<li class="dropdown" ng-show="nav.status.id">
+								<a ui-sref="Newsletter">League News</a>
+							<!-- Newsletter takes in league ID to deliver news specific
+							to that league to the viewer-->
+							<ul>
+								<li>
+									<a ui-sref="CreateNewsletter">Create Post</a>
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+				<li><a ui-sref="TestView">Test</a></li>
+				<li ng-show="!nav.status.id"><a ui-sref="Register">Sign Up</a></li>
+				<li ng-show="!nav.status.id"><a ui-sref="Login">Login</a></li>
 
-				<ul ng-show="nav.status.id">
-					<li class="logo1"><a class="logo" href="#">Mighty Leagues</a></li>
-					<li><a ng-click="nav.logout()">Logout</a></li>
-					<li><a ui-sref="Profile">{{nav.status.username}}</a></li>
-					<li><a ui-sref="Leagues">Leagues</a></li>
-					<li><a ui-sref="About">About</a></li>
-					<li><a ui-sref="Admin">Admin</a></li>
-					<li><a ui-sref="Home">Home</a></li>
-				</ul>
-
-
-			</nav>
-			<ui-view></ui-view>
+				<li ng-show="nav.status.id" class="dropdown">
+					<a ui-sref="Profile">{{nav.status.username}}</a>
+					<ul>
+						<li><a ui-sref="Admin">Admin</a></li>
+						<li><a ng-click="nav.logout()">Logout</a></li>
+					</ul>
+				</li>
+			</ul>
 		</div>
+
 		<!-- Ext Libs -->
 		<script src="angular/angular.min.js"></script>
 		<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -53,7 +67,7 @@
 		<script src="/javascript/controllers/TeamController.js"></script>
 		<script src="/javascript/controllers/PlayerController.js"></script>
 		<script src="/javascript/controllers/NavController.js"></script>
-		<script src="/javascript/controllers/LeagueController.js"></script>
+		<script src="/javascript/controllers/InboxController.js"></script>
 		<script src="/javascript/controllers/AdminController.js"></script>
 	</body>
 	</html>

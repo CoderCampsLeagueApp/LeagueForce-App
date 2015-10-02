@@ -35,14 +35,28 @@
 			templateUrl: '../admin_views/team_form.html',
 		}).state('Admin.home',{
 			url: '/home',
-			templateUrl: '../admin_views/admin_home.html',
+			templateUrl: '../admin_views/admin_home.html'
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html',
 			controller: 'AdminController',
 			controllerAs: 'vm'
+		}).state('Newsletter', {
+			url: '/leaguenews', //possibly convert it to /leaguenews/:id once we have that working
+			templateUrl: 'views/league_news.html',
+			controller: 'ProfileController',
+			controllerAs: 'vm'
+		}).state('CreateNewsletter', {
+			url: '/createnewsletter',
+			templateUrl: 'views/create_newsletter.html',
+			controller: 'AdminController',
+			controllerAs: 'vm'
+		}).state('Profile', {
+			url: '/Profile',
+			templateUrl: 'views/profile.html',
+			controller: "ProfileController",
+			controllerAs: 'vm'
 		});
-
 		$urlRouterProvider.otherwise('/');
 	}
 })();

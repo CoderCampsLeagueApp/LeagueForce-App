@@ -4,6 +4,7 @@
 	.controller('AdminController', AdminController);
 
 
+<<<<<<< HEAD
 	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory'];
 
 	function AdminController($state, $stateParams, $rootScope, AdminFactory) {
@@ -15,6 +16,16 @@
 			vm.adminLeague = res;
 		})
 
+=======
+	AdminController.$inject = ['$state', '$stateParams', '$sce', '$rootScope', 'LeagueFactory', 'AdminFactory'];
+
+	function AdminController($state, $stateParams, $sce, $rootScope, LeagueFactory, AdminFactory) {
+		var vm = this;
+		//news
+		vm.newsletter = {};
+		vm.edit = {};
+		vm.editBox = false;
+>>>>>>> 0a102342a33b16bfc9133f3f63eda7ede53224b0
 		//league
 		vm.league = {};
 		vm.league.features = [];
@@ -125,6 +136,58 @@
 			vm.team.images.push(image);
 		};
 	
+
+		//Newsletters adjust doing it for league property
+		if($stateParams.id) { //if the ID exists here, we go to the factory and find the specific pictures
+			AdminFactory.getNewsletter($stateParams.id).then(function(res) {
+				vm.newsletter = res;
+				//vm.oldNewsletter = angular.copy(res);
+			});
+		};
+
+		// if($rootScope._user) {
+		// 	AdminFactory.getAdminLoggedIn($rootScope._user.id).then(function(res) {
+		// 		vm.loggedInUser = res;
+		// 	});
+		// };	
+
+		vm.postNewsletter = function(newsletter) {
+			vm.newsletter.created = new Date();
+			//console.log(vm.newsletter.created);
+			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
+				console.log
+				vm.getNewsletters();
+				delete vm.newsletter;
+				//$state.go('Newsletter');
+			});
+		};
+
+		//Strict Contextual Escaping
+		//vm.articleBody = $sce.trustAsHTML();
+
+		vm.getNewsletters = function() {
+			AdminFactory.getNewsletters().then(function(res) {
+				vm.newsletters = res;
+			});
+		};
+
+		vm.getNewsletters();
+
+		vm.deleteNewsletter = function(newsletter) {
+			AdminFactory.deleteNewsletter(newsletter).then(function(res) {
+				vm.newsletters.splice(vm.newsletters.indexOf(newsletter), 1);
+				console.log(newsletter);
+			});
+		};
+
+		vm.editNewsletter = function(id) {
+			vm.edit.id = id;
+			AdminFactory.editNewsletter(vm.edit).then(function() {
+				vm.edit= "";
+				vm.getNewsletters();
+			})
+		};
+
 
 	};
 })();

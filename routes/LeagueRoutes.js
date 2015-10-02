@@ -45,7 +45,6 @@ router.get('/', function(req, res) {
 });
 
 //------------Creating a League-----------
-
 router.post('/', auth, function(req, res) {
 	var league = new League(req.body);
 	league.admin = req.payload.id;

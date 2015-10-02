@@ -6,12 +6,13 @@ var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
 var passport = require('passport') ;
 
-
 require('./models/User');
 require('./models/Inbox');
 require('./models/League');
 require('./models/Team');
 require('./models/Schedule');
+require('./models/Comments');
+require('./models/Newsletter');
 require('./config/passport') ;
 
 mongoose.connect('mongodb://localhost/league');
@@ -32,24 +33,26 @@ app.set('view options', {
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-
 var userRoutes = require('./routes/UserRoutes');
 var inboxRoutes = require('./routes/InboxRoutes');
 var leagueRoutes = require('./routes/LeagueRoutes');
 var teamRoutes = require('./routes/TeamRoutes');
 var scheduleRoutes = require('./routes/ScheduleRoutes');
+var commentRoutes = require('./routes/CommentRoutes');
+var newsletterRoutes = require('./routes/NewsletterRoutes');
 
 //on homepage load, render the index page
 app.get('/', function(req, res) {
 	res.render('index');
 });
 
-
 app.use('/api/user', userRoutes);
 app.use('/api/inbox', inboxRoutes);
 app.use('/api/league', leagueRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/schedule', scheduleRoutes);
+app.use('/api/comment', commentRoutes);
+app.use('/api/newsletter', newsletterRoutes);
 
 var server = app.listen(port, function() {
 	var host = server.address().address;
