@@ -5,7 +5,7 @@ var CommentsSchema = new mongoose.Schema({
 	username: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	body: String,
 	images: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
-	news: {type: mongoose.Schema.Types.ObjectId, ref: 'News'}
+	newsletter: {type: mongoose.Schema.Types.ObjectId, ref: 'League'}
 });
 
 mongoose.model('Comments', CommentsSchema);

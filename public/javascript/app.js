@@ -27,13 +27,13 @@
 			templateUrl: 'views/admin.html',
 			controller: 'AdminController',
 			controllerAs: 'vm'
-		}).state('Admin.League',{
+		}).state('Admin.League', {
 			url: '/admin/createLeague',
 			templateUrl: '../admin_views/league_form.html',
-		}).state('Admin.Team',{
+		}).state('Admin.Team', {
 			url: '/admin/createTeams',
 			templateUrl: '../admin_views/team_form.html',
-		}).state('Admin.Player',{
+		}).state('Admin.Player', {
 			url: '/admin/createPlayers',
 			templateUrl: '../admin_views/player_form.html',
 		}).state('TestView', {
@@ -46,8 +46,17 @@
 			templateUrl: 'views/league_news.html',
 			controller: 'ProfileController',
 			controllerAs: 'vm'
+		}).state('CreateNewsletter', {
+			url: '/createnewsletter',
+			templateUrl: 'views/create_newsletter.html',
+			controller: 'AdminController',
+			controllerAs: 'vm'
+		}).state('Profile', {
+			url: '/Profile',
+			templateUrl: 'views/profile.html',
+			controller: "ProfileController",
+			controllerAs: 'vm'
 		});
-
 		$urlRouterProvider.otherwise('/');
 	}
 })();

@@ -8,7 +8,7 @@ var auth = jwt({
 	userProperty: 'payload',
 	secret: '_secret_sauce'
 });
-
+//test edit
 //------------Params----------------------
 router.param('id', function(req, res, next, id) {
 	req._id = id;

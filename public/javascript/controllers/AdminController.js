@@ -4,11 +4,14 @@
 	.controller('AdminController', AdminController);
 
 
-	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'LeagueFactory'];
+	AdminController.$inject = ['$state', '$stateParams', '$sce', '$rootScope', 'LeagueFactory', 'AdminFactory'];
 
-	function AdminController() {
+	function AdminController($state, $stateParams, $sce, $rootScope, LeagueFactory, AdminFactory) {
 		var vm = this;
-		vm.title = 'Welcome to our App!';
+		//news
+		vm.newsletter = {};
+		vm.edit = {};
+		vm.editBox = false;
 		//league
 		vm.league = {};
 		vm.league.features = [];
@@ -73,7 +76,57 @@
 			//show form with drop down of players.
 		}
 
-		//news article stuff is this controller and admin factory
+		//Newsletters adjust doing it for league property
+		if($stateParams.id) { //if the ID exists here, we go to the factory and find the specific pictures
+			AdminFactory.getNewsletter($stateParams.id).then(function(res) {
+				vm.newsletter = res;
+				//vm.oldNewsletter = angular.copy(res);
+			});
+		};
+
+		// if($rootScope._user) {
+		// 	AdminFactory.getAdminLoggedIn($rootScope._user.id).then(function(res) {
+		// 		vm.loggedInUser = res;
+		// 	});
+		// };	
+
+		vm.postNewsletter = function(newsletter) {
+			vm.newsletter.created = new Date();
+			//console.log(vm.newsletter.created);
+			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
+				console.log
+				vm.getNewsletters();
+				delete vm.newsletter;
+				//$state.go('Newsletter');
+			});
+		};
+
+		//Strict Contextual Escaping
+		//vm.articleBody = $sce.trustAsHTML();
+
+		vm.getNewsletters = function() {
+			AdminFactory.getNewsletters().then(function(res) {
+				vm.newsletters = res;
+			});
+		};
+
+		vm.getNewsletters();
+
+		vm.deleteNewsletter = function(newsletter) {
+			AdminFactory.deleteNewsletter(newsletter).then(function(res) {
+				vm.newsletters.splice(vm.newsletters.indexOf(newsletter), 1);
+				console.log(newsletter);
+			});
+		};
+
+		vm.editNewsletter = function(id) {
+			vm.edit.id = id;
+			AdminFactory.editNewsletter(vm.edit).then(function() {
+				vm.edit= "";
+				vm.getNewsletters();
+			})
+		};
+
 
 	};
 })();

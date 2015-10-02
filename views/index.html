@@ -22,7 +22,7 @@
 						<a ui-sref="Leagues">Leagues</a>
 						<ul>
 							<li>
-								<a ui-sref="">League Search</a>
+								<a ui-sref="Home">League Search</a>
 							</li>
 							<li class="dropdown" ng-show="nav.status.id">
 								<a ui-sref="Newsletter">League News</a>
@@ -30,7 +30,7 @@
 							to that league to the viewer-->
 							<ul>
 								<li>
-									<a ui-sref="CreateArticle">Create Post</a>
+									<a ui-sref="CreateNewsletter">Create Post</a>
 								</li>
 							</ul>
 						</li>
@@ -62,13 +62,13 @@
 	<script src="/javascript/services/LeagueFactory.js"></script>
 	<script src="/javascript/services/UserFactory.js"></script>
 	<script src="/javascript/services/ProfileFactory.js"></script>
+	<script src="/javascript/services/AdminFactory.js"></script>
 	<!-- Controllers -->
 	<script src="/javascript/controllers/ProfileController.js"></script>
 	<script src="/javascript/controllers/LeagueController.js"></script>
 	<script src="/javascript/controllers/TeamController.js"></script>
 	<script src="/javascript/controllers/PlayerController.js"></script>
 	<script src="/javascript/controllers/NavController.js"></script>
-	<script src="/javascript/controllers/LeagueController.js"></script>
 	<script src="/javascript/controllers/InboxController.js"></script>
 	<script src="/javascript/controllers/AdminController.js"></script>
 </body>
