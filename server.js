@@ -23,6 +23,7 @@ app.engine('.html', require('ejs').renderFile);
 //Allow for these directories to be usable on the client side
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/bower_components'));
+app.use(passport.initialize());
 //we want to render html files
 app.set('view engine', 'html');
 app.set('view options', {

@@ -28,7 +28,7 @@
 			return localStorage.token ;
 		};
 
-		function isLoggedIn() {
+		o.isLoggedIn = function() {
 			var token = getToken() ;
 			if(token) {
 				var payload = JSON.parse(urlBase64Decoder(token.split(".")[1])) ;
@@ -42,7 +42,6 @@
 
 
 		o.register = function(user) {
-			console.log("DEBUG: UserFactory o.register called.") ;
 			var q = $q.defer() ;
 			$http.post('/api/user/register', user).success(function(res) {
 				// Need to uncomment the following 2 lines so that 
@@ -55,11 +54,10 @@
 		} ;
 
 		o.login = function(user) {
-			console.log("DEBUG: UserFactory o.login called.") ;
 			var q = $q.defer() ;
 			$http.post('/api/user/login', user).success(function(res) {
 				setToken(res.token) ;
-				$rootScope._user = isLoggedIn() ;
+				$rootScope._user = o.isLoggedIn() ;
 				q.resolve() ;
 			}) ;
 			return q.promise ;
@@ -67,7 +65,7 @@
 
 		o.logout = function() {
 			removeToken() ;
-			$rootScope._user = isLoggedIn() ;
+			$rootScope._user = o.isLoggedIn() ;
 		} ;
 
 		function urlBase64Decoder(str) {
@@ -84,7 +82,21 @@
 			return decodeURIComponent(escape($window.atob(output))) ;
 		} ;
 
-		$rootScope._user = isLoggedIn() ;
+		o.getUserLoggedIn = function(id) {
+			var q = $q.defer() ;
+			$http.get('/api/user/' + id).success(function(res) {
+				q.resolve(res) ;
+			});
+			return q.promise ;
+
+		}
+
+		o.saveToken = function(token) {
+			console.log("DEBUG: UserFactory saveToken called") ;
+			window.localStorage.setItem("token", token) ;
+		}
+
+		$rootScope._user = o.isLoggedIn() ;
 		return o ;
 	}
 })() ;

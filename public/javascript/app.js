@@ -41,9 +41,23 @@
 			templateUrl: 'views/test_view.html',
 			controller: 'AdminController',
 			controllerAs: 'vm'
+		}).state('Profile', {
+			url: '/profile',
+			templateUrl: 'views/profile.html',
+			controller: 'ProfileController',
+			controllerAs:'vm'
+		}).state("Token", {
+			url: '/auth/token/:token',
+			templateUrl: 'views/authenticating.html',
+			controller: 'TokenController',
+			resolve: {
+				token: ["$stateParams", function($stateParams) {
+					return $stateParams.token ;
+				}]
+			}
 		});
 
-		$urlRouterProvider.otherwise('/');
+		// $urlRouterProvider.otherwise('/');
 	}
 })();
 
