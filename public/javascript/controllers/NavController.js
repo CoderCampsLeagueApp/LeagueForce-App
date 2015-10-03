@@ -28,8 +28,9 @@
 
 		vm.logout = function() {
 			UserFactory.logout() ;
-			vm.status = $rootScope._user ;
-			$state.go('Home') ;
+			vm.status = $rootScope._user;
+			//delete vm.user;
+			$state.go('Home');
 		} ;
 
 	} ;

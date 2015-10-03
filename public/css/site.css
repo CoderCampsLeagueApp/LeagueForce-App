@@ -3,75 +3,19 @@
 	padding: 0;
 	margin: 0;
 }
-body 
-{
+body {
 	background: #fff;
 }
-#navHolder{
-	width: 100%;
-	height: 50px;
-	background: #DBDBDB;
-}
-nav {
-	width: 100%;
-	height: 50px;
-	background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(17,17,17,1) 17%,rgba(28,28,28,1) 35%,rgba(35,35,35,1) 63%,rgba(43,43,43,1) 83%,rgba(51,51,51,1) 100%);
-	position: absolute;
-	top: 0;
-}
-nav li {
-	display: inline-block;
-	float: right;
-}
-nav a {
-	text-decoration: none;
-	font-family: 'Abel', sans-serif;
-	font-size: 15px;
-	text-transform: uppercase;
-	color: #FF6801;
-	line-height: 50px;
-	width: 100px;
-	height: 50px;
-	float: right;
-	text-align: center;
-}
-nav a:hover {
-	text-decoration: none;
-	font-family: 'Abel', sans-serif;
-	font-size: 15px;
-	text-transform: uppercase;
-	color: #fff;
-	line-height: 50px;
-	width: 100px;
-	height: 50px;
-	background: #FF6801;
-	float: right;
-	text-align: center;
-}
-nav li.logo1 {
-	display: inline-block;
-	float: left;
-}
-nav a.logo {
-	text-decoration: none;
-	font-family: 'Dosis', sans-serif;
-	font-size: 17px;
-	text-transform: uppercase;
-	color: #E8E8E8;
-	line-height: 50px;
-	width: 150px;
-	height: 50px;
-	float: left;
-	text-align: center;
-	background: #FF6801;
-}
-#homePic{
+
+#homePic {
 	height: 90vh;
 	width: 100%;
 }
+
 .nopadding{
 	padding: 0;
 }
+
 .thumbnail{
 	border: none;
 }
@@ -99,3 +43,73 @@ nav a.logo {
 .pointer{
 	cursor: pointer;
 }
+
+/* NewsLetter and Comments */
+.newsImage {
+	height: 350px;
+	position: relative;
+	float: left;
+}
+
+.subjectLine {
+	margin-left: 35px;
+}
+
+.leagueLogo {
+	height: 25px;
+	clear: both;
+}
+
+p.article {
+	width: 50em; 
+	word-wrap: break-word;
+}
+
+
+/* Codepen Player & Coach Cards */
+
+body {
+	margin: 0 auto;
+	padding: 0;
+}
+
+.left {
+	right: 65px;
+}
+
+.right {
+	right: 15px;
+}
+
+.center {
+	text-align: center;
+}
+
+.bottom {
+	position: absolute;
+	bottom: 15px;
+}
+
+.card {
+	position: absolute;
+	width: 300px;
+	height: 100px;
+	padding-left: 5px;
+	padding-top: 0;
+	padding-bottom: 0;
+	left: 50%;
+	top: 67.5px;
+	background: #E9E2D0;
+	box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
+	/* make z-index stack more efficient or not needed if possible */
+}
+
+.card img {
+
+	margin-left: -250px;
+	background: #E9E2D0;
+	box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
+	z-index: -1;
+	/* make z-index stack more efficient or not needed if possible */
+}
+

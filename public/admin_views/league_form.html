@@ -1,4 +1,29 @@
-<form class="form-horizontal" ng-submit='vm.addLeague(vm.league)'>
+<div class="well">
+  this will be a drop down!
+  <ul> 
+    <li>Logo:</li>
+    <img width="120" height="120" ng-src="{{vm.league.logo}}">
+    <li>Name: {{vm.league.name}}</li>
+    <li>Division: {{vm.league.division}}</li>
+    <li>About: {{vm.league.about}}</li>
+    <li>features: </li>
+    <ul>
+      <div style="padding-left:20px">
+        <li ng-repeat='feature in vm.league.features track by $index'>{{feature}} 
+          <span class='text-danger pointer' ng-click='vm.removeFeature($index)' >X</span></li>
+        </div>
+      </ul>
+      <li>Images: </li>
+      <div class="row">
+        <div class="col-md-2" ng-repeat='image in vm.league.images track by $index'><img  width="200" height="" ng-src="{{image}}">
+          <button ng-click='vm.removeImage($index)' class="btn btn-danger" style="margin-left: 55px;margin-top: 10px;">Remove</button>
+          <div>
+          </div>
+        </ul>
+        
+  </div>
+
+<form class="form-horizontal" ng-submit='vm.createLeague(vm.league)'>
   <fieldset>
 
     <!-- Form Name -->
@@ -8,7 +33,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">League Name</label>  
       <div class="col-md-4">
-        <input type="text" ng-model='vm.league.name' placeholder="League name" class="form-control input-md">
+        <input type="text" ng-model='vm.league.name' placeholder="League name" class="form-control input-md" required>
       </div>
     </div>
 
@@ -16,7 +41,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">League Division</label>
       <div class="col-md-4">
-        <select ng-model='vm.league.division' class="form-control">
+        <select ng-model='vm.league.division' class="form-control" required>
           <option value="U5">U5</option>
           <option value="U6">U6</option>
           <option value="U7">U7</option>
@@ -71,7 +96,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">League description</label>
       <div class="col-md-4">                     
-        <textarea ng-model='vm.league.about' class="form-control" placeholder='what the league can offer'></textarea>
+        <textarea ng-model='vm.league.description' class="form-control" placeholder='what the league can offer' required></textarea>
       </div>
     </div>
     <label class="col-md-4 control-label"></label>

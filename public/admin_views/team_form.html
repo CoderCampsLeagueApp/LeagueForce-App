@@ -1,75 +1,51 @@
-<div class="form-group">
-  <label class="col-md-4 control-label" >Teams</label>
-  <div class="col-md-4">
-    <select name="multipleSelect" ng-model="vm.data"  
-    class="form-control">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-    <option value="13">13</option>
-    <option value="14">14</option>
-    <option value="15">15</option>
-    <option value="16">16</option>
-    <option value="17">17</option>
-    <option value="18">18</option>
-    <option value="19">19</option>
-    <option value="20">20</option>
-    <option value="21">21</option>
-    <option value="22">22</option>
-    <option value="23">23</option>
-    <option value="24">24</option>
-  </select>
-  <button ng-click='vm.formSize(vm.data)'>Select</button>
+<div class="well">
+  <p>Teams</p>
+  <div ng-repeat='t in vm.teams'>
+    <div class="well">
+    <p>{{t.name}}</p>
+    <p>{{t.images}}</p>
+    <p>{{t.logo}}</p>
+    <p>{{t.teamMembers}}</p>
+    <button class="btn btn-success" ng-click='vm.createTeam(t)'>Save Team</button>
+    </div>
+  </div>
 </div>
-</div>
-<br>
 <hr>
 <br>
-<div ng-repeat='l in vm.leagueSize track by $index'>
+
+<div class="row">
+  <div class="col-md-12 well">
+    <p>Name: {{vm.team.name}}</p>
+    <p>Logo: {{vm.team.logo}}</p>
+    <p>images: {{vm.team.images}}</p>
+    <p>TeamMember: {{vm.team.teamMembers}}</p>
+  </div>
+</div>
+
+<div>
   <form class="form-horizontal">
     <fieldset>
       <!-- Form Name -->
       <legend>Team {{$index + 1}}</legend>
 
-      <!-- Appended Input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label">Coaches</label>
-        <div class="col-md-4">
-          <div class="input-group">
-            
-            <input ng-model='vm.coach'  class="form-control" placeholder="Coaches" type="text">
-            <span ng-click='vm.teams[$index].coachdef = false;vm.addCoach(vm.coach, $index); vm.coach = ""' class="input-group-addon pointer">Add Coach</span>
-          </div>
-          <p>{{vm.team.coach}}</p>
-        </div>
-      </div>
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label">Team Name</label>  
         <div class="col-md-4">
-          <input ng-model='vm.teams[$index].name'  type="text" placeholder="team name" class="form-control input-md">  
+          <input ng-model='vm.team.name'  type="text" placeholder="team name" class="form-control input-md" required>  
         </div>
-        <p>{{vm.team.name}}</p>
       </div>
 
       <!-- Text input-->
       <div class="form-group">
         <label class="col-md-4 control-label" for="">Logo</label>  
         <div class="col-md-4">
-          <input ng-model='vm.teams[$index].logo'  type="text" placeholder="url or bson" class="form-control input-md">
+          <input ng-model='vm.team.logo'  type="text" placeholder="url or bson" class="form-control input-md">
           
         </div>
-        <p>{{vm.team.logo}}</p>
       </div>
+
+
 
       <!-- File Button --> 
       <div class="form-group">
@@ -77,31 +53,164 @@
         <div class="col-md-4">
           <div class="input-group">
             <input ng-model='vm.teamImage'  class="form-control" placeholder="Url for now.." type="text">
-            <span ng-click='vm.teams[$index].imagedef = false;vm.addTeamImage(vm.teamImage, $index); vm.teamImage = ""' class="input-group-addon pointer">Add Image</span>
+            <span ng-click='vm.team.imagedef = false;vm.addTeamImage(vm.teamImage); vm.teamImage = ""' class="input-group-addon pointer">Add Image</span>
           </div>
         </div>
       </div>
 
-
-      <!-- Appended Input-->
-      <!-- Adding more inputs for playes -->
-  <!-- <div class="form-group">
-    <label class="col-md-4 control-label" for="">Players</label>
-    <div class="col-md-4">
-      <div class="input-group">
-        <input ng-model='vm.player'  class="form-control" placeholder="player" type="text">
-        <span ng-click='vm.addPlayer(vm.player, $index);vm.player = ""' class="input-group-addon pointer">Add Player</span>
-      </div>
-      <p>{{vm.team.player}}</p>
-      <button style="margin-top: 20px;" ng-click='vm.addTeam(vm.team)' class="btn btn default btn-block">Add team</button>
-    </div>
-
-  </div> -->
-  <label class="col-md-4 control-label"></label>
-  <div class="col-md-4">                     
-    <input ng-click='vm.playerForm()' style=" margin-top: 15px" class="btn btn-success btn-block" type="submit" value="Add players" />
-  </div>
+  
 </fieldset>
 
 </form>
 </div>
+
+<!-- Coach Form!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<div class="row">
+  <div class="col-md-12 well">
+    <div class="well" ng-repeat='c in vm.team.teamMembers | filter: { isCoach: true }'> 
+      <p>{{c}}</p>
+    </div>
+   
+  </div>
+</div>
+<div style="margin-top:50px">
+<form class="form-horizontal" ng-submit='vm.addCoach(vm.coach)'>
+<fieldset>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label">Coach Name</label>  
+  <div class="col-md-4">
+  <input ng-model='vm.coach.name' type="text" placeholder="Full name" class="form-control input-md" required>
+    
+  </div>
+</div>
+
+<!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="">Head coach </label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="-0">
+      <input ng-model='vm.coach.isCoach' type="checkbox" >
+      yes
+    </label>
+  </div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" >Coach Picture</label>  
+  <div class="col-md-4">
+  <input  ng-model='vm.coach.pic' type="text" placeholder="img url for now.. " class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label">Bio</label>
+  <div class="col-md-4">                     
+    <textarea ng-model='vm.coach.bio' class="form-control"></textarea>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button class="btn btn-primary btn-block">Save Coach</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+  
+</div>
+
+<!-- Team Members !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!-- <div class="row">
+  <div class="col-md-12 well">
+    
+      <div class="card">
+        <img class="img-circle " src="https://pbs.twimg.com/media/CLx83ohUMAAStiN.jpg"/>
+        <h4 class="nopadding" style="margin:0">#17 - Jose Medina</h4>
+        <p>Striker</p>
+        <span><button class="btn btn-danger btn-sm">Delete</button></span>
+        <span><button class="btn btn-warning btn-sm">Edit</button></span>
+      </div>
+    </div>
+   
+  </div> -->
+
+<div class="row">
+  <div class="col-md-12 well">
+    <div class="well" ng-repeat='p in vm.team.teamMembers | filter: { isPlayer: true }'> 
+      <p>{{p}}</p>
+    </div>
+  </div>
+</div>
+
+
+
+<div style="margin-top: 50px">
+  <form class="form-horizontal" ng-submit='vm.addPlayer(vm.player)'>
+<fieldset>
+
+<!-- Form Name -->
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label">Player Info</label>  
+  <div class="col-md-3">
+  <input ng-model='vm.player.name' type="text" placeholder="Full name" class="form-control input-md" required>    
+  </div>
+  <div class="col-md-2">
+    <input ng-model='vm.player.teamNumber' type="number" placeholder="Jersey #" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" >Player Position</label>  
+  <div class="col-md-4">
+  <input ng-model='vm.player.position' type="text" placeholder="position" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label">Profile Picture</label>  
+  <div class="col-md-4">
+  <input ng-model='vm.player.pic' type="text" placeholder="img url for now.. " class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label">Date of Birth</label>  
+  <div class="col-md-4">
+  <input ng-model='vm.player.dob'  type="date" placeholder="Birthday" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-4">
+    <button class="btn btn-primary btn-block">Save Player</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+</div>
+
+<button ng-click='vm.addTeam(vm.team)' style="margin-top:50px; margin-bottom: 50px;" class="btn btn-block btn-success">ADD TEAM</button>

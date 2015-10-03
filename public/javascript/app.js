@@ -27,25 +27,33 @@
 			templateUrl: 'views/admin.html',
 			controller: 'AdminController',
 			controllerAs: 'vm'
-		}).state('Admin.League',{
-			url: '/admin/createLeague',
+		}).state('Admin.league',{
+			url: '/createLeague',
 			templateUrl: '../admin_views/league_form.html',
-		}).state('Admin.Team',{
-			url: '/admin/createTeams',
+		}).state('Admin.team',{
+			url: '/createTeams',
 			templateUrl: '../admin_views/team_form.html',
-		}).state('Admin.Player',{
-			url: '/admin/createPlayers',
-			templateUrl: '../admin_views/player_form.html',
+		}).state('Admin.home',{
+			url: '/home',
+			templateUrl: '../admin_views/admin_home.html'
+		}).state('Admin.newsletter', {
+			url: '/createnewsletter',
+			templateUrl: '../admin_views/create_newsletter.html'
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html',
-			controller: 'AdminController',
+			controller: 'LeagueController',
+			controllerAs: 'vm'
+		}).state('Newsletter', {
+			url: '/leaguenews', //possibly convert it to /leaguenews/:id once we have that working
+			templateUrl: 'views/league_news.html',
+			controller: 'NewsletterController',
 			controllerAs: 'vm'
 		}).state('Profile', {
-			url: '/profile',
+			url: '/Profile',
 			templateUrl: 'views/profile.html',
-			controller: 'ProfileController',
-			controllerAs:'vm'
+			controller: "ProfileController",
+			controllerAs: 'vm'
 		}).state("Token", {
 			url: '/auth/token/:token',
 			templateUrl: 'views/authenticating.html',
@@ -57,7 +65,7 @@
 			}
 		});
 
-		// $urlRouterProvider.otherwise('/');
+		$urlRouterProvider.otherwise('/');
 	}
 })();
 
