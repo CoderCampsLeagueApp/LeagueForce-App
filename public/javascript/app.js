@@ -42,7 +42,7 @@
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html',
-			controller: 'AdminController',
+			controller: 'LeagueController',
 			controllerAs: 'vm'
 		}).state('Newsletter', {
 			url: '/leaguenews', //possibly convert it to /leaguenews/:id once we have that working

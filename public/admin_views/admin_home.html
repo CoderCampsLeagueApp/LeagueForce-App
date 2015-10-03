@@ -1,7 +1,7 @@
 <h1>Admin Home!!</h1>
 
 
-
+<div ng-show='vm.adminLeague'>
 <ul> 
 	<li>Logo:</li>
 	<img width="200" height="200" ng-src="{{vm.adminLeague.logo}}">
@@ -22,6 +22,6 @@
 </ul>
 <button class="btn btn-lg btn-info" ng-click='vm.startLeagueEdit(vm.adminLeague._id)'>Edit League</button>
 <button class="btn btn-lg btn-warning" ng-click='vm.startTeamEdit(vm.adminLeague._id)'>ADD or EDIT teams</button>
-
+</div>
 
 

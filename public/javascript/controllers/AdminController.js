@@ -11,8 +11,10 @@
 		vm.title = 'Welcome to our App!';
 
 		$state.go('Admin.home');
+
 		AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.adminLeague = res;
+			console.log(vm.adminLeague);
 		})
 		//news
 		vm.newsletter = {};
