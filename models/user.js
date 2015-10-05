@@ -5,23 +5,13 @@ var jwt = require('jsonwebtoken') ;
 
 
 var UserSchema = new mongoose.Schema({
-	name: String,
+	name: {type:String, lowercase:true, unique:true},
 	username: {type:String, lowercase:true, unique:true},
-	profilePic: String,
-	facebook: {
-		id: String,
-		token: String,
-		email: String,
-		name: String,
-		photo: String
-	},
-	// facebookId: String,
 	images: Array, //array of images either bson or img url.
 	bio: String,
 	passwordHash: String,
 	salt: String,
-	created: Date, //date user created.
-	affiliation: {type: mongoose.Schema.Types.ObjectId, ref: 'Team'}, //Player or coach can affiliate accounts to users
+	created: String, //date user created.
 	leagueSubscribed: [{type: mongoose.Schema.Types.ObjectId, ref: 'League'}],
 	teamSubscribed: [{type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
 	Comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comments'}],
@@ -31,7 +21,6 @@ var UserSchema = new mongoose.Schema({
 });
 
 UserSchema.methods.generateJWT = function() {
-	console.log("DEBUG: UserSchema.methods.generateJWT called") ;
 	var today = new Date();
 	var exp = new Date(today);
 	exp.setDate(today.getDate() + 36500);
