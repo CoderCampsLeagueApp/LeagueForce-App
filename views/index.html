@@ -39,12 +39,14 @@
 				<li>
 					<a href="/api/user/auth/facebook" class="btn btn-primary">Facebook</a>
 				</li>
+				<li>
+					<a href="/api/user/auth/google" class="btn btn-primary">Google</a>
+				</li>
 				<li ng-show="!nav.status.id"><a ui-sref="Login">Login</a></li>
 
 				<li ng-show="nav.status.id" class="dropdown">
 					<a ui-sref="Profile">{{nav.status.username}}</a>
 					<ul>
-						<li><a href="/api/user/auth/facebook" class="btn btn-primary">Facebook</a></li>
 						<li><a ui-sref="Admin">Admin</a></li>
 						<li><a ng-click="nav.logout()">Logout</a></li>
 					</ul>
