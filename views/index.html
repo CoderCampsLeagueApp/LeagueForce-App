@@ -41,15 +41,19 @@
 				</li>
 				<li class="col-md-1"><a ui-sref="TestView">Test</a></li>		 	
 				<li class="col-md-1"><a ui-sref="Register">Sign Up</a></li>
-				<li class="col-md-1">
-					<a href="/api/user/auth/facebook" style="background-color: #4D65A3">Facebook</a>
-				</li>
-				<li class="col-md-1">
-					<a href="/api/user/auth/google" style="background-color: #DF4B38">Google</a>
+				<li class="dropdown col-md-2">
+					<a ui-sref="Login">Login</a>
+					<ul>
+						<li>
+							<a href="/api/user/auth/facebook" style="background-color: #4D65A3">Facebook</a>
+						</li>
+						<li >
+							<a href="/api/user/auth/google" style="background-color: #DF4B38">Google</a>
+						</li>
+						
+					</ul>
 				</li>
 
-				<li class="col-md-1"><a ui-sref="Login">Login</a></li>
-		 </ul>
 
 		
 			<ul ng-show="nav.status.id" class="nav">
@@ -70,8 +74,7 @@
 						</li>
 						<li >
 							<a ui-sref="Newsletter">League News</a>
-							<!-- Newsletter takes in league ID to deliver news specific
-							to that league to the viewer-->
+						
 						</li>
 						
 					</ul>
