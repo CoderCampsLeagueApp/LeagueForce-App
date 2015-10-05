@@ -72,7 +72,6 @@ nav a.logo {
 .nav {
 	position: relative;
 	line-height: 22px;
-	/*background-color: #e74c3c;*/
 }
 .nav>li {
 	display: block;
