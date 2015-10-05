@@ -14,6 +14,13 @@ var UserSchema = new mongoose.Schema({
 		name: String,
 		photo: String
 	},
+	google: {
+		id: String,
+		token: String,
+		email: String,
+		name: String,
+		photo: String
+	},
 	// facebookId: String,
 	images: Array, //array of images either bson or img url.
 	bio: String,

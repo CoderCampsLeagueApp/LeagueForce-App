@@ -35,7 +35,7 @@ router.get('/:id', function(req, res) {
 		if(err) return res.status(500).send({err: "Error inside the server"});
 		if(!league) return res.status(400).send({err: "That league does not exist"});
 		res.send(league);
-	})
+	});
 	
 });
 

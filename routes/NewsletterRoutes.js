@@ -15,29 +15,30 @@ var auth = jwt({
 });
 
 //----------------Push User ID into News addedBy property-------
-router.param('newsId', function(req, res, next, id) {
-	req._id = id;
-	News.findOne({_id: id})
-	.populate({ path: "comments"})
-	.exec(function(err, comments) {
-		News.populate(comments, {
-			path: 'addedBy', 
-			model: 'User',
-			select: "username profilePic"
-		}, function (err, news) {
-			if(err) return res.status(500).send({err: "Error inside the server."});
-			if(!news) return res.status(400).send({err: "That news does not exist"});
-			req.News = news;
-			next();
-		});
+// router.param('newsId', function(req, res, next, id) {
+// 	req._id = id;
+// 	News.findOne({_id: id})
+// 	.populate({ path: "comments"})
+// 	.exec(function(err, comments) {
+// 		News.populate(comments, {
+// 			path: 'username', 
+// 			model: 'User',
+// 			select: "username images"
+// 		}, function (err, news) {
+// 			if(err) return res.status(500).send({err: "Error inside the server."});
+// 			if(!news) return res.status(400).send({err: "That news does not exist"});
+// 			req.News = news;
+// 			next();
+// 		});
 
-	});
-});
+// 	});
+// });
 
 //-----------------Post News-------------------
 router.post('/', auth, function(req, res) {
 	var news = new News(req.body);
-	news.user = req.payload;
+	news.username = req.payload.id;
+	console.log(news);
 	news.save(function(err, newsResult) {
 		if(err) return res.status(500).send({err: "Issues with server"});
 		if(!newsResult) return res.status(400).send({err: "Could not post news"});
@@ -47,7 +48,13 @@ router.post('/', auth, function(req, res) {
 
 //---------------------Getting News------------------
 router.get('/', function(req, res) {
+	//console.log(news);
 	News.find({})
+	.populate({
+		path: 'username', 
+		model: 'User',
+		select: "username name"
+	})
 	.exec(function(err, news) {
 		if(err) return res.status(500).send({err: "error getting all news"});
 		if(!news) return res.status(400).send({err: "news do not exist"});
@@ -55,17 +62,7 @@ router.get('/', function(req, res) {
 	});
 });
 
-router.get('/:id', function(req, res) { //find by index
-	// News.findOne({})
-	// .exec(function(err, news) {
-	// 	if(err) return res.status(500).send({err: "Error getting a single newsletter"});
-	// 	if(!news) return res.status(400).send({err: "that newsletter doesn't exist"});
-	// 	res.send(req.news)
-	// })
-res.send(req.news);
-});
-
-router.get('/news/:newsId', function(req, res) {
+router.get('/news/:id', function(req, res) {
 	res.send(req.News)
 });
 

@@ -45,6 +45,10 @@ body {
 }
 
 /* NewsLetter and Comments */
+/*.ng-dirty {
+	background: yellow;
+	}*/
+
 .newsImage {
 	height: 350px;
 	position: relative;

@@ -5,8 +5,7 @@
 
 	function LeagueFactory($q, $http, $window, $rootScope) {
 		var o = {} ;
-
 		
 		return o ;
 	}
-})() ;
+})();

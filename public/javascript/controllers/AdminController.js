@@ -37,6 +37,7 @@
 		//creating League or editing
 		vm.createLeague = function(league){
 			if(!league._id){
+
 			AdminFactory.createLeague(league).then(function(res){
 				console.log('created league!');
 					$state.go('Admin.home');
@@ -63,15 +64,16 @@
 			console.log(idx);
 			vm.league.images.splice(idx, 1);
 		}
+
 		//creating League finished 
 
 		//Editing League ------------------------------------------------
 
 		vm.startLeagueEdit = function(id){
 			AdminFactory.getLeague($rootScope._user.id).then(function(res){
-			vm.league = res;
-			$state.go('Admin.league');
-		});
+				vm.league = res;
+				$state.go('Admin.league');
+			});
 		};
 
 		vm.startAddTeam = function(){
@@ -152,6 +154,7 @@
 			}
 			vm.team.images.push(image);
 		};
+
 		vm.removeTeamImage = function(idx){
 			vm.team.images.splice(idx, 1);
 		}
@@ -207,7 +210,5 @@
 				vm.getNewsletters();
 			})
 		};
-
-
 	};
 })();
