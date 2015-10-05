@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('app', ['ui.router'])
+	angular.module('app', ['ui.router', 'angularModalService'])
 	.config(Config);
 	Config.$inject = ['$stateProvider', '$urlRouterProvider'];
 	function Config($stateProvider, $urlRouterProvider) {
@@ -39,6 +39,9 @@
 		}).state('Admin.newsletter', {
 			url: '/createnewsletter',
 			templateUrl: '../admin_views/create_newsletter.html'
+		}).state('Admin.draftsmodal', {
+			url: '/article_draft/:id', //does this need an :id? 
+			templateUrl: '../admin_views/drafts_modal.html'
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html',
@@ -49,6 +52,9 @@
 			templateUrl: 'views/league_news.html',
 			controller: 'NewsletterController',
 			controllerAs: 'vm'
+		}).state('Admin.storedarticles', {
+			url: '/storedArticles',
+			templateUrl: '../admin_views/stored_articles.html'
 		}).state('Profile', {
 			url: '/Profile',
 			templateUrl: 'views/profile.html',

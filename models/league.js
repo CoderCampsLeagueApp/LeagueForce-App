@@ -12,6 +12,7 @@ var LeagueSchema = new mongoose.Schema({
 	newsletter: [{
 		body: String,
 		title: String,
+		isPublished: Boolean,
 		created: Date,
 		image: String,
 		comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comments"}],

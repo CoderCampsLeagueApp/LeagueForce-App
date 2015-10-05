@@ -36,38 +36,38 @@
 		//creating League
 		vm.createLeague = function(league){
 			if(!league._id){
-			AdminFactory.createLeague(league).then(function(res){
-				console.log('created league!');
-			});
+				AdminFactory.createLeague(league).then(function(res){
+					console.log('created league!');
+				});
 			}
 			else{
 				AdminFactory.editLeague(league).then(function(res)
-				{console.log('edited!')}
-			)};
-		}
-		vm.addFeature = function(feature){
-			vm.league.features.push(feature);
-		}
-		vm.removeFeature = function(idx){
-			console.log(idx);
-			vm.league.features.splice(idx, 1);
-		}
-		vm.addImage = function(image){
-			vm.league.images.push(image);
-		}
-		vm.removeImage = function(idx){
-			console.log(idx);
-			vm.league.images.splice(idx, 1);
-		}
+					{console.log('edited!')}
+					)};
+			}
+			vm.addFeature = function(feature){
+				vm.league.features.push(feature);
+			}
+			vm.removeFeature = function(idx){
+				console.log(idx);
+				vm.league.features.splice(idx, 1);
+			}
+			vm.addImage = function(image){
+				vm.league.images.push(image);
+			}
+			vm.removeImage = function(idx){
+				console.log(idx);
+				vm.league.images.splice(idx, 1);
+			}
 		//creating League finished 
 
 		//Editing League ------------------------------------------------
 
 		vm.startLeagueEdit = function(id){
 			AdminFactory.getLeague($rootScope._user.id).then(function(res){
-			vm.league = res;
-			$state.go('Admin.league');
-		});
+				vm.league = res;
+				$state.go('Admin.league');
+			});
 		};
 
 
@@ -130,59 +130,6 @@
 			}
 			vm.team.images.push(image);
 		};
-	
-
-		//Newsletters adjust doing it for league property
-		if($stateParams.id) { //if the ID exists here, we go to the factory and find the specific pictures
-			AdminFactory.getNewsletter($stateParams.id).then(function(res) {
-				vm.newsletter = res;
-				//vm.oldNewsletter = angular.copy(res);
-			});
-		};
-
-		// if($rootScope._user) {
-		// 	AdminFactory.getAdminLoggedIn($rootScope._user.id).then(function(res) {
-		// 		vm.loggedInUser = res;
-		// 	});
-		// };	
-
-		vm.postNewsletter = function(newsletter) {
-			vm.newsletter.created = new Date();
-			//console.log(vm.newsletter.created);
-			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
-				console.log
-				vm.getNewsletters();
-				delete vm.newsletter;
-				//$state.go('Newsletter');
-			});
-		};
-
-		//Strict Contextual Escaping
-		//vm.articleBody = $sce.trustAsHTML();
-
-		vm.getNewsletters = function() {
-			AdminFactory.getNewsletters().then(function(res) {
-				vm.newsletters = res;
-			});
-		};
-
-		vm.getNewsletters();
-
-		vm.deleteNewsletter = function(newsletter) {
-			AdminFactory.deleteNewsletter(newsletter).then(function(res) {
-				vm.newsletters.splice(vm.newsletters.indexOf(newsletter), 1);
-				console.log(newsletter);
-			});
-		};
-
-		vm.editNewsletter = function(id) {
-			vm.edit.id = id;
-			AdminFactory.editNewsletter(vm.edit).then(function() {
-				vm.edit= "";
-				vm.getNewsletters();
-			})
-		};
-
-
+		
 	};
 })();

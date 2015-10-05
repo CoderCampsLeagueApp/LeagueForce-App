@@ -31,7 +31,7 @@ router.get('/:id', function(req, res) {
 		if(err) return res.status(500).send({err: "Error inside the server"});
 		if(!league) return res.status(400).send({err: "That league does not exist"});
 		res.send(league);
-	})
+	});
 	
 });
 
@@ -89,7 +89,7 @@ router.post('/team', function(req, res) {
 		if(!result) return res.status(400).send({err: "Could not create a league"}); 
 		
 		League.update({_id: team.league}, {$push: {teams: result._id}} , function(err, result){ console.log('hi');res.send()} );
-});
+	});
 });
 
 

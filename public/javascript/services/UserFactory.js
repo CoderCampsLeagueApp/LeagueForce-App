@@ -14,7 +14,7 @@
 				}
 			}
 			return auth ;
-		} ;
+		};
 
 		function setToken(token) {
 			localStorage.setItem("token", token) ;

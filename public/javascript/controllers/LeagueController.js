@@ -4,9 +4,9 @@
 	.controller('LeagueController', LeagueController);
 
 
-	LeagueController.$inject = ['$state', '$stateParams', '$rootScope', 'LeagueFactory'];
+	LeagueController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory', 'LeagueFactory'];
 
-	function LeagueController($state, $stateParams, $rootScope, LeagueFactory) {
+	function LeagueController($state, $stateParams, $rootScope, AdminFactory, LeagueFactory) {
 		var vm = this;
 		vm.league = {};
 
@@ -16,12 +16,6 @@
 				vm.oldLeague = angular.copy(res);
 			});
 		};
-
-		// if($rootScope._user) {
-		// 	LeagueFactory.getAdminLoggedIn($rootScope._user.id).then(function(res) {
-		// 		vm.adminLoggedIn = res;
-		// 	})
-		// }
 
 		//----------League CRUD----------
 		vm.createLeague = function(league) {

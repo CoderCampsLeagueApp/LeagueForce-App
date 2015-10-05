@@ -7,6 +7,7 @@ var jwt = require('jsonwebtoken') ;
 var UserSchema = new mongoose.Schema({
 	name: String,
 	username: {type:String, lowercase:true, unique:true},
+	profilePic: String,
 	facebook: {
 		id: String,
 		token: String,
