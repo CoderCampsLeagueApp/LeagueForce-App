@@ -10,12 +10,13 @@
 		var vm = this;
 		vm.title = 'Welcome to our App!';
 
+		vm.def = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 		$state.go('Admin.home');
 
 		AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.adminLeague = res;
-			console.log(vm.adminLeague);
-		})
+		});
+		
 		//news
 		vm.newsletter = {};
 		vm.edit = {};
@@ -33,18 +34,21 @@
 
 
 		//league ----------------------------------------
-		//creating League
+		//creating League or editing
 		vm.createLeague = function(league){
 			if(!league._id){
 			AdminFactory.createLeague(league).then(function(res){
 				console.log('created league!');
+					$state.go('Admin.home');
 			});
 			}
 			else{
-				AdminFactory.editLeague(league).then(function(res)
-				{console.log('edited!')}
+				AdminFactory.editLeague(league).then(function(res){
+					console.log('edited!');
+					$state.go('Admin.home');
+				}
 			)};
-		}
+		};
 		vm.addFeature = function(feature){
 			vm.league.features.push(feature);
 		}
@@ -70,9 +74,15 @@
 		});
 		};
 
-
-		vm.startTeamEdit = function(id){
+		vm.startAddTeam = function(){
 			$state.go('Admin.team');
+			vm.edit = false;
+		}
+		vm.startTeamEdit = function(team){
+			$state.go('Admin.team');
+			vm.team = team;
+			console.log(vm.team.images);
+			vm.edit = true;
 		}
 
 		vm.team.teamMembers = [];
@@ -81,8 +91,20 @@
 		vm.createTeam = function(team){
 			team.league = vm.adminLeague._id;
 			AdminFactory.createTeam(team).then(function(res){
-				console.log('has been added to database!');
-				$state.go('Home');
+				vm.adminLeague.teams.push(team);
+				$state.go('Admin.home');
+			});
+		};
+		vm.editTeam = function(team){
+			AdminFactory.editTeam(team).then(function(res){
+				$state.go('Admin.home');
+			}); 
+		};
+		vm.deleteTeam = function(team, idx){
+		
+			AdminFactory.deleteTeam(team).then(function(res){
+				console.log('has been deleted');
+				vm.adminLeague.teams.splice(idx, 1);
 			})
 		}
 
@@ -130,6 +152,9 @@
 			}
 			vm.team.images.push(image);
 		};
+		vm.removeTeamImage = function(idx){
+			vm.team.images.splice(idx, 1);
+		}
 	
 
 		//Newsletters adjust doing it for league property

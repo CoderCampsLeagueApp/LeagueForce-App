@@ -1,46 +1,23 @@
-<div class="well">
-  this will be a drop down!
-  <ul> 
-    <li>Logo:</li>
-    <img width="120" height="120" ng-src="{{vm.league.logo}}">
-    <li>Name: {{vm.league.name}}</li>
-    <li>Division: {{vm.league.division}}</li>
-    <li>About: {{vm.league.about}}</li>
-    <li>features: </li>
-    <ul>
-      <div style="padding-left:20px">
-        <li ng-repeat='feature in vm.league.features track by $index'>{{feature}} 
-          <span class='text-danger pointer' ng-click='vm.removeFeature($index)' >X</span></li>
-        </div>
-      </ul>
-      <li>Images: </li>
-      <div class="row">
-        <div class="col-md-2" ng-repeat='image in vm.league.images track by $index'><img  width="200" height="" ng-src="{{image}}">
-          <button ng-click='vm.removeImage($index)' class="btn btn-danger" style="margin-left: 55px;margin-top: 10px;">Remove</button>
-          <div>
-          </div>
-        </ul>
-        
-  </div>
 
-<form class="form-horizontal" ng-submit='vm.createLeague(vm.league)'>
+<div class="leagueform">
+<form style="color:#fff" class="form-horizontal" ng-submit='vm.createLeague(vm.league)'>
   <fieldset>
 
     <!-- Form Name -->
-    <legend>Create a League</legend>
+    <legend style="color:white">Create a League</legend>
 
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label">League Name</label>  
-      <div class="col-md-4">
-        <input type="text" ng-model='vm.league.name' placeholder="League name" class="form-control input-md" required>
+      <label class="col-md-2 control-label">Name </label>  
+      <div class="col-md-10">
+        <input type="text" class="nameinput" ng-model='vm.league.name' placeholder="League name" required>
       </div>
     </div>
 
     <!-- Select Basic -->
     <div class="form-group">
-      <label class="col-md-4 control-label">League Division</label>
-      <div class="col-md-4">
+      <label class="col-md-2 control-label">Divisions</label>
+      <div class="col-md-10">
         <select ng-model='vm.league.division' class="form-control" required>
           <option value="U5">U5</option>
           <option value="U6">U6</option>
@@ -63,47 +40,58 @@
 
     <!-- Appended Input-->
     <div class="form-group">
-      <label class="col-md-4 control-label">League Features</label>
-      <div class="col-md-4">
+      <label class="col-md-2 control-label">Features</label>
+      <div class="col-md-10">
         <div class="input-group">
-          <input ng-model='vm.feature' class="form-control" placeholder="features" type="text">
+          <input type="text" class="appendinput" ng-model='vm.feature' placeholder="features">
           <span ng-click='vm.addFeature(vm.feature); vm.feature = ""' class="input-group-addon pointer">Add feature</span>
           
         </div>
-        <p>{{vm.league.features}}</p>
+        <div class="leagueOverflow col-md-12" style="padding-left:20px">
+        <li ng-repeat='feature in vm.league.features track by $index'>{{feature}} 
+          <span class='text-danger pointer' ng-click='vm.removeFeature($index)' >X</span></li>
+        </div>
       </div>
     </div>
     <!-- Text input-->
     <div class="form-group">
-      <label class="col-md-4 control-label">League Logo</label>  
-      <div class="col-md-4">
-        <input ng-model='vm.league.logo' type="text" placeholder="url for now.." class="form-control input-md">   
+      <label class="col-md-2 control-label">Logo </label>  
+      <div class="col-md-10">
+        <input type="text" class="nameinput" ng-model='vm.league.logo' type="text" placeholder="url for now..">   
       </div>
     </div>
 
     <!-- Appended Input-->
     <div class="form-group">
-      <label class="col-md-4 control-label">League Images</label>
-      <div class="col-md-4">
+      <label class="col-md-2 control-label">Images</label>
+      <div class="col-md-10">
         <div class="input-group">
-          <input ng-model='vm.image' class="form-control" placeholder="images" type="text">
+          <input type="text" class="appendinput" ng-model='vm.image' placeholder="images" type="text">
           <span ng-click='vm.addImage(vm.image); vm.image = ""' class="input-group-addon pointer">Add Image</span>
         </div>
-        <p>{{vm.league.images}}</p> 
+        <div class="leagueOverflow col-md-12" style=" padding-top:10px;">
+        <div class="col-md-2 nopadding" ng-repeat='image in vm.league.images track by $index'><img  width="105" height="95" ng-src="{{image}}">
+        <div class="pointer" ng-click='vm.removeImage($index)'>
+          <span class="imgRemove">X</span>
+        </div>
+        </div>
       </div> 
     </div>  
+    </div>
+
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label">League description</label>
-      <div class="col-md-4">                     
-        <textarea ng-model='vm.league.description' class="form-control" placeholder='what the league can offer' required></textarea>
+      <label class="col-md-2 control-label">League Description</label>
+      <div class="col-md-10">                     
+        <textarea ng-model='vm.league.description' class="wpcf7-form-control wpcf7-textarea" placeholder='what the league can offer' required></textarea>
       </div>
     </div>
-    <label class="col-md-4 control-label"></label>
-    <div class="col-md-4">                     
+    <label class="col-md-3 control-label"></label>
+    <div class="col-md-7">                     
       <input style=" margin-top: 15px" class="btn btn-success btn-block" type="submit" value="Submit" />
     </div>
 
   </fieldset>
 </form>
+</div>
 

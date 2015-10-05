@@ -27,6 +27,10 @@ var auth = jwt({
 //------------Getting a League------------
 router.get('/:id', function(req, res) {
 	League.findOne({admin: req.params.id})
+	.populate({
+    path: 'teams',
+    model: 'Team',
+  })
 	.exec(function(err, league){
 		if(err) return res.status(500).send({err: "Error inside the server"});
 		if(!league) return res.status(400).send({err: "That league does not exist"});
@@ -48,6 +52,7 @@ router.get('/', function(req, res) {
 router.post('/', auth, function(req, res) {
 	var league = new League(req.body);
 	league.admin = req.payload.id;
+	league.isDisplay = false;
 	console.log(league);
 
 	league.save(function(err, league) {
@@ -88,10 +93,41 @@ router.post('/team', function(req, res) {
 		if(err) return res.status(500).send({err: "Issues with the server"});
 		if(!result) return res.status(400).send({err: "Could not create a league"}); 
 		
-		League.update({_id: team.league}, {$push: {teams: result._id}} , function(err, result){ console.log('hi');res.send()} );
+		League.update({_id: team.league}, {$push: {teams: {_id: result._id}}} , function(err, result){ console.log('hi');res.send()} );
 });
 });
 
+//deletes the team and the ref on teams array
+router.put('/team/delete/:id', function(req, res){
+	var id = req.params.id;
+	console.log(id);
+	console.log('----------------------------------');
+	var leagueId = req.body.league;
+	Team.remove({_id: id})
+	.exec(function(err, result){
+		if(err) return res.status(500).send({err: "Issues with the server"});
+		if(!result) return res.status(400).send({err: "Could not remove team"}); 
+		League.findOneAndUpdate({_id: leagueId}, {$pull: {teams : id}},
+		function(err, result){
+			console.log(leagueId);
+			console.log(result);
+			if(err) return res.status(500).send({err: "Issues with the server"});
+			if(!result) return res.status(400).send({err: "Could not remove id from league"}); 
+			res.send();
+		});
+	});
+});
+
+router.put('/team/edit', function(req, res){
+	var team  = req.body;	
+	console.log(team);
+	Team.update({_id: team._id}, team)
+	.exec(function(err, result){
+		if(err) return res.status(500).send({err: "Issues with the server"});
+		if(!result) return res.status(400).send({err: "Could not remove team"});
+		res.send(); 
+	})
+})
 
 
 

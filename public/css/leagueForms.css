@@ -1,0 +1,330 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+.admin {
+	  background:#2d3b36 url(http://www.mrwallpaper.com/wallpapers/football-stadium.jpg)no-repeat center center fixed;
+}
+.adminHome{
+    width: 900px;
+    height: 400px;
+    margin-bottom: 200px;
+    color: #fff;
+    background-color: rgba(10, 10, 10, 0.5);
+    border: 1px outset;
+    margin: auto auto;
+    padding: 40px;
+    padding-bottom: 60px;
+     border-radius: 4px; 
+    box-shadow: 0 0 10px black;
+}
+.adminHomeTeams{
+  margin-top: 100px;
+  background-color: #fff;
+}
+.admin .adminleaguecard{
+    width: 900px;
+    height: 100%;
+    margin-bottom: 200px;
+    color: #fff;
+    background-color: rgba(10, 10, 10, 0.5);
+    border: 1px outset;
+    margin: auto auto;
+    padding: 40px;
+    padding-bottom: 60px;
+     border-radius: 4px; 
+    box-shadow: 0 0 10px black;
+}
+.admin .leagueform{
+    width: 900px;
+    height: 100%;
+    margin-bottom: 200px;
+    color: #fff;
+    background-color: rgba(10, 10, 10, 0.5);
+    margin: auto auto;
+    padding: 40px;
+    padding-bottom: 60px;
+     border-radius: 4px; 
+    box-shadow: 0 0 10px black;
+}
+.leagueOverflow{
+  margin-top: 20px;
+  overflow: auto;
+  height: 140px;
+  background-color: rgba(21, 22, 39, 0.86);
+  border-radius: 10px;
+  overflow-x: hidden;
+}
+.coachOverflow{
+  margin-top: 20px;
+  overflow: auto;
+  height: 200px;
+  background-color: rgba(21, 22, 39, 0.86);
+  border-radius: 10px;
+  overflow-x: hidden;
+}
+.teamOverflow{
+  margin-top: 20px;
+  overflow: auto;
+  height: 250px;
+  overflow-x: hidden;
+}
+.playerOverflow{
+  margin-top: 20px;
+  overflow: auto;
+  height: 300px;
+  overflow-x: hidden;
+}
+.odd{
+  background-color: #eaeaea;
+}
+.odd:hover{
+  background-color: #969696
+}
+.even{
+  background-color: #e1e1e1;
+}
+.even:hover{
+  background-color: #969696
+}
+.table-bordered {
+    border: 6px solid #333333;
+}
+.table-bordered>thead>tr>th {
+    border: 1px solid #3f3f3f;
+}
+.imgRemove{
+  color: red;
+  background-color: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  font-size: 30px;
+}
+.teamimgRemove{
+  font-size: 20px;
+  background-color: rgba(0,0,0,0.6);
+  color: red;
+  position: absolute;
+  top: 0;
+  right: 4px;
+}
+.admin .teamForm{
+    width: 900px;
+    height: 100%;
+    margin-bottom: 200px;
+    color: #fff;
+    background-color: rgba(10, 10, 10, 0.5);
+    margin: auto auto;
+    padding: 40px;
+    padding-bottom: 60px;
+     border-radius: 4px; 
+    box-shadow: 0 0 10px black;
+}
+
+.admin h1 {
+   color: #fff; 
+   text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+   text-align: center;
+   padding-top: 30px;
+   font-size: 100px; 
+   font-weight: 700;
+   font-family: 'Source Sans Pro', sans-serif;
+   margin: 0px;
+}
+.homebtn { /* http://www.colorzilla.com/gradient-editor/#643232+20,190000+100&0.25+20,0.75+100;Custom */
+  background: linear-gradient(to bottom, rgba(100,50,50,0.25) 20%, rgba(25,0,0,0.75) 100%) repeat-x;
+  border-top: 1px solid rgba(255,255,255,0.75);
+  box-shadow: 
+    0 10px 0 rgba(255,200,200,0.35) inset,
+    0 -1px 0 black,
+    0 0 10px 1px rgba(0,0,0,0.5);
+  color: #fff;
+  cursor: pointer;
+  font: 150% Trebuchet MS;
+  height: 50px;
+  position: relative;
+  text-align: center;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  width: 25%; 
+}
+.homebtn:hover {
+  background-position: 0 10px;
+  box-shadow: 
+    0 20px 0 rgba(255,200,200,0.35) inset,
+    0 -1px 0 black,
+    0 0 10px 1px rgba(0,0,0,0.5);
+}
+.homebtnEdit { /* http://www.colorzilla.com/gradient-editor/#643232+20,190000+100&0.25+20,0.75+100;Custom */
+  background: linear-gradient(to bottom, rgba(251,223,147,0) 0%,rgba(247,214,100,0.62) 32%,rgba(244,206,60,0.66) 59%,rgba(242,201,32,0.66) 78%,rgba(239,195,0,0.76) 100%);
+  border-top: 1px solid rgba(255,255,255,0.75);
+  box-shadow: 
+    0 10px 0 rgba(255,200,200,0.35) inset,
+    0 -1px 0 black,
+    0 0 10px 1px rgba(0,0,0,0.5);
+  color: #fff;
+  cursor: pointer;
+  font: 150% Trebuchet MS;
+  height: 50px;
+  position: relative;
+  text-align: center;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  width: 25%; 
+  margin-top: 50px;
+    margin-left: 5px;
+}
+.homebtnEdit:hover {
+  background-position: 0 10px;
+}
+.homeTeambtn{
+  width: 100%;
+  width: 75%;
+  margin-left: 30px; 
+}
+.img-responsive{
+  margin: 0 auto;
+}
+
+.admin textarea{
+	  background: rgba(0, 0, 0, 0.4); 
+    width: 100%;
+    height: 150px;
+    border: none;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; 
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 45px;
+    padding-right: 20px;
+    padding-top: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.admin select {
+    width: 100%;
+    height: 48px;
+    line-height: 1.5;
+    font-size: 1.4em;
+    border: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -mox-border-radius: 10px;
+    color: #fff;
+    display: block;
+    background: transparent;
+    background-color: rgba(0,0,0,.4);
+    margin-bottom: 20px;
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.admin .nameinput {
+    width: 100%;
+    height: 48px;
+    border: none;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; 
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 20px;
+}
+.admin .appendinput{
+    width: 100%;
+    height: 48px;
+    border: none;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; 
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 20px;
+  }
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+input.nameinput {
+	  background: rgba(0, 0, 0, 0.4); 
+	  padding-left: 45px;
+}
+
+input.appendinput {
+	  background: rgba(0, 0, 0, 0.4);
+	  padding-left: 45px;
+}
+
+input.message {
+	  background: rgba(0, 0, 0, 0.4);
+	  padding-left: 45px;
+}
+
+select.indent {
+	  padding-left: 45px;
+    cursor: pointer;
+}
+
+::-webkit-input-placeholder {
+	  color: #fff;
+}
+
+:-moz-placeholder{ 
+    color: #fff; 
+}
+
+::-moz-placeholder {
+    color: #fff;
+}
+
+:-ms-input-placeholder {  
+	  color: #fff; 
+}
+
+input:focus, textarea:focus { 
+	  background-color: rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px 1px rgba(255,255,255,.5);
+    -webkit-box-shadow: 0 0 5px 1px rgba(255,255,255,.5);
+    box-shadow: 0 0 5px 1px rgba(255,255,255,.5);
+	  overflow: hidden; 
+}
+
+
+@media only screen and ( min-width: 768px ) and ( max-width: 1035px ) {
+  h1 { font-size: 80px; }
+  form { width: 736px !important; }
+    #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat > select, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat { width: 731px !important; }
+    .nameinput, .emailinput, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Message > textarea { width: 666px !important; }
+}
+
+@media only screen and ( max-width: 804px ) {
+    h1 { font-size: 50px; }
+  form { width: 450px !important; }
+   #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat > select, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat { width: 445px !important; }
+    .nameinput, .emailinput, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Message > textarea { width: 380px !important; }
+}
+
+@media only screen and ( max-width: 517px ) {
+     h1 { font-size: 30px; }
+  form { width: 295px !important; }
+  #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat > select, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat { width: 290px !important; }
+    .nameinput, .emailinput, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Message > textarea { width: 225px !important; }
+  .btn { width: 110px; }
+}

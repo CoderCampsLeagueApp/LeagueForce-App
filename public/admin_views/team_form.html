@@ -1,46 +1,43 @@
-<div class="well">
-  <p>Teams</p>
-  <div ng-repeat='t in vm.teams'>
-    <div class="well">
-    <p>{{t.name}}</p>
-    <p>{{t.images}}</p>
-    <p>{{t.logo}}</p>
-    <p>{{t.teamMembers}}</p>
-    <button class="btn btn-success" ng-click='vm.createTeam(t)'>Save Team</button>
-    </div>
-  </div>
-</div>
-<hr>
+
+<br>
+<br>
 <br>
 
-<div class="row">
-  <div class="col-md-12 well">
-    <p>Name: {{vm.team.name}}</p>
-    <p>Logo: {{vm.team.logo}}</p>
-    <p>images: {{vm.team.images}}</p>
-    <p>TeamMember: {{vm.team.teamMembers}}</p>
-  </div>
-</div>
 
-<div>
+<div class="teamForm">
   <form class="form-horizontal">
     <fieldset>
+
+    <div class="form-group">
+      
+      <div class="teamOverflow col-md-12">
+      <img class="col-md-4 img-responsive" style="float:left" ng-src="{{vm.team.logo || vm.def}}">
+      <h3>{{vm.team.name}}</h3>
+      <div style="display:inline" class="col-md-8">
+        <div ng-repeat='img in vm.team.images track by $index' style="display:inline" class="col-md-3 nopadding">
+          <img height="115" width="125" ng-src="{{img}}">
+          <div ng-click='vm.removeTeamImage($index)' class="teamimgRemove pointer">
+            <span>X</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
       <!-- Form Name -->
-      <legend>Team {{$index + 1}}</legend>
 
       <!-- Text input-->
       <div class="form-group">
-        <label class="col-md-4 control-label">Team Name</label>  
-        <div class="col-md-4">
-          <input ng-model='vm.team.name'  type="text" placeholder="team name" class="form-control input-md" required>  
+        <label class="col-md-2 control-label">Team Name</label>  
+        <div class="col-md-8">
+          <input ng-model='vm.team.name'  type="text" placeholder="team name" class="nameinput" required>  
         </div>
       </div>
 
       <!-- Text input-->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="">Logo</label>  
-        <div class="col-md-4">
-          <input ng-model='vm.team.logo'  type="text" placeholder="url or bson" class="form-control input-md">
+        <label class="col-md-2 control-label" for="">Logo</label>  
+        <div class="col-md-8">
+          <input ng-model='vm.team.logo'  type="text" placeholder="url or bson" class="nameinput">
           
         </div>
       </div>
@@ -49,48 +46,60 @@
 
       <!-- File Button --> 
       <div class="form-group">
-        <label class="col-md-4 control-label" for="">Images</label>
-        <div class="col-md-4">
+        <label class="col-md-2 control-label" for="">Images</label>
+        <div class="col-md-8">
           <div class="input-group">
-            <input ng-model='vm.teamImage'  class="form-control" placeholder="Url for now.." type="text">
+            <input ng-model='vm.teamImage'  class="appendinput" placeholder="Url for now.." type="text">
             <span ng-click='vm.team.imagedef = false;vm.addTeamImage(vm.teamImage); vm.teamImage = ""' class="input-group-addon pointer">Add Image</span>
           </div>
         </div>
       </div>
 
+
   
 </fieldset>
-
+<br>
+<h3 style="text-align:center">Coaches</h3>
+<hr>
 </form>
-</div>
+
 
 <!-- Coach Form!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<div class="row">
-  <div class="col-md-12 well">
-    <div class="well" ng-repeat='c in vm.team.teamMembers | filter: { isCoach: true }'> 
-      <p>{{c}}</p>
-    </div>
-   
-  </div>
-</div>
+
+
+
 <div style="margin-top:50px">
 <form class="form-horizontal" ng-submit='vm.addCoach(vm.coach)'>
 <fieldset>
 
+<div class="form-group">
+      <label class="col-md-1 control-label"></label>
+      <div class="coachOverflow col-md-10" style="padding-top:10px;">
+        <div ng-repeat='c in vm.team.teamMembers'>
+          <div ng-hide='c.isPlayer' class="col-md-12" style=" border-bottom: solid 1px;padding-bottom: 15px;">
+          <img style="float:left" class="img-circle" width="120" height="120" src="{{c.pic || vm.def}}">
+          <h4>{{c.name}}</h4>
+          <p><i ng-show='c.isCoach'>Head Coach</i></p>
+          <p><i ng-hide='c.isCoach'>Coach</i></p>
+          <p style="padding-left:10px">{{c.bio | limitTo: 300}}{{c.bio.length > 300 ? '...' : ''}}</p>
+          </div>
+        </div>
+      </div>
+</div>
+
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label">Coach Name</label>  
-  <div class="col-md-4">
-  <input ng-model='vm.coach.name' type="text" placeholder="Full name" class="form-control input-md" required>
-    
+  <label class="col-md-2 control-label">Coach Name</label>  
+  <div class="col-md-8">
+  <input ng-model='vm.coach.name' type="text" placeholder="Full name" class="nameinput" required>  
   </div>
 </div>
 
 <!-- Multiple Checkboxes -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="">Head coach </label>
-  <div class="col-md-4">
+  <label class="col-md-2 control-label" for="">Head coach</label>
+  <div class="col-md-8">
   <div class="checkbox">
     <label for="-0">
       <input ng-model='vm.coach.isCoach' type="checkbox" >
@@ -102,25 +111,25 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" >Coach Picture</label>  
-  <div class="col-md-4">
-  <input  ng-model='vm.coach.pic' type="text" placeholder="img url for now.. " class="form-control input-md">
+  <label class="col-md-2 control-label" >Coach Picture</label>  
+  <div class="col-md-8">
+  <input  ng-model='vm.coach.pic' type="text" placeholder="img url for now.. " class="nameinput">
     
   </div>
 </div>
 
 <!-- Textarea -->
 <div class="form-group">
-  <label class="col-md-4 control-label">Bio</label>
-  <div class="col-md-4">                     
+  <label class="col-md-2 control-label">Coach Bio</label>
+  <div class="col-md-8">                     
     <textarea ng-model='vm.coach.bio' class="form-control"></textarea>
   </div>
 </div>
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label"></label>
-  <div class="col-md-4">
+  <label class="col-md-2 control-label"></label>
+  <div class="col-md-8">
     <button class="btn btn-primary btn-block">Save Coach</button>
   </div>
 </div>
@@ -131,86 +140,94 @@
 </div>
 
 <!-- Team Members !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-<!-- <div class="row">
-  <div class="col-md-12 well">
-    
-      <div class="card">
-        <img class="img-circle " src="https://pbs.twimg.com/media/CLx83ohUMAAStiN.jpg"/>
-        <h4 class="nopadding" style="margin:0">#17 - Jose Medina</h4>
-        <p>Striker</p>
-        <span><button class="btn btn-danger btn-sm">Delete</button></span>
-        <span><button class="btn btn-warning btn-sm">Edit</button></span>
-      </div>
-    </div>
-   
-  </div> -->
-
-<div class="row">
-  <div class="col-md-12 well">
-    <div class="well" ng-repeat='p in vm.team.teamMembers | filter: { isPlayer: true }'> 
-      <p>{{p}}</p>
-    </div>
-  </div>
-</div>
 
 
+<br>
+<h3 style="text-align:center">Players</h3>
+<hr>
 
 <div style="margin-top: 50px">
   <form class="form-horizontal" ng-submit='vm.addPlayer(vm.player)'>
 <fieldset>
+
+<div class="playerOverflow" style="color:black">
+    <table class="table table-bordered">
+      <thead>
+      <tr style="background: #333333; color:white">
+        <th>pic.</th>
+        <th>#</th>
+        <th>Name</th>
+        <th>position</th>
+        <th>d.o.b.</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='p in vm.team.teamMembers track by $index' ng-show='p.isPlayer' ng-class-odd="'odd'" ng-class-even="'even'">
+          <th><img width="30" height="30" ng-src="{{p.pic}}"></th>
+          <th>{{p.teamNumber}}</th>
+          <th>{{p.name}}</th>
+          <th>{{p.position}}</th>
+          <th>{{p.dob}}</th>
+        </tr>
+      </tbody>
+    </table>
+</div>
 
 <!-- Form Name -->
 
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label">Player Info</label>  
-  <div class="col-md-3">
-  <input ng-model='vm.player.name' type="text" placeholder="Full name" class="form-control input-md" required>    
+  <label class="col-md-2 control-label">Player Info</label>  
+  <div class="col-md-6">
+  <input ng-model='vm.player.name' type="text" placeholder="Full name" class="nameinput" required>    
   </div>
   <div class="col-md-2">
-    <input ng-model='vm.player.teamNumber' type="number" placeholder="Jersey #" class="form-control input-md">
+    <input ng-model='vm.player.teamNumber' type="number" placeholder="Jersey #" class="nameinput">
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" >Player Position</label>  
-  <div class="col-md-4">
-  <input ng-model='vm.player.position' type="text" placeholder="position" class="form-control input-md">
+  <label class="col-md-2 control-label" >Player Position</label>  
+  <div class="col-md-8">
+  <input ng-model='vm.player.position' type="text" placeholder="position" class="nameinput">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label">Profile Picture</label>  
-  <div class="col-md-4">
-  <input ng-model='vm.player.pic' type="text" placeholder="img url for now.. " class="form-control input-md">
+  <label class="col-md-2 control-label">Profile Picture</label>  
+  <div class="col-md-8">
+  <input ng-model='vm.player.pic' type="text" placeholder="img url for now.. " class="nameinput">
     
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label">Date of Birth</label>  
-  <div class="col-md-4">
-  <input ng-model='vm.player.dob'  type="date" placeholder="Birthday" class="form-control input-md">
+  <label class="col-md-2 control-label">Date of Birth</label>  
+  <div class="col-md-8">
+  <input ng-model='vm.player.dob'  type="date" placeholder="Birthday" class="nameinput">
     
   </div>
 </div>
 
 <!-- Button -->
 <div class="form-group">
-  <label class="col-md-4 control-label" ></label>
-  <div class="col-md-4">
+  <label class="col-md-2 control-label" ></label>
+  <div class="col-md-8">
     <button class="btn btn-primary btn-block">Save Player</button>
   </div>
 </div>
 
 </fieldset>
 </form>
+
+
+<button ng-show='vm.edit === false' ng-click='vm.createTeam(vm.team)' style="margin-top:50px; margin-bottom: 50px;" class="btn btn-block btn-success">ADD TEAM</button>
+<button ng-show='vm.edit === true' ng-click='vm.editTeam(vm.team)' style="margin-top:50px; margin-bottom: 50px;" class="btn btn-block btn-success">Update Team</button>
 </div>
 </div>
 
-<button ng-click='vm.addTeam(vm.team)' style="margin-top:50px; margin-bottom: 50px;" class="btn btn-block btn-success">ADD TEAM</button>

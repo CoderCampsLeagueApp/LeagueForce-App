@@ -18,7 +18,8 @@ var LeagueSchema = new mongoose.Schema({
 		username: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
 	}],
 	matches: {type: mongoose.Schema.Types.ObjectId, ref: 'Schedule'},
-	admin: {type: mongoose.Schema.Types.ObjectId, ref: 'User'} //Admin
+	admin: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},//Admin
+	isDisplay: Boolean
 });
 
 mongoose.model('League', LeagueSchema);

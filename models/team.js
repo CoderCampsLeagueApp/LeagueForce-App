@@ -2,7 +2,7 @@
 
 var TeamSchema = new mongoose.Schema({
 	name: String,
-	images: String, //or bson
+	images: Array, //or bson
 	logo: String, //or bson
 	teamMembers: [{
 		name: String,

@@ -7,24 +7,29 @@
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
 	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/navbar.css">
+	<link rel="stylesheet" href="/css/leagueForms.css">
 </head>
 <body >	
 	<div ng-controller="NavController as nav">
+	<div class="container-fluid">
+		<div class="row">
+		 <div class="col-md-12 nopadding">
 
-		<div id="nav" class="fluid">
-			<ul class="nav">
+		 <ul ng-hide="nav.status.id" class="nav">
 				<!-- fix navbar extending 100%-->
-				<li class="logo1">
-					<a class="logo" ui-sref="Home">Mighty Leagues</a>
+				
+				<li class="col-md-2">
+					<a  ui-sref="Home">Mighty Leagues</a>
 				</li>
-				<li>
+				
+				<li class="col-md-1 col-md-offset-4">
 					<a ui-sref="About">About</a>
 				</li>
-				<li class="dropdown">
+				<li class="dropdown col-md-1">
 					<a ui-sref="Leagues">Leagues</a>
 					<ul>
 						<li>
-							<a ui-sref="Home">League Search</a>
+							<a class="pointer">League Search</a>
 						</li>
 						<li >
 							<a ui-sref="Newsletter">League News</a>
@@ -34,24 +39,56 @@
 						
 					</ul>
 				</li>
-				<li><a ui-sref="TestView">Test</a></li>
-				<li ng-show="!nav.status.id"><a ui-sref="Register">Sign Up</a></li>
-				<li>
-					<a href="/api/user/auth/facebook" class="btn btn-primary">Facebook</a>
+				<li class="col-md-1"><a ui-sref="TestView">Test</a></li>		 	
+				<li class="col-md-1"><a ui-sref="Register">Sign Up</a></li>
+				<li class="col-md-1">
+					<a href="/api/user/auth/facebook" style="background-color: #4D65A3">Facebook</a>
 				</li>
-				<li ng-show="!nav.status.id"><a ui-sref="Login">Login</a></li>
+				<li class="col-md-1"><a ui-sref="Login">Login</a></li>
+		 </ul>
 
-				<li ng-show="nav.status.id" class="dropdown">
-					<a ui-sref="Profile">{{nav.status.username}}</a>
+		
+			<ul ng-show="nav.status.id" class="nav">
+				<!-- fix navbar extending 100%-->
+				
+				<li class="col-md-2">
+					<a  ui-sref="Home">Mighty Leagues</a>
+				</li>
+				
+				<li class="col-md-1 col-md-offset-5">
+					<a ui-sref="About">About</a>
+				</li>
+				<li class="dropdown col-md-1">
+					<a ui-sref="Leagues">Leagues</a>
 					<ul>
-						<li><a href="/api/user/auth/facebook" class="btn btn-primary">Facebook</a></li>
-						<li><a ui-sref="Admin">Admin</a></li>
-						<li><a ng-click="nav.logout()">Logout</a></li>
+						<li>
+							<a class="pointer">League Search</a>
+						</li>
+						<li >
+							<a ui-sref="Newsletter">League News</a>
+							<!-- Newsletter takes in league ID to deliver news specific
+							to that league to the viewer-->
+						</li>
+						
+					</ul>
+				</li>
+				<li class="col-md-1"><a ui-sref="TestView">Test</a></li>
+
+				<li class="col-md-2 dropdown">
+					<a style="text-align:center" ui-sref="Profile">{{ nav.status.username | limitTo: 15}}{{nav.status.username.length >= 16 ? '...' : ''}}</a>
+					<ul>
+						<li class="profile">
+							<a href="/api/user/auth/facebook"  style="background-color: #4D65A3">Facebook</a>
+						</li>
+						<li class="profile"><a ui-sref="Admin">Admin</a></li>
+						<li class="profile"><a ng-click="nav.logout()">Logout</a></li>
 					</ul>
 				</li>
 			</ul>
 			<ui-view></ui-view>
 		</div>
+		</div>
+	</div>
 	</div>
 
 	<!-- Ext Libs -->

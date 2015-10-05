@@ -72,11 +72,11 @@ nav a.logo {
 .nav {
 	position: relative;
 	line-height: 22px;
+	background-color: #e74c3c;
 }
 .nav>li {
 	display: block;
 	float: left;
-	margin: 0;
 	padding: 0;
 }
 .nav>li>a {
@@ -88,11 +88,14 @@ nav a.logo {
 	color: #fff;
 	font-size: 18px;
 	text-decoration: none;
-	background-color: #c0392b;
+	background-color: #e74c3c;
 	transition: color .3s ease-in;
 }
 .nav>li>a:hover, .nav>li:hover>a {
-	background-color: #e74c3c;
+	background-color: #c0392b;
+}
+.nav>li>a:focus, .nav>li:focus>a {
+	background-color: #c0392b;
 }
 .nav>.dropdown>a {
 	padding: 10px 30px 10px 20px;
@@ -113,7 +116,6 @@ nav a.logo {
 }
 .nav ul {
 	position: absolute;
-	margin: 0;
 	padding: 0;
 	list-style: none;
 	display: block;
@@ -123,7 +125,6 @@ nav a.logo {
 	top: -9999px;
 	height: 0px; 
 	display: block;
-	margin: 0;
 	padding: 0;
 	transition: height .2s ease-in;
 }
@@ -134,7 +135,19 @@ nav a.logo {
 }
 .nav ul li a {
 	padding: 4px 20px;
-	width: 180px;
+	width: 140px;
+	display: block;
+	position: relative;
+	font-family: Tahoma, Verdana, Segoe, sans-serif;
+	color: #fff;
+	text-decoration: none;
+	font-size: 14px;
+	background-color: #c0392b;
+	transition: color .3s ease-in, background .3s ease-in;
+}
+.nav ul li .profile {
+	padding: 4px 20px;
+	width: 200px;
 	display: block;
 	position: relative;
 	font-family: Tahoma, Verdana, Segoe, sans-serif;
@@ -146,7 +159,7 @@ nav a.logo {
 }
 .nav ul li:hover>a, .nav ul li a:hover {
 	color: #fff;
-	background-color: #c0392b;
+	background-color: #e74c3c; 
 }
 .nav ul .dropdown:hover ul {
 	left: 180px;

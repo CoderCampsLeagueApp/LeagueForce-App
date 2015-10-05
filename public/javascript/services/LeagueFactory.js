@@ -1,13 +1,12 @@
-(function() {
-	'use strict';
-	angular.module('app')
-	.controller('LeagueController', LeagueController);
+(function(){
+	// "use strict" ;
+	angular.module('app').factory('LeagueFactory', LeagueFactory) ;
+	LeagueFactory.$inject = ['$q', '$http', '$window', '$rootScope'] ;
 
+	function LeagueFactory($q, $http, $window, $rootScope) {
+		var o = {} ;
 
-	LeagueController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory'];
-
-	function LeagueController($state, $stateParams, $rootScope, LeagueFactory) {
-		var vm = this;
-		vm.title = 'Welcome to our App!';
-	};
-})();
+		
+		return o ;
+	}
+})() ;

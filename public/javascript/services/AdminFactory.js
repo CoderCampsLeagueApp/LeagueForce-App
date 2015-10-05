@@ -49,8 +49,40 @@
 			});
 			return q.promise;
 		};
+		//---------------------team--------------------------
+		o.createTeam = function(team){
+			console.log(team);
+			var q = $q.defer();
+			$http.post('/api/league/team', team).success(function(res) {
+				q.resolve();
+				console.log('hello');
+			});
+			return q.promise;
+		};
 
+		o.editTeam = function(team){
+			console.log(team);
+			var q = $q.defer();
+			$http.put('/api/league/team/edit', team).success(function(res) {
+				q.resolve();
+			});
+			return q.promise;
+		}
 
+		o.deleteTeam = function(team){
+			var q = $q.defer();
+			var leagueId = {league: team.league };
+			console.log(team._id);
+			console.log("---------------------------");
+			console.log(leagueId);
+			$http.put('/api/league/team/delete/' + team._id, leagueId).success(function(res){
+				console.log('has been deleted');
+				q.resolve();
+			});
+			return q.promise;
+		};
+
+		//-------------------newsletter---------------------
 		o.getNewsletters = function() {
 			var q = $q.defer();
 			$http.get('/api/newsletter/').success(function(res) {
@@ -79,16 +111,6 @@
 			var q = $q.defer();
 			$http.put('/api/newsletter/' + edit._id, edit).success(function(res) {
 				q.resolve(res);
-			});
-			return q.promise;
-		};
-
-		o.createTeam = function(team){
-			console.log(team);
-			var q = $q.defer();
-			$http.post('/api/league/team', team).success(function(res) {
-				q.resolve();
-				console.log('hello');
 			});
 			return q.promise;
 		};
