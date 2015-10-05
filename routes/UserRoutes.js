@@ -123,4 +123,22 @@ router.get('/auth/facebook/callback',
 	}) ;
 
 
+// For Google Authentication
+router.get('/auth/google',
+	passport.authenticate('google', { scope: ['profile', 'email']})) ;
+
+// Google callback
+router.get('/auth/google/callback',
+	passport.authenticate('google', { failureRedirect: '/login' }),
+	function(req, res) {
+		if(req.user) {
+			console.log("DEBUG: router callback called.  generating token...") ;
+			var token = { token : req.user.generateJWT() }
+			res.redirect("/#/auth/token/" + token.token) ;
+		} else {
+			res.send("You are not authenticated") ;
+		}
+	}) ;
+
+
 module.exports = router ;
