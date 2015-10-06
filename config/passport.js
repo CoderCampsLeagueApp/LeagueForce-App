@@ -172,6 +172,8 @@ function(accessToken, refreshToken, profile, done) {
 )) ;
 
 
+
+
 // Following is from Isaiah's example	
 // passport.serializeUser(function(user, done) {
 // 	done(null, user) ;
