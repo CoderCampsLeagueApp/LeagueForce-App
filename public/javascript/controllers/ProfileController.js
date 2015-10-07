@@ -23,6 +23,7 @@
 				vm.userLoggedIn = res ;
 			}) ;
 		}
+
 		//Edit Profile: picture, bio, name, etc.
 
 		vm.editProfile = function() {

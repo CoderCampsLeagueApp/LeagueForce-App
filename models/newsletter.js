@@ -6,9 +6,10 @@ var NewsletterSchema = new mongoose.Schema({
 	created: Date,
 	image: String,
 	isPublished: Boolean,
+	hasImage: Boolean,
 	leagueName: {type: mongoose.Schema.Types.ObjectId, ref: "League"},
 	comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comments"}],
-	username: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
+	user: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
 });
 
 mongoose.model('Newsletter', NewsletterSchema);

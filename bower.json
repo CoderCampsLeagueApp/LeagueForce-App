@@ -17,6 +17,7 @@
     "angular": "~1.4.3",
     "angular-ui-router": "~0.2.15",
     "angular-modal-service": "~0.6.9",
-    "angular-ui-bootstrap": "~0.13.4"
+    "angular-ui-bootstrap": "~0.13.4",
+    "textAngular": "~1.4.6"
   }
 }

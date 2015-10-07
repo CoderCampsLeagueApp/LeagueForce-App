@@ -107,9 +107,9 @@
 			return q.promise
 		};
 
-		o.editNewsletter = function(edit) {
+		o.editNewsletter = function(oldNewsletter, newsletter) {
 			var q = $q.defer();
-			$http.put('/api/newsletter/' + edit._id, edit).success(function(res) {
+			$http.put('/api/newsletter/' + oldNewsletter._id, newsletter).success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise;

@@ -9,6 +9,7 @@
 	function AdminController($state, $stateParams, $rootScope, AdminFactory) {
 		var vm = this;
 		vm.title = 'Welcome to our App!';
+		vm.uiRouterState = $state;
 
 		vm.def = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 		$state.go('Admin.home');
@@ -38,32 +39,32 @@
 		vm.createLeague = function(league){
 			if(!league._id){
 
-			AdminFactory.createLeague(league).then(function(res){
-				console.log('created league!');
+				AdminFactory.createLeague(league).then(function(res){
+					console.log('created league!');
 					$state.go('Admin.home');
-			});
+				});
 			}
 			else{
 				AdminFactory.editLeague(league).then(function(res){
 					console.log('edited!');
 					$state.go('Admin.home');
 				}
-			)};
-		};
-		vm.addFeature = function(feature){
-			vm.league.features.push(feature);
-		}
-		vm.removeFeature = function(idx){
-			console.log(idx);
-			vm.league.features.splice(idx, 1);
-		}
-		vm.addImage = function(image){
-			vm.league.images.push(image);
-		}
-		vm.removeImage = function(idx){
-			console.log(idx);
-			vm.league.images.splice(idx, 1);
-		}
+				)};
+			};
+			vm.addFeature = function(feature){
+				vm.league.features.push(feature);
+			}
+			vm.removeFeature = function(idx){
+				console.log(idx);
+				vm.league.features.splice(idx, 1);
+			}
+			vm.addImage = function(image){
+				vm.league.images.push(image);
+			}
+			vm.removeImage = function(idx){
+				console.log(idx);
+				vm.league.images.splice(idx, 1);
+			}
 
 		//creating League finished 
 
@@ -103,7 +104,7 @@
 			}); 
 		};
 		vm.deleteTeam = function(team, idx){
-		
+			
 			AdminFactory.deleteTeam(team).then(function(res){
 				console.log('has been deleted');
 				vm.adminLeague.teams.splice(idx, 1);
@@ -158,35 +159,47 @@
 		vm.removeTeamImage = function(idx){
 			vm.team.images.splice(idx, 1);
 		}
-	
 
-		//Newsletters adjust doing it for league property
-		if($stateParams.id) { //if the ID exists here, we go to the factory and find the specific pictures
-			AdminFactory.getNewsletter($stateParams.id).then(function(res) {
-				vm.newsletter = res;
-				//vm.oldNewsletter = angular.copy(res);
-			});
-		};
+		//-------------Newsletter Controller Functions------
+		// if($stateParams.id) { 
+		// 	AdminFactory.getNewsletter($stateParams.id).then(function(res) {
 
-		// if($rootScope._user) {
-		// 	AdminFactory.getAdminLoggedIn($rootScope._user.id).then(function(res) {
-		// 		vm.loggedInUser = res;
 		// 	});
 		// };	
 
+
+		vm.editNewsletter = function(newsletter) {
+			vm.oldNewsletter.isPublished = true;
+			
+		}; 
+
+		vm.toEditPage = function(newsletter) {
+			$state.go('Admin.editnewsletter');
+			vm.newsletter = angular.copy(newsletter);
+		}
+
 		vm.postNewsletter = function(newsletter) {
-			vm.newsletter.created = new Date();
-			//console.log(vm.newsletter.created);
-			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
-				console.log
-				vm.getNewsletters();
-				delete vm.newsletter;
-				//$state.go('Newsletter');
-			});
+			if(!newsletter._id) {
+				vm.newsletter.created = new Date();
+				vm.newsletter.isPublished = true;
+				AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
+					vm.getNewsletters();
+					console.log(vm.newsletter);
+					delete vm.newsletter;
+					$state.go('Newsletter');
+				});
+			}
+
+			else {
+				AdminFactory.editNewsletter(vm.newsletter, vm.oldNewsletter).then(function(res) {
+					vm.getNewsletters();
+					console.log(vm.oldNewsletter);
+					$state.go('Newsletter');
+				});
+			}
+			
 		};
 
-		//Strict Contextual Escaping
-		//vm.articleBody = $sce.trustAsHTML();
 
 		vm.getNewsletters = function() {
 			AdminFactory.getNewsletters().then(function(res) {
@@ -203,12 +216,51 @@
 			});
 		};
 
-		vm.editNewsletter = function(id) {
-			vm.edit.id = id;
-			AdminFactory.editNewsletter(vm.edit).then(function() {
-				vm.edit= "";
-				vm.getNewsletters();
-			})
+		vm.adminToComments = function(newsletter) {
+			
+			$state.go('SingleNewsletter');
+		}
+
+		//------------Draft Functionality-------------
+		vm.draftRequest = function(draft) {
+			vm.newsletter.isPublished = false;
+			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {				
+				//console.log(newsletter);
+				delete vm.newsletter;
+				$state.go('Admin.draftsmodal')
+			});
 		};
+
+		vm.exampleModal = function(){
+			ModalService.showModal({
+				templateUrl: '../admin_views/drafts_modal.html',
+				controller: 'ModalController'
+			}).then(function(modal) {
+				modal.element.modal();
+				modal.close.then(function(result) {
+					console.log(result);	
+				})
+			});
+		};
+
+		vm.saveDraft = function(newsletter) {
+			vm.newsletter.isPublished = false;
+			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
+				vm.getNewsletters();
+				delete vm.newsletter;
+				$state.go('Admin.home')
+			});
+		};
+
+		vm.cancelDraft = function() {
+			delete vm.newsletter;
+			vm.newsletter = "";
+			vm.newsletter = {};
+			$state.go('Admin.home');
+			console.log(vm.newsletter);
+			console.log(newsletter);
+		};
+
+		
 	};
 })();

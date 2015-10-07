@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('app', ['ui.router', 'angularModalService'])
+	angular.module('app', ['ui.router', 'angularModalService', 'textAngular'])
 	.config(Config);
 	Config.$inject = ['$stateProvider', '$urlRouterProvider'];
 	function Config($stateProvider, $urlRouterProvider) {
@@ -37,20 +37,25 @@
 			url: '/home',
 			templateUrl: '../admin_views/admin_home.html'
 		}).state('Admin.newsletter', {
-			url: '/createnewsletter',
+			url: '/newsletter/create',
 			templateUrl: '../admin_views/create_newsletter.html'
-		}).state('Admin.draftsmodal', {
-			url: '/article_draft/:id', //does this need an :id? 
-			templateUrl: '../admin_views/drafts_modal.html'
+		}).state('Admin.editnewsletter', {
+			url: '/newsletter/edit/:id',
+			templateUrl: '../admin_views/create_newsletter.html'
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html',
 			controller: 'LeagueController',
 			controllerAs: 'vm'
 		}).state('Newsletter', {
-			url: '/leaguenews', //possibly convert it to /leaguenews/:id once we have that working
+			url: '/leaguenews',
 			templateUrl: 'views/league_news.html',
-			controller: 'NewsletterController',
+			controller: 'ViewNewsController',
+			controllerAs: 'vm'
+		}).state('SingleNewsletter', {
+			url: '/leaguenews/:id',
+			templateUrl: 'views/newsletter.html',
+			controller: 'ViewNewsController',
 			controllerAs: 'vm'
 		}).state('Admin.storedarticles', {
 			url: '/storedArticles',
