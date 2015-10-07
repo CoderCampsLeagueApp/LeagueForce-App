@@ -26,18 +26,10 @@
 		};
 
 		//------------------Comments---------------
-		o.getComment = function(id) {
+
+		o.getComments = function(id) {
 			var q = $q.defer();
 			$http.get('/api/comment/' + id).success(function(res) {
-				console.log(id);
-				q.resolve(res);
-			});
-			return q.promise;
-		};
-
-		o.getComments = function() {
-			var q = $q.defer();
-			$http.get('/api/comment/').success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise;

@@ -2,18 +2,27 @@
 	angular.module('app')
 	.controller('ViewNewsController', ViewNewsController);
 
-	ViewNewsController.$inject = ['UserFactory', '$state', '$stateParams', '$rootScope', 'ProfileFactory', 'WebsiteFactory'];
+	ViewNewsController.$inject = ['$state', '$stateParams', '$rootScope', '$timeout', 'ProfileFactory', 'WebsiteFactory'];
 
-	function ViewNewsController(UserFactory, $state, $stateParams, $rootScope, ProfileFactory, WebsiteFactory){
+	function ViewNewsController($state, $stateParams, $rootScope, $timeout, ProfileFactory, WebsiteFactory){
 		var vm = this;
 		vm.newsletter = {};
 		vm.replyBox = false;
+		
 
-		if($stateParams.id) {
-			WebsiteFactory.getNewsletter($stateParams.id).then(function(res) {
-				vm.newsletter = res
-			});
-		}
+		vm.getNews = function() {
+			
+			if($stateParams.id) {
+				WebsiteFactory.getNewsletter($stateParams.id).then(function(res) {
+					vm.newsletter = res;
+					WebsiteFactory.getComments($stateParams.id).then(function(res) {
+						vm.comments = res;
+					})
+				});
+			}
+		};
+
+		$timeout( function(){ vm.getNews(); }, 10);
 
 		vm.getNewsletters = function() {
 			WebsiteFactory.getNewsletters().then(function(res) {
@@ -22,45 +31,35 @@
 		};
 
 		vm.getNewsletters();
+
+
 		//-------------------Comments----------------------
-
-		vm.getComments = function() {
-			ProfileFactory.getComments().then(function(res) {
-				vm.comment = res;
-			})
-		};
-
-		vm.getComments();
 
 		vm.deleteComment = function(comment, news) {
 			ProfileFactory.deleteComment(comment, news).then(function(res) {
-				vm.comment.splice(vm.comment.indexOf(comment), 1);
+				vm.comments.splice(vm.comments.indexOf(comment), 1);
 			})
 		};
 
 		vm.createComment = function(newsId) {
 			var comment = {
 				body: vm.comment.body,
-				picture: $stateParams.id,
 				news: newsId				
 			};
 			ProfileFactory.createComment(comment).then(function(res) {
-				vm.comment.body = " ",
-				vm.getComments();
-				vm.comment.push(res);
+				vm.comment.body = " ";
+				vm.getNews();
 			})
 		};
 
-		vm.postReply = function(reply) {
+		vm.postReply = function(commentId) {
 			var reply = {
 				body: vm.comment.reply.body,
-				picture: $stateParams.id,
-				comments: commentId
+				comment: commentId
 			};
 			ProfileFactory.postReply(reply).then(function(res) {
-				vm.comment.reply.body = " ",
-				vm.getComments();
-				vm.comment.push(res);
+				vm.comment.reply.body = " "
+				//vm.comment.push(res); i think the push here put all the comments
 			})
 		};
 

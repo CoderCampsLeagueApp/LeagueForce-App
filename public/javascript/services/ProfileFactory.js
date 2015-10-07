@@ -25,22 +25,23 @@
 			return q.promise;
 		};
 
-		o.getComment = function(id) {
-			var q = $q.defer();
-			$http.get('/api/comment/' + id).success(function(res) {
-				console.log(id);
-				q.resolve(res);
-			});
-			return q.promise;
-		};
+		//already in website factory
+		// o.getComment = function(id) {
+		// 	var q = $q.defer();
+		// 	$http.get('/api/comment/' + id).success(function(res) {
+		// 		console.log(id);
+		// 		q.resolve(res);
+		// 	});
+		// 	return q.promise;
+		// };
 
-		o.getComments = function() {
-			var q = $q.defer();
-			$http.get('/api/comment/').success(function(res) {
-				q.resolve(res);
-			});
-			return q.promise;
-		};
+		// o.getComments = function() {
+		// 	var q = $q.defer();
+		// 	$http.get('/api/comment/').success(function(res) {
+		// 		q.resolve(res);
+		// 	});
+		// 	return q.promise;
+		// };
 
 
 		o.editComment = function(edit) {
@@ -52,16 +53,6 @@
 			return q.promise;
 		};
 
-		// o.deleteComment = function(comment) {
-		// 	var q = $q.defer();
-		// 	$http.delete('/api/comment/' + comment._id).success(function(res) {
-		// 		q.resolve(res);
-		// 	});
-		// 	return q.promise;
-		// };
-
-		
-
 		o.deleteComment = function(comment, news){
 			var q = $q.defer();
 			var del = {commentId: comment, newsId: news};
@@ -70,6 +61,14 @@
 			});
 			return q.promise;
 		};
+
+		o.postReply = function(reply) {
+			var q = $q.defer();
+			$http.post('/api/comment/reply' + reply, getAuth()).success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise;
+		}
 
 		return o;
 	}

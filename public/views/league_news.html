@@ -3,5 +3,5 @@
 	{{n.username.name}} - {{n.created | date:"M/d/yyyy hh:mma"}}<br>
 	<img style="float: left;" ng-src="{{n.image}}" ng-class="newsImage"/><br>
 	<div ta-bind ng-model="n.body" style="clear: both;"></div>
-	<button class='btn btn-md btn-info' ui-sref='SingleNewsletter({id: n._id})'>View All {{n.comments.length}} Comments</button>
+	<button class='btn btn-md btn-info' ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">View All {{n.comments.length}} Comments</button>
 </div>

@@ -217,6 +217,7 @@
 		};
 
 		vm.adminToComments = function(newsletter) {
+			
 			$state.go('SingleNewsletter');
 		}
 

@@ -12,19 +12,6 @@ var auth = jwt({
 	secret: '_secret_sauce'
 });
 
-//---------------Finding a single --------
-
-router.get('/comment/:commentsId', function(req, res) {
-	res.send(req.Comment)
-});	
-
-
-router.get('/:id', function(req, res) {
-	res.send(req.comment) 
-});
-
-//-----------Get Calls--------------
-
 router.post('/', auth, function(req, res) {
 	var news = req.body.news;
 	var comment = new Comment(req.body);
@@ -44,8 +31,8 @@ router.post('/', auth, function(req, res) {
 	})
 });
 
-router.get('/', function(req, res) {
-	Comment.find({})
+router.get('/:id', function(req, res) {
+	Comment.find({news: req.params.id})
 	.populate({
 		path: "user",
 		model: "User",
@@ -59,7 +46,7 @@ router.get('/', function(req, res) {
 });
 
 
-//---------------edit comment-----------
+//--------------------------Edit comment------------------------------
 router.put('/:id', function(req, res) {
 	console.log(req.body);
 	Comment.update({_id: req.body.id}, req.body)
@@ -70,7 +57,7 @@ router.put('/:id', function(req, res) {
 	});
 });
 
-//delete a comment
+//------------------------Delete a comment--------------------------
 router.put("/delete/:id", auth, function(req, res) {
 	var commentId = req.params.id;
 	var newsId = req.body.newsId;
@@ -93,4 +80,34 @@ router.put("/delete/:id", auth, function(req, res) {
 		});
 });
 
+//------------Replies---------------
+router.post('/', auth, function(req, res) {
+	var news = req.body.news;
+	var comment = new Comment(req.body);
+	comment.created = new Date();
+	comment.user = req.payload.id;
+	console.log(comment);
+	comment.save(function(err, commentResult) {
+		if(err) return res.status(500).send({err: "Issues with server"});
+		if(!commentResult) return res.status(400).send({err: "Could not post comment"});
+		News.update({_id: news}, {$push: {comments: {_id: commentResult._id}}}, 
+			function(err, result) {
+				User.update({_id: comment.user}, {$push: {comments: {_id: commentResult._id}}},
+					function(err, result) {
+						res.send();
+					})
+			})
+	})
+});
+
+// router.post('/reply', auth, function(req, res) {
+// 	var comment = req.body.comment
+// 	var reply = new Comment(req.body);
+// 	reply.created = new Date();
+// 	reply.user = req.payload.id;
+// 	console.log(reply);
+// 	reply.save(function err, replyResult) {
+// 		if(err) return res.status(500).send()
+// 	}
+// })
 module.exports = router;
