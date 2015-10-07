@@ -2,17 +2,34 @@
 	angular.module('app')
 	.controller('NewsletterController', NewsletterController);
 
-	NewsletterController.$inject = ['$state', '$stateParams', '$sce', 'AdminFactory', 'ModalService'];
+	NewsletterController.$inject = ['$state', '$stateParams', 'AdminFactory', 'ModalService', 'ProfileFactory'];
 
-	function NewsletterController($state, $stateParams, $sce, AdminFactory, ModalService){
+	function NewsletterController($state, $stateParams, AdminFactory, ModalService, ProfileFactory){
 		var vm = this;
+		vm.uiRouterState = $state;
 
-		//Newsletters adjust doing it for league property
-		if($stateParams.id) { //if the ID exists here, we go to the factory and find the specific pictures
+		if($stateParams.id) { 
 			AdminFactory.getNewsletter($stateParams.id).then(function(res) {
 				vm.newsletter = res;
+				vm.oldNewsletter = angular.copy(res);
 			});
 		};	
+
+		vm.editNewsletter = function(newsletter) {
+			vm.oldNewsletter.isPublished = true;
+			AdminFactory.editNewsletter(vm.newsletter, vm.oldNewsletter).then(function(res) {
+				vm.getNewsletters();
+				console.log(vm.oldNewsletter);
+				//delete vm.newsletter;
+				$state.go('Newsletter');
+			});
+		}; 
+
+		vm.toEditPage = function() {
+			vm.newsletter = res;
+			vm.oldNewsletter = angular.copy(res);	
+			$state.go('Admin.editnewsletter');
+		}
 
 		vm.postNewsletter = function(newsletter) {
 			vm.newsletter.created = new Date();
@@ -25,8 +42,6 @@
 			});
 		};
 
-		//Strict Contextual Escaping
-		//vm.articleBody = $sce.trustAsHTML();
 
 		vm.getNewsletters = function() {
 			AdminFactory.getNewsletters().then(function(res) {
@@ -43,21 +58,13 @@
 			});
 		};
 
-		vm.editNewsletter = function(id) {
-			vm.edit.id = id;
-			AdminFactory.editNewsletter(vm.edit).then(function() {
-				vm.edit= "";
-				vm.getNewsletters();
-			})
-		};
-
 		//------------Draft Functionality-------------
 		vm.draftRequest = function(draft) {
 			vm.newsletter.isPublished = false;
-			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
-				$state.go('Admin.draftsmodal')
+			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {				
 				//console.log(newsletter);
 				delete vm.newsletter;
+				$state.go('Admin.draftsmodal')
 			});
 		};
 
@@ -73,8 +80,10 @@
 			});
 		};
 
-		vm.saveDraft = function(draft) {
+		vm.saveDraft = function(newsletter) {
+			vm.newsletter.isPublished = false;
 			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
+				vm.getNewsletters();
 				delete vm.newsletter;
 				$state.go('Admin.home')
 			});
@@ -89,9 +98,52 @@
 			console.log(newsletter);
 		};
 
-		vm.current = function() {
-			console.log(vm.newsletter + ' | 2')
+		
+		//-------------------Comments----------------------
+		if($stateParams.id) { //if the ID exists here, we go to the factory an
+			ProfileFactory.getComment($stateParams.id).then(function(res) {
+				vm.comment = res;
+			});
+		};	
+
+		vm.getComments = function() {
+			ProfileFactory.getComments().then(function(res) {
+				vm.comment = res;
+			})
 		};
+
+		vm.getComments();
+
+		vm.deleteComment = function(comment) {
+			ProfileFactory.deleteComment(comment).then(function(res) {
+				vm.comment.splice(vm.comment.indexOf(comment), 1);
+			})
+		};
+
+		vm.editComment = function(id) {
+			vm.edit.id = id;
+			console.log(vm.edit);
+			ProfileFactory.editComment(vm.edit).then(function(res) {
+				vm.edit = "";
+				vm.getComments();
+			});
+		};
+
+		vm.createComment = function() {
+			var comment = {
+				body: vm.comment.body,
+				picture: $stateParams.id,
+				addedBy: vm.loggedInUser
+			};
+			ProfileFactory.createComment(comment).then(function(res) {
+				vm.comment.body = " ",
+				vm.getComments();
+				console.log(res);
+				vm.comment.push(res);
+				console.log(vm.comment)
+			})
+		}
+
 	} 
 
 })()
