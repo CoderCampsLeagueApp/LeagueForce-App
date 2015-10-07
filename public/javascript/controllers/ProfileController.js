@@ -23,10 +23,10 @@
 				vm.userLoggedIn = res ;
 			}) ;
 		}
-		//Edit Profile: picture, bio, name, etc.
-		//Full CRUD on Comments and Inbox model
-		//Will create the needed models after achieving MVP
-		//CRUD for comments and points to profile factory
+
+
+
+		
 	} 
 
 })()

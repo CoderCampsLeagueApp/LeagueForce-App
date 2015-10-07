@@ -28,9 +28,9 @@ var auth = jwt({
 router.get('/:id', function(req, res) {
 	League.findOne({admin: req.params.id})
 	.populate({
-    path: 'teams',
-    model: 'Team',
-  })
+		path: 'teams',
+		model: 'Team',
+	})
 	.exec(function(err, league){
 		if(err) return res.status(500).send({err: "Error inside the server"});
 		if(!league) return res.status(400).send({err: "That league does not exist"});
@@ -94,7 +94,7 @@ router.post('/team', function(req, res) {
 		if(!result) return res.status(400).send({err: "Could not create a league"}); 
 		
 		League.update({_id: team.league}, {$push: {teams: {_id: result._id}}} , function(err, result){ console.log('hi');res.send()} );
-});
+	});
 });
 
 //deletes the team and the ref on teams array
@@ -108,13 +108,13 @@ router.put('/team/delete/:id', function(req, res){
 		if(err) return res.status(500).send({err: "Issues with the server"});
 		if(!result) return res.status(400).send({err: "Could not remove team"}); 
 		League.findOneAndUpdate({_id: leagueId}, {$pull: {teams : id}},
-		function(err, result){
-			console.log(leagueId);
-			console.log(result);
-			if(err) return res.status(500).send({err: "Issues with the server"});
-			if(!result) return res.status(400).send({err: "Could not remove id from league"}); 
-			res.send();
-		});
+			function(err, result){
+				console.log(leagueId);
+				console.log(result);
+				if(err) return res.status(500).send({err: "Issues with the server"});
+				if(!result) return res.status(400).send({err: "Could not remove id from league"}); 
+				res.send();
+			});
 	});
 });
 

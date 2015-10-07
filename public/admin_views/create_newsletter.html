@@ -1,25 +1,22 @@
-<h1>Post An Article</h1>
-<div ng-controller="NewsletterController as vm">
-	<div class="well container">
-		<form name="createArticle" ng-submit="vm.postNewsletter()">
-			<div style="float: left;">
-				<label>Newsletter Title:</label><br>
-				<input name="title" style="width: 250px;" type="text" ng-model="vm.newsletter.title" required>
-			</div>
-			<div style="margin-left: 200px; float: left;">
-				<label>Link An Image:</label><br>
-				<input name="picture" style="width: 250px;" type="text" ng-model="vm.newsletter.image"/>
-			</div>
-			<div style="clear: both;">
-				<label>Write Your Article Below</label><br>
-				<textarea name="article" style="width: 400px; height: 300px;" ng-bind-html="articleBody" ng-model="vm.newsletter.body" type="text" class="" required></textarea>
-			</div><br>
-			<button ng-disabled="createArticle.title.$invalid || createArticle.article.$invalid" class="btn btn-md btn-success" type="submit">Post Article</button>
-			<button ng-click="vm.exampleModal()" ng-show="createArticle.article.$dirty" type="button" class="btn btn-md btn-danger">Cancel</button><!--this leads to Drafts modal -->
-			<!--<button ng-click="vm.draftRequest(vm.newsletter)" ng-show="createArticle.article.$dirty" type="button" class="btn btn-md btn-danger">Cancel</button> -->
-			<button ui-sref='Admin' ng-hide="createArticle.article.$dirty"type="button" class="btn btn-md btn-danger">Cancel</button>
+<h1>Post A Newsletter</h1>
+<div class="well container">
+	<form name="createArticle">
+		<div style="float: left;">
+			<label>Newsletter Title:<span ng-if="vm.oldNewsletter.title">: {{vm.oldNewsletter.title}}</span></label><br>
+			<input name="title" style="width: 250px;" type="text" ng-model="vm.newsletter.title" placeholder="Enter your title here..." required>
+		</div>
+		<div style="margin-left: 200px; float: left;">
+			<label>Link An Image:</label><br>
+			<input  name="picture" style="width: 250px;" type="text" ng-model="vm.newsletter.image" placeholder="Enter the URL here..."/>
+		</div>
+		<div style="clear: both;">
+			<label>Write Your Newsletter Below</label><br>
+			<text-angular name="body" ng-model="vm.newsletter.body" ></text-angular>
+		</div><br>
+		<button ng-show="vm.uiRouterState.current.name === 'Admin.newsletter'" ng-disabled="createArticle.title.$invalid || vm.newsletter.body.$invalid" class="btn btn-md btn-success" ng-click="vm.postNewsletter(vm.newsletter)">Post Newsletter</button>
+		<button ng-click="vm.postNewsletter(vm.newsletter);" ng-disabled="createArticle.title.$invalid || vm.newsletter.body.$invalid" ng-show="vm.uiRouterState.current.name === 'Admin.editnewsletter'" class="btn btn-md btn-success">Edit Newsletter</button>
+		<button ng-click="vm.saveDraft()" ng-show="createArticle.article.$dirty" type="button" class="btn btn-md btn-danger">Cancel</button> 
+		<button ui-sref='Admin' ng-hide="createArticle.article.$dirty"type="button" class="btn btn-md btn-danger">Cancel</button>
 
-		</form>
-	</div>
+	</form>
 </div>
-<!-- fix bringing over the body property to the edit field-->

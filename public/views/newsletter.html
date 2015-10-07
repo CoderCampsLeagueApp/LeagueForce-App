@@ -1,0 +1,24 @@
+	<h2>{{vm.newsletter.title}}</h2>
+	{{vm.newsletter.user.name}} - {{vm.newsletter.created | date:"M/d/yyyy hh:mma"}}<br>
+	<img style="float: left;" ng-src="{{vm.newsletter.image}}" ng-class="newsImage"/><br>
+	<div ta-bind ng-model="vm.newsletter.body" style="clear: both;"></div>
+	
+
+	<div class="well container">
+		<h3>Post A Comment</h3>
+		<div style="text-align:center;">
+			<input class="form-control" ng-model="vm.comment.body" placeholder="Comment..."><br>
+			<button class="btn btn-success" ng-click="vm.createComment(vm.newsletter._id);">Submit</button>
+		</div>
+	</div>
+	<div class="container" ng-repeat="c in vm.comment | orderBy: 'createdate': true">
+		<img ng-src="{{c.user.facebook.photo}}" class="img img-circle" style="height: 75px"/><br><strong>{{c.user.name}}</strong> says:<br>{{c.body}}<br><small>{{c.created | date:"M/d/yyyy hh:mma"}}</small>
+		<br><button class="btn btn-sm btn-danger" style="margin-bottom: 15px;" ng-click="vm.deleteComment(c._id, vm.newsletter._id)"><span class="glyphicon glyphicon-remove"></span></button>
+		<a ng-click="replyBox = true">Reply</a>
+		<div class="well" ng-show="replyBox">
+			<textarea ng-model="vm.comment.reply.body"></textarea><br>
+			<a ng-click="replyBox = false">Cancel</a>
+			<a ng-click="vm.postReply(c._id); replyBox=false;">Reply</a>
+		</div>
+
+	</div>

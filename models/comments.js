@@ -2,10 +2,14 @@ var mongoose = require('mongoose');
 
 var CommentsSchema = new mongoose.Schema({
 	created: Date,
-	username: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+	user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	body: String,
-	images: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
-	newsletter: {type: mongoose.Schema.Types.ObjectId, ref: 'League'}
+	newsletter: {type: mongoose.Schema.Types.ObjectId, ref: 'Newsletter'},
+	reply: [{
+		user: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
+		body: String,
+		created: Date
+	}]
 });
 
 mongoose.model('Comments', CommentsSchema);
