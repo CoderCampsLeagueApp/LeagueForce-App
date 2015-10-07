@@ -35,8 +35,25 @@ passport.use(new LocalStrategy(function(username, password, done) {
 	});
 }));
 
+// function generateFacebookPhotoUrl(id, accessToken) {
+// 	var picUrl = "https://graph.facebook.com/" ;
+// 	picUrl = picUrl + id ;
+// 	picUrl = picUrl + "/picture?width=300&height=300&access_token=" ;
+// 	picUrl = picUrl + accessToken ;
+// 	return picUrl ;
+// }
 
-
+function generateFacebookPhotoUrl(id, accessToken, height, width) {
+	var picUrl = "https://graph.facebook.com/" ;
+	picUrl += id ;
+	picUrl += "/picture?width=" ;
+	picUrl += width ;
+	picUrl += "&height=" ;
+	picUrl += height ;
+	picUrl += "&access_token=" ;
+	picUrl += accessToken ;
+	return picUrl ;
+}
 
 passport.use(new FacebookStrategy({
 	clientID: configAuth.facebookAuth.clientID,
@@ -52,8 +69,6 @@ function(accessToken, refreshToken, profile, done) {
 		// Whatever is returned will be stored in profile.
 		// Returns err if it cannot connect
 		User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-			console.log("DEBUG: Contents of profile:") ;
-			console.log(profile) ;
 			if(err) {
 				console.log('DEBUG: Error connecting') ;
 				return done(err) ;
@@ -86,7 +101,10 @@ function(accessToken, refreshToken, profile, done) {
 
 				// Photo
 				newUser.facebook.photo = profile.photos[0].value ;
-				console.log("DEBUG: passport.js profile photo: " + newUser.facebook.photo) ;
+				// console.log("DEBUG: passport.js profile photo: " + newUser.facebook.photo) ;
+
+				// newUser.pic = newUser.facebook.photo ;
+				newUser.pic = generateFacebookPhotoUrl(profile.id, accessToken, 300, 300) ;
 
 				// Created. Stores date created in the database.
 				newUser.created = new Date() ;
@@ -103,6 +121,19 @@ function(accessToken, refreshToken, profile, done) {
 }) ;
 }
 )) ;
+
+
+// Change Google photo url to url with a bigger picture.
+function generateGooglePhotoUrl(photoUrl, size) {
+	var img = photoUrl ;
+	var index = img.indexOf("50") ;
+	var s = img.split("") ;
+
+	s.splice(index, 2) ;
+	s = s.join("") ;
+	s += size ;
+	return s ;
+}
 
 
 passport.use(new GoogleStrategy({
@@ -153,7 +184,10 @@ function(accessToken, refreshToken, profile, done) {
 
 				// Photo
 				newUser.google.photo = profile.photos[0].value ;
-				console.log("DEBUG: passport.js profile photo: " + newUser.facebook.photo) ;
+
+				// Get bigger photo URL from Google.
+				newUser.google.photo = generateGooglePhotoUrl(newUser.google.photo, 300) ;
+				newUser.pic = newUser.google.photo;
 
 				// Created stores date created in the database.
 				newUser.created = new Date() ;
