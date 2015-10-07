@@ -42,9 +42,6 @@
 		}).state('Admin.editnewsletter', {
 			url: '/newsletter/edit/:id',
 			templateUrl: '../admin_views/create_newsletter.html'
-		}).state('Admin.draftsmodal', {
-			url: '/article_draft/:id',
-			templateUrl: '../admin_views/drafts_modal.html'
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html',
@@ -53,7 +50,7 @@
 		}).state('Newsletter', {
 			url: '/leaguenews',
 			templateUrl: 'views/league_news.html',
-			controller: 'CommentsController',
+			controller: 'ViewNewsController',
 			controllerAs: 'vm'
 		}).state('SingleNewsletter', {
 			url: '/leaguenews/:id',

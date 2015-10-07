@@ -54,7 +54,7 @@ router.get('/:id', function(req,res){
 	.populate({
 		path: 'comments',
 		model: 'Comments',
-		select: 'replies body created'
+		select: 'reply user news body created'
 	})
 	.exec(function(err, result){
 		if(err) return res.status(500).send({err: "The server is having issues."});

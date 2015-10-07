@@ -3,12 +3,5 @@
 	{{n.username.name}} - {{n.created | date:"M/d/yyyy hh:mma"}}<br>
 	<img style="float: left;" ng-src="{{n.image}}" ng-class="newsImage"/><br>
 	<div ta-bind ng-model="n.body" style="clear: both;"></div>
-	<button class="btn btn-md btn-danger" ng-click="vm.deleteNewsletter(n)">Delete Newsletter</button>
-	<button class="btn btn-md btn-warning" ui-sref="Admin.editnewsletter({id: n._id})">Edit Newsletter</button>
-	<button class='btn btn-md btn-info' ui-sref='SingleNewsletter({id: n._id})'>View Comments</button>
-	<div ng-show="vm.editBox">
-		<button class="btn btn-md btn-success" ng-click="vm.editNewsletter(n._id); vm.editBox=false">Submit Edit</button>
-		<input class="form-control" style="width: 200px; margin-bottom: 10px;" ng-model="vm.edit.body" placeholder="Edit Article...">
-		<button ng-click="vm.editBox=false" class="btn btn-lg btn-info">Cancel</button>
-	</div>
+	<button class='btn btn-md btn-info' ui-sref='SingleNewsletter({id: n._id})'>View All {{n.comments.length}} Comments</button>
 </div>

@@ -88,9 +88,9 @@ router.put("/delete/:id", auth, function(req, res) {
 							if(err) return res.status(500).send({err: "Issues with the server"});
 							if(!result) return res.status(400).send({err: "Could not delete comment from user"});
 							res.send(); 
-						})
-				})
-		})
+						});
+				});
+		});
 });
 
 module.exports = router;

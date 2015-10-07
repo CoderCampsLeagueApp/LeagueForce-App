@@ -22,17 +22,7 @@
 				vm.userLoggedIn = res ;
 			}) ;
 		}
-
-		vm.getNewsletters = function() {
-			AdminFactory.getNewsletters().then(function(res) {
-				vm.newsletters = res;
-			});
-		};
-
-		vm.getNewsletters();
-
-		//work on removing the above
-
+		
 		//-------------------Comments----------------------
 		if($stateParams.id) { //if the ID exists here, we go to the factory an
 			ProfileFactory.getComment($stateParams.id).then(function(res) {

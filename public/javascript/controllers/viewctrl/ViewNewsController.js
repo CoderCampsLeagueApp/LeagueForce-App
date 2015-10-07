@@ -15,6 +15,13 @@
 			});
 		}
 
+		vm.getNewsletters = function() {
+			WebsiteFactory.getNewsletters().then(function(res) {
+				vm.newsletters = res;
+			});
+		};
+
+		vm.getNewsletters();
 		//-------------------Comments----------------------
 
 		vm.getComments = function() {
