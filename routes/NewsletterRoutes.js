@@ -66,7 +66,7 @@ router.get('/:id', function(req,res){
 
 //edit News
 router.put('/:id', function(req, res) {
-	News.update({_id: req.body.id}, req.body)
+	News.update({_id: req.body._id}, req.body)
 	.exec(function(err, news) {
 		if(err) return res.status(500).send({err: "error getting news to edit"});
 		if(!news) return res.status(400).send({err: "News to edit don't exist"});

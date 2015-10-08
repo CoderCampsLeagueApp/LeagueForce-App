@@ -162,9 +162,9 @@
 
 		//-------------Newsletter Controller Functions------
 
-		vm.toEditPage = function(newsletter) {
+		vm.toEditPage = function(edit) {
 			$state.go('Admin.editnewsletter');
-			vm.newsletter = angular.copy(newsletter);
+			vm.newsletter = angular.copy(edit);
 		}
 
 		vm.postNewsletter = function(newsletter) {
@@ -173,16 +173,17 @@
 				vm.newsletter.isPublished = true;
 				AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
 					vm.getNewsletters();
-					console.log(vm.newsletter);
+					console.log(vm.newsletter + ' | created!');
 					delete vm.newsletter;
 					$state.go('Newsletter');
 				});
 			}
 
 			else {
-				AdminFactory.editNewsletter(vm.newsletter, vm.oldNewsletter).then(function(res) {
+				AdminFactory.editNewsletter(vm.newsletter).then(function(res) {
 					vm.getNewsletters();
-					console.log(vm.newsletter);
+					console.log(vm.newsletter + ' | edited!');
+					delete vm.newsletter;
 					$state.go('Admin.storedarticles');
 				});
 			}
@@ -235,6 +236,8 @@
 		vm.saveDraft = function(newsletter) {
 			vm.newsletter.isPublished = false;
 			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
+				vm.newsletter.body = " ";
+				vm.newsletter.title = " ";
 				vm.getNewsletters();
 				delete vm.newsletter;
 				$state.go('Admin.home')

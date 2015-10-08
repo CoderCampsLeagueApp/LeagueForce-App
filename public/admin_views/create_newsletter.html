@@ -15,7 +15,7 @@
 		</div><br>
 		<button ng-show="vm.uiRouterState.current.name === 'Admin.newsletter'" ng-disabled="createArticle.title.$invalid || vm.newsletter.body.$invalid" class="btn btn-md btn-success" ng-click="vm.postNewsletter(vm.newsletter)">Post Newsletter</button>
 		<button ng-click="vm.postNewsletter(vm.newsletter);" ng-disabled="createArticle.title.$invalid || vm.newsletter.body.$invalid" ng-show="vm.uiRouterState.current.name === 'Admin.editnewsletter'" class="btn btn-md btn-success">Edit Newsletter</button>
-		<button ng-click="vm.saveDraft()" ng-show="createArticle.article.$dirty" type="button" class="btn btn-md btn-danger">Cancel</button> 
+		<button ng-click="vm.saveDraft();" ng-show="createArticle.article.$dirty" type="button" class="btn btn-md btn-danger">Cancel</button> 
 		<button ui-sref='Admin' ng-hide="createArticle.article.$dirty"type="button" class="btn btn-md btn-danger">Cancel</button>
 
 	</form>
