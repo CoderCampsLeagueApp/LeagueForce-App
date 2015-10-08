@@ -141,4 +141,16 @@ router.get('/auth/google/callback',
 	}) ;
 
 
+router.put('/:id', function(req, res) {
+	var userProfile = req.body ;
+	User.update({ _id: req.body._id }, userProfile)
+	.exec(function(err, user) {
+		if(err) return res.status(500).send({ err: "error getting user to edit" }) ;
+		if(!user) return res.status(400).send({ err: "user profile doesn't exist" }) ;
+		res.send(user) ;
+	}) ;
+}) ;
+
+
+
 module.exports = router ;

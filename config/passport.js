@@ -36,7 +36,17 @@ passport.use(new LocalStrategy(function(username, password, done) {
 }));
 
 
-
+function generateFacebookPhotoUrl(id, accessToken, height, width) {
+	var picUrl = "https://graph.facebook.com/" ;
+	picUrl += id ;
+	picUrl += "/picture?width=" ;
+	picUrl += width ;
+	picUrl += "&height=" ;
+	picUrl += height ;
+	picUrl += "&access_token=" ;
+	picUrl += accessToken ;
+	return picUrl ;
+}
 
 passport.use(new FacebookStrategy({
 	clientID: configAuth.facebookAuth.clientID,
@@ -52,8 +62,6 @@ function(accessToken, refreshToken, profile, done) {
 		// Whatever is returned will be stored in profile.
 		// Returns err if it cannot connect
 		User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-			console.log("DEBUG: Contents of profile:") ;
-			console.log(profile) ;
 			if(err) {
 				console.log('DEBUG: Error connecting') ;
 				return done(err) ;
@@ -86,7 +94,10 @@ function(accessToken, refreshToken, profile, done) {
 
 				// Photo
 				newUser.facebook.photo = profile.photos[0].value ;
-				console.log("DEBUG: passport.js profile photo: " + newUser.facebook.photo) ;
+				
+				// Getting bigger photo URL from Facebook
+				// Sending size 300x300.
+				newUser.pic = generateFacebookPhotoUrl(profile.id, accessToken, 300, 300) ;
 
 				// Created. Stores date created in the database.
 				newUser.created = new Date() ;
@@ -105,6 +116,19 @@ function(accessToken, refreshToken, profile, done) {
 )) ;
 
 
+// Change Google photo url to url with a bigger picture.
+function generateGooglePhotoUrl(photoUrl, size) {
+	var img = photoUrl ;
+	var index = img.indexOf("50") ;
+	var s = img.split("") ;
+
+	s.splice(index, 2) ;
+	s = s.join("") ;
+	s += size ;
+	return s ;
+}
+
+
 passport.use(new GoogleStrategy({
 	clientID: configAuth.googleAuth.clientID,
 	clientSecret: configAuth.googleAuth.clientSecret,
@@ -119,8 +143,8 @@ function(accessToken, refreshToken, profile, done) {
 		// Whatever is returned will be stored in profile.
 		// Returns err if it cannot connect
 		User.findOne({ 'google.id' : profile.id }, function(err, user) {
-			console.log("DEBUG: Contents of profile:") ;
-			console.log(profile) ;
+			// console.log("DEBUG: Contents of profile:") ;
+			// console.log(profile) ;
 			if(err) {
 				console.log('DEBUG: Error connecting') ;
 				return done(err) ;
@@ -147,13 +171,16 @@ function(accessToken, refreshToken, profile, done) {
 
 				// According to Google API, emails come back as an array
 				// So, need the first element of the array.
-				newUser.google.email = profile.emails ? profile.emails[0].value : profile.username + "@facebook.com";
+				newUser.google.email = profile.emails ? profile.emails[0].value : profile.username + "@google.com";
 				// Setting username to email from Facebook
 				newUser.username = newUser.google.email ;
 
 				// Photo
 				newUser.google.photo = profile.photos[0].value ;
-				console.log("DEBUG: passport.js profile photo: " + newUser.facebook.photo) ;
+
+				// Get bigger photo URL from Google. Sending size = 300
+				newUser.pic = generateGooglePhotoUrl(newUser.google.photo, 300) ;
+				
 
 				// Created stores date created in the database.
 				newUser.created = new Date() ;
@@ -170,50 +197,3 @@ function(accessToken, refreshToken, profile, done) {
 }) ;
 }
 )) ;
-
-
-
-
-// Following is from Isaiah's example	
-// passport.serializeUser(function(user, done) {
-// 	done(null, user) ;
-// }) ;
-
-// passport.deserializeUser(function(obj, done) {
-// 	done(null, obj) ;
-// }) ;
-
-// passport.use(new FacebookStrategy({
-// 	clientID: "DEBUG: Needs to be filled out",
-// 	clientSecret: "DEBUG: Needs to be filled out",
-// 	callbackURL: "DEBUG: This URL needs to be filled out",
-// 	passReqToCallback: true,
-// 	profileFields: ['id', 'name', 'emails', 'photos']
-// },
-// function(req, accessToken, refreshToken, profile, done) {
-// 	User.findOne({ facebookId : profile.id }, function(err, user) {
-// 		if(err) return done(err, null) ;
-// 		if(user) {
-// 			console.log("Current User, Logging In") ;
-// 			return done(null, user) ;
-// 		} else {
-// 			console.log("New User, Registering and Logging In") ;
-// 			var userModel = new User() ;
-// 			if(profile.emails) {
-// 				userModel.username = profile.emails[0].value ;
-// 			} else {
-// 				userModel.username = profile.username + "@facebook.com" ;
-// 			}
-// 			userModel.facebookId = profile.id ;
-// 			userModel.name = profile.name.givenName + " " + profile.name.familyName ;
-// 			userModel.save(function(err, userSaved) {
-// 				if(err) {
-// 					return err ;
-// 				}
-// 				return(err, userSaved) ;
-// 			})
-// 		}
-// 	}) ;
-// }
-// )) ;
-

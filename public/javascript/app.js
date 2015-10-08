@@ -65,6 +65,11 @@
 			templateUrl: 'views/profile.html',
 			controller: "ProfileController",
 			controllerAs: 'vm'
+		}).state('EditProfile', {
+			url: '/EditProfile/:id',
+			templateUrl: 'views/edit_profile.html',
+			controller: "ProfileController",
+			controllerAs: 'vm'
 		}).state("Token", {
 			url: '/auth/token/:token',
 			templateUrl: 'views/authenticating.html',
