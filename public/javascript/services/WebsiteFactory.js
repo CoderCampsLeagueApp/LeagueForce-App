@@ -35,6 +35,13 @@
 			return q.promise;
 		};
 
+		o.getReplies = function() {
+			var q = $q.defer();
+			$http.get('/api/comment/reply/').success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise;
+		};
 
 		//-------------Leagues----------------------
 		o.getLeague = function(id) {

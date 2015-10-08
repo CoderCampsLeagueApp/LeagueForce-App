@@ -25,25 +25,6 @@
 			return q.promise;
 		};
 
-		//already in website factory
-		// o.getComment = function(id) {
-		// 	var q = $q.defer();
-		// 	$http.get('/api/comment/' + id).success(function(res) {
-		// 		console.log(id);
-		// 		q.resolve(res);
-		// 	});
-		// 	return q.promise;
-		// };
-
-		// o.getComments = function() {
-		// 	var q = $q.defer();
-		// 	$http.get('/api/comment/').success(function(res) {
-		// 		q.resolve(res);
-		// 	});
-		// 	return q.promise;
-		// };
-
-
 		o.editComment = function(edit) {
 			var q = $q.defer();
 			$http.put('/api/comment/' + edit.id, edit).success(function(res) {
@@ -64,7 +45,7 @@
 
 		o.postReply = function(reply) {
 			var q = $q.defer();
-			$http.post('/api/comment/reply' + reply, getAuth()).success(function(res) {
+			$http.post('/api/comment/reply/', reply, getAuth()).success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise;

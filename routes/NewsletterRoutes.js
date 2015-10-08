@@ -74,6 +74,17 @@ router.put('/:id', function(req, res) {
 	});
 });
 
+router.put('/team/edit', auth, function(req, res){
+	var team  = req.body;	
+	console.log(team);
+	Team.update({_id: team._id}, team)
+	.exec(function(err, result){
+		if(err) return res.status(500).send({err: "Issues with the server"});
+		if(!result) return res.status(400).send({err: "Could not remove team"});
+		res.send(); 
+	})
+})
+
 //delete a News
 router.delete('/:id', function(req, res) {
 	News.remove({_id: req.params.id})

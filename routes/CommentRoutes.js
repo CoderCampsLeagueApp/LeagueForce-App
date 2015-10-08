@@ -34,7 +34,7 @@ router.post('/', auth, function(req, res) {
 router.get('/:id', function(req, res) {
 	Comment.find({news: req.params.id})
 	.populate({
-		path: "user",
+		path: "user reply.user",
 		model: "User",
 		select: "username name facebook.photo images"
 	})
@@ -81,33 +81,23 @@ router.put("/delete/:id", auth, function(req, res) {
 });
 
 //------------Replies---------------
-router.post('/', auth, function(req, res) {
-	var news = req.body.news;
-	var comment = new Comment(req.body);
-	comment.created = new Date();
-	comment.user = req.payload.id;
-	console.log(comment);
-	comment.save(function(err, commentResult) {
-		if(err) return res.status(500).send({err: "Issues with server"});
-		if(!commentResult) return res.status(400).send({err: "Could not post comment"});
-		News.update({_id: news}, {$push: {comments: {_id: commentResult._id}}}, 
-			function(err, result) {
-				User.update({_id: comment.user}, {$push: {comments: {_id: commentResult._id}}},
-					function(err, result) {
-						res.send();
-					})
-			})
-	})
-});
 
-// router.post('/reply', auth, function(req, res) {
-// 	var comment = req.body.comment
-// 	var reply = new Comment(req.body);
-// 	reply.created = new Date();
-// 	reply.user = req.payload.id;
-// 	console.log(reply);
-// 	reply.save(function err, replyResult) {
-// 		if(err) return res.status(500).send()
-// 	}
-// })
+
+router.post('/reply', auth, function(req, res) {
+	var reply = req.body;
+	reply.created = new Date();
+	reply.user = req.payload.id;
+	console.log(reply);
+	Comment.update({_id: reply.comment}, {$push: {reply: reply}})
+	.populate({
+		path: 'reply.user',
+		model: 'User',
+		select: 'username name facebook.photo images'
+	})
+	.exec(function(err, result) {
+		if(err) return res.status(500).send({err: "Issues with server, re: reply"});
+		if(!result) return res.status(400).send({err: "Could not post reply"});
+		res.send(reply);
+	})
+})
 module.exports = router;

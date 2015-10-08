@@ -161,17 +161,6 @@
 		}
 
 		//-------------Newsletter Controller Functions------
-		// if($stateParams.id) { 
-		// 	AdminFactory.getNewsletter($stateParams.id).then(function(res) {
-
-		// 	});
-		// };	
-
-
-		vm.editNewsletter = function(newsletter) {
-			vm.oldNewsletter.isPublished = true;
-			
-		}; 
 
 		vm.toEditPage = function(newsletter) {
 			$state.go('Admin.editnewsletter');
@@ -193,8 +182,8 @@
 			else {
 				AdminFactory.editNewsletter(vm.newsletter, vm.oldNewsletter).then(function(res) {
 					vm.getNewsletters();
-					console.log(vm.oldNewsletter);
-					$state.go('Newsletter');
+					console.log(vm.newsletter);
+					$state.go('Admin.storedarticles');
 				});
 			}
 			
