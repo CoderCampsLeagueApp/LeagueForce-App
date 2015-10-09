@@ -23,8 +23,9 @@ var TeamSchema = new mongoose.Schema({
 	}
 	}],
 	league: {type: mongoose.Schema.Types.ObjectId, ref: 'League'},
-	matches: Array,
-	// sponsors: Array  -- excess
+	matches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Week'}],
+		// sponsors: Array  -- excess
+	
 	score: {   //getting the team rank by comparing win/losses ratio to all teams.
 		wins: Number,
 		losses: Number,
