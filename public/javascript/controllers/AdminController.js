@@ -4,14 +4,38 @@
 	.controller('AdminController', AdminController);
 
 
-	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory'];
+	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory', '$window', '$scope'];
 
-	function AdminController($state, $stateParams, $rootScope, AdminFactory) {
+	function AdminController($state, $stateParams, $rootScope, AdminFactory, $window, $scope) {
 		var vm = this;
 		vm.title = 'Welcome to our App!';
 
 		vm.def = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 		$state.go('Admin.home');
+
+		// -----------Google Maps---------------------
+
+		vm.map = { center: { latitude: 40, longitude: -100 }, zoom: 4 }; //center of map
+
+		//Geolocation HTML5, using $scope.$apply-- digest cycle applies changes
+		vm.getLocation = function(){
+			$window.navigator.geolocation.getCurrentPosition(function(position){
+				console.log(position);
+				vm.marker = {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude
+				}
+				var newCenter = angular.copy(vm.marker);
+				console.log(newCenter.latitude);
+				$scope.$apply(function(){
+	        		vm.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
+	      		});
+				
+
+			});
+		}
+	
+
 
 		AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.adminLeague = res;
@@ -37,13 +61,14 @@
 		//creating League or editing
 		vm.createLeague = function(league){
 			if(!league._id){
-
+				league.googleLocation = vm.marker;
 			AdminFactory.createLeague(league).then(function(res){
 				console.log('created league!');
 					$state.go('Admin.home');
 			});
 			}
 			else{
+				league.googleLocation = vm.marker;
 				AdminFactory.editLeague(league).then(function(res){
 					console.log('edited!');
 					$state.go('Admin.home');

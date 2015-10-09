@@ -8,9 +8,10 @@
 	<link rel="stylesheet" href="/css/animate.css">
 	<link rel="stylesheet" href="/css/navbar.css">
 	<link rel="stylesheet" href="/css/leagueForms.css">
+	
 </head>
 <body >	
-	<div ng-controller="NavController as nav">
+	<div ng-controller="NavController as nav" class="ng-cloak">
 	<div class="container-fluid">
 		<div class="row">
 		 <div class="col-md-12 nopadding">
@@ -108,6 +109,13 @@
 	<script src="angular-modal-service/dst/angular-modal-service.min.js"></script>
 	<!-- Global Src -->
 	<script src="/javascript/app.js"></script>
+
+	<!-- Google Maps -->
+	<script src='/lodash/lodash.min.js'></script>
+	<script src='/angular-simple-logger/dist/index.js'></script>
+	<script src='/angular-google-maps/dist/angular-google-maps.min.js'></script>
+	
+	<script src='/javascript/map.js'></script>
 	<!-- Factories -->
 	<script src="/javascript/services/LeagueFactory.js"></script>
 	<script src="/javascript/services/UserFactory.js"></script>

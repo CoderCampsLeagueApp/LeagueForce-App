@@ -138,13 +138,13 @@
     0 0 10px 1px rgba(0,0,0,0.5);
   color: #fff;
   cursor: pointer;
-  font: 150% Trebuchet MS;
+  font: 120% Trebuchet MS;
   height: 50px;
   position: relative;
   text-align: center;
   -moz-transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  width: 25%; 
+  width: 24%; 
 }
 .homebtn:hover {
   background-position: 0 10px;
@@ -162,15 +162,15 @@
     0 0 10px 1px rgba(0,0,0,0.5);
   color: #fff;
   cursor: pointer;
-  font: 150% Trebuchet MS;
+  font: 140% Trebuchet MS;
   height: 50px;
   position: relative;
   text-align: center;
   -moz-transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  width: 25%; 
-  margin-top: 50px;
-    margin-left: 5px;
+  width: 24%; 
+  margin-top: 18px;
+  margin-left: 8px;
 }
 .homebtnEdit:hover {
   background-position: 0 10px;

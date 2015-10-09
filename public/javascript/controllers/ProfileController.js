@@ -7,6 +7,8 @@
 	function ProfileController(UserFactory, $state, $stateParams, $rootScope, ProfileFactory){
 		var vm = this;
 
+	
+
 		if(!$stateParams.id) {
 			$state.go('Profile') ;
 		} else {

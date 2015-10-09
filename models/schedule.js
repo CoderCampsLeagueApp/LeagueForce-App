@@ -5,7 +5,10 @@ var ScheduleSchema = new mongoose.Schema({
 	team1: {type: mongoose.Schema.Types.ObjectId, ref: 'Team'},
 	team2: {type: mongoose.Schema.Types.ObjectId, ref: 'team'},
 	date: Date, // date with time
-	// location: {latitude & longitude} //google maps
+	googleLocation : {
+		latitude: String,
+		longitude: String
+	}
 });
 
 mongoose.model('Schedule', ScheduleSchema);

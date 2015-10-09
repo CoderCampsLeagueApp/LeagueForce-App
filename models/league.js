@@ -18,6 +18,10 @@ var LeagueSchema = new mongoose.Schema({
 		comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comments"}],
 		username: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
 	}],
+	googleLocation: {
+		latitude: String,
+		longitude: String
+	},
 	matches: {type: mongoose.Schema.Types.ObjectId, ref: 'Schedule'},
 	admin: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},//Admin
 	isDisplay: Boolean

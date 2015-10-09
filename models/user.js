@@ -22,7 +22,7 @@ var UserSchema = new mongoose.Schema({
 		photo: String
 	},
 	// facebookId: String,
-	images: Array, //array of images either bson or img url.
+	pic: String, //array of images either bson or img url.
 	bio: String,
 	passwordHash: String,
 	salt: String,

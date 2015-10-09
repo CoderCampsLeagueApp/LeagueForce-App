@@ -4,21 +4,25 @@
 <div ng-show='vm.adminLeague'>
 
 <div style="margin-top:60px" class="adminHome">
-
-	<img style="float:left; margin-right:20px" width="250" height="250" ng-src="{{vm.adminLeague.logo}}">
+	<div class="col-md-4 nopadding">
+		<img class="img-responsive" ng-src="{{vm.adminLeague.logo}}">
+	</div>
+	<div class="col-md-8">
 	<p>NAME : {{vm.adminLeague.name}}</p>
 	<p>DIVISIONS : {{vm.adminLeague.division}}</p>
 	<p>ABOUT : {{vm.adminLeague.description | limitTo : 200}}{{vm.adminLeague.description.length >= 201 ? '...' : ''}}</p>
 	<p>features: </p>
   	<p>Images: </p>
+  	</div>
   	
 
-<button class="homebtn" >Preview Leagues Page</button>
-<button class="homebtn">Publish</button>
 <br>
-<button class="pull-right homebtnEdit" ng-click='vm.startLeagueEdit(vm.adminLeague._id)'>Edit League</button>
-<button class="pull-right homebtnEdit" ng-click='vm.startAddTeam()'>ADD teams</button>
-
+<div class="col-md-12 nopadding" style="margin-top:30px">
+<button class="homebtn" >Preview Leagues Page</button>
+<button class="homebtn" >Publish</button>
+<button class="homebtnEdit" ng-click='vm.startLeagueEdit(vm.adminLeague._id)'>Edit League</button>
+<button class="homebtnEdit" ng-click='vm.startAddTeam()'>ADD teams</button>
+</div>
 </div>
 
 <h1>Teams</h1>
