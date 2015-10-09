@@ -71,7 +71,7 @@
 				<li class="col-md-1 col-md-offset-5">
 					<a ui-sref="About">About</a>
 				</li>
-				<li class="dropdown col-md-1">
+				<li style="z-index: 1" class="dropdown col-md-1">
 					<a ui-sref="Leagues">Leagues</a>
 					<ul>
 						<li>
@@ -79,14 +79,12 @@
 						</li>
 						<li >
 							<a ui-sref="Newsletter">League News</a>
-
 						</li>
-						
 					</ul>
 				</li>
 				<li class="col-md-1"><a ui-sref="TestView">Test</a></li>
 
-				<li class="col-md-2 dropdown">
+				<li style="z-index: 1" class="col-md-2 dropdown">
 					<a style="text-align:center" ui-sref="Profile">{{ nav.status.username | limitTo: 15}}{{nav.status.username.length >= 16 ? '...' : ''}}</a>
 					<ul>
 						<li class="profile">
