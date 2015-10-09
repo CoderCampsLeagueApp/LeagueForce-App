@@ -24,6 +24,7 @@ passport.deserializeUser(function(obj, done) {
 }) 
 
 
+// For local login
 passport.use(new LocalStrategy(function(username, password, done) {
 	// find the username, which is email, in the model
 	User.findOne({username: username})
@@ -36,6 +37,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 }));
 
 
+// Generates url for Facebook photo of size height x width
 function generateFacebookPhotoUrl(id, accessToken, height, width) {
 	var picUrl = "https://graph.facebook.com/" ;
 	picUrl += id ;
@@ -48,15 +50,20 @@ function generateFacebookPhotoUrl(id, accessToken, height, width) {
 	return picUrl ;
 }
 
+
+// For Facebook login
 passport.use(new FacebookStrategy({
 	clientID: configAuth.facebookAuth.clientID,
 	clientSecret: configAuth.facebookAuth.clientSecret,
 	callbackURL: configAuth.facebookAuth.callbackURL,
-	profileFields: ['id', 'name', 'emails', 'photos']
+	// profileFields: ['id', 'name', 'emails', 'photos', 'picture.type(large)']
+	profileFields: ['id', 'name', 'emails', 'picture.type(large)']
 },
 function(accessToken, refreshToken, profile, done) {
 	// process.nextTick is a Node.js function for asynchronous
 	// Waits for data to come back before continuing.
+	console.log("DEBUG: passport.js: Contents from profile") ;
+	console.log(profile) ;
 	process.nextTick(function() {
 		// Information for accessing our database
 		// Whatever is returned will be stored in profile.
@@ -116,7 +123,8 @@ function(accessToken, refreshToken, profile, done) {
 )) ;
 
 
-// Change Google photo url to url with a bigger picture.
+// Change Google photo url to url with a bigger picture (size x size).
+// Maybe max size 9980
 function generateGooglePhotoUrl(photoUrl, size) {
 	var img = photoUrl ;
 	var index = img.indexOf("50") ;
@@ -129,6 +137,7 @@ function generateGooglePhotoUrl(photoUrl, size) {
 }
 
 
+// For Google login
 passport.use(new GoogleStrategy({
 	clientID: configAuth.googleAuth.clientID,
 	clientSecret: configAuth.googleAuth.clientSecret,
@@ -179,7 +188,7 @@ function(accessToken, refreshToken, profile, done) {
 				newUser.google.photo = profile.photos[0].value ;
 
 				// Get bigger photo URL from Google. Sending size = 300
-				newUser.pic = generateGooglePhotoUrl(newUser.google.photo, 300) ;
+				newUser.pic = generateGooglePhotoUrl(newUser.google.photo, 1000) ;
 				
 
 				// Created stores date created in the database.
