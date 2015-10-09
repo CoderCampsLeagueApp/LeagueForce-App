@@ -25,10 +25,16 @@
 				vm.userLoggedIn = res ;
 			}) ;
 		}
+
 		//Edit Profile: picture, bio, name, etc.
+
+		vm.editProfile = function() {
+			UserFactory.editProfile(vm.user) ;
+			$state.go('Profile') ;
+		} ;
 		//Full CRUD on Comments and Inbox model
 		//Will create the needed models after achieving MVP
 		//CRUD for comments and points to profile factory
 	} 
 
-})()
+})() ;

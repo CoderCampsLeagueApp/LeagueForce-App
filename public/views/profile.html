@@ -4,10 +4,13 @@
 	<strong>About: </strong><p>{{vm.userLoggedIn.bio}}</p>
 	<strong>Name: </strong><p>{{vm.userLoggedIn.name}}</p>
 	<strong>Profile Picture</strong>
-	<p><img ng-src="{{vm.userLoggedIn.facebook.photo}}" /></p>
-	<p><img ng-src="{{vm.userLoggedIn.google.photo}}" /></p>
+	<p><img ng-src="{{vm.userLoggedIn.pic}}" /></p>
 
-</div>
+	<br />
+	<br />
+	<div>
+		<a type="btn" ui-sref="EditProfile({id:vm.userLoggedIn._id})" class="btn btn-sm info">Edit Profile</a>
+	</div>
 
 <!-- Name: name
 Username (email): username

@@ -18,6 +18,10 @@
     "angular-ui-router": "~0.2.15",
     "angular-modal-service": "~0.6.9",
     "angular-ui-bootstrap": "~0.13.4",
+<<<<<<< HEAD
     "angular-google-maps": "~2.2.1"
+=======
+    "textAngular": "~1.4.6"
+>>>>>>> 312ba2536151707795e28f4be046a1fb83c743c6
   }
 }

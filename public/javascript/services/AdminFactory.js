@@ -27,14 +27,14 @@
 		};
 		o.getLeague = function(id) {
 			var q = $q.defer();
-			$http.get('/api/league/' + id).success(function(res) {
+			$http.get('/api/league/' + id, getAuth()).success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise;
 		}
 		o.getLeagues = function() {
 			var q = $q.defer();
-			$http.get('/api/league/').success(function(res) {
+			$http.get('/api/league/', getAuth()).success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise;
@@ -43,7 +43,7 @@
 		o.editLeague = function(league) {
 			console.log(league);
 			var q = $q.defer();
-			$http.put('/api/league/' + league._id, league).success(function(res) {
+			$http.put('/api/league/' + league._id, league, getAuth()).success(function(res) {
 				console.log('league edited');
 				q.resolve();
 			});
@@ -53,7 +53,7 @@
 		o.createTeam = function(team){
 			console.log(team);
 			var q = $q.defer();
-			$http.post('/api/league/team', team).success(function(res) {
+			$http.post('/api/league/team', team, getAuth()).success(function(res) {
 				q.resolve();
 				console.log('hello');
 			});
@@ -63,7 +63,7 @@
 		o.editTeam = function(team){
 			console.log(team);
 			var q = $q.defer();
-			$http.put('/api/league/team/edit', team).success(function(res) {
+			$http.put('/api/league/team/edit', team, getAuth()).success(function(res) {
 				q.resolve();
 			});
 			return q.promise;
@@ -75,7 +75,7 @@
 			console.log(team._id);
 			console.log("---------------------------");
 			console.log(leagueId);
-			$http.put('/api/league/team/delete/' + team._id, leagueId).success(function(res){
+			$http.put('/api/league/team/delete/' + team._id, leagueId, getAuth()).success(function(res){
 				console.log('has been deleted');
 				q.resolve();
 			});
@@ -83,7 +83,7 @@
 		};
 
 		//-------------------newsletter---------------------
-		o.getNewsletters = function() {
+		o.getNewsletters = function() { 
 			var q = $q.defer();
 			$http.get('/api/newsletter/').success(function(res) {
 				q.resolve(res);
@@ -107,9 +107,9 @@
 			return q.promise
 		};
 
-		o.editNewsletter = function(edit) {
+		o.editNewsletter = function(newsletter) {
 			var q = $q.defer();
-			$http.put('/api/newsletter/' + edit._id, edit).success(function(res) {
+			$http.put('/api/newsletter/' + newsletter._id, newsletter).success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise;

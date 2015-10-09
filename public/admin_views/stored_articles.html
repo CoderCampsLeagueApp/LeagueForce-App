@@ -1,16 +1,20 @@
-<div ng-controller="NewsletterController as vm">
-	<div ng-repeat="n in vm.newsletters | orderBy: 'createdate': true">
-
-		<h2>{{n.title}}</h2> 
-		<p>{{n.username.name}} - <span style="color: green;" ng-show="{{n.isPublished}}">Published on {{n.created | date:"M/d/yyyy hh:mma"}}</span><span style="color: red;" ng-hide="{{n.isPublished}}">Not Published</span></p><br>
-		<img style="float: left;" ng-src="{{n.image}}" class="newsImage"/><br>
-		<p style="clear: both;" class="well">{{n.body}}</p>
-		<button class="btn btn-md btn-danger" ng-click="vm.deleteNewsletter(n)">Delete Newsletter</button>
-		<button class="btn btn-md btn-warning" ng-click="vm.editBox = true">Edit Newsletter</button>
-		<div ng-show="vm.editBox">
-			<button class="btn btn-md btn-success" ng-click="vm.editNewsletter(n._id); vm.editBox=false">Submit Edit</button>
-			<input class="form-control" style="width: 200px; margin-bottom: 10px;" ng-model="vm.edit.body" placeholder="Edit Article...">
-			<button ng-click="vm.editBox=false" class="btn btn-lg btn-info">Cancel</button>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-6">
+				<div ng-repeat="n in vm.newsletters | orderBy: 'createdate': true">
+					<div class="well">
+						<h2 style="word-wrap: break-word;"><a ui-sref="SingleNewsletter({id: n._id})">{{n.title}}</a></h2> 
+						<p><b>{{n.user.name}} - <span style="color: green;" ng-show="{{n.isPublished}}">Published on {{n.created | date:"M/d/yyyy hh:mma"}}</span><span style="color: red;" ng-hide="{{n.isPublished}}">Not Published</span></b></p>
+						<div ng-show="n.image">
+							<img style="float: left;" ng-src="{{n.image}}" class="img-responsive newsImage"/>
+						</div>
+						<div ta-bind ng-model="n.body" style="word-wrap: break-word; clear: both;"></div>
+						<button class="btn btn-md btn-danger" ng-click="vm.deleteNewsletter(n)">Delete Newsletter</button>
+						<button class="btn btn-md btn-warning" ng-click="vm.toEditPage(n)">Edit Newsletter</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

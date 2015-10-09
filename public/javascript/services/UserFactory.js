@@ -96,6 +96,17 @@
 			window.localStorage.setItem("token", token) ;
 		}
 
+
+		o.editProfile = function(editedProfile) {
+			var q = $q.defer() ;
+			$http.put('/api/user/' + editedProfile._id, editedProfile).success(
+				function(res) {
+					q.resolve(res) ;
+					console.log("DEBUG: UserFactory.editProfile res: ") ;
+					console.log(res) ;
+				})
+		}
+
 		$rootScope._user = o.isLoggedIn() ;
 		return o ;
 	}

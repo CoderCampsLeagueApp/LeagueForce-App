@@ -54,71 +54,75 @@ body {
 	background: yellow;
 	}*/
 
-.newsImage {
-	height: 350px;
-	position: relative;
-	float: left;
-}
+	.newsImage {
+		float: left;
+		padding-bottom: 30px;
+	}
 
-.subjectLine {
-	margin-left: 35px;
-}
+	.singleNewsImage {
+		height: 350px;
+		width: 500px;
+	}
 
-.leagueLogo {
-	height: 25px;
-	clear: both;
-}
+	.subjectLine {
+		margin-left: 35px;
+	}
 
-p.article {
-	width: 50em; 
-	word-wrap: break-word;
-}
+	.leagueLogo {
+		height: 25px;
+		clear: both;
+	}
+
+	p.article {
+		width: 50em; 
+		word-wrap: break-word;
+	}
 
 
-/* Codepen Player & Coach Cards */
+	/* Codepen Player & Coach Cards */
 
-body {
-	margin: 0 auto;
-	padding: 0;
-}
+	body {
+		margin: 0 auto;
+		padding: 0;
+	}
 
-.left {
-	right: 65px;
-}
+	.left {
+		right: 65px;
+	}
 
-.right {
-	right: 15px;
-}
+	.right {
+		right: 15px;
+	}
 
-.center {
-	text-align: center;
-}
+	.center {
+		text-align: center;
+	}
 
-.bottom {
-	position: absolute;
-	bottom: 15px;
-}
+	.bottom {
+		position: absolute;
+		bottom: 15px;
+	}
 
-.card {
-	position: absolute;
-	width: 300px;
-	height: 100px;
-	padding-left: 5px;
-	padding-top: 0;
-	padding-bottom: 0;
-	left: 50%;
-	top: 67.5px;
-	background: #E9E2D0;
-	box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
-	/* make z-index stack more efficient or not needed if possible */
-}
+	.card {
+		position: absolute;
+		width: 300px;
+		height: 100px;
+		padding-left: 5px;
+		padding-top: 0;
+		padding-bottom: 0;
+		left: 50%;
+		top: 67.5px;
+		background: #E9E2D0;
+		box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
+		/* make z-index stack more efficient or not needed if possible */
+	}
 
-.card img {
+	.card img {
 
-	margin-left: -250px;
-	background: #E9E2D0;
-	box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
-	z-index: -1;
-	/* make z-index stack more efficient or not needed if possible */
-}
+		margin-left: -250px;
+		background: #E9E2D0;
+		box-shadow: -20px 0 35px -25px black, 20px 0 35px -25px black;
+		z-index: -1;
+		/* make z-index stack more efficient or not needed if possible */
+	}
 

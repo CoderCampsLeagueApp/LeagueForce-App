@@ -3,7 +3,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var League = mongoose.model('League');
 var Team = mongoose.model('Team');
+var User = mongoose.model('User') ;
 var jwt = require('express-jwt');
+
 
 var auth = jwt({
 	userProperty: 'payload',
@@ -24,13 +26,27 @@ var auth = jwt({
 // 	});  
 // });
 
+// Middleware checks if user is admin.
+router.use('/', auth, function(req, res, next) {
+	User.findOne({
+		_id : req.payload.id
+	}, function(err, user) {
+		req.user = user ;
+		console.log(user) ;
+		if(user.admin) {
+			next() ;
+		} ;
+	}) ;
+}) ;
+
+
 //------------Getting a League------------
-router.get('/:id', function(req, res) {
+router.get('/:id', auth, function(req, res) {
 	League.findOne({admin: req.params.id})
 	.populate({
-    path: 'teams',
-    model: 'Team',
-  })
+		path: 'teams',
+		model: 'Team',
+	})
 	.exec(function(err, league){
 		if(err) return res.status(500).send({err: "Error inside the server"});
 		if(!league) return res.status(400).send({err: "That league does not exist"});
@@ -39,7 +55,7 @@ router.get('/:id', function(req, res) {
 	
 });
 
-router.get('/', function(req, res) {
+router.get('/', auth, function(req, res) {
 	League.find({})
 	.exec(function(err, league) {
 		if(err) return res.status(500).send({err: "Error getting all leagues"});
@@ -63,7 +79,7 @@ router.post('/', auth, function(req, res) {
 });
 
 //------------Editing a League------------
-router.put('/:id', function(req, res) {
+router.put('/:id', auth, function(req, res) {
 	console.log(req.body);
 	League.update({_id: req.body._id}, req.body)
 	.exec(function(err, league) {
@@ -74,7 +90,7 @@ router.put('/:id', function(req, res) {
 });
 
 //------------Deleting a League-----------
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth, function(req, res) {
 	League.remove({_id: req._id})
 	.exec(function(err, league) {
 		if(err) return res.status(500).send({err: "Error with deleting the league"});
@@ -85,7 +101,7 @@ router.delete('/:id', function(req, res) {
 
 //----------TEAM!!--------------------
 
-router.post('/team', function(req, res) {
+router.post('/team', auth, function(req, res) {
 	var team = new Team(req.body);
 
 	team.save(function(err, result) {
@@ -94,11 +110,11 @@ router.post('/team', function(req, res) {
 		if(!result) return res.status(400).send({err: "Could not create a league"}); 
 		
 		League.update({_id: team.league}, {$push: {teams: {_id: result._id}}} , function(err, result){ console.log('hi');res.send()} );
-});
+	});
 });
 
 //deletes the team and the ref on teams array
-router.put('/team/delete/:id', function(req, res){
+router.put('/team/delete/:id', auth, function(req, res){
 	var id = req.params.id;
 	console.log(id);
 	console.log('----------------------------------');
@@ -108,17 +124,17 @@ router.put('/team/delete/:id', function(req, res){
 		if(err) return res.status(500).send({err: "Issues with the server"});
 		if(!result) return res.status(400).send({err: "Could not remove team"}); 
 		League.findOneAndUpdate({_id: leagueId}, {$pull: {teams : id}},
-		function(err, result){
-			console.log(leagueId);
-			console.log(result);
-			if(err) return res.status(500).send({err: "Issues with the server"});
-			if(!result) return res.status(400).send({err: "Could not remove id from league"}); 
-			res.send();
-		});
+			function(err, result){
+				console.log(leagueId);
+				console.log(result);
+				if(err) return res.status(500).send({err: "Issues with the server"});
+				if(!result) return res.status(400).send({err: "Could not remove id from league"}); 
+				res.send();
+			});
 	});
 });
 
-router.put('/team/edit', function(req, res){
+router.put('/team/edit', auth, function(req, res){
 	var team  = req.body;	
 	console.log(team);
 	Team.update({_id: team._id}, team)
