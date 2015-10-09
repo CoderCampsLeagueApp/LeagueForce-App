@@ -66,13 +66,24 @@ router.get('/:id', function(req,res){
 
 //edit News
 router.put('/:id', function(req, res) {
-	News.update({_id: req.body.id}, req.body)
+	News.update({_id: req.body._id}, req.body)
 	.exec(function(err, news) {
 		if(err) return res.status(500).send({err: "error getting news to edit"});
 		if(!news) return res.status(400).send({err: "News to edit don't exist"});
 		res.send(news);
 	});
 });
+
+router.put('/team/edit', auth, function(req, res){
+	var team  = req.body;	
+	console.log(team);
+	Team.update({_id: team._id}, team)
+	.exec(function(err, result){
+		if(err) return res.status(500).send({err: "Issues with the server"});
+		if(!result) return res.status(400).send({err: "Could not remove team"});
+		res.send(); 
+	})
+})
 
 //delete a News
 router.delete('/:id', function(req, res) {

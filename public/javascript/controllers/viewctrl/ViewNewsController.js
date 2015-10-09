@@ -16,6 +16,7 @@
 				WebsiteFactory.getNewsletter($stateParams.id).then(function(res) {
 					vm.newsletter = res;
 					WebsiteFactory.getComments($stateParams.id).then(function(res) {
+						console.log(res)
 						vm.comments = res;
 					})
 				});
@@ -38,6 +39,7 @@
 		vm.deleteComment = function(comment, news) {
 			ProfileFactory.deleteComment(comment, news).then(function(res) {
 				vm.comments.splice(vm.comments.indexOf(comment), 1);
+				vm.getNews();
 			})
 		};
 
@@ -58,8 +60,9 @@
 				comment: commentId
 			};
 			ProfileFactory.postReply(reply).then(function(res) {
-				vm.comment.reply.body = " "
-				//vm.comment.push(res); i think the push here put all the comments
+				vm.comment.reply.body = " ";
+				vm.getNews();
+				
 			})
 		};
 

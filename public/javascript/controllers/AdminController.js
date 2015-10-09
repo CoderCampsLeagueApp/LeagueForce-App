@@ -4,15 +4,39 @@
 	.controller('AdminController', AdminController);
 
 
-	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory'];
+	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory', '$window', '$scope'];
 
-	function AdminController($state, $stateParams, $rootScope, AdminFactory) {
+	function AdminController($state, $stateParams, $rootScope, AdminFactory, $window, $scope) {
 		var vm = this;
 		vm.title = 'Welcome to our App!';
 		vm.uiRouterState = $state;
 
 		vm.def = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 		$state.go('Admin.home');
+
+		// -----------Google Maps---------------------
+
+		vm.map = { center: { latitude: 40, longitude: -100 }, zoom: 4 }; //center of map
+
+		//Geolocation HTML5, using $scope.$apply-- digest cycle applies changes
+		vm.getLocation = function(){
+			$window.navigator.geolocation.getCurrentPosition(function(position){
+				console.log(position);
+				vm.marker = {
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude
+				}
+				var newCenter = angular.copy(vm.marker);
+				console.log(newCenter.latitude);
+				$scope.$apply(function(){
+	        		vm.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
+	      		});
+				
+
+			});
+		}
+	
+
 
 		AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.adminLeague = res;
@@ -38,13 +62,14 @@
 		//creating League or editing
 		vm.createLeague = function(league){
 			if(!league._id){
-
-				AdminFactory.createLeague(league).then(function(res){
-					console.log('created league!');
+				league.googleLocation = vm.marker;
+			AdminFactory.createLeague(league).then(function(res){
+				console.log('created league!');
 					$state.go('Admin.home');
 				});
 			}
 			else{
+				league.googleLocation = vm.marker;
 				AdminFactory.editLeague(league).then(function(res){
 					console.log('edited!');
 					$state.go('Admin.home');
@@ -161,21 +186,10 @@
 		}
 
 		//-------------Newsletter Controller Functions------
-		// if($stateParams.id) { 
-		// 	AdminFactory.getNewsletter($stateParams.id).then(function(res) {
 
-		// 	});
-		// };	
-
-
-		vm.editNewsletter = function(newsletter) {
-			vm.oldNewsletter.isPublished = true;
-			
-		}; 
-
-		vm.toEditPage = function(newsletter) {
+		vm.toEditPage = function(edit) {
 			$state.go('Admin.editnewsletter');
-			vm.newsletter = angular.copy(newsletter);
+			vm.newsletter = angular.copy(edit);
 		}
 
 		vm.postNewsletter = function(newsletter) {
@@ -184,17 +198,18 @@
 				vm.newsletter.isPublished = true;
 				AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
 					vm.getNewsletters();
-					console.log(vm.newsletter);
+					console.log(vm.newsletter + ' | created!');
 					delete vm.newsletter;
 					$state.go('Newsletter');
 				});
 			}
 
 			else {
-				AdminFactory.editNewsletter(vm.newsletter, vm.oldNewsletter).then(function(res) {
+				AdminFactory.editNewsletter(vm.newsletter).then(function(res) {
 					vm.getNewsletters();
-					console.log(vm.oldNewsletter);
-					$state.go('Newsletter');
+					console.log(vm.newsletter + ' | edited!');
+					delete vm.newsletter;
+					$state.go('Admin.storedarticles');
 				});
 			}
 			
@@ -246,6 +261,8 @@
 		vm.saveDraft = function(newsletter) {
 			vm.newsletter.isPublished = false;
 			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
+				vm.newsletter.body = " ";
+				vm.newsletter.title = " ";
 				vm.getNewsletters();
 				delete vm.newsletter;
 				$state.go('Admin.home')

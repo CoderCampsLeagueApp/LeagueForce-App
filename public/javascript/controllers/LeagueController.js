@@ -8,8 +8,8 @@
 
 	function LeagueController($state, $stateParams, $rootScope, AdminFactory, LeagueFactory) {
 		var vm = this;
+		
 		vm.league = {};
-
 
 	}
 

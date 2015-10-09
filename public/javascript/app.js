@@ -1,9 +1,16 @@
 (function() {
 	'use strict';
-	angular.module('app', ['ui.router', 'angularModalService', 'textAngular'])
+
+	angular.module('app', ['ui.router', 'angularModalService', 'textAngular','uiGmapgoogle-maps'])
 	.config(Config);
-	Config.$inject = ['$stateProvider', '$urlRouterProvider'];
-	function Config($stateProvider, $urlRouterProvider) {
+	Config.$inject = ['$stateProvider', '$urlRouterProvider', 'uiGmapGoogleMapApiProvider'];
+	function Config($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
+
+		uiGmapGoogleMapApiProvider.configure({ 
+		key: 'AIzaSyAGEGj1MQXzaAG_1LN_rDcJgX1i5XO6tl4', 
+		v: '3.20', 
+		libraries: 'weather,geometry,visualization,places' 
+		}); 
 		$stateProvider.state('Home',{
 			url: '/',
 			templateUrl: 'views/home.html'
@@ -44,9 +51,7 @@
 			templateUrl: '../admin_views/create_newsletter.html'
 		}).state('TestView', {
 			url: '/test',
-			templateUrl: 'views/test_view.html',
-			controller: 'LeagueController',
-			controllerAs: 'vm'
+			templateUrl: 'views/test_view.html'
 		}).state('Newsletter', {
 			url: '/leaguenews',
 			templateUrl: 'views/league_news.html',

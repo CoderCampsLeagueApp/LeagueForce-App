@@ -10,7 +10,7 @@ require('./models/User');
 require('./models/Inbox');
 require('./models/League');
 require('./models/Team');
-require('./models/Schedule');
+require('./models/Week');
 require('./models/Comments');
 require('./models/Newsletter');
 require('./config/passport') ;
@@ -38,7 +38,7 @@ var userRoutes = require('./routes/UserRoutes');
 var inboxRoutes = require('./routes/InboxRoutes');
 var leagueRoutes = require('./routes/LeagueRoutes');
 var teamRoutes = require('./routes/TeamRoutes');
-var scheduleRoutes = require('./routes/ScheduleRoutes');
+var weekRoutes = require('./routes/WeekRoutes');
 var commentRoutes = require('./routes/CommentRoutes');
 var newsletterRoutes = require('./routes/NewsletterRoutes');
 
@@ -51,7 +51,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/inbox', inboxRoutes);
 app.use('/api/league', leagueRoutes);
 app.use('/api/team', teamRoutes);
-app.use('/api/schedule', scheduleRoutes);
+app.use('/api/week', weekRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 

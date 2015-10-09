@@ -9,6 +9,7 @@
 		var vm = this;
 		vm.user = {} ;
 		vm.status = $rootScope._user ;
+		
 
 		vm.register = function() {
 			console.log("DEBUG: NavController vm.register called.") ;
