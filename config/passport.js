@@ -57,6 +57,8 @@ passport.use(new FacebookStrategy({
 	clientSecret: configAuth.facebookAuth.clientSecret,
 	callbackURL: configAuth.facebookAuth.callbackURL,
 	// profileFields: ['id', 'name', 'emails', 'photos', 'picture.type(large)']
+	// Sending picture.type(large).  This returns photo 200x200.
+	// Without this, default profile photo is 50x50.
 	profileFields: ['id', 'name', 'emails', 'picture.type(large)']
 },
 function(accessToken, refreshToken, profile, done) {
@@ -100,6 +102,8 @@ function(accessToken, refreshToken, profile, done) {
 				newUser.username = newUser.facebook.email ;
 
 				// Photo
+				// Photo returned by Facebook is 200x200 because of picture.type(large) 
+				// in profileFields above.
 				newUser.facebook.photo = profile.photos[0].value ;
 				
 				// Getting bigger photo URL from Facebook
