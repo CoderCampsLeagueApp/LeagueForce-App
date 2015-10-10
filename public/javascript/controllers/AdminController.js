@@ -197,11 +197,7 @@
 		}
 
 		//-------------Matches & Weeks----------------------
-		vm.createArrayIndexes = function(id) {
-			for(i = 0; i < vm.league.weeks; i++) {
-
-			}
-		};
+		
 
 		vm.addWeek = function(week) {
 			vm.league.weeks.push(week);
