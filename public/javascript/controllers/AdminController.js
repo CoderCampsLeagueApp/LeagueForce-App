@@ -29,13 +29,13 @@
 				var newCenter = angular.copy(vm.marker);
 				console.log(newCenter.latitude);
 				$scope.$apply(function(){
-	        		vm.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
-	      		});
+					vm.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
+				});
 				
 
 			});
 		}
-	
+
 
 
 		AdminFactory.getLeague($rootScope._user.id).then(function(res){
@@ -52,10 +52,16 @@
 		vm.league.features = [];
 		vm.league.images = [];
 		vm.leagueSize = [0];
+		vm.league.weeks = [];
+		//vm.league.teams  = [];
 
 		//team
 		vm.team = {};
 		vm.teams = [];	
+
+		//schedule
+		vm.matches = [];
+		vm.match = {};
 
 
 		//league ----------------------------------------
@@ -63,8 +69,8 @@
 		vm.createLeague = function(league){
 			if(!league._id){
 				league.googleLocation = vm.marker;
-			AdminFactory.createLeague(league).then(function(res){
-				console.log('created league!');
+				AdminFactory.createLeague(league).then(function(res){
+					console.log('created league!');
 					$state.go('Admin.home');
 				});
 			}
@@ -78,18 +84,23 @@
 			};
 			vm.addFeature = function(feature){
 				vm.league.features.push(feature);
-			}
+			};
+
+
 			vm.removeFeature = function(idx){
 				console.log(idx);
 				vm.league.features.splice(idx, 1);
-			}
+			};
+
 			vm.addImage = function(image){
 				vm.league.images.push(image);
-			}
+			};
+
 			vm.removeImage = function(idx){
 				console.log(idx);
 				vm.league.images.splice(idx, 1);
-			}
+			};
+
 
 		//creating League finished 
 
@@ -185,12 +196,27 @@
 			vm.team.images.splice(idx, 1);
 		}
 
+		//-------------Matches & Weeks----------------------
+		vm.createArrayIndexes = function(id) {
+			for(i = 0; i < vm.league.weeks; i++) {
+
+			}
+		};
+
+		vm.addWeek = function(week) {
+			vm.league.weeks.push(week);
+		};
+
+		vm.subtractWeek = function(idx) {
+			vm.league.weeks.splice(idx, 1);
+		};
+
 		//-------------Newsletter Controller Functions------
 
 		vm.toEditPage = function(edit) {
 			$state.go('Admin.editnewsletter');
 			vm.newsletter = angular.copy(edit);
-		}
+		};
 
 		vm.postNewsletter = function(newsletter) {
 			if(!newsletter._id) {

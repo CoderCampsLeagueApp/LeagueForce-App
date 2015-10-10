@@ -48,14 +48,14 @@ router.get('/:id', function(req, res) {
 
 //--------------------------Edit comment------------------------------
 router.put('/:id', function(req, res) {
-	console.log(req.body);
-	Comment.update({_id: req.body.id}, req.body)
+	Comment.update({_id: req.body._id}, req.body)
 	.exec(function(err, comment) {
 		if(err) return res.status(500).send({err: "error getting comment to edit"});
-		if(!comment) return res.status(400).send({err: "Comment to edit doesn't exist"});
+		if(!comment) return res.status(400).send({err: "comment to edit don't exist"});
 		res.send(comment);
 	});
 });
+
 
 //------------------------Delete a comment--------------------------
 router.put("/delete/:id", auth, function(req, res) {

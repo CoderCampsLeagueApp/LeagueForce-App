@@ -32,7 +32,6 @@ router.use('/', auth, function(req, res, next) {
 		_id : req.payload.id
 	}, function(err, user) {
 		req.user = user ;
-		console.log(user) ;
 		if(user.admin) {
 			next() ;
 		} ;
@@ -66,14 +65,15 @@ router.get('/', auth, function(req, res) {
 
 //------------Creating a League-----------
 router.post('/', auth, function(req, res) {
+	console.log
 	var league = new League(req.body);
 	league.admin = req.payload.id;
 	league.isDisplay = false;
 	console.log(league);
-
-	league.save(function(err, league) {
+	league.save(function(err, result) {
+		console.log(result);
 		if(err) return res.status(500).send({err: "Issues with the server"});
-		if(!league) return res.status(400).send({err: "Could not create a league"});
+		if(!result) return res.status(400).send({err: "Could not create a league"});
 		res.send();
 	});
 });
