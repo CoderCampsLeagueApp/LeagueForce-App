@@ -58,6 +58,18 @@
 			var q = $q.defer() ;
 			$http.post('/api/user/login', user).success(function(res) {
 				setToken(res.token) ;
+
+				// Following only happens when user has registered 
+				// but not verified.
+				if(!res.token) {
+					// Put in a message for the user saying that you are not
+					// verified
+					q.resolve(res) ;
+					localStorage.removeItem("token") ;
+					return ;
+
+				}
+
 				$rootScope._user = o.isLoggedIn() ;
 				q.resolve() ;
 			}) ;

@@ -29,24 +29,15 @@
 				var newCenter = angular.copy(vm.marker);
 				console.log(newCenter.latitude);
 				$scope.$apply(function(){
-	        		vm.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
-	      		});
+					vm.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
+				});
 				
 
 			});
 		}
 
+
 		//--------------------Cloudinary-----------------------
-		$scope.submit = function(files) {
-			// console.log($scope.form.file.$valid);
-			console.log($scope.file);
-			// console.log(!$scope.file.$error);
-
-			// if ($scope.form.file.$valid && $scope.file && !$scope.file.$error) {
-			// 	$scope.upload($scope.file);
-			// }
-
-		};
 
     // upload on file select or drop
     $scope.upload = function (file) {
@@ -85,10 +76,23 @@
 		vm.league.features = [];
 		vm.league.images = [];
 		vm.leagueSize = [0];
+		vm.league.weeks = [];
+		//vm.league.teams  = [];
 
 		//team
 		vm.team = {};
 		vm.teams = [];	
+
+		//schedule
+		vm.week = {}
+		vm.weeks = [];
+		vm.league.weeks = [];
+		vm.league.weeks.week = {};
+		vm.weeks.week = {};
+		vm.week.matches = [];
+		vm.match = {};
+		vm.week.weekNumber = Number;
+		vm.weekId = vm.league.weeks.indexOf(vm.week);
 
 
 		//league ----------------------------------------
@@ -96,7 +100,7 @@
 		vm.createLeague = function(league){
 			if(!league._id){
 				league.googleLocation = vm.marker;
-			AdminFactory.createLeague(league).then(function(res){
+				AdminFactory.createLeague(league).then(function(res){
 					vm.adminLeague = res;
 					$state.go('Admin.home');
 				});
@@ -112,18 +116,23 @@
 			};
 			vm.addFeature = function(feature){
 				vm.league.features.push(feature);
-			}
+			};
+
+
 			vm.removeFeature = function(idx){
 				console.log(idx);
 				vm.league.features.splice(idx, 1);
-			}
+			};
+
 			vm.addImage = function(image){
 				vm.league.images.push(image);
-			}
+			};
+
 			vm.removeImage = function(idx){
 				console.log(idx);
 				vm.league.images.splice(idx, 1);
-			}
+			};
+
 
 		//creating League finished 
 
@@ -219,12 +228,45 @@
 			vm.team.images.splice(idx, 1);
 		}
 
+		//-------------Matches & Weeks----------------------
+		vm.addWeek = function(singleWeek) {
+			var week = angular.copy(singleWeek);
+			week = {};
+			for(var i = 0; i < vm.league.weeks.length+1; i++) {
+				for (var property in vm.league.weeks) {
+					vm.week.weekNumber = i + 1;
+					console.log(vm.week.weekNumber);
+				}
+			};
+			vm.league.weeks.push(week);
+			console.log(vm.league.weeks.length);			
+		};
+
+		vm.subtractWeek = function(idx) {
+			vm.league.weeks.splice(idx, 1);
+		};
+
+		vm.createMatch = function(match) {
+			AdminFactory.createMatch(match).then(function(res) {
+
+			})
+			//push it into unqiue week
+		};
+
+		// vm.getWeeks = function() {
+		// 	AdminFactory.getWeek($stateParams.id).then(function(res) {
+		// 		vm.weeks = res;
+		// 	});
+		// };
+
+		// vm.getWeeks();
+
 		//-------------Newsletter Controller Functions------
 
 		vm.toEditPage = function(edit) {
 			$state.go('Admin.editnewsletter');
 			vm.newsletter = angular.copy(edit);
-		}
+		};
 
 		vm.postNewsletter = function(newsletter) {
 			if(!newsletter._id) {

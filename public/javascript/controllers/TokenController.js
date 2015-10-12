@@ -15,7 +15,6 @@
 
 		setTimeout(function() {
 			// $rootScope._user = UserFactory.isLoggedIn() ;
-			console.log('has reached this point');
 			if(!$rootScope._user) {
 				$window.location.reload() ;
 			}

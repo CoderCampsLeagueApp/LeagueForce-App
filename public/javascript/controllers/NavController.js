@@ -14,7 +14,7 @@
 
 
 
-		// $scope.upload = function(dataUrl) {
+		$scope.upload = function(dataUrl) {
 		// 	console.log(dataUrl);
 		
 		// Upload.upload({
@@ -43,7 +43,7 @@
   //       		$scope.picSubmitted = true;
   //       	});
             
-  //       };
+        };
 		
 
 		vm.register = function() {
@@ -56,9 +56,14 @@
 
 		vm.login = function() {
 			console.log("DEBUG: NavController vm.login called.") ;
-			UserFactory.login(vm.user).then(function() {
-				vm.status = $rootScope._user ;
-				$state.go('Home') ;
+			UserFactory.login(vm.user).then(function(res) {
+				if(res){
+					console.log(res);
+					vm.confirm = res;
+				}else{
+					vm.status = $rootScope._user;
+					$state.go('Home');
+				}
 			}) ;
 		} ;
 

@@ -123,6 +123,23 @@
 			return q.promise;
 		}
 
+		//-------------------Weeks---------------------------
+		// o.getWeek = function(id) {
+		// 	var q = $q.defer();
+		// 	$http.get('/api/league/week', id).success(function(res) {
+		// 		q.resolve(res);
+		// 	});
+		// 	return q.promise;
+		// };
+
+		//-------------------Matches-------------------------
+		o.createMatch = function(match) {
+			var q = $q.defer();
+			$http.post('/api/league/match/', match, getAuth()).success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise
+		} 
 
 		return o;
 	}

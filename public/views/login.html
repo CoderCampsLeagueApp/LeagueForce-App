@@ -34,6 +34,16 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+
+						<div class="alert alert-danger" ng-show="nav.confirm">
+							<strong>Danger!</strong> {{nav.confirm}}
+						</div>
+					</div>
+				</div>
+
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 
@@ -44,6 +54,7 @@
 				</div>
 			</form>
 		</div>
+		<a ui-sref='Register'><h3>REGISTER</h3></a>
 		<div class="form-group">
 			<div class="col-sm-offset-4 col-sm-5">
 

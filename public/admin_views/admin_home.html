@@ -3,32 +3,34 @@
 
 <div ng-show='vm.adminLeague'>
 
-<div style="margin-top:60px" class="adminHome">
-	<div class="col-md-4 nopadding">
-		<img class="img-responsive" ng-src="{{vm.adminLeague.logo}}">
+	<div style="margin-top:60px" class="adminHome">
+		<div class="col-md-4 nopadding">
+			<img class="img-responsive" ng-src="{{vm.adminLeague.logo}}">
+		</div>
+		<div class="col-md-8">
+			<p>NAME : {{vm.adminLeague.name}}</p>
+			<p>DIVISIONS : {{vm.adminLeague.division}}</p>
+			<p>WEEKS : {{vm.adminLeague.weeks.length}}</p>
+			<p>ABOUT : {{vm.adminLeague.description | limitTo : 200}}{{vm.adminLeague.description.length >= 201 ? '...' : ''}}</p>
+			<p>features: {{vm.adminLeague.features}}</p>
+			<p>Images: {{vm.adminLeague.images}}</p>
+			<p>Location: {{vm.adminLeague.googleLocation.latitude}}, {{vm.adminLeague.googleLocation.longitude}} </p>
+		</div>
+		
+
+		<br>
+		<div class="col-md-12 nopadding" style="margin-top:30px">
+			<button class="homebtn" >Preview Leagues Page</button>
+			<button class="homebtn" >Publish</button>
+			<button class="homebtnEdit" ng-click='vm.startLeagueEdit(vm.adminLeague._id)'>Edit League</button>
+			<button class="homebtnEdit" ng-click='vm.startAddTeam()'>ADD teams</button>
+		</div>
 	</div>
-	<div class="col-md-8">
-	<p>NAME : {{vm.adminLeague.name}}</p>
-	<p>DIVISIONS : {{vm.adminLeague.division}}</p>
-	<p>ABOUT : {{vm.adminLeague.description | limitTo : 200}}{{vm.adminLeague.description.length >= 201 ? '...' : ''}}</p>
-	<p>features: </p>
-  	<p>Images: </p>
-  	</div>
-  	
 
-<br>
-<div class="col-md-12 nopadding" style="margin-top:30px">
-<button class="homebtn" >Preview Leagues Page</button>
-<button class="homebtn" >Publish</button>
-<button class="homebtnEdit" ng-click='vm.startLeagueEdit(vm.adminLeague._id)'>Edit League</button>
-<button class="homebtnEdit" ng-click='vm.startAddTeam()'>ADD teams</button>
-</div>
-</div>
-
-<h1>Teams</h1>
-<div class="adminHomeTeams container-fluid">
-	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:10px">
+	<h1>Teams</h1>
+	<div class="adminHomeTeams container-fluid">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:10px">
 				
 				<div ng-repeat='t in vm.adminLeague.teams' class="col-lg-3 col-md-3 col-sm-6">
 					<img class="img-responsive"  width="170" height="170" ng-src="{{t.logo}}">
@@ -38,9 +40,9 @@
 						<button  ng-click='vm.deleteTeam(t, $index)'class="btn btn-danger btn-block">Delete</button>
 
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 </div>
