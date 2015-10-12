@@ -14,7 +14,7 @@
 			<p>ABOUT : {{vm.adminLeague.description | limitTo : 200}}{{vm.adminLeague.description.length >= 201 ? '...' : ''}}</p>
 			<p>features: {{vm.adminLeague.features}}</p>
 			<p>Images: {{vm.adminLeague.images}}</p>
-			<p>Location: {{vm.adminLeague.googleLocation}}</p>
+			<p>Location: {{vm.adminLeague.googleLocation.latitude}}, {{vm.adminLeague.googleLocation.longitude}} </p>
 		</div>
 		
 

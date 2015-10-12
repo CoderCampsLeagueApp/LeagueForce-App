@@ -10,6 +10,7 @@ var LeagueSchema = new mongoose.Schema({
 	teams: [{type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
 	recentMatches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Week'}],
 	weeks: [{
+		weekNumber: Number,
 		matches : [{
 			team1: {type: mongoose.Schema.Types.ObjectId, ref: 'Team'},
 			team2: {type: mongoose.Schema.Types.ObjectId, ref: 'team'},

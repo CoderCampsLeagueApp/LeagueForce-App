@@ -143,8 +143,36 @@ router.put('/team/edit', auth, function(req, res){
 		if(!result) return res.status(400).send({err: "Could not remove team"});
 		res.send(); 
 	})
-})
+});
+
+//----------Adding Matches and Weeks---------------
+router.post('/match', auth, function(req, res) {
+	var match = req.body;
+	League.save(function(err, result) {
+		if(err) return res.status(500).send({err: "Issues with server for matches"});
+		if(!result) return res.status(400).send({err: "Could not create match"});
+		League.update({})
+	});
+});
 
 
+// router.post('/', auth, function(req, res) {
+// 	var news = req.body.news;
+// 	var comment = new Comment(req.body);
+// 	comment.created = new Date();
+// 	comment.user = req.payload.id;
+// 	console.log(comment);
+// 	comment.save(function(err, commentResult) {
+// 		if(err) return res.status(500).send({err: "Issues with server"});
+// 		if(!commentResult) return res.status(400).send({err: "Could not post comment"});
+// 		News.update({_id: news}, {$push: {comments: {_id: commentResult._id}}}, 
+// 			function(err, result) {
+// 				User.update({_id: comment.user}, {$push: {comments: {_id: commentResult._id}}},
+// 					function(err, result) {
+// 						res.send();
+// 					})
+// 			})
+// 	})
+// });
 
 module.exports = router;

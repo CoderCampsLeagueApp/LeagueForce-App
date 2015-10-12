@@ -5,7 +5,9 @@
 		<span style="font-size: .9em; color: gray;">Posted on <a style="text-decoration: none;" ng-click="vm.getNews()">{{vm.newsletter.created | date:"M/d/yyyy hh:mma"}}</a> by {{vm.newsletter.user.name}}</span>
 		<br>
 		<br>
-		<img style="float: left;" ng-src="{{vm.newsletter.image}}" class="img img-thumbnail singleNewsImage"/><br>	
+		<div ng-show="vm.newsletter.image">
+			<img style="float: left;" ng-src="{{vm.newsletter.image}}" class="img img-thumbnail singleNewsImage"/>
+		</div><br>	
 		<div style="word-wrap: break-word;" ta-bind ng-model="vm.newsletter.body " style="clear: both;"></div><hr>
 	</div>
 	<div class="col-md-6"></div>

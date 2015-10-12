@@ -60,8 +60,15 @@
 		vm.teams = [];	
 
 		//schedule
-		vm.matches = [];
+		vm.week = {}
+		vm.weeks = [];
+		vm.league.weeks = [];
+		vm.league.weeks.week = {};
+		vm.weeks.week = {};
+		vm.week.matches = [];
 		vm.match = {};
+		vm.week.weekNumber = Number;
+		vm.weekId = vm.league.weeks.indexOf(vm.week);
 
 
 		//league ----------------------------------------
@@ -197,15 +204,37 @@
 		}
 
 		//-------------Matches & Weeks----------------------
-		
-
-		vm.addWeek = function(week) {
+		vm.addWeek = function(singleWeek) {
+			var week = angular.copy(singleWeek);
+			week = {};
+			for(var i = 0; i < vm.league.weeks.length+1; i++) {
+				for (var property in vm.league.weeks) {
+					vm.week.weekNumber = i + 1;
+					console.log(vm.week.weekNumber);
+				}
+			};
 			vm.league.weeks.push(week);
+			console.log(vm.league.weeks.length);			
 		};
 
 		vm.subtractWeek = function(idx) {
 			vm.league.weeks.splice(idx, 1);
 		};
+
+		vm.createMatch = function(match) {
+			AdminFactory.createMatch(match).then(function(res) {
+
+			})
+			//push it into unqiue week
+		};
+
+		// vm.getWeeks = function() {
+		// 	AdminFactory.getWeek($stateParams.id).then(function(res) {
+		// 		vm.weeks = res;
+		// 	});
+		// };
+
+		// vm.getWeeks();
 
 		//-------------Newsletter Controller Functions------
 

@@ -2,12 +2,13 @@
 <div class="leagueform">
   <form style="color:#fff" class="form-horizontal" ng-submit='vm.createLeague(vm.league)'>
     <fieldset>
-      <div ng-repeat="weeks in vm.league">
+      <div ng-repeat="w in vm.adminLeague.weeks">
+        {{w._id}} - {{vm.weekId + 1}}
       </div>
 
       <!-- Weeks -->
       <div class="form-group">
-        <label class="col-md-2 control-label">Weeks {{vm.league.weeks.length}} </label>  
+        <label class="col-md-2 control-label">Weeks {{vm.adminLeague.weeks.length}} </label>  
         <div class="col-md-10">
           <input type="text" class="nameinput" ng-model='vm.league.name' placeholder="League name" required>
         </div>
