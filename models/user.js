@@ -33,7 +33,9 @@ var UserSchema = new mongoose.Schema({
 	comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comments'}],
 	inbox: [{type: mongoose.Schema.Types.ObjectId, ref: 'Inbox'}],
 	admin: Boolean, //check the server -- midleware.
-	league: {type: mongoose.Schema.Types.ObjectId, ref: 'League'} //admin
+	league: {type: mongoose.Schema.Types.ObjectId, ref: 'League'}, //admin
+	isValidated: Boolean, // Checks if the user has been validated via email
+	rand: Number
 });
 
 UserSchema.methods.generateJWT = function() {
