@@ -8,7 +8,17 @@ var LeagueSchema = new mongoose.Schema({
 	logo: String, //bson or img url.
 	images: Array, //bson or img url.
 	teams: [{type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
-	recentMatches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Schedule'}],
+	recentMatches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Week'}],
+	weeks: [{
+		weekNumber: Number,
+		matches : [{
+			team1: {type: mongoose.Schema.Types.ObjectId, ref: 'Team'},
+			team2: {type: mongoose.Schema.Types.ObjectId, ref: 'team'},
+			date: Date,
+			team1score: Number,
+			team2score: Number
+		}],
+	}],
 	newsletter: [{
 		body: String,
 		title: String,
@@ -22,7 +32,7 @@ var LeagueSchema = new mongoose.Schema({
 		latitude: String,
 		longitude: String
 	},
-	matches: {type: mongoose.Schema.Types.ObjectId, ref: 'Schedule'},
+	matches: {type: mongoose.Schema.Types.ObjectId, ref: 'Week'},
 	admin: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},//Admin
 	isDisplay: Boolean
 });

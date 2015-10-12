@@ -8,6 +8,7 @@
 		var vm = this;
 		vm.newsletter = {};
 		vm.replyBox = false;
+		vm.commentEdit = false;
 		
 
 		vm.getNews = function() {

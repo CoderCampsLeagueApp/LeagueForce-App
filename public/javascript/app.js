@@ -7,9 +7,9 @@
 	function Config($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
 
 		uiGmapGoogleMapApiProvider.configure({ 
-		key: 'AIzaSyAGEGj1MQXzaAG_1LN_rDcJgX1i5XO6tl4', 
-		v: '3.20', 
-		libraries: 'weather,geometry,visualization,places' 
+			key: 'AIzaSyAGEGj1MQXzaAG_1LN_rDcJgX1i5XO6tl4', 
+			v: '3.20', 
+			libraries: 'weather,geometry,visualization,places' 
 		}); 
 		$stateProvider.state('Home',{
 			url: '/',
@@ -49,6 +49,12 @@
 		}).state('Admin.editnewsletter', {
 			url: '/newsletter/edit/:id',
 			templateUrl: '../admin_views/create_newsletter.html'
+		}).state('Admin.addmatch', {
+			url: '/addMatch',
+			templateUrl: '../admin_views/add_match_form.html'
+		}).state('Admin.schedule', {
+			url: '/schedule',
+			templateUrl: '../admin_views/league_schedule.html'
 		}).state('TestView', {
 			url: '/test',
 			templateUrl: 'views/test_view.html'
