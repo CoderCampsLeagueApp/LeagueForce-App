@@ -42,7 +42,7 @@
 
 
 		o.register = function(user) {
-			user.admin = true;
+			
 			var q = $q.defer() ;
 			$http.post('/api/user/register', user).success(function(res) {
 				// Need to uncomment the following 2 lines so that 
