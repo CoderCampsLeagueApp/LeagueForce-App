@@ -30,7 +30,7 @@
 			<div ng-class='{"hideMessage": !vm.messageDisplay}' class="messageDisplay">
 				<div ng-repeat='m in vm.inboxMessage.messages' class="col-md-12">
 					<div class="col-md-1">
-						<img ng-hide=' m.sender._id === nav.status.id' class="img-circle" width="50" height="50" ng-src="{{m.sender.pic}}">
+						<img style="position: relative;top: 15px;" ng-hide=' m.sender._id === nav.status.id' class="img-circle" width="60" height="60" ng-src="{{m.sender.pic}}">
 					</div>
 					<div class="col-md-11">
 						<div ng-class="{'messageSender': m.sender._id === nav.status.id, 'messageRecipient': m.sender._id != nav.status.id }">
