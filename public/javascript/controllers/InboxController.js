@@ -13,25 +13,17 @@
 		
 		InboxFactory.getMessages($stateParams.id).then(function(res){
 			vm.inbox  = res;
-			console.log('messages retrieved');
-			console.log(vm.inbox);
+			console.log('All messages retrieved');
 		});
 
 		vm.showMessage = function(inbox){
 			vm.messageDisplay = true;
 			vm.inboxMessage = inbox;
-			vm.inboxMessage.body[0].name = 'bubbles';
-			vm.msg.body = vm.inboxMessage._id;
-			for(var i = 0; i< vm.inboxMessage.body.length; i++)
-			if(inbox.user1._id === vm.inboxMessage.body[i].sender ){
-				vm.inboxMessage.body[i].name = inbox.user1.name;
-		}else vm.inboxMessage.body[i].name = inbox.user2.name;
-			
 		};
 	
-		vm.sendMessage = function(){
-			MessageFactory.sendMessage(vm.msg).then(function(res){
-				vm.inboxMessage.body.push(res);
+		vm.reply = function(){
+			InboxFactory.reply(vm.msg).then(function(res){
+				vm.inboxMessage.messages.push(res);
 				vm.msg.message = "";
 			});
 		}

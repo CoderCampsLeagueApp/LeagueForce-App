@@ -50,6 +50,10 @@ router.get('/:id', auth, function(req,res){
     path: 'user2',
     model: 'User',
     select : 'name pic'
+  }).populate({
+    path: 'messages.sender',
+    model: 'User',
+    select: 'name pic'
   })
   .exec(function(err, result){
     if(err) return res.status(500).send({err: "The server is having issues."});
@@ -63,6 +67,8 @@ router.post('/reply', auth, function(req, res){
   var message = req.body;
   message.created = new Date();
   message.sender = req.payload.id;
+   console.log(message);
+   console.log('--------------------------------------');
   var id = message.body;
   delete message.body;
   console.log(message);
