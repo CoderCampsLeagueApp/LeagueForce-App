@@ -1,20 +1,21 @@
 (function() {
 	'use strict';
 
-	angular.module('app', ['ui.router', 'angularModalService', 'textAngular','uiGmapgoogle-maps'])
+	angular.module('app', ['ui.router', 'angularModalService', 'textAngular','uiGmapgoogle-maps', 'ngFileUpload', 'ngImgCrop', "ui.bootstrap"])
 	.config(Config);
 	Config.$inject = ['$stateProvider', '$urlRouterProvider', 'uiGmapGoogleMapApiProvider'];
 	function Config($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
 
-		uiGmapGoogleMapApiProvider.configure({ 
-		key: 'AIzaSyAGEGj1MQXzaAG_1LN_rDcJgX1i5XO6tl4', 
-		v: '3.20', 
-		libraries: 'weather,geometry,visualization,places' 
-		}); 
 		$stateProvider.state('Home',{
 			url: '/',
 			templateUrl: 'views/home.html'
-		}).state('Leagues', {
+		}).state('Inbox', {
+			url: '/inbox/:id',
+			templateUrl: '/views/inbox.html',
+			controller: 'InboxController',
+			controllerAs: 'vm'
+		})
+		.state('Leagues', {
 			url: '/leagues',
 			templateUrl: 'views/leagues.html'
 		}).state('About', {
@@ -65,9 +66,14 @@
 		}).state('Admin.storedarticles', {
 			url: '/storedArticles',
 			templateUrl: '../admin_views/stored_articles.html'
+		}).state('ViewProfile', {
+			url: '/profile/:id',
+			templateUrl: 'views/all_profiles.html',
+			controller: "ViewProfileController",
+			controllerAs: 'vm'
 		}).state('Profile', {
-			url: '/Profile',
-			templateUrl: 'views/profile.html',
+			url: '/profile/settings/:id',
+			templateUrl: 'views/profile_settings.html',
 			controller: "ProfileController",
 			controllerAs: 'vm'
 		}).state('EditProfile', {
@@ -85,7 +91,12 @@
 				}]
 			}
 		});
-
+		uiGmapGoogleMapApiProvider.configure({ 
+		key: 'AIzaSyAGEGj1MQXzaAG_1LN_rDcJgX1i5XO6tl4', 
+		v: '3.20',
+		libraries: 'places,weather,geometry,visualization' 
+		});
+		
 		$urlRouterProvider.otherwise('/');
 	}
 })();

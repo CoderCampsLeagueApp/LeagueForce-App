@@ -1,5 +1,8 @@
 <h1>Regular user register page</h1>
-<form class="form-horizontal" ng-submit="nav.register()">
+<button ng-click='nav.form2 = false' class="btn" ng-class="{'btn-primary' : !nav.form2, 'btn-default' : nav.form2} ">1</button>
+<button ng-click='nav.form2 = true' class="btn" ng-class="{'btn-primary' : nav.form2, 'btn-default' : !nav.form2} ">2</button>
+
+<form ng-show='!nav.form2' class="form-horizontal animated fadeIn" ng-submit="nav.form2 = true">
   <fieldset>
 
     <!-- Form Name -->
@@ -9,7 +12,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Name</label>  
       <div class="col-md-4">
-        <input id="" name="" type="text" placeholder="Name" class="form-control input-md" required ng-model="nav.user.name" />
+        <input type="text" placeholder="Name" class="form-control input-md" required ng-model="nav.user.name" />
 
       </div>
     </div>
@@ -18,7 +21,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Email</label>  
       <div class="col-md-4">
-        <input id="" name="" type="email" placeholder="Email" class="form-control input-md" ng-model="nav.user.username" />
+        <input type="email" placeholder="Email" class="form-control input-md" ng-model="nav.user.username" required />
       </div>
     </div>
 
@@ -26,7 +29,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Password</label>
       <div class="col-md-4">
-        <input id="" name="" type="password" placeholder="password" class="form-control input-md" required ng-model="nav.user.password" />
+        <input type="password" placeholder="password" class="form-control input-md" required ng-model="nav.user.password" required/>
       </div>
     </div>
 
@@ -34,8 +37,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Confirm Password</label>
       <div class="col-md-4">
-        <input id="" name="" type="password" placeholder="comfirm password" class="form-control input-md" required ng-model="nav.user.confirmPass" />
-
+        <input type="password" placeholder="comfirm password" class="form-control input-md" required ng-model="nav.user.confirmPass" required/>
       </div>
     </div>
 
@@ -43,8 +45,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Cell/Tel. Number(optional)</label>  
       <div class="col-md-4">
-        <input id="" name="" type="text" placeholder="Cell/Tel. Number..." class="form-control input-md" ng-model="nav.user.phone" />
-
+        <input type="text" placeholder="Cell/Tel. Number..." class="form-control input-md" ng-model="nav.user.phone" />
       </div>
     </div>
 
@@ -57,23 +58,84 @@
     </div> -->
 
     <!-- Text input for link to profile pic -->
-    <div class="form-group">
-      <label class="col-md-4 control-label">Profile Picture</label>
-      <div class="col-md-4">
-        <input id="" name="" type="text" placeholder="Profile Picture..." class="form-control input-md" ng-model="nav.user.pic" />
-      </div>
-    </div>
 
-    <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label">About</label>
-      <div class="col-md-4">                     
-        <textarea class="form-control" id="" name="" ng-model="nav.user.bio"></textarea>
+      <label class="col-md-4"></label>
+      <div class="col-md-4 ">
+        <button type="submit" class="btn btn-lg btn-success btn-block" ng-disabled="!nav.user.name || !nav.user.username || !nav.user.password || !(nav.user.password === nav.user.confirmPass)">Continue</button>
       </div>
-    </div>
-
-    <div>
-      <button type="submit" class="btn btn-lg btn-success" ng-disabled="!nav.user.name || !nav.user.username || !nav.user.password || !(nav.user.password === nav.user.confirmPass)">Submit</button>
     </div>
   </fieldset>
 </form>
+
+
+<div ng-show='nav.form2' class="animated fadeIn">
+<form class="form-horizontal" name='myForm'>
+<div class="form-group">
+        <label class="col-md-4 control-label">Profile Picture(optional)</label>
+            <div class="col-md-4"> 
+
+                 <!-- <input type="file" ngf-select ng-model="picFile" name="file"    
+               accept="image/*" ngf-max-size="20MB"> -->
+               
+                <div ng-show='!picSubmitted' ng-hide='picFile' class="dropboxposition">
+                  <div ngf-drop ngf-select  class="dropArea" ng-model="picFile" ngf-pattern="image/*" ngf-accept="image/*" ngf-max-size="20MB">
+                    <i ng-show="myForm.file.$error.maxSize">File too large 
+                      {{picFile.size / 1000000|number:1}}MB: max 20MB</i>
+                    <div style="padding-top:40px"><i class="fa fa-file-image-o fa-5x"></i></div>
+                    <br><br>
+                    <span class='dropboxtext'>Drop Image or </span> <br>
+                    <span class='dropboxtext'>click to upload</span>
+                  </div>
+               </div>
+               <div ng-hide='picSubmitted'>
+               <!-- class="{'animated': picSubmitted, 'fadeOut' : picSubmitted}" -->
+                 <div ng-show='picFile' class="cropArea animated fadeIn">
+                 <!-- ng-class="{'cropArea' : picFile, 'animated': picFile, 'fadeIn' : picFile}" -->
+                  <img-crop image="picFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                    </img-crop>
+                 </div>
+               </div>
+                <div style="col-md-5;margin-top: 20px; float:left">
+                  <img width="120" height="120" ngf-src="picFile" class="img-circle">
+                </div>
+                <!-- <div class="background: rgba(255,255,255,0.5)">
+                <a style="color:red" ng-show='picFile' ng-click="picFile = null; progressVisible = false;" ng-show="picFile">X</a>
+                </div> -->
+                <div style='margin-top:15px' class="col-md-7" ng-show='picFile'>
+                <br>
+                <a class="btn btn-default" ng-hide='picSubmitted'
+                ng-click="progressVisible = true;upload(croppedDataUrl)">Upload Profile pic.</a>
+                <br>
+                <br>
+                <a class="btn btn-danger" ng-click="picFile = null;progressVisible = false; picSubmitted = false">Remove pic.</a>
+                </div>
+                <br>
+                <br>
+                <div class= 'col-md-12' ng-show="progressVisible">
+                  <div class="percent">{{progress}}%</div>
+                  <div class="pg-bar">
+                      <div class="uploaded progress-bar-striped" style="width: {{progress}}%"></div>
+                  </div>
+                </div>
+          </div>
+          </div>
+          
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label">Bio(optional)</label>
+      <div class="col-md-4">                     
+        <textarea class="form-control" placeholder="Bio" class="form-control input-md" ng-model="nav.user.bio"></textarea>
+      </div>
+  </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-4">                     
+        <button class="form-control" ng-click='nav.register' >Register</button>
+      </div>
+  </div>
+  </form>
+</div>
+

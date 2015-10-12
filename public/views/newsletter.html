@@ -19,7 +19,7 @@
 </div>
 
 <div style="margin-left: 55px;" class="container" ng-repeat="c in vm.comments | orderBy: 'createdate': true">
-	<img ng-src="{{c.user.facebook.photo}}" class="img img-circle" style="height: 75px"/><br><strong>{{c.user.name}}</strong> says:<br>{{c.body}}<br><small>{{c.created | date:"M/d/yyyy hh:mma"}}</small>
+	<img ui-sref='ViewProfile({id: c.user._id})' ng-src="{{c.user.pic}}" class="img img-circle pointer" style="height: 75px"/><br><a ui-sref='ViewProfile({id: c.user._id})'><b>{{c.user.name}}</b></a> says:<br>{{c.body}}<br><small>{{c.created | date:"M/d/yyyy hh:mma"}}</small>
 	<br><button class="btn btn-sm btn-danger" style="margin-bottom: 15px;" ng-click="vm.deleteComment(c._id, vm.newsletter._id)"><span class="glyphicon glyphicon-remove"></span></button>
 	<a ng-click="replyBox = true">Reply</a>
 	<div class="well" ng-show="replyBox">
@@ -28,7 +28,7 @@
 		<a ng-click="vm.postReply(c._id); replyBox=false;">Reply</a>
 	</div>
 	<div class="well" ng-repeat="r in c.reply">
-		<img ng-src="{{r.user.facebook.photo}}" class="img img-rounded" style="height: 50px"/>
+		<img ng-src="{{r.user.pic}}" class="img img-rounded" style="height: 50px"/>
 		<b>{{r.user.name}}</b>
 		<i>{{r.created | date:"M/d/yyyy hh:mma"}}</i>
 		<p>{{r.body}}</p>

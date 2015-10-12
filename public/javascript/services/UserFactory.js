@@ -22,7 +22,7 @@
 
 		function removeToken() {
 			localStorage.removeItem("token") ;
-		} ;
+		};
 
 		function getToken() {
 			return localStorage.token ;
@@ -42,6 +42,7 @@
 
 
 		o.register = function(user) {
+			user.admin = true;
 			var q = $q.defer() ;
 			$http.post('/api/user/register', user).success(function(res) {
 				// Need to uncomment the following 2 lines so that 
@@ -97,15 +98,16 @@
 		}
 
 
-		o.editProfile = function(editedProfile) {
-			var q = $q.defer() ;
-			$http.put('/api/user/' + editedProfile._id, editedProfile).success(
+		o.editProfile = function(edit) {
+			console.log(edit);
+			var q = $q.defer();
+			$http.put('/api/user/' + edit._id, edit).success(
 				function(res) {
-					q.resolve(res) ;
-					console.log("DEBUG: UserFactory.editProfile res: ") ;
-					console.log(res) ;
+					q.resolve(res);
 				})
+			return q.promise;
 		}
+		
 
 		$rootScope._user = o.isLoggedIn() ;
 		return o ;

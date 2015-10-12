@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 nopadding" style="background-color:#ededed;border-left: solid 1px #d6d6d6;border-right: solid 1px #d6d6d6;">
+			<div class="well"><h2>{{profile.name}}<button ng-show='profile._id === nav.status.id' ui-sref='Profile' class="btn btn-warning pull-right">Edit profile</button></h2></div>
+
+			<div class="col-md-3 profBox">
+				<img class='img-responsive' ng-src="{{profile.pic}}"/>
+				<button style="margin-top:10px" class="btn btn-primary btn-block" ng-click='openSendMessage()'>Message</button>
+				
+				<h2>{{profile.name}}</h2>
+				<p>{{profile.bio | limitTo: 40}}{{profile.bio.length > 40 ? '...' : ''}}</p>
+			</div>
+			<div class="col-md-8 col-md-offset-1">
+				<div class="profBox2">
+				<strong>Email: </strong><p>{{profile.username}}</p>
+				<strong>Bio: </strong><p>{{profile.bio}}</p>
+				</div>
+				<hr>
+				<h2 style="text-align:center">Subscribed Leagues</h2>
+				<div class="profLeague">
+					<h4>None</h4>
+				</div>
+				<div class="hr"></div>
+				<h2 style="text-align:center">Comments</h2>
+				<div class="profComments">
+					<h4>None</h4>
+				</div>
+				<div class="hr"></div>
+
+			</div>
+		</div>
+	</div>
+</div>

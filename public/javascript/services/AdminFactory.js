@@ -21,7 +21,7 @@
 			console.log(league);
 			var q = $q.defer();
 			$http.post('/api/league/', league, getAuth()).success(function(res){
-				q.resolve();
+				q.resolve(res);
 			});
 			return q.promise;
 		};

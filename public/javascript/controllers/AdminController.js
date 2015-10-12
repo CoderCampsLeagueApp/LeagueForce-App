@@ -4,9 +4,9 @@
 	.controller('AdminController', AdminController);
 
 
-	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory', '$window', '$scope'];
+	AdminController.$inject = ['$state', '$stateParams', '$rootScope', 'AdminFactory', '$window', '$scope', 'Upload', '$http'];
 
-	function AdminController($state, $stateParams, $rootScope, AdminFactory, $window, $scope) {
+	function AdminController($state, $stateParams, $rootScope, AdminFactory, $window, $scope, Upload, $http) {
 		var vm = this;
 		vm.title = 'Welcome to our App!';
 		vm.uiRouterState = $state;
@@ -35,6 +35,39 @@
 
 			});
 		}
+
+		//--------------------Cloudinary-----------------------
+		$scope.submit = function(files) {
+			// console.log($scope.form.file.$valid);
+			console.log($scope.file);
+			// console.log(!$scope.file.$error);
+
+			// if ($scope.form.file.$valid && $scope.file && !$scope.file.$error) {
+			// 	$scope.upload($scope.file);
+			// }
+
+		};
+
+    // upload on file select or drop
+    $scope.upload = function (file) {
+    	console.log(file);
+    // 	vm.loading = true;
+    // 	Upload.upload({
+    // 		url: '/api/user/uploadPhoto',
+    // 		data: {file: file, 'userId': vm.status._user.id}
+    // 	}).then(function (resp) {
+				// vm.loading = false;
+
+    // 		console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    // 	}, function (resp) {
+				// vm.loading = false;
+				
+    // 		console.log('Error status: ' + resp.status);
+    // 	}, function (evt) {
+    // 		var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    // 		console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    // 	});
+    };
 	
 
 
@@ -64,14 +97,15 @@
 			if(!league._id){
 				league.googleLocation = vm.marker;
 			AdminFactory.createLeague(league).then(function(res){
-				console.log('created league!');
+					vm.adminLeague = res;
 					$state.go('Admin.home');
 				});
 			}
 			else{
 				league.googleLocation = vm.marker;
 				AdminFactory.editLeague(league).then(function(res){
-					console.log('edited!');
+					console.log(league);
+					vm.adminLeague = league;
 					$state.go('Admin.home');
 				}
 				)};

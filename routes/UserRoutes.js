@@ -4,12 +4,14 @@ var mongoose = require('mongoose') ;
 var User = mongoose.model('User') ;
 var jwt = require('jsonwebtoken') ;
 var passport = require('passport') ;
+var cloudinary = require('cloudinary');
+var multiparty = require('multiparty');
+
 
 router.post('/register', function (req, res) {
 
 	// Set created date
 	req.body.created = new Date() ;
-	console.log(req.body)
 	// Bring in request, and add document from schema
 	var user = new User(req.body) ;
 
@@ -20,7 +22,7 @@ router.post('/register', function (req, res) {
 	user.save(function(err, result) {
 		if(err) console.log(err) ;
 		if(err) return res.status(500).send({ err: "Issues with the server" }) ;
-		if(!result) return res.status(400).send({ err: "Server unable to understand request. Maybe request malformed." }) ;
+		if(!result) return res.status(400).send({ err: "Server unable to understand request. Maybe request malformed." });
 
 		// Complete post
 		res.send() ;
@@ -29,7 +31,6 @@ router.post('/register', function (req, res) {
 
 
 router.post('/login', function(req, res, next) { 
-	console.log(req.body);
 	// calling from passport
 	passport.authenticate('local', function(err, user, info){ 
 		if(!user) return res.status(400).send(info);
@@ -150,6 +151,42 @@ router.put('/:id', function(req, res) {
 		res.send(user) ;
 	}) ;
 }) ;
+
+router.get('/profile/:id', function(req, res){
+	User.findOne({_id: req.params.id})
+	.exec(function(err, user) {
+		console.log('user');
+		if(err) return res.status(500).send({ err: "error getting user to edit" }) ;
+		if(!user) return res.status(400).send({ err: "user profile doesn't exist" }) ;
+		res.send(user) ;
+	}) ;
+})
+
+
+
+//--------Cloudinary-------------
+cloudinary.config({
+  cloud_name: 'josemedina760',
+  api_key: '276662693546377',
+  api_secret: 'A7GxUka_ZvG2NHNFU54GcDcO_Rw'
+});
+
+
+router.post('/profilePicUpload', function(req, res) {
+  var form = new multiparty.Form();
+  form.parse(req, function(err, data, fileObject){
+  	
+    cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
+      console.log(picInfo.url);
+      User.update({_id: data.userId[0]}, {pic: picInfo.url})
+      .exec(function(err, user){
+        if(err) return res.status(500).send({err:"Server Issues"});
+        if(!user) return res.status(500).send({err:"Could not find the users"});
+        res.send(picInfo.url);
+      });
+    });
+  });
+});
 
 
 

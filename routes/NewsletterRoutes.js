@@ -32,7 +32,7 @@ router.get('/', function(req, res) {
 	.populate({
 		path: 'user', 
 		model: 'User',
-		select: "username name"
+		select: "username name pic"
 	})
 	.exec(function(err, news) {
 		if(err) return res.status(500).send({err: "error getting all news"});
@@ -49,7 +49,7 @@ router.get('/:id', function(req,res){
 	.populate({
 		path: 'user',
 		model: 'User',
-		select : 'username name images'
+		select : 'username name pic'
 	})
 	.populate({
 		path: 'comments',

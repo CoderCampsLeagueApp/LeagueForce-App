@@ -36,7 +36,7 @@ router.get('/:id', function(req, res) {
 	.populate({
 		path: "user reply.user",
 		model: "User",
-		select: "username name facebook.photo images"
+		select: "username name pic images"
 	})
 	.exec(function(err, comment) {
 		if(err) return res.status(500).send({err: "error getting all comments"});
@@ -92,7 +92,7 @@ router.post('/reply', auth, function(req, res) {
 	.populate({
 		path: 'reply.user',
 		model: 'User',
-		select: 'username name facebook.photo images'
+		select: 'username name pic images'
 	})
 	.exec(function(err, result) {
 		if(err) return res.status(500).send({err: "Issues with server, re: reply"});

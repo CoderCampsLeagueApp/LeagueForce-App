@@ -16,6 +16,15 @@
 			};
 			return auth;
 		};
+		o.getProfile = function(id){
+			//no auth neccessary
+			var q = $q.defer();
+			$http.get('/api/user/profile/' + id).success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise;
+		};
+		
 
 		o.createComment = function(comment) {
 			var q = $q.defer();
