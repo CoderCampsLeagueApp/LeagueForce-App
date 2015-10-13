@@ -27,6 +27,7 @@ router.use('/', auth, function(req, res, next) {
 }) ;
 
 
+
 //------------Getting a League------------
 router.get('/:id', auth, function(req, res) {
 	League.findOne({admin: req.params.id})
@@ -68,9 +69,10 @@ router.post('/', auth, function(req, res) {
 router.put('/:id', auth, function(req, res) {
 	League.update({_id: req.body._id}, req.body)
 	.exec(function(err, league) {
+		console.log(req.body);
 		if(err) return res.status(500).send({err: "Error getting league to edit"});
 		if(!league) return res.status(400).send({err: "League to edit does not exist"});
-		res.send(league);
+		res.send(req.body);
 	});
 });
 

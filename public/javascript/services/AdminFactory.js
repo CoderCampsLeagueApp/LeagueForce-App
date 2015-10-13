@@ -45,7 +45,7 @@
 			var q = $q.defer();
 			$http.put('/api/league/' + league._id, league, getAuth()).success(function(res) {
 				console.log('league edited');
-				q.resolve();
+				q.resolve(res);
 			});
 			return q.promise;
 		};

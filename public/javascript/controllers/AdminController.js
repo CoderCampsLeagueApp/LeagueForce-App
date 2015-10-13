@@ -108,7 +108,7 @@
 			else{
 				league.googleLocation = vm.marker;
 				AdminFactory.editLeague(league).then(function(res){
-					console.log(league);
+					console.log(res);
 					vm.adminLeague = league;
 					$state.go('Admin.home');
 				}
