@@ -55,7 +55,7 @@
 		} ;
 
 		vm.login = function() {
-			console.log("DEBUG: NavController vm.login called.") ;
+			
 			UserFactory.login(vm.user).then(function(res) {
 				if(res){
 					console.log(res);

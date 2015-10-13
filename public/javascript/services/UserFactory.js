@@ -42,22 +42,18 @@
 
 
 		o.register = function(user) {
-			user.admin = true;
+
 			var q = $q.defer() ;
 			$http.post('/api/user/register', user).success(function(res) {
-				// Need to uncomment the following 2 lines so that 
-				// the user is logged in on registration
-				// o.status.isLoggedIn = true ;
-				// o.status.username = user.username ;
 				q.resolve() ;
-			})  ;
+			})
 			return q.promise ;
 		} ;
 
 		o.login = function(user) {
 			var q = $q.defer() ;
 			$http.post('/api/user/login', user).success(function(res) {
-				setToken(res.token) ;
+				setToken(res.token);
 
 				// Following only happens when user has registered 
 				// but not verified.
@@ -72,7 +68,9 @@
 
 				$rootScope._user = o.isLoggedIn() ;
 				q.resolve() ;
-			}) ;
+			}).error(function(err, res){
+				q.resolve(err);
+			});
 			return q.promise ;
 		};
 
