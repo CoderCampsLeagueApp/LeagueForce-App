@@ -51,7 +51,7 @@
 			url: '/newsletter/edit/:id',
 			templateUrl: '../admin_views/create_newsletter.html'
 		}).state('Admin.addmatch', {
-			url: '/addMatch',
+			url: '/addMatch/:id',
 			templateUrl: '../admin_views/add_match_form.html'
 		}).state('Admin.schedule', {
 			url: '/schedule',
@@ -98,9 +98,9 @@
 			}
 		});
 		uiGmapGoogleMapApiProvider.configure({ 
-		key: 'AIzaSyAGEGj1MQXzaAG_1LN_rDcJgX1i5XO6tl4', 
-		v: '3.20',
-		libraries: 'places,weather,geometry,visualization' 
+			key: 'AIzaSyAGEGj1MQXzaAG_1LN_rDcJgX1i5XO6tl4', 
+			v: '3.20',
+			libraries: 'places,weather,geometry,visualization' 
 		});
 		
 		$urlRouterProvider.otherwise('/');

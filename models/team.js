@@ -1,14 +1,14 @@
  var mongoose = require('mongoose');
 
-var TeamSchema = new mongoose.Schema({
-	name: String,
+ var TeamSchema = new mongoose.Schema({
+ 	name: String,
 	images: Array, //or bson
 	logo: String, //or bson
 	teamMembers: [{
 		name: String,
 		teamNumber: Number,
- 		position: String,
- 		pic: String,
+		position: String,
+		pic: String,
  		dob: Date,  //date of birth
  		bio: String,
  		isCoach: Boolean,
@@ -21,11 +21,11 @@ var TeamSchema = new mongoose.Schema({
 		games: Number,     //goals/game = goals per game.
 		goals: Number,
 	}
-	}],
-	league: {type: mongoose.Schema.Types.ObjectId, ref: 'League'},
-	matches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Week'}],
+}],
+league: {type: mongoose.Schema.Types.ObjectId, ref: 'League'},
+matches: [{type: mongoose.Schema.Types.ObjectId, ref: 'League'}],
 		// sponsors: Array  -- excess
-	
+		
 	score: {   //getting the team rank by comparing win/losses ratio to all teams.
 		wins: Number,
 		losses: Number,
@@ -33,4 +33,4 @@ var TeamSchema = new mongoose.Schema({
 	}
 });
 
-mongoose.model('Team', TeamSchema);
+ mongoose.model('Team', TeamSchema);

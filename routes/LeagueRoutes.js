@@ -33,13 +33,18 @@ router.get('/:id', auth, function(req, res) {
 	.populate({
 		path: 'teams',
 		model: 'Team',
+		select: 'name'
+	})
+	.populate({
+		path: 'weeks.matches.team1 weeks.matches.team2',
+		model: 'Team',
+		select: 'name'
 	})
 	.exec(function(err, league){
 		if(err) return res.status(500).send({err: "Error inside the server"});
 		if(!league) return res.status(400).send({err: "That league does not exist"});
 		res.send(league);
 	});
-	
 });
 
 router.get('/', auth, function(req, res) {
@@ -53,7 +58,6 @@ router.get('/', auth, function(req, res) {
 
 //------------Creating a League-----------
 router.post('/', auth, function(req, res) {
-	console.log
 	var league = new League(req.body);
 	league.admin = req.payload.id;
 	league.isDisplay = false;
@@ -70,7 +74,7 @@ router.put('/:id', auth, function(req, res) {
 	.exec(function(err, league) {
 		if(err) return res.status(500).send({err: "Error getting league to edit"});
 		if(!league) return res.status(400).send({err: "League to edit does not exist"});
-		res.send(league);
+		res.send(req.body);
 	});
 });
 
@@ -126,32 +130,29 @@ router.put('/team/edit', auth, function(req, res){
 
 //----------Adding Matches and Weeks---------------
 router.post('/match', auth, function(req, res) {
+	var x = {};
 	var match = req.body;
-	League.save(function(err, result) {
-		if(err) return res.status(500).send({err: "Issues with server for matches"});
-		if(!result) return res.status(400).send({err: "Could not create match"});
-		League.update({})
+	console.log(req.body);
+	var idx = 0;
+	League.findOne({_id: match.leagueWeek.weekId}, function(err, League) { //attempt to find correct week
+		if(err) return res.status(500).send({err: "Issues with server for finding league"});
+		if(!League) return res.status(400).send({err: "Could not find League"});
+		for(var i = 0; i < League.weeks.length; i++) {
+			if(League.weeks[i]._id.toString() === match.week) {
+				idx = i;
+				console.log(idx);
+			}
+		};
+		
+		League.weeks[idx].matches.push(match);
+
+		var  x = League;
+		x.edit = true;
+		//League.update({_id: match.league}, x)
+		res.send(x);
+
+
 	});
 });
-
-
-// router.post('/', auth, function(req, res) {
-// 	var news = req.body.news;
-// 	var comment = new Comment(req.body);
-// 	comment.created = new Date();
-// 	comment.user = req.payload.id;
-// 	console.log(comment);
-// 	comment.save(function(err, commentResult) {
-// 		if(err) return res.status(500).send({err: "Issues with server"});
-// 		if(!commentResult) return res.status(400).send({err: "Could not post comment"});
-// 		News.update({_id: news}, {$push: {comments: {_id: commentResult._id}}}, 
-// 			function(err, result) {
-// 				User.update({_id: comment.user}, {$push: {comments: {_id: commentResult._id}}},
-// 					function(err, result) {
-// 						res.send();
-// 					})
-// 			})
-// 	})
-// });
 
 module.exports = router;

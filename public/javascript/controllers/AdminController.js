@@ -58,14 +58,15 @@
     // 		var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
     // 		console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
     // 	});
-    };
+};
+
+
+
+AdminFactory.getLeague($rootScope._user.id).then(function(res){
+	vm.adminLeague = res;
 	
+});
 
-
-		AdminFactory.getLeague($rootScope._user.id).then(function(res){
-			vm.adminLeague = res;
-		});
-		
 		//news
 		vm.newsletter = {};
 		vm.edit = {};
@@ -77,6 +78,7 @@
 		vm.league.images = [];
 		vm.leagueSize = [0];
 		vm.league.weeks = [];
+		vm.matches = [];
 		//vm.league.teams  = [];
 
 		//team
@@ -84,20 +86,17 @@
 		vm.teams = [];	
 
 		//schedule
-		vm.week = {}
-		vm.weeks = [];
-		vm.league.weeks = [];
-		vm.league.weeks.week = {};
-		vm.weeks.week = {};
-		vm.week.matches = [];
-		vm.match = {};
-		vm.week.weekNumber = Number;
-		vm.weekId = vm.league.weeks.indexOf(vm.week);
+		// vm.week = {}
+		// // vm.weeks = [];
+		// vm.league.weeks = [];
+		// vm.league.weeks.week = {};
+		// vm.weeks.week = {};
+		// vm.week.matches = [];
 
 
 		//league ----------------------------------------
 		//creating League or editing
-		vm.createLeague = function(league){
+		vm.createLeague = function(league, match){
 			if(!league._id){
 				league.googleLocation = vm.marker;
 				AdminFactory.createLeague(league).then(function(res){
@@ -108,9 +107,32 @@
 			else{
 				league.googleLocation = vm.marker;
 				AdminFactory.editLeague(league).then(function(res){
-					console.log(league);
-					vm.adminLeague = league;
-					$state.go('Admin.home');
+					console.log(res);
+					console.log(match);
+					if(match) {
+						var idx = 0;
+						for (var i = 0; i < vm.adminLeague.weeks.length; i++) {
+							console.log(vm.adminLeague.weeks.length);
+							if (vm.adminLeague.weeks[i]._id === match.week) {
+								idx = i;
+								for(var j = 0; i < vm.adminLeague.teams.length; i++){
+									console.log('sodejhgfdghdf');
+									if(vm.adminLeague.teams[i] === match.team1){
+										match.team1name = vm.adminLeague.teams[i].name;
+									}
+									if(vm.adminLeague.teams[i] === match.team2){
+										console.log('bubba');
+										match.team2name = vm.adminLeague.teams[i].name;
+									}
+								}
+							}
+						} vm.adminLeague.weeks[idx].matches.push(match);
+					} 
+					else {
+						vm.adminLeague = res; 
+						$state.go('Admin.home');
+					}
+
 				}
 				)};
 			};
@@ -229,15 +251,16 @@
 		}
 
 		//-------------Matches & Weeks----------------------
+		vm.matchesInWeek = function(week) {
+			vm.edit = false;
+			vm.week = week;
+			$state.go('Admin.addmatch', {id: week})
+		};
+
 		vm.addWeek = function(singleWeek) {
 			var week = angular.copy(singleWeek);
+			console.log(week);
 			week = {};
-			for(var i = 0; i < vm.league.weeks.length+1; i++) {
-				for (var property in vm.league.weeks) {
-					vm.week.weekNumber = i + 1;
-					console.log(vm.week.weekNumber);
-				}
-			};
 			vm.league.weeks.push(week);
 			console.log(vm.league.weeks.length);			
 		};
@@ -246,12 +269,39 @@
 			vm.league.weeks.splice(idx, 1);
 		};
 
-		vm.createMatch = function(match) {
-			AdminFactory.createMatch(match).then(function(res) {
-
-			})
-			//push it into unqiue week
+		vm.addMatch = function(match) {
+			var copy = angular.copy(match);
+			vm.matches.push(copy);
+			console.log(copy);
+			console.log(vm.matches);
+			vm.match.date = '';
+			vm.match.googleLocation = '';
+			vm.match.team1 = '';
+			vm.match.team2 = '';
 		};
+
+		vm.removeMatch = function(idx){
+			console.log(idx);
+			vm.league.weeks.matches.splice(idx, 1);
+		};
+
+		vm.createMatch = function(matches) {
+			var leagueWeek = {
+				weekId: vm.week,
+				leagueId: vm.adminLeague._id
+			};
+			AdminFactory.createMatch(matches, leagueWeek).then(function(res) {
+				vm.createLeague(res, matches);
+				$state.go('Admin.schedule');
+			})
+		};
+
+		// vm.getMatches = function() {
+		// 	AdminFactory.getMatches($stateParams.id).then(function(res) {
+		// 		vm.matches = res;
+		// 	})
+		// }
+
 
 		// vm.getWeeks = function() {
 		// 	AdminFactory.getWeek($stateParams.id).then(function(res) {
@@ -259,7 +309,6 @@
 		// 	});
 		// };
 
-		// vm.getWeeks();
 
 		//-------------Newsletter Controller Functions------
 

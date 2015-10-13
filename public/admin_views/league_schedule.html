@@ -1,75 +1,27 @@
-
 <div class="leagueform">
-  <form style="color:#fff" class="form-horizontal" ng-submit='vm.createLeague(vm.league)'>
-    <fieldset>
-      <div ng-repeat="w in vm.adminLeague.weeks">
-        {{w._id}} - {{vm.weekId + 1}}
+  <fieldset>
+    <div ng-repeat="w in vm.adminLeague.weeks track by $index">
+      <a ng-click="vm.matchesInWeek(w._id)" style="font-size: 2em" class="text-center">Week - {{$index + 1}}</a>
+      <div class="playerOverflow" style="color:black">
+        <table class="table table-bordered">
+          <thead>
+            <tr style="background: #333333; color:white">
+              <th style="width: 150px;">Date</th>
+              <th>Teams</th>
+              <th style="width: 150px;">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='m in w.matches track by $index' ng-class-odd="'odd'" ng-class-even="'even'">
+              <th>{{m.date | date:"M/d hh:mma"}}</th>
+              <th>{{m.team1.name}} <em>vs.</em> {{m.team2.name}}</th>
+              <form>
+                <th><input style="width: 50px" type="number"/>{{m.team1score}} - <input style="width: 50px" type="number"/>{{m.team2score}}</th>
+              </form>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <!-- Weeks -->
-      <div class="form-group">
-        <label class="col-md-2 control-label">Weeks {{vm.adminLeague.weeks.length}} </label>  
-        <div class="col-md-10">
-          <input type="text" class="nameinput" ng-model='vm.league.name' placeholder="League name" required>
-        </div>
-      </div>
-
-      <!-- Select Teams -->
-      <div class="col-md-12">
-        <div class="col-md-5">
-          <div class="form-group">
-            <label class="col-md-2 control-label">Team 1</label>
-            <div class="col-md-10">
-              <div ng-repeat="teams in vm.league">
-                {{team.team}}
-              </div>
-              <select ng-model='vm.league' ng-options="teams for teams in vm.league" ng-class="form-control" required>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-1"></div>
-        <div class="col-md-1">VS.</div>
-
-        <div class="col-md-5">
-          <div class="form-group">
-            <label class="col-md-2 control-label">Team 2</label>
-            <div class="col-md-10">
-              <select ng-model='vm.week.matches.team2' class="form-control" required>
-                <option value="U5">U5</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="form-group">
-        <label class="col-md-2 control-label">League Location</label>
-        <div class="col-md-10">                     
-          <input class="nameinput" placeholder='Enter Location..' type="text">
-        </div>
-      </div>
-
-      <!-- ______________________Google Maps__________________________ -->
-
-
-
-      <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
-      <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-      <ui-gmap-marker options="{ draggable: true }" idKey='1' coords='vm.marker' >
-    </ui-gmap-marker>
-  </ui-gmap-google-map>
-
-
-
-  <label class="col-md-3 control-label"></label>
-  <div class="col-md-7">                     
-    <input style=" margin-top: 15px" class="btn btn-success btn-block" type="submit" value="Submit" />
-  </div>
-</fieldset>
-</form>
+    </div><br>
+  </fieldset>
 </div>
-
-

@@ -1,7 +1,7 @@
 <div class="leagueform">
 
-<form style="color:#fff" class="form-horizontal" >
-  <fieldset>
+  <form style="color:#fff" class="form-horizontal" >
+    <fieldset>
 
 
       <!-- Form Name -->
@@ -55,56 +55,42 @@
           </div>
         </div>
 
-        <div class="leagueOverflow col-md-12" style="padding-left:20px">
-        <li ng-repeat='feature in vm.league.features track by $index'>{{feature}} 
-          <span class='text-danger pointer' ng-click='vm.removeFeature($index)' >X</span></li>
-        </div>
-      </div>
-    </div>
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-2 control-label">Logo </label>  
-      <div class="col-md-10">
-        <input type="text" class="nameinput" ng-model='vm.league.logo' type="text" placeholder="url for now..">   
-      </div>
-    </div>
-    <ng-form name="form">
-      Single Image with validations
-      <button class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-resize="{width: 600, height: 600}" THIS APPLIES MAX SIZE TO PHOTO ngf-min-height="100">Select</button>
-
-      <!-- ngf-resize="{width: 100, height: 100}" THIS APPLIES MAX SIZE TO PHOTO-->
-
-      Drop files:
-      <div ngf-drop ng-model="files" class="drop-box">Drop</div>
-      <button ng-click="submit()">submit</button>
-    </ng-form>
-    Image thumbnail:
-    <img ngf-thumbnail="file || '/thumb.jpg'">
-
-    <div style="margin: auto;" ng-show='vm.loading' layout='row' layout-sm='column' layout-align='space-around'>
-      <md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular>
-    </div>
-
-
-        <!-- Weeks -->
-        <div class="form-group">
-          <label class="col-md-2 control-label">Weeks In A Season</label>
-          <div class="col-md-10">
-            <a type="btn" class="btn btn-success btn-md"ng-click="vm.addWeek()"><span class="glyphicon glyphicon-plus"></span></a>
-            <a type="btn" class="btn btn-danger btn-md"ng-click="vm.subtractWeek()"><span class="glyphicon glyphicon-minus"></span></a>
-            <span style="font-size: 32px; padding-left: 10px;">{{vm.league.weeks.length}}</span>
-            <!-- <div class="input-group">
-              <input type="number" class="appendinput" ng-model='vm.league.weeks' placeholder="Weeks"/>
-            </div> -->
-          </div> 
-        </div>
-
         <!-- Text input-->
         <div class="form-group">
           <label class="col-md-2 control-label">Logo </label>  
           <div class="col-md-10">
             <input type="text" class="nameinput" ng-model='vm.league.logo' type="text" placeholder="url for now..">   
           </div>
+        </div>
+        <ng-form name="form">
+        Single Image with validations
+        <button class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-resize="{width: 600, height: 600}" THIS APPLIES MAX SIZE TO PHOTO ngf-min-height="100">Select</button>
+
+        <!-- ngf-resize="{width: 100, height: 100}" THIS APPLIES MAX SIZE TO PHOTO-->
+
+        Drop files:
+        <div ngf-drop ng-model="files" class="drop-box">Drop</div>
+        <button ng-click="submit()">submit</button>
+      </ng-form>
+      Image thumbnail:
+      <img ngf-thumbnail="file || '/thumb.jpg'">
+
+      <div style="margin: auto;" ng-show='vm.loading' layout='row' layout-sm='column' layout-align='space-around'>
+        <md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular>
+      </div>
+
+
+      <!-- Weeks -->
+      <div class="form-group">
+        <label class="col-md-2 control-label">Weeks In A Season</label>
+        <div class="col-md-10">
+          <a type="btn" class="btn btn-success btn-md"ng-click="vm.addWeek()"><span class="glyphicon glyphicon-plus"></span></a>
+          <a type="btn" class="btn btn-danger btn-md"ng-click="vm.subtractWeek()"><span class="glyphicon glyphicon-minus"></span></a>
+          <span style="font-size: 32px; padding-left: 10px;">{{vm.league.weeks.length}}</span>
+            <!-- <div class="input-group">
+              <input type="number" class="appendinput" ng-model='vm.league.weeks' placeholder="Weeks"/>
+            </div> -->
+          </div> 
         </div>
 
         <!-- Appended Input-->
@@ -158,5 +144,3 @@
   </fieldset>
 </form>
 </div>
-
-
