@@ -31,11 +31,7 @@ router.use('/', auth, function(req, res, next) {
 //------------Getting a League------------
 router.get('/:id', auth, function(req, res) {
 	League.findOne({admin: req.params.id})
-	.populate({
-		path: 'teams',
-		model: 'Team',
-		select: 'name logo'
-	})
+	.populate('teams')
 	.populate({
 		path: 'weeks.matches.team1 weeks.matches.team2',
 		model: 'Team',
@@ -65,12 +61,14 @@ router.post('/', auth, function(req, res) {
 	league.save(function(err, league) {
 		if(err) return res.status(500).send({err: "Issues with the server"});
 		if(!league) return res.status(400).send({err: "Could not create a league"});
+		console.log(league);
 		res.send(league);
 	});
 });
 
 //------------Editing a League------------
 router.put('/:id', auth, function(req, res) {
+	console.log(req.body);
 	League.update({_id: req.body._id}, req.body)
 	.exec(function(err, league) {
 		console.log('put---------------------------------------------');

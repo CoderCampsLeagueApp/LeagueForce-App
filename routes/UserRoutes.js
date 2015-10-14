@@ -7,6 +7,10 @@ var passport = require('passport') ;
 var cloudinary = require('cloudinary');
 var multiparty = require('multiparty');
 var nodemailer = require('nodemailer') ;
+var flash = require('express-flash') ;
+
+var async = require("async");
+var crypto = require('crypto') ;
 
 
 
@@ -157,7 +161,140 @@ router.post('/login', function(req, res, next) {
 		res.send({ token: user.generateJWT() }); 
 	}) (req, res, next);
 }
-});
+}) ;
+
+
+router.post('/forgot', function(req, res, next) {
+	var smtpTransport = nodemailer.createTransport("SMTP", {
+		service: "Gmail",
+		auth: {
+			user: "leagueforceapp@gmail.com",
+			pass: "leagueforce2015"
+		}
+	}) ;
+	var rand, mailOptions, host, link ;
+
+	rand = Math.floor((Math.random() * 100) + 54) ;
+	email = req.body.username ;
+
+	// Look for user on db
+	User.findOne({ username : email }, function(err, user) {
+		if(err) console.log(err) ;
+		if(err) return res.status(500).send({ err: "Issues with the server" }) ;
+		if(!user) {
+			console.log("DEBUG: UserRoutes.js: router.post(/forgot): User not found") ;
+			return res.send("Error: No account with that email address.") ;
+		}
+
+		host = req.get('host') ;
+		link = 'http://' + host + '/#/PasswordReset/' + user._id ;
+
+		mailOptions = {
+			to: email,
+			subject: "Password Reset",
+			html : 'Please click on the link to reset your password.<a href="' + link + '">Click here to reset</a>'
+		}
+
+		smtpTransport.sendMail(mailOptions, function(error, response) {
+			if(error) {
+				console.log(error) ;
+				res.end("error") ;
+			} else {
+				console.log("Message sent: " + response.message) ;
+				res.end("sent") ;
+			}
+		});
+	}) ;
+}) ;
+
+
+router.put('/resetPassword/:id', function(req, res) {
+	User.findOne({ _id : req.body.id }, function(err, user) {
+		if(err) console.log(err) ;
+		if(err) return res.status(500).send({ err: "Issues with the server" }) ;
+		if (!user) {
+			return res.send("Error: Not found.") ;
+		}
+		user.setPassword(req.body.password) ;
+		console.log(user) ;
+		User.update({ _id: req.body.id }, user)
+		.exec(function(err, user) {
+			if(err) ;
+			if(!user) ;
+			res.send(user) ;
+		}) ;
+	}) ;
+	// userProfile.setPassword(req.body.password) ;
+	
+
+	// console.log(userProfile) ;
+	// User.update({ _id : req.body._id }, userProfile)
+	// .exec(function(err, user) {
+	// 	if(err) return res.status(500).send({ err: "error getting user to edit" }) ;
+	// 	if(!user) return res.status(400).send({ err: "user profile doesn't exist" }) ;
+	// 	res.send(user) ;
+	// }) ;
+}) ;
+
+
+// router.post('/forgot', function(req, res, next) {
+// 	async.waterfall([
+// 		function(done) {
+// 			crypto.randomBytes(20, function(err, buf) {
+// 				var token = buf.toString('hex') ;
+// 				done(err, token) ;
+// 			}) ;
+// 		},
+
+// 		function(token, done) {
+// 			User.findOne({ username : req.body.username }, function(err, user) {
+// 				if(!user) {
+// 					// req.flash('error', 'No account with that email address exist') ;
+// 					return res.send('error: No account with that email address exists') ;
+// 					// return res.redirect('/forgot') ;
+// 				}
+
+// 				console.log("DEBUG: UserRoutes router post(/forgot) user = ") ;
+// 				console.log(user) ;
+
+// 				user.resetPasswordToken = token ;
+// 				user.resetPasswordExpires = Date.now() + 3600000 ; // 1 hour
+
+// 				user.save(function(err) {
+// 					done(err, token, user) ;
+// 				}) ;
+// 			}) ;
+// 		},
+
+// 		function(token, user, done) {
+// 			var smtpTransport = nodemailer.createTransport('SMTP', {
+// 				service: 'Gmail',
+// 				auth: {
+// 					user: "leagueforceapp@gmail.com",
+// 					password: "leagueforce2015"
+// 				}
+// 			}) ;
+
+// 			var mailOptions = {
+// 				to: user.username,
+// 				from: 'leagueforceapp@gmail.com',
+// 				subject: 'League Force Password Reset',
+// 				text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+// 				'Please click on the following link, or paste this link into your browser to complete the process:\n\n' +
+// 				'http://' + req.headers.host + '/reset' + token + '\n\n' +
+// 				'If you did not request this, please ignore this email and your password will remain unchanged.\n' 
+// 			} ;
+
+// 			smtpTransport.sendMail(mailOptions, function(err) {
+// 				res.send('An e-mail has been sent to ' + user.username + ' with further instructions.') ;
+// 				done(err, 'done') ;
+// 			}) ;
+// 		}
+// 		], function(err) {
+// 			if(err) return next(err) ;
+// 			res.redirect('/forgot') ;
+// 		}) ;
+// }) ;
 
 
 // Getting an individual user
@@ -271,6 +408,10 @@ router.put('/:id', function(req, res) {
 	}) ;
 }) ;
 
+
+
+
+
 router.get('/profile/:id', function(req, res){
 	User.findOne({_id: req.params.id})
 	.populate({
@@ -289,25 +430,25 @@ router.get('/profile/:id', function(req, res){
 
 //--------Cloudinary-------------
 cloudinary.config({
-  cloud_name: 'josemedina760',
-  api_key: '276662693546377',
-  api_secret: 'A7GxUka_ZvG2NHNFU54GcDcO_Rw'
+	cloud_name: 'josemedina760',
+	api_key: '276662693546377',
+	api_secret: 'A7GxUka_ZvG2NHNFU54GcDcO_Rw'
 });
 
 
 router.post('/profilePicUpload', function(req, res) {
-  var form = new multiparty.Form();
-  form.parse(req, function(err, data, fileObject){
-  	
-    cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
-      User.update({_id: data.userId[0]}, {pic: picInfo.url})
-      .exec(function(err, user){
-        if(err) return res.status(500).send({err:"Server Issues"});
-        if(!user) return res.status(500).send({err:"Could not find the users"});
-        res.send(picInfo.url);
-      });
-    });
-  });
+	var form = new multiparty.Form();
+	form.parse(req, function(err, data, fileObject){
+		
+		cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
+			User.update({_id: data.userId[0]}, {pic: picInfo.url})
+			.exec(function(err, user){
+				if(err) return res.status(500).send({err:"Server Issues"});
+				if(!user) return res.status(500).send({err:"Could not find the users"});
+				res.send(picInfo.url);
+			});
+		});
+	});
 });
 
 

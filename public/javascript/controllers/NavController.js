@@ -58,25 +58,44 @@ vm.register = function() {
 
 vm.login = function() {
 
+	console.log("DEBUG: NavController vm.login called.") ;
 	UserFactory.login(vm.user).then(function(res) {
-		if(res){
-			console.log(res);
-			vm.confirm = res;
-		}else{
-			vm.status = $rootScope._user;
-			$state.go('Home');
+		if(res) {
+			console.log(res) ;
+			vm.confirm = res ;
+		} else {
+			vm.status = $rootScope._user ;
+			$state.go('Home') ;
 		}
 	}) ;
 } ;
 
+
+
 vm.logout = function() {
 	UserFactory.logout() ;
 	vm.status = $rootScope._user;
-			//delete vm.user;
-			$window.location.reload();
-			$state.go('Home');
-		} ;
+	//delete vm.user;
+	$window.location.reload();
+	$state.go('Home');
+} ;
 
-	} ;
+
+
+vm.forgot = function() {
+	UserFactory.forgot(vm.user).then(function() {
+		$state.go('Login') ;
+	}) ;
+} ;
+
+vm.resetPassword = function() {
+	vm.user.id = $stateParams.id ;
+	UserFactory.resetPassword(vm.user).then(function(res) {
+		$state.go('Home') ;
+	}) ;
+	
+} ;
+
+} ;
 
 })() ;

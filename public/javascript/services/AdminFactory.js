@@ -41,6 +41,7 @@
 		};
 
 		o.editLeague = function(league) {
+			console.log(league);
 			var q = $q.defer();
 			$http.put('/api/league/' + league._id, league, getAuth()).success(function(res) {
 				console.log('league edited');
