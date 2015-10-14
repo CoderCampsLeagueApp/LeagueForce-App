@@ -31,11 +31,7 @@ router.use('/', auth, function(req, res, next) {
 //------------Getting a League------------
 router.get('/:id', auth, function(req, res) {
 	League.findOne({admin: req.params.id})
-	.populate({
-		path: 'teams',
-		model: 'Team',
-		select: 'name'
-	})
+	.populate('teams')
 	.populate({
 		path: 'weeks.matches.team1 weeks.matches.team2',
 		model: 'Team',

@@ -145,7 +145,7 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			}
 			else{
 				if(match){
-						AdminFactory.editLeague(league).then(function(){
+					AdminFactory.editLeague(league).then(function(){
 						AdminFactory.getLeague($rootScope._user.id).then(function(res){
 							vm.adminLeague = res;
 							$state.go('Admin.schedule');
@@ -164,27 +164,27 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 						$state.go('Admin.home');
 					});
 				};
-				}
-		
-			};
-			vm.addFeature = function(feature){
-				vm.league.features.push(feature);
-			};
+			}
+
+		};
+		vm.addFeature = function(feature){
+			vm.league.features.push(feature);
+		};
 
 
-			vm.removeFeature = function(idx){
-				console.log(idx);
-				vm.league.features.splice(idx, 1);
-			};
+		vm.removeFeature = function(idx){
+			console.log(idx);
+			vm.league.features.splice(idx, 1);
+		};
 
-			vm.addImage = function(image){
-				vm.league.images.push(image);
-			};
+		vm.addImage = function(image){
+			vm.league.images.push(image);
+		};
 
-			vm.removeImage = function(idx){
-				console.log(idx);
-				vm.league.images.splice(idx, 1);
-			};
+		vm.removeImage = function(idx){
+			console.log(idx);
+			vm.league.images.splice(idx, 1);
+		};
 
 
 		//creating League finished 
@@ -208,10 +208,8 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.startTeamEdit = function(team){
 			$state.go('Admin.team');
 			vm.team = team;
-			console.log(vm.team.images);
 			vm.edit = true;
-		}
-
+		};
 		vm.team.teamMembers = [];
 
 		//Creating & Editing Team---------------------------------------------
@@ -223,6 +221,7 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			});
 		};
 		vm.editTeam = function(team){
+			console.log(team); 
 			AdminFactory.editTeam(team).then(function(res){
 				$state.go('Admin.home');
 			}); 

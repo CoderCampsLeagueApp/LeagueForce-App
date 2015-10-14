@@ -50,6 +50,16 @@
 			return q.promise ;
 		} ;
 
+		o.forgot = function(user) {
+			console.log(user) ;
+			var q = $q.defer() ;
+			$http.post('/api/user/forgot', user).success(function(res) {
+				q.resolve() ;
+			}) ;
+
+			return q.promise ;
+		} ;
+
 		o.login = function(user) {
 			var q = $q.defer() ;
 			$http.post('/api/user/login', user).success(function(res) {
@@ -117,7 +127,17 @@
 				})
 			return q.promise;
 		}
-		
+
+		o.resetPassword = function(editedUser) {
+			var q = $q.defer() ;
+			console.log(editedUser) ;
+			$http.put('/api/user/resetPassword/' + editedUser.id, editedUser).success(
+				function(res) {
+					q.resolve(res) ;
+				}) ;
+			return q.promise ;
+		}
+
 
 		$rootScope._user = o.isLoggedIn() ;
 		return o ;

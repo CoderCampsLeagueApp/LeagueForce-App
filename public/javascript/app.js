@@ -87,6 +87,9 @@
 			templateUrl: 'views/edit_profile.html',
 			controller: "ProfileController",
 			controllerAs: 'vm'
+		}).state('PasswordReset', {
+			url: '/PasswordReset/:id',
+			templateUrl: 'views/password_reset.html'
 		}).state("Token", {
 			url: '/auth/token/:token',
 			templateUrl: 'views/authenticating.html',
