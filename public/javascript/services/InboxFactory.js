@@ -30,7 +30,8 @@
 			});
 			return q.promise;
 		}
-		o.messageReply = function(message){
+		o.reply = function(message){
+			console.log(message);
 			var q = $q.defer();
 			$http.post('/api/inbox/reply', message, getAuth()).success(function(res){
 				q.resolve(res);

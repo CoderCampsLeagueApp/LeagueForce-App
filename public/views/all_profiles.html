@@ -23,7 +23,10 @@
 				<div class="hr"></div>
 				<h2 style="text-align:center">Comments</h2>
 				<div class="profComments">
-					<h4>None</h4>
+					<div ng-repeat='c in profile.comments'>
+						<p>{{c}}</p>
+						<hr>
+					</div>
 				</div>
 				<div class="hr"></div>
 

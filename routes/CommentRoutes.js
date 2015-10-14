@@ -33,7 +33,7 @@ router.post('/', auth, function(req, res) {
 
 router.get('/:id', function(req, res) {
 	Comment.find({news: req.params.id})
-	.populate({
+	.populate({ 
 		path: "user reply.user",
 		model: "User",
 		select: "username name pic images"

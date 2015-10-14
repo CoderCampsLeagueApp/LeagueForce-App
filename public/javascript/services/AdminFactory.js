@@ -41,11 +41,10 @@
 		};
 
 		o.editLeague = function(league) {
-			console.log(league);
 			var q = $q.defer();
 			$http.put('/api/league/' + league._id, league, getAuth()).success(function(res) {
 				console.log('league edited');
-				q.resolve();
+				q.resolve(res);
 			});
 			return q.promise;
 		};
@@ -124,17 +123,27 @@
 		}
 
 		//-------------------Weeks---------------------------
-		// o.getWeek = function(id) {
-		// 	var q = $q.defer();
-		// 	$http.get('/api/league/week', id).success(function(res) {
-		// 		q.resolve(res);
-		// 	});
-		// 	return q.promise;
-		// };
+		o.getWeek = function(id) {
+			var q = $q.defer();
+			$http.get('/api/league/week', id).success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise;
+		};
 
 		//-------------------Matches-------------------------
-		o.createMatch = function(match) {
+		o.getMatches = function(id) {
 			var q = $q.defer();
+			$http.get('api/league/match', id).success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise;
+		}
+
+		o.createMatch = function(matches, leagueWeek) {
+			var q = $q.defer();
+			var match = {matches, leagueWeek}
+			console.log(match);
 			$http.post('/api/league/match/', match, getAuth()).success(function(res) {
 				q.resolve(res);
 			});

@@ -67,7 +67,7 @@ router.post('/register', function (req, res) {
 			console.log(error) ;
 			res.end("error") ;
 		} else {
-			console.log("Message sent: " + response.message) ;
+			console.log("Message sent: " + response.message);
 			res.end("sent") ;
 		}
 	});
@@ -133,8 +133,6 @@ router.get('/verify', function(req, res) {
 // Login router
 router.post('/login', function(req, res, next) { 
 
-	console.log("DEBUG: UserRoutes: router.post login: req.body: ") ;
-	console.log(req.body);
 	console.log("Username from req.body: " + req.body.username) ;
 	var email = req.body.username ;
 
@@ -142,8 +140,8 @@ router.post('/login', function(req, res, next) {
 
 	// Check if user has been validated.
 	User.findOne({ username : email }, function(err, user) {
-		console.log("DEBUG: UserRoutes: router.post /login: user from User.findOne(): ") ;
-		console.log(user) ;
+		if(err) return res.status(500).send({ err: "Error inside the server" }) ;
+		if(!user) return res.status(400).send("Invalid Email or Password") ;
 		if(!user.isValidated) {
 			isUserValidated = false ;
 			return res.send("Please confirm email to continue") ;
@@ -303,7 +301,7 @@ router.put('/resetPassword/:id', function(req, res) {
 router.param('id', function(req, res, next, id) {
 	User.findOne({
 		_id : id
-	}, function(err, user) {
+	}) .exec(function(err, user) {
 		if(err) return next({
 			err : err,
 			type : 'client'
@@ -416,8 +414,12 @@ router.put('/:id', function(req, res) {
 
 router.get('/profile/:id', function(req, res){
 	User.findOne({_id: req.params.id})
+	.populate({
+		path: 'comments',
+		model: 'Comments',
+		select: 'created user body news'
+	})
 	.exec(function(err, user) {
-		console.log('user');
 		if(err) return res.status(500).send({ err: "error getting user to edit" }) ;
 		if(!user) return res.status(400).send({ err: "user profile doesn't exist" }) ;
 		res.send(user) ;
@@ -437,9 +439,8 @@ cloudinary.config({
 router.post('/profilePicUpload', function(req, res) {
 	var form = new multiparty.Form();
 	form.parse(req, function(err, data, fileObject){
-
+		
 		cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
-			console.log(picInfo.url);
 			User.update({_id: data.userId[0]}, {pic: picInfo.url})
 			.exec(function(err, user){
 				if(err) return res.status(500).send({err:"Server Issues"});

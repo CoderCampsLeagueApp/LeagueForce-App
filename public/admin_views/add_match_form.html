@@ -1,14 +1,33 @@
-
 <div class="leagueform">
-  <form style="color:#fff" class="form-horizontal" name="addMatch" ng-submit='vm.createMatch()'>
+  <form style="color:#fff" class="form-horizontal" name="addMatch" ng-submit='vm.createMatch(vm.allmatches)'>
     <fieldset>
+      <div style="margin-top: 50px">
+        <div class="playerOverflow" style="color:black">
+          <table class="table table-bordered">
+            <thead>
+              <tr style="background: #333333; color:white">
+                <th style="width: 150px;">Date</th>
+                <th>Teams</th>
+                <th style="width: 100px;">Remove Match</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='m in vm.allmatches track by $index' ng-class-odd="'odd'" ng-class-even="'even'">
+
+                <th>{{m.date | date:"M/d hh:mma"}}</th>
+                <th>{{m.t1name}} <em>vs.</em> {{m.t2name}}</th>
+                <th class="text-center"><span class='text-dangerpointer' ng-click='vm.removeMatch($index)'>X</span></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br>
+
 
       <!-- Weeks -->
       <div class="form-group">
-        <label class="col-md-2 control-label">Weeks {{vm.adminLeague.weeks.length}} </label>  
-        <div class="col-md-10">
-          <input type="text" class="nameinput" ng-model='vm.league.name' placeholder="League name" required>
-        </div>
+        <label class="col-md-2 control-label"></label>  
       </div>
 
       <!-- Select Teams -->
@@ -17,16 +36,14 @@
           <div class="form-group">
             <label class="col-md-2 control-label">Team 1</label>
             <div class="col-md-10">
-              <div ng-repeat="teams in vm.league">
-                {{team.team}}
-              </div>
-              <select name="team1" ng-model='vm.adminLeague.teams1' ng-options="teams for team in vm.adminLeague.teams" ng-class="form-control" required>
+              <select name="team1" ng-model='vm.match.team1' class="form-control">
+                <option ng-repeat="teams in vm.adminLeague.teams" value="{{teams._id}}">{{teams.name}}</option>
               </select>
               <p>{{vm.adminLeague.teams1.name}}</p>
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-1"></div>
         <div class="col-md-1">VS.</div>
 
@@ -34,7 +51,8 @@
           <div class="form-group">
             <label class="col-md-2 control-label">Team 2</label>
             <div class="col-md-10">
-              <select name="team2" ng-model='vm.adminLeague.teams2' ng-options="teams for team in vm.adminLeague.teams" class="form-control" required>
+              <select name="team2" ng-model='vm.match.team2' class="form-control">
+                <option ng-repeat="teams in vm.adminLeague.teams" value="{{teams._id}}">{{teams.name}}</option>
               </select>
               <p>{{vm.adminLeague.teams2.name}}</p>
             </div>
@@ -42,25 +60,30 @@
         </div>
       </div>
 
-
       <div class="form-group">
+        <label class="col-md-2 control-label">Date and Time</label>  
+        <div class="col-md-8">
+          <input ng-model='vm.match.date'  type="datetime-local" class="nameinput">
+
+
+     <!--  <div class="form-group">
         <label class="col-md-2 control-label">Match Location</label>
         <div class="col-md-10">                     
-          <input class="nameinput" placeholder='Enter Location..' type="text">
+          <input ng-model="vm.match.location.name" class="nameinput" placeholder='Enter Location..' type="text">
         </div>
-      </div>
+      </div> -->
 
-      <!-- ______________________Google Maps__________________________ -->
+      <!-- ______________________Google Maps__________________________-->
 
 
-
-      <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
+      <!-- <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
       <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-      <ui-gmap-marker options="{ draggable: true }" idKey='1' coords='vm.marker' >
+      <ui-gmap-marker ng-model="vm.match.location.coordinates" options="{ draggable: true }" idKey='1' coords='vm.marker' >
     </ui-gmap-marker>
-  </ui-gmap-google-map>
+  </ui-gmap-google-map> -->
 
-
+  <a ng-click='vm.addMatch(vm.match)' style="margin-top:50px;" class="btn btn-info btn-block">Add Match</a>
+ 
 
   <label class="col-md-3 control-label"></label>
   <div class="col-md-7">                     
@@ -69,5 +92,3 @@
 </fieldset>
 </form>
 </div>
-
-

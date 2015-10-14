@@ -58,14 +58,14 @@
     // 		var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
     // 		console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
     // 	});
-    };
-	
+};
 
 
-		AdminFactory.getLeague($rootScope._user.id).then(function(res){
-			vm.adminLeague = res;
-		});
-		
+
+AdminFactory.getLeague($rootScope._user.id).then(function(res){
+	vm.adminLeague = res;
+});
+
 		//news
 		vm.newsletter = {};
 		vm.edit = {};
@@ -77,6 +77,8 @@
 		vm.league.images = [];
 		vm.leagueSize = [0];
 		vm.league.weeks = [];
+		vm.allmatches = [];
+
 		//vm.league.teams  = [];
 
 		//team
@@ -84,20 +86,17 @@
 		vm.teams = [];	
 
 		//schedule
-		vm.week = {}
-		vm.weeks = [];
-		vm.league.weeks = [];
-		vm.league.weeks.week = {};
-		vm.weeks.week = {};
-		vm.week.matches = [];
-		vm.match = {};
-		vm.week.weekNumber = Number;
-		vm.weekId = vm.league.weeks.indexOf(vm.week);
+		vm.week = '';
+		// // vm.weeks = [];
+		// vm.league.weeks = [];
+		// vm.league.weeks.week = {};
+		// vm.weeks.week = {};
+		// vm.week.matches = [];
 
 
 		//league ----------------------------------------
 		//creating League or editing
-		vm.createLeague = function(league){
+		vm.createLeague = function(league, match){
 			if(!league._id){
 				league.googleLocation = vm.marker;
 				AdminFactory.createLeague(league).then(function(res){
@@ -106,32 +105,43 @@
 				});
 			}
 			else{
-				league.googleLocation = vm.marker;
-				AdminFactory.editLeague(league).then(function(res){
-					console.log(league);
-					vm.adminLeague = league;
-					$state.go('Admin.home');
+				if(match){
+					AdminFactory.editLeague(league).then(function(){
+						AdminFactory.getLeague($rootScope._user.id).then(function(res){
+							vm.adminLeague = res;
+							$state.go('Admin.schedule');
+						}); 			
+					});
 				}
-				)};
-			};
-			vm.addFeature = function(feature){
-				vm.league.features.push(feature);
-			};
+				else{
+					league.googleLocation = vm.marker;
+					AdminFactory.editLeague(league).then(function(res){
+						vm.adminLeague = res;
+						console.log(res); 
+						$state.go('Admin.home');
+					});
+				};
+			}
+
+		};
+		vm.addFeature = function(feature){
+			vm.league.features.push(feature);
+		};
 
 
-			vm.removeFeature = function(idx){
-				console.log(idx);
-				vm.league.features.splice(idx, 1);
-			};
+		vm.removeFeature = function(idx){
+			console.log(idx);
+			vm.league.features.splice(idx, 1);
+		};
 
-			vm.addImage = function(image){
-				vm.league.images.push(image);
-			};
+		vm.addImage = function(image){
+			vm.league.images.push(image);
+		};
 
-			vm.removeImage = function(idx){
-				console.log(idx);
-				vm.league.images.splice(idx, 1);
-			};
+		vm.removeImage = function(idx){
+			console.log(idx);
+			vm.league.images.splice(idx, 1);
+		};
 
 
 		//creating League finished 
@@ -150,12 +160,13 @@
 			vm.edit = false;
 		}
 		vm.startTeamEdit = function(team){
+			if(!team.teamMembers){
+				vm.team.teamMembers = [];
+			}
 			$state.go('Admin.team');
 			vm.team = team;
-			console.log(vm.team.images);
 			vm.edit = true;
-		}
-
+		};
 		vm.team.teamMembers = [];
 
 		//Creating & Editing Team---------------------------------------------
@@ -229,37 +240,68 @@
 		}
 
 		//-------------Matches & Weeks----------------------
-		vm.addWeek = function(singleWeek) {
-			var week = angular.copy(singleWeek);
-			week = {};
-			for(var i = 0; i < vm.league.weeks.length+1; i++) {
-				for (var property in vm.league.weeks) {
-					vm.week.weekNumber = i + 1;
-					console.log(vm.week.weekNumber);
+		vm.matchesInWeek = function(week) {
+			vm.week = week._id;
+			vm.allmatches = week.matches;
+			for(var i = 0; i< vm.allmatches.length; i++){
+				for(var j = 0; j < vm.adminLeague.teams.length; j++){
+					
+					if(vm.allmatches[i].team1._id === vm.adminLeague.teams[j]._id){
+						vm.allmatches[i].t1name = vm.adminLeague.teams[j].name;
+					}
+					if(vm.allmatches[i].team2._id === vm.adminLeague.teams[j]._id){
+						vm.allmatches[i].t2name = vm.adminLeague.teams[j].name;
+					}
 				}
-			};
-			vm.league.weeks.push(week);
-			console.log(vm.league.weeks.length);			
+				console.log(vm.allmatches);
+			}
+			// console.log(vm.allmatches);
+			$state.go('Admin.addmatch', {id: vm.week._id});
 		};
 
 		vm.subtractWeek = function(idx) {
 			vm.league.weeks.splice(idx, 1);
 		};
-
-		vm.createMatch = function(match) {
-			AdminFactory.createMatch(match).then(function(res) {
-
-			})
-			//push it into unqiue week
+		vm.addWeek = function() {
+			var week = {};
+			vm.league.weeks.push(week);			
 		};
 
-		// vm.getWeeks = function() {
-		// 	AdminFactory.getWeek($stateParams.id).then(function(res) {
-		// 		vm.weeks = res;
-		// 	});
-		// };
+		vm.addMatch = function(match) {
+			var copy = angular.copy(match);
+			for(var i = 0; i< vm.adminLeague.teams.length; i++){
+				
+				if(copy.team1 === vm.adminLeague.teams[i]._id ){
+					copy.t1name = vm.adminLeague.teams[i].name;
+				}
+				if(copy.team2 === vm.adminLeague.teams[i]._id ){
+					copy.t2name = vm.adminLeague.teams[i].name;
+				}
+			}
+			vm.allmatches.push(copy);
+			
+			vm.match.date = '';
+			vm.match.googleLocation = '';
+			vm.match.team1 = '';
+			vm.match.team2 = '';
+		};
 
-		// vm.getWeeks();
+		vm.removeMatch = function(idx){
+			console.log(idx);
+			vm.allmatches.splice(idx, 1);
+		};
+
+		vm.createMatch = function(matches) {
+			
+			var leagueWeek = {
+				weekId: vm.week,
+				leagueId: vm.adminLeague._id
+			};
+			AdminFactory.createMatch(matches, leagueWeek).then(function(res) {
+				var match = true;
+				vm.createLeague(res, match);
+			})
+		};
 
 		//-------------Newsletter Controller Functions------
 
