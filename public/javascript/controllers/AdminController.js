@@ -16,20 +16,55 @@
 
 		// -----------Google Maps---------------------
 
-		vm.map = { center: { latitude: 40, longitude: -100 }, zoom: 4 }; //center of map
+		var events = {
+		    places_changed: function (searchBox) {
+		        var place = searchBox.getPlaces();
+		        // console.log(place);
+		        if (!place || place == 'undefined' || place.length == 0) {
+		            console.log('no place data :(');
+		            return;
+		        }
+
+		        $scope.map = {
+		            "center": {
+		                "latitude": place[0].geometry.location.lat(),
+		                "longitude": place[0].geometry.location.lng()
+		            },
+		            "zoom": 18
+		        };
+		        $scope.marker = {
+		                latitude: place[0].geometry.location.lat(),
+		                longitude: place[0].geometry.location.lng()
+		        };
+		        $scope.address = {};
+		        $scope.address.format = place[0].formatted_address;
+		       	if(place[0].address_components){
+		        for(var i = 0; i < place[0].address_components.length; i++){
+		        	var x = parseInt(place[0].address_components[i].short_name);
+		        	if(x > 10000 && x < 99999){
+		        		$scope.address.zip = x;
+		        	}
+		        }
+		    }
+		        
+		    }
+		};
+        $scope.searchbox = { template:'searchbox.tpl.html', events:events, parentDiv: 'gmapsearchbox'};
+
+		$scope.map = { center: { latitude: 40, longitude: -100 }, zoom: 4 }; //center of map
 
 		//Geolocation HTML5, using $scope.$apply-- digest cycle applies changes
 		vm.getLocation = function(){
 			$window.navigator.geolocation.getCurrentPosition(function(position){
 				console.log(position);
-				vm.marker = {
+				$scope.marker = {
 					latitude: position.coords.latitude,
 					longitude: position.coords.longitude
 				}
-				var newCenter = angular.copy(vm.marker);
+				var newCenter = angular.copy($scope.marker);
 				console.log(newCenter.latitude);
 				$scope.$apply(function(){
-					vm.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
+					$scope.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
 				});
 				
 
@@ -98,7 +133,11 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		//creating League or editing
 		vm.createLeague = function(league, match){
 			if(!league._id){
-				league.googleLocation = vm.marker;
+				league.googleLocation = {};
+				league.googleLocation.latitude = $scope.marker.latitude;
+				league.googleLocation.longitude = $scope.marker.longitude;
+				league.googleLocation.address = $scope.address.format;
+				league.googleLocation.zip = $scope.address.zip;
 				AdminFactory.createLeague(league).then(function(res){
 					vm.adminLeague = res;
 					$state.go('Admin.home');
@@ -114,7 +153,11 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 					});
 				}
 				else{
-					league.googleLocation = vm.marker;
+					league.googleLocation = {};
+					league.googleLocation.latitude = $scope.marker.latitude;
+					league.googleLocation.longitude = $scope.marker.longitude;
+					league.googleLocation.address = $scope.address.format;
+					league.googleLocation.zip = $scope.address.zip;
 					AdminFactory.editLeague(league).then(function(res){
 						vm.adminLeague = res;
 						console.log(res); 
@@ -151,6 +194,9 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.startLeagueEdit = function(id){
 			AdminFactory.getLeague($rootScope._user.id).then(function(res){
 				vm.league = res;
+				$scope.marker = angular.copy(vm.league.googleLocation);
+				var c = angular.copy(vm.league.googleLocation);
+				$scope.map = { center: { latitude: c.latitude, longitude: c.longitude }, zoom: 16 };
 				$state.go('Admin.league');
 			});
 		};

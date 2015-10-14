@@ -17,6 +17,8 @@ var LeagueSchema = new mongoose.Schema({
 			team1score: Number,
 			team2score: Number,
 			googleLocation : {
+				address: String,
+				zip: String,
 				latitude: String,
 				longitude: String
 			}
@@ -32,8 +34,10 @@ var LeagueSchema = new mongoose.Schema({
 		username: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
 	}],
 	googleLocation: {
+		address: String,
 		latitude: String,
-		longitude: String
+		longitude: String,
+		zip: String
 	},
 	matches: {type: mongoose.Schema.Types.ObjectId, ref: 'Week'},
 	admin: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},//Admin

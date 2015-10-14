@@ -96,11 +96,11 @@
 					return $stateParams.token ;
 				}]
 			}
-		});
+		})
 		uiGmapGoogleMapApiProvider.configure({ 
 			key: 'AIzaSyAGEGj1MQXzaAG_1LN_rDcJgX1i5XO6tl4', 
 			v: '3.20',
-			libraries: 'places,weather,geometry,visualization' 
+			libraries: 'places, weather' 
 		});
 		
 		$urlRouterProvider.otherwise('/');
