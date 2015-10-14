@@ -9,8 +9,10 @@
 		var vm = this;
 		vm.user = {} ;
 		vm.status = $rootScope._user ;
-		vm.def = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
+		vm.noPic = "http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette.png";
+		vm.noLogo = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 		vm.form2 = false;
+
 
 
 
@@ -42,34 +44,34 @@
   // 				}, 30);
   //       		$scope.picSubmitted = true;
   //       	});
-            
-        };
-		
 
-		vm.register = function() {
-			console.log("DEBUG: NavController vm.register called.") ;
-			UserFactory.register(vm.user).then(function() {
-				vm.user = {} ;
-				$state.go('Home') ;
-			}) ;
-		} ;
+};
 
-		vm.login = function() {
-			
-			UserFactory.login(vm.user).then(function(res) {
-				if(res){
-					console.log(res);
-					vm.confirm = res;
-				}else{
-					vm.status = $rootScope._user;
-					$state.go('Home');
-				}
-			}) ;
-		} ;
 
-		vm.logout = function() {
-			UserFactory.logout() ;
+vm.register = function() {
+	console.log("DEBUG: NavController vm.register called.") ;
+	UserFactory.register(vm.user).then(function() {
+		vm.user = {} ;
+		$state.go('Home') ;
+	}) ;
+} ;
+
+vm.login = function() {
+
+	UserFactory.login(vm.user).then(function(res) {
+		if(res){
+			console.log(res);
+			vm.confirm = res;
+		}else{
 			vm.status = $rootScope._user;
+			$state.go('Home');
+		}
+	}) ;
+} ;
+
+vm.logout = function() {
+	UserFactory.logout() ;
+	vm.status = $rootScope._user;
 			//delete vm.user;
 			$window.location.reload();
 			$state.go('Home');

@@ -11,7 +11,6 @@
 		vm.title = 'Welcome to our App!';
 		vm.uiRouterState = $state;
 
-		vm.def = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 		$state.go('Admin.home');
 
 		// -----------Google Maps---------------------
@@ -106,7 +105,7 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			}
 			else{
 				if(match){
-						AdminFactory.editLeague(league).then(function(){
+					AdminFactory.editLeague(league).then(function(){
 						AdminFactory.getLeague($rootScope._user.id).then(function(res){
 							vm.adminLeague = res;
 							$state.go('Admin.schedule');
@@ -121,27 +120,27 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 						$state.go('Admin.home');
 					});
 				};
-				}
-		
-			};
-			vm.addFeature = function(feature){
-				vm.league.features.push(feature);
-			};
+			}
+			
+		};
+		vm.addFeature = function(feature){
+			vm.league.features.push(feature);
+		};
 
 
-			vm.removeFeature = function(idx){
-				console.log(idx);
-				vm.league.features.splice(idx, 1);
-			};
+		vm.removeFeature = function(idx){
+			console.log(idx);
+			vm.league.features.splice(idx, 1);
+		};
 
-			vm.addImage = function(image){
-				vm.league.images.push(image);
-			};
+		vm.addImage = function(image){
+			vm.league.images.push(image);
+		};
 
-			vm.removeImage = function(idx){
-				console.log(idx);
-				vm.league.images.splice(idx, 1);
-			};
+		vm.removeImage = function(idx){
+			console.log(idx);
+			vm.league.images.splice(idx, 1);
+		};
 
 
 		//creating League finished 

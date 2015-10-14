@@ -14,10 +14,26 @@
 			templateUrl: '/views/inbox.html',
 			controller: 'InboxController',
 			controllerAs: 'vm'
-		})
-		.state('Leagues', {
+		}).state('Leagues', {
 			url: '/leagues',
-			templateUrl: 'views/leagues.html'
+			templateUrl: 'views/leagues.html',
+			controller: 'ViewLeaguesController',
+			controllerAs: 'vm'
+		}).state('SingleLeague', {
+			url: '/leagues/:id',
+			templateUrl: 'views/single_league.html',
+			controller: 'ViewLeaguesController',
+			controllerAs: 'vm'
+		}).state('TeamPage', {
+			url: '/team/:id',
+			templateUrl: 'views/team_page.html',
+			controller: 'ViewLeaguesController',
+			controllerAs: 'vm'
+		}).state('SingleMatch', {
+			url: '/match/:id',
+			templateUrl: 'views/single_match.html',
+			controller: 'ViewLeaguesController',
+			controllerAs: 'vm'
 		}).state('About', {
 			url: '/about',
 			templateUrl: 'views/about.html'

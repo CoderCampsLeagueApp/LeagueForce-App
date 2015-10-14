@@ -40,6 +40,7 @@ var leagueRoutes = require('./routes/LeagueRoutes');
 var teamRoutes = require('./routes/TeamRoutes');
 var commentRoutes = require('./routes/CommentRoutes');
 var newsletterRoutes = require('./routes/NewsletterRoutes');
+var viewRoutes = require('./routes/ViewRoutes')
 
 // Configure SMTP server details.
 // SMTP is the mail server responsible for sending and retrieving email
@@ -105,6 +106,7 @@ app.use('/api/league', leagueRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/newsletter', newsletterRoutes);
+app.use('/api/views/', viewRoutes)
 
 var server = app.listen(port, function() {
 	var host = server.address().address;

@@ -34,7 +34,7 @@ router.get('/:id', auth, function(req, res) {
 	.populate({
 		path: 'teams',
 		model: 'Team',
-		select: 'name'
+		select: 'name logo'
 	})
 	.populate({
 		path: 'weeks.matches.team1 weeks.matches.team2',
