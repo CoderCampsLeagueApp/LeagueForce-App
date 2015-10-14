@@ -73,7 +73,7 @@ router.post('/', auth, function(req, res) {
 router.put('/:id', auth, function(req, res) {
 	League.update({_id: req.body._id}, req.body)
 	.exec(function(err, league) {
-		console.log(req.body);
+		console.log('put---------------------------------------------');
 		if(err) return res.status(500).send({err: "Error getting league to edit"});
 		if(!league) return res.status(400).send({err: "League to edit does not exist"});
 		res.send(req.body);
@@ -134,23 +134,24 @@ router.put('/team/edit', auth, function(req, res){
 router.post('/match', auth, function(req, res) {
 	var x = {};
 	var match = req.body;
-	console.log(req.body);
 	var idx = 0;
-	League.findOne({_id: match.leagueWeek.weekId}, function(err, League) { //attempt to find correct week
+	League.findOne({_id: match.leagueWeek.leagueId}, function(err, League) { //attempt to find correct week
 		if(err) return res.status(500).send({err: "Issues with server for finding league"});
 		if(!League) return res.status(400).send({err: "Could not find League"});
 		for(var i = 0; i < League.weeks.length; i++) {
-			if(League.weeks[i]._id.toString() === match.week) {
+			if(League.weeks[i]._id.toString() === match.leagueWeek.weekId) {
 				idx = i;
-				console.log(idx);
+				console.log(i);
 			}
 		};
 		
-		League.weeks[idx].matches.push(match);
 
 		var  x = League;
-		x.edit = true;
-		//League.update({_id: match.league}, x)
+		x.weeks[idx].matches = match.matches;
+		
+		// for(var i = 0; i < x.weeks.length; i++){
+		// 	console.log(x.weeks[i].matches);
+		// }
 		res.send(x);
 
 

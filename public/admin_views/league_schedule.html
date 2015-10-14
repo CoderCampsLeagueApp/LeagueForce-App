@@ -1,7 +1,7 @@
 <div class="leagueform">
   <fieldset>
     <div ng-repeat="w in vm.adminLeague.weeks track by $index">
-      <a ng-click="vm.matchesInWeek(w._id)" style="font-size: 2em" class="text-center">Week - {{$index + 1}}</a>
+      <a ng-click="vm.matchesInWeek(w)" style="font-size: 2em" class="text-center">Week - {{$index + 1}}</a>
       <div class="playerOverflow" style="color:black">
         <table class="table table-bordered">
           <thead>

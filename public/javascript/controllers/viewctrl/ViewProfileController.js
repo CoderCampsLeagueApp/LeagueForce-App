@@ -10,7 +10,6 @@
 		ProfileFactory.getProfile($stateParams.id).then(function(res){
 			$scope.profile = res;
 			console.log($scope.profile);
-
 		});
 		
 		}

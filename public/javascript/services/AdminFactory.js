@@ -140,10 +140,11 @@
 			return q.promise;
 		}
 
-		o.createMatch = function(match, leagueWeek) {
+		o.createMatch = function(matches, leagueWeek) {
 			var q = $q.defer();
-			var matches = {match, leagueWeek}
-			$http.post('/api/league/match/', matches, getAuth()).success(function(res) {
+			var match = {matches, leagueWeek}
+			console.log(match);
+			$http.post('/api/league/match/', match, getAuth()).success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise

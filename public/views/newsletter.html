@@ -26,7 +26,7 @@
 			<img ui-sref='ViewProfile({id: c.user._id})' ng-src="{{c.user.pic}}" class="img-thumbnail pointer" style="height: 75px"/>
 		</div>
 		<div class="col-md-11 well">
-		<a ui-sref='ViewProfile({id: c.user._id})'><b>{{c.user.name}}</b></a> says:<br>{{c.body}}<br><small>{{c.created | date:"M/d/yyyy hh:mma"}}</small>
+		<a ui-sref='ViewProfile({id: c.user._id})'><b>{{c.user.name}}</b></a> <i>{{c.created | date:"M/d/yyyy hh:mma"}}</i><br>{{c.body}}<br>
 		<br>
 		
 		<!-- <a ng-click="vm.startCommentEdit(c)">Edit</a> 

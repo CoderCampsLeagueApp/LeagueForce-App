@@ -164,7 +164,7 @@ router.post('/login', function(req, res, next) {
 router.param('id', function(req, res, next, id) {
 	User.findOne({
 		_id : id
-	}, function(err, user) {
+	}) .exec(function(err, user) {
 		if(err) return next({
 			err : err,
 			type : 'client'
@@ -273,6 +273,11 @@ router.put('/:id', function(req, res) {
 
 router.get('/profile/:id', function(req, res){
 	User.findOne({_id: req.params.id})
+	.populate({
+		path: 'comments',
+		model: 'Comments',
+		select: 'created user body news'
+	})
 	.exec(function(err, user) {
 		if(err) return res.status(500).send({ err: "error getting user to edit" }) ;
 		if(!user) return res.status(400).send({ err: "user profile doesn't exist" }) ;
