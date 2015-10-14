@@ -261,6 +261,10 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.subtractWeek = function(idx) {
 			vm.league.weeks.splice(idx, 1);
 		};
+		vm.addWeek = function() {
+			var week = {};
+			vm.league.weeks.push(week);			
+		};
 
 		vm.addMatch = function(match) {
 			var copy = angular.copy(match);

@@ -81,11 +81,11 @@
 
 
       <!-- Weeks -->
-      <div class="form-group">
+      <div class="form-group" ng-show='!vm.league._id'>
         <label class="col-md-2 control-label">Weeks In A Season</label>
         <div class="col-md-10">
-          <a type="btn" class="btn btn-success btn-md"ng-click="vm.addWeek()"><span class="glyphicon glyphicon-plus"></span></a>
-          <a type="btn" class="btn btn-danger btn-md"ng-click="vm.subtractWeek()"><span class="glyphicon glyphicon-minus"></span></a>
+          <a type="btn" class="btn btn-success btn-md" ng-click="vm.addWeek()"><span class="glyphicon glyphicon-plus"></span></a>
+          <a type="btn" class="btn btn-danger btn-md" ng-click="vm.subtractWeek()"><span class="glyphicon glyphicon-minus"></span></a>
           <span style="font-size: 32px; padding-left: 10px;">{{vm.league.weeks.length}}</span>
             <!-- <div class="input-group">
               <input type="number" class="appendinput" ng-model='vm.league.weeks' placeholder="Weeks"/>
