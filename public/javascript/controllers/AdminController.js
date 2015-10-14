@@ -160,9 +160,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.edit = false;
 		}
 		vm.startTeamEdit = function(team){
-			if(!team.teamMembers){
-				vm.team.teamMembers = [];
-			}
 			$state.go('Admin.team');
 			vm.team = team;
 			vm.edit = true;
@@ -178,6 +175,7 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			});
 		};
 		vm.editTeam = function(team){
+			console.log(team); 
 			AdminFactory.editTeam(team).then(function(res){
 				$state.go('Admin.home');
 			}); 
