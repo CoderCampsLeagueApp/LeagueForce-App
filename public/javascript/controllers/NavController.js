@@ -8,8 +8,9 @@
 	function NavController($state, $stateParams, $rootScope, UserFactory, $scope, Upload, $timeout, $interval, $window){
 		var vm = this;
 		vm.user = {} ;
-		vm.status = $rootScope._user ;
-		vm.def = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
+		vm.status = $rootScope._user;
+		vm.noPic = "http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette.png";
+  		vm.noLogo = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 		vm.form2 = false;
 
 
