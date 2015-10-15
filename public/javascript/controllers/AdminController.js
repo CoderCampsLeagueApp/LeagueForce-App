@@ -66,7 +66,6 @@
 					$scope.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
 				});
 				
-
 			});
 		}
 
@@ -74,25 +73,25 @@
 		//--------------------Cloudinary-----------------------
 
     // upload on file select or drop
-    $scope.upload = function (file) {
-    	console.log(file);
-    // 	vm.loading = true;
-    // 	Upload.upload({
-    // 		url: '/api/user/uploadPhoto',
-    // 		data: {file: file, 'userId': vm.status._user.id}
-    // 	}).then(function (resp) {
-				// vm.loading = false;
+//     $scope.upload = function (file) {
+//     	// console.log(file);
+//     // 	vm.loading = true;
+//     // 	Upload.upload({
+//     // 		url: '/api/user/uploadPhoto',
+//     // 		data: {file: file, 'userId': vm.status._user.id}
+//     // 	}).then(function (resp) {
+// 				// vm.loading = false;
 
-    // 		console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-    // 	}, function (resp) {
-				// vm.loading = false;
+//     // 		console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+//     // 	}, function (resp) {
+// 				// vm.loading = false;
 				
-    // 		console.log('Error status: ' + resp.status);
-    // 	}, function (evt) {
-    // 		var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-    // 		console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-    // 	});
-};
+//     // 		console.log('Error status: ' + resp.status);
+//     // 	}, function (evt) {
+//     // 		var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+//     // 		console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+//     // 	});
+// };
 
 
 
@@ -133,10 +132,14 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.createLeague = function(league, match){
 			if(!league._id){
 				league.googleLocation = {};
+				if($scope.marker){
 				league.googleLocation.latitude = $scope.marker.latitude;
 				league.googleLocation.longitude = $scope.marker.longitude;
+				}
+				if($scope.address){
 				league.googleLocation.address = $scope.address.format;
 				league.googleLocation.zip = $scope.address.zip;
+				}
 				AdminFactory.createLeague(league).then(function(res){
 					vm.adminLeague = res;
 					$state.go('Admin.home');
@@ -153,10 +156,14 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 				}
 				else{
 					league.googleLocation = {};
+					if($scope.marker){
 					league.googleLocation.latitude = $scope.marker.latitude;
 					league.googleLocation.longitude = $scope.marker.longitude;
+					}
+					if($scope.address){
 					league.googleLocation.address = $scope.address.format;
 					league.googleLocation.zip = $scope.address.zip;
+					}
 					AdminFactory.editLeague(league).then(function(res){
 						vm.adminLeague = res;
 						console.log(res); 
@@ -201,9 +208,11 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.startLeagueEdit = function(id){
 			AdminFactory.getLeague($rootScope._user.id).then(function(res){
 				vm.league = res;
+				if(vm.league.googleLocation){
 				$scope.marker = angular.copy(vm.league.googleLocation);
 				var c = angular.copy(vm.league.googleLocation);
 				$scope.map = { center: { latitude: c.latitude, longitude: c.longitude }, zoom: 16 };
+				}
 				$state.go('Admin.league');
 			});
 		};

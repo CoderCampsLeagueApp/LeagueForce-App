@@ -176,8 +176,20 @@ p.article {
 .hideMessage{
   visibility: hidden;
 }
-.profImg{
-	
+form .progress {
+    line-height: 15px;
+}
+
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+
+.progress div {
+    font-size: smaller;
+    background: orange;
+    width: 0;
 }
 .profBox{
   background-color: #fff;
@@ -187,16 +199,19 @@ p.article {
 .profBox2{
   background-color: #fff;
   padding: 40px;
+  border-top: solid 3px #ff8432;
 }
 .profLeague{
   background-color: #fff;
   margin-bottom: 10px;
   padding: 40px;
+  border-top: solid 3px #ff8432;
 }
 .profComments{
   background-color: #fff;
   margin-bottom: 10px;
   padding: 40px;
+  border-top: solid 3px #ff8432;
 }
 .hr{
   padding-top: 5px;

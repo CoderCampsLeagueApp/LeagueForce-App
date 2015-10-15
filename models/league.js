@@ -17,7 +17,7 @@ var LeagueSchema = new mongoose.Schema({
 			date: Date,
 			team1score: Number,
 			team2score: Number,
-			googleLocation : {
+			googleLocation : { 
 				address: String,
 				zip: String,
 				latitude: String,

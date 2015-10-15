@@ -6,9 +6,11 @@
 
 			<div class="col-md-3 profBox">
 				<img class='img-responsive' ng-src="{{vm.prof.pic}}"/>
+				<div>
 				<button style="    margin-top: 10px;margin-left: 40px;" class="button responsive" ng-click='vm.editpic(vm.prof)'>
 					<i class="fa fa-camera"> </i> Change Photo
 				</button>
+				</div>
 			</div>
 			<div class="col-md-8 col-md-offset-1">
 				<div style="padding-bottom:60px" class="profBox2">
@@ -23,6 +25,14 @@
 				      <label class="col-md-3 control-label">Name</label>  
 				      <div class="col-md-9">
 				        <input type="text" class="form-control input-md" required ng-model="vm.prof.name" />
+				      </div>
+				    </div>
+				    <br>
+				    <br>
+				    <div class="form-group">
+				      <label class="col-md-3 control-label">Background</label>  
+				      <div class="col-md-9">
+				        <input placeholder='url' type="text" class="form-control input-md" ng-model="vm.prof.background" />
 				      </div>
 				    </div>
 				    <br>
