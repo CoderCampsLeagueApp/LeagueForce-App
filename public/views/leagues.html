@@ -12,13 +12,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='l in vm.leagues track by $index' ng-class-odd="'odd'" ng-class-even="'even'">
+			<tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='l in vm.leagues track by $index' ng-class-odd="'odd'" ng-class-even="'even'" ng-show="l.isDisplay">
 				<th class="text-center" ui-sref="SingleLeague({id: l._id})"><img width="30" height="30" ng-src="{{l.logo}}"></th>
 				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.name}}</th>
 				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.teams.length}}</th>
 				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.weeks.length}}</th>
 				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.division}}</th>
-				<th class="text-center" style="width: 50%" ui-sref="SingleLeague({id: l._id})">{{l.googleLocation}}</th>
+				<th class="text-center" style="width: 50%" ui-sref="SingleLeague({id: l._id})">{{l.googleLocation.address}}</th>
 			</tr>
 		</tbody>
 	</table>

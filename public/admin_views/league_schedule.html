@@ -7,16 +7,18 @@
           <thead>
             <tr style="background: #333333; color:white">
               <th style="width: 150px;">Date</th>
-              <th>Teams</th>
-              <th style="width: 150px;">Score</th>
+              <th style="width: 250px;">Teams</th>
+              <th>Location</th>
+              <th style="width: 110px;">Score</th>
             </tr>
           </thead>
           <tbody>
             <tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='m in w.matches track by $index' ng-class-odd="'odd'" ng-class-even="'even'">
               <th>{{m.date | date:"M/d hh:mma"}}</th>
               <th>{{m.team1.name}} <em>vs.</em> {{m.team2.name}}</th>
+              <th>{{m.googleLocation.address}}</th>
               <form>
-                <th><input style="width: 50px" type="number"/>{{m.team1score}} - <input style="width: 50px" type="number"/>{{m.team2score}}</th>
+                <th><input style="width: 30px" type="number"/>{{m.team1score}} - <input style="width: 30px" type="number"/>{{m.team2score}}</th>
               </form>
             </tr>
           </tbody>

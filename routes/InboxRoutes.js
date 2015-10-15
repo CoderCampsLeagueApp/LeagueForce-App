@@ -19,29 +19,28 @@ router.post('/post', auth, function(req,res){
   console.log(msg);
   msg.save(function(err, result){
     if (err) return res.status(500).send({
-            err: "Server Error"
-      });
+      err: "Server Error"
+    });
       if (!result) return res.status(400).send({
-            err: "Could not create message"
+        err: "Could not create message"
       });
         var id = result._id;
-        User.update({_id: msg.user1}, {$push: {
-          messages: {_id: id}
-        }}, function(err, result){
+        User.update({_id: msg.user1}, {$push: {     messages: {_id: id}
+      }}, function(err, result){
         User.update({_id: msg.user2}, {$push: {
           messages: {_id: id}
         }}, function(err, result){
           res.send(); 
         });
       });
-  
-    });
+
+      });
 });
 router.get('/:id', auth, function(req,res){
   var id = req.params.id;
   Inbox.find({
-  $or : [ { user1 : id }, {user2:id} ] 
-     })
+    $or : [ { user1 : id }, {user2:id} ] 
+  })
   .populate({
     path: 'user1',
     model: 'User',
@@ -58,8 +57,8 @@ router.get('/:id', auth, function(req,res){
   .exec(function(err, result){
     if(err) return res.status(500).send({err: "The server is having issues."});
     if(!result) return res.status(400).send({err: "Could not get the messages."});
-      res.send(result);
-    });
+    res.send(result);
+  });
 });
 
 //Message replies
@@ -67,19 +66,18 @@ router.post('/reply', auth, function(req, res){
   var message = req.body;
   message.created = new Date();
   message.sender = req.payload.id;
-   console.log(message);
-   console.log('--------------------------------------');
-  var id = message.body;
-  delete message.body;
+  console.log('--------------------------------------');
+  var id = req.body.id; 
   console.log(message);
   
-  Inbox.update({_id: id},
-    {$push: {body:  message}} )
+  Inbox.update({_id: id}, {$push: {messages: message}} )
   .exec(function(err, result){
     if(err) return res.status(500).send({err: "The server is having issues."});
     if(!result) return res.status(400).send({err: "Could not push the reply."});
     res.send(message);
   });
 });
+
+
 
 module.exports = router;

@@ -1,8 +1,7 @@
-
 <div class="container">
 	<div style="margin-top: 40px;" class="col-md-12"></div>
-	<div class="col-md-4 nopadding" ng-repeat="l in vm.leagues" ng-hide="vm.team.league != l._id">
-		<h3><a ui-sref="SingleLeague({id: l._id})" style="text-decoration: none;">League: {{l.name}}</a></h3>
+	<div class="col-md-4 nopadding">
+		<h6><a ui-sref="SingleLeague({id: vm.league._id})" style="text-decoration: none;">Back To League Page</a></h6>
 		<img style="float: left;" width="160" class="img-responsive img-circle" ng-src="{{vm.team.logo}}">
 	</div>
 	<div class="row">
@@ -10,10 +9,12 @@
 			<div ng-repeat='c in vm.team.teamMembers'>
 				<div ng-hide='c.isPlayer' class="col-md-12" style=" border-bottom: solid 1px;padding-bottom: 15px;">
 					<img style="float:left" class="img-circle" width="120" height="120" src="{{c.pic || nav.noLogo}}">
-					<h4>{{c.name}}</h4>
-					<p><i ng-show='c.isCoach'>Head Coach</i></p>
-					<p><i ng-hide='c.isCoach'>Coach</i></p>
-					<p style="padding-left:10px">{{c.bio | limitTo: 300}}{{c.bio.length > 300 ? '...' : ''}}</p>
+					<div class="col-md-6">
+						<h4 style="color: white;">{{c.name}}</h4>
+						<p style="color: white;"><i ng-show='c.isCoach'>Head Coach</i></p>
+						<p style="color: white;"><i ng-hide='c.isCoach'>Coach</i></p>
+						<p style="padding-left:10px; color: white;">{{c.bio | limitTo: 300}}{{c.bio.length > 300 ? '...' : ''}}</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -23,30 +24,31 @@
 
 		<!-- Schedule -->
 		<!-- Display that teams matches, so have it look thru the id of every match and see if one matches the team -->
-	<!-- <div class="container-fluid">
+
 		<div class="playerOverflow" style="color:black">
-		<h3>Schedule</h3>
 			<table class="table table-bordered">
 				<thead>
-					<tr class="text-center" style="background: #333333; color:white">
-						<th class="text-center">Picture</th>
-						<th class="text-center">Name</th>
-						<th class="text-center">Number</th>
-						<th class="text-center">Position</th>
-						<th class="text-center">Date of Birth</th>
+					<tr style="background: #333333; color:white">
+						<th style="width: 150px;">Date</th>
+						<th style="width: 250px;">Teams</th>
+						<th>Location</th>
+						<th style="width: 110px;">Score</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='p in vm.team.teamMembers track by $index' ng-class-odd="'odd'" ng-class-even="'even'" ng-show="p.isPlayer">
-						<th class="text-center"><img width="60" height="60" ng-src="{{p.pic}}"></th>
-						<th class="text-center">{{p.name}}</th>
-						<th class="text-center">{{p.teamNumber}}</th>
-						<th class="text-center">{{p.position}}</th>
-						<th class="text-center">{{p.dob | date:"M/d/yyyy"}}</th>
+					<tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='m in vm.schedule track by $index' ng-class-odd="'odd'" ng-class-even="'even'">
+						{{m}}
+						<th>{{m.date | date:"M/d hh:mma"}}</th>
+						<th>{{m.t1name}} <em>vs.</em> {{m.t2name}}</th>
+						<th>{{m.googleLocation.address}}</th>
+						<form>
+							<th><input style="width: 30px" type="number"/>{{m.team1score}} - <input style="width: 30px" type="number"/>{{m.team2score}}</th>
+						</form>
 					</tr>
 				</tbody>
 			</table>
-		</div> -->
+		</div>
+
 		<!-- Players -->
 		<div class="playerOverflow" style="color:black">
 			<h3><strong>{{vm.team.name}}</strong> Players</h3>

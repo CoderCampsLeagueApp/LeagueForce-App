@@ -22,17 +22,17 @@
 		}).state('SingleLeague', {
 			url: '/leagues/:id',
 			templateUrl: 'views/single_league.html',
-			controller: 'ViewLeaguesController',
+			controller: 'ViewSingleLeagueController',
 			controllerAs: 'vm'
 		}).state('TeamPage', {
 			url: '/team/:id',
 			templateUrl: 'views/team_page.html',
-			controller: 'ViewLeaguesController',
+			controller: 'ViewTeamController',
 			controllerAs: 'vm'
 		}).state('SingleMatch', {
 			url: '/match/:id',
 			templateUrl: 'views/single_match.html',
-			controller: 'ViewLeaguesController',
+			controller: 'ViewTeamController',
 			controllerAs: 'vm'
 		}).state('About', {
 			url: '/about',

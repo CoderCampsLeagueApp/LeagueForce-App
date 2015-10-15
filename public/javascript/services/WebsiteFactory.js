@@ -63,6 +63,7 @@
 		o.getTeam = function(id) {
 			var q = $q.defer();
 			$http.get('/api/views/team/' + id).success(function(res) {
+				console.log(res);
 				q.resolve(res);
 			});
 			return q.promise;

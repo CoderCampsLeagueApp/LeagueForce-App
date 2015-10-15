@@ -1,14 +1,16 @@
 <div style="margin-top:60px" class="leagueHome">
-	<div class="row">
-		<div class="col-md-4 nopadding">
-			<img class="img-responsive img-circle" ng-src="{{vm.league.logo}}">
-		</div>
-		<div class="col-md-8">
-			<p>NAME : {{vm.league.name}}</p>
-			<p>DIVISIONS : {{vm.league.division}}</p>
-			<p>WEEKS : {{vm.league.weeks.length}}</p>
-			<p>features: {{vm.league.features}}</p>
-			<p>Location: {{vm.league.googleLocation.latitude}}, {{vm.league.googleLocation.longitude}} </p>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 nopadding">
+				<img class="img-responsive img-circle" ng-src="{{vm.league.logo}}">
+			</div>
+			<div class="col-md-8">
+				<p>NAME : {{vm.league.name}}</p>
+				<p>DIVISIONS : {{vm.league.division}}</p>
+				<p>WEEKS : {{vm.league.weeks.length}}</p>
+				<p>features: {{vm.league.features}}</p>
+				<p>Location: {{vm.league.googleLocation.latitude}}, {{vm.league.googleLocation.longitude}} </p>
+			</div>
 		</div>
 	</div>
 	<div class="container-fluid" ng-show="vm.league.description">
@@ -16,15 +18,16 @@
 			<h2>About Us:</h2>
 			<p>{{vm.league.description}}</p>
 		</section>
+		
+
+		<!-- League Photos Carousel -->
+
+		<carousel>
+			<slide ng-repeat="i in vm.league.images track by $index" active="slide.active">
+				<img class="img-responsive" style="width: 400px; height: 260px;" src="{{i}}">
+			</slide>
+		</carousel>
 	</div>
-
-	<!-- League Photos Carousel -->
-
-	<carousel>
-		<slide ng-repeat="i in vm.league.images track by $index" active="slide.active">
-			<img class="img-responsive" style="width: 400px; height: 260px;" src="{{i}}">
-		</slide>
-	</carousel>
 	<div class="teamBackground">
 		<h2 style="margin-top: 70px;" class="text-center">Teams</h2>
 	</div>

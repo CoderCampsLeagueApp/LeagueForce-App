@@ -32,12 +32,9 @@ router.get('/league/:id', function(req, res) {
 
 router.get('/team/:id', function(req, res) {
 	Team.findOne({_id: req.params.id})
-	.populate({
-		path: 'matches',
-		model: 'League',
-		select: 'name weeks.matches'
-	})
+	.populate('matches')
 	.exec(function(err, team) {
+		console.log(team);
 		if(err) return res.status(500).send({err: 'Error inside server for finding a team'});
 		if(!team) return res.status(400).send({err: "That team does not exist!"});
 		res.send(team);

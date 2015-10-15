@@ -167,6 +167,16 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 
 		};
 
+		vm.publishLeague = function(id) {
+			var leaguePublish = {
+				_id: id,
+				isDisplay: true
+			};
+			AdminFactory.editLeague(leaguePublish).then(function(res) {
+				$state.go('Leagues');
+			})
+		}
+
 		vm.addFeature = function(feature){
 			vm.league.features.push(feature);
 		};
@@ -185,9 +195,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			console.log(idx);
 			vm.league.images.splice(idx, 1);
 		};
-
-
-		//creating League finished 
 
 		//Editing League ------------------------------------------------
 
@@ -213,6 +220,16 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.team.teamMembers = [];
 
 		//Creating & Editing Team---------------------------------------------
+		vm.clearTeam = function() {
+			delete vm.team;
+			delete vm.coach;
+			delete vm.player;
+			vm.team = {};
+			vm.team.teamMembers = [];
+			vm.coach = {};
+			vm.player = {};
+		};
+		
 		vm.createTeam = function(team){
 			team.league = vm.adminLeague._id;
 			AdminFactory.createTeam(team).then(function(res){
@@ -223,6 +240,13 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.editTeam = function(team){
 			console.log(team); 
 			AdminFactory.editTeam(team).then(function(res){
+				delete vm.team;
+				delete vm.coach;
+				delete vm.player;
+				vm.team = {};
+				vm.team.teamMembers = [];
+				vm.coach = {};
+				vm.player = {};
 				$state.go('Admin.home');
 			}); 
 		};
@@ -321,9 +345,16 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 				if(copy.team2 === vm.adminLeague.teams[i]._id ){
 					copy.t2name = vm.adminLeague.teams[i].name;
 				}
-			}
+			};
+
+			copy.googleLocation = {
+				address: $scope.address.format,
+				zip: $scope.address.zip,
+				latitude: $scope.marker.latitude,
+				longitude: $scope.marker.longitude
+			};
+			console.log(copy);
 			vm.allmatches.push(copy);
-			
 			vm.match.date = '';
 			vm.match.googleLocation = '';
 			vm.match.team1 = '';
@@ -339,7 +370,8 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			
 			var leagueWeek = {
 				weekId: vm.week,
-				leagueId: vm.adminLeague._id
+				leagueId: vm.adminLeague._id,
+
 			};
 			AdminFactory.createMatch(matches, leagueWeek).then(function(res) {
 				var match = true;

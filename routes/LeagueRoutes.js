@@ -74,7 +74,7 @@ router.put('/:id', auth, function(req, res) {
 		console.log('put---------------------------------------------');
 		if(err) return res.status(500).send({err: "Error getting league to edit"});
 		if(!league) return res.status(400).send({err: "League to edit does not exist"});
-		res.send(req.body);
+		res.send();
 	});
 });
 

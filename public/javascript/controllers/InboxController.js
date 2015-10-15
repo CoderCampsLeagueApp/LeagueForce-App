@@ -17,15 +17,21 @@
 		});
 
 		vm.showMessage = function(inbox){
+			delete vm.msg;
+			vm.msg = {};
 			vm.messageDisplay = true;
 			vm.inboxMessage = inbox;
 		};
-	
-		vm.reply = function(){
-			InboxFactory.reply(vm.msg).then(function(res){
+
+		vm.reply = function(msgId, msg){
+			var reply = {
+				body: msg,
+				id: msgId
+			};
+			InboxFactory.reply(reply).then(function(res){
 				vm.inboxMessage.messages.push(res);
 				vm.msg.message = "";
 			});
 		}
-};
+	};
 })();
