@@ -1,0 +1,50 @@
+<div class="container">
+	<div class="col-md-6">
+		<h2 style="word-wrap: break-word;"><a ng-click="vm.getNews()">{{vm.newsletter.title}}</a></h2>
+
+		<span style="font-size: .9em; color: gray;">Posted on <a style="text-decoration: none;" ng-click="vm.getNews()">{{vm.newsletter.created | date:"M/d/yyyy hh:mma"}}</a> by {{vm.newsletter.user.name}}</span>
+		<br>
+		<br>
+		<div ng-show="vm.newsletter.image">
+			<img style="float: left;" ng-src="{{vm.newsletter.image}}" class="img img-thumbnail singleNewsImage"/>
+		</div><br>	
+		<div style="word-wrap: break-word;" ta-bind ng-model="vm.newsletter.body " style="clear: both;"></div><hr>
+	</div>
+	<div class="col-md-6"></div>
+</div>
+<div class="container">
+	<h3>Post A Comment</h3>
+	<div style="">
+		<textarea class="form-group" ng-model="vm.comment.body" placeholder="Comment..."></textarea><br>
+		<button class="btn btn-success" ng-click="vm.createComment(vm.newsletter._id);">Submit</button><br><br>
+	</div>
+</div>
+<!-- Comments -->
+<div ng-repeat="c in vm.comments | orderBy: 'createdate': true">
+	<div style="margin-left: 55px;" class="container">
+		<div class="col-md-1">
+			<img ui-sref='ViewProfile({id: c.user._id})' ng-src="{{c.user.pic}}" class="img-thumbnail pointer" style="height: 75px"/>
+		</div>
+		<div class="col-md-11 well">
+		<a ui-sref='ViewProfile({id: c.user._id})'><b>{{c.user.name}}</b></a> <i>{{c.created | date:"M/d/yyyy hh:mma"}}</i><br>{{c.body}}<br>
+		<br>
+		
+		<!-- <a ng-click="vm.startCommentEdit(c)">Edit</a> 
+		finish comment editing-->
+		<a style="color:red" ng-click="vm.deleteComment(c._id, vm.newsletter._id)">Remove</a>
+		<a ng-click="replyBox = true">Reply</a>
+		<div class="well" ng-show="replyBox">
+			<textarea ng-model="vm.comment.reply.body"></textarea><br>
+			<a ng-click="replyBox = false">Cancel</a>
+			<a ng-click="vm.postReply(c._id); replyBox=false;">Reply</a>
+		</div>
+		<!-- Replies -->
+		<div class="well" ng-repeat="r in c.reply">
+			<img ng-src="{{r.user.pic}}" class="img img-thumbnail" style="height: 50px"/>
+			<b>{{r.user.name}}</b>
+			<i>{{r.created | date:"M/d/yyyy hh:mma"}}</i>
+			<p>{{r.body}}</p>
+		</div>
+		</div>
+	</div>
+</div>

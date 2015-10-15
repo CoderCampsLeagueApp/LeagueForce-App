@@ -1,0 +1,57 @@
+<div ng-hide='uc.stat'>
+<div class="modal-header">
+  <button class="btn btn-danger pull-right" ng-click='cancel()'>X</button>
+  <h3 style="text-align:center">Upload Photo</h3>
+</div>
+<div style="height: 400px; margin-top:20px;padding-left:20px">
+<form name='myForm'>
+  <div ng-show='picFile'>
+  <div class="col-md-5">
+    <img class="img-responsive" ngf-src="croppedDataUrl">
+    <a class="btn btn-success"
+    ng-click="upload(croppedDataUrl)">Save.</a>
+    </div>
+  </div>
+
+<div ng-hide='picFile'>
+<div class="col-md-5">
+  <img  style="float:left" class="img-responsive" ng-src="{{uc.user.pic}}">
+</div>
+<div class="col-md-7">
+<div class="dropboxposition">
+      <div ngf-drop ngf-select type="file" name='file'  class="dropArea" ng-model="picFile" ngf-pattern="image/*" ngf-accept="image/*" ngf-max-size="8MB">
+        <div style="padding-top:40px"><i class="fa fa-file-image-o fa-5x"></i></div>
+        <br><br>
+        <span class='dropboxtext'>Drop Image or </span> <br>
+        <span class='dropboxtext'>click to upload</span>
+      </div>
+   </div>
+   <i class='text-danger' style='font-size:17px;' ng-show="myForm.file.$error.maxSize">File too large 
+      {{picFile.size / 1000000|number:1}}MB: max 8MB</i>
+</div>
+</div>
+  <div class="col-md-7">
+   <!-- class="{'animated': picSubmitted, 'fadeOut' : picSubmitted}" -->
+     <div ng-show='picFile' class="cropArea animated fadeIn">
+     <!-- ng-class="{'cropArea' : picFile, 'animated': picFile, 'fadeIn' : picFile}" -->
+      <img-crop area-type="square" result-image-size="400"  image="picFile | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+        </img-crop>
+     </div>
+  </div>
+  
+</form>
+</div>
+</div>
+<div ng-show='uc.stat' style="height: 150px">
+  <div style="margin-top:50px">
+    <div class="percent">{{progress}}%</div>
+    <div class="pg-bar">
+        <div class="uploaded progress-bar-striped" style="width: {{progress}}%"></div>
+    </div>
+  </div>
+</div>
+
+
+
+                
+          

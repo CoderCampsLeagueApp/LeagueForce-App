@@ -116,12 +116,21 @@ router.get('/verify', function(req, res) {
 			user.isValidated = true ;
 			console.log("DEBUG: UserRoutes: router verify: " + user.isValidated) ;
 
+			// Getting host from req.
+			var host = req.get('host') ;
+
+			var appUrl = "http://" + host ;
+
+			console.log("DEBUG=======================appUrl==============================") ;
+			console.log("appUrl: " + appUrl) ;
+			console.log("============================appUrl==============================") ;
+
 
 			User.update({ _id : user.id }, user)
 			.exec(function(err, user) {
 				if(err) return res.status(500).send({ err: "error getting user to edit" }) ;
 				if(!user) return res.status(400).send({ err: "user profile doesn't exist" }) ;
-				res.send('You have been validated. Please login <a href="http://localhost:3000">here</a>') ; 
+				res.send('You have been validated. Please login <a href="' + appUrl + '">here</a>') ; 
 			}) ;
 		} else {
 			res.send("Cannot verify. Token did not match.") ;

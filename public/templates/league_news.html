@@ -1,0 +1,28 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-8">
+				<div ng-repeat="n in vm.newsletters | orderBy: 'createdate': true">
+					<h2 style="word-wrap: break-word;"><a ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">{{n.title}}</a></h2>
+					<span style="font-size: .9em; color: gray;">Posted on <a style="text-decoration: none;" ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">{{n.created | date:"M/d/yyyy hh:mma"}}</a> by {{n.user.name}}</span><br><br>
+					<div class="col-md-12">
+						<div class="col-md-7" ng-show="n.image">
+							<div class="newsImage">
+								<img class="img img-thumbnail img-responsive" style="float: left;" ng-src="{{n.image}}"/>
+							</div>
+						</div>
+						<div  class="col-md-5" style="word-wrap: break-word;" ta-bind ng-model="n.body" style="clear: both;"></div>
+					</div>
+					<div ng-show="n.comments.length > 0">
+						<button class='btn btn-md btn-info' ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">View All {{n.comments.length}} Comments</button>
+					</div>
+					<br>
+					<div style="border-bottom: 2px #bfbfbf solid; clear: both;"></div>
+				</div>
+			</div>
+			<div style="height: 700px; width: 200px;" class="col-md-4"></div>
+		</div>
+	</div>
+</div>
+<!-- fix Read more !!!!!!!!!!!!! -->
+<!--  n.body.length >= 100 ? 'Read more...' : '' -->

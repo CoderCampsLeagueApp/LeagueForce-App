@@ -1,0 +1,25 @@
+<h1>Leagues</h1>
+<div class="playerOverflow" style="color:black">
+	<table class="table table-bordered">
+		<thead>
+			<tr class="text-center" style="background: #333333; color:white">
+				<th class="text-center">Logo</th>
+				<th class="text-center">League Name</th>
+				<th class="text-center">Teams</th>
+				<th class="text-center">Weeks</th>
+				<th class="text-center">Division</th>
+				<th class="text-center">Location</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='l in vm.leagues track by $index' ng-class-odd="'odd'" ng-class-even="'even'">
+				<th class="text-center" ui-sref="SingleLeague({id: l._id})"><img width="30" height="30" ng-src="{{l.logo}}"></th>
+				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.name}}</th>
+				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.teams.length}}</th>
+				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.weeks.length}}</th>
+				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.division}}</th>
+				<th class="text-center" style="width: 50%" ui-sref="SingleLeague({id: l._id})">{{l.googleLocation}}</th>
+			</tr>
+		</tbody>
+	</table>
+</div>

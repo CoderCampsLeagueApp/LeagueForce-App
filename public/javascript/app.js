@@ -8,47 +8,47 @@
 
 		$stateProvider.state('Home',{
 			url: '/',
-			templateUrl: 'views/home.html'
+			templateUrl: 'templates/home.html'
 		}).state('Inbox', {
 			url: '/inbox/:id',
-			templateUrl: '/views/inbox.html',
+			templateUrl: '/templates/inbox.html',
 			controller: 'InboxController',
 			controllerAs: 'vm'
 		}).state('Leagues', {
 			url: '/leagues',
-			templateUrl: 'views/leagues.html',
+			templateUrl: 'templates/leagues.html',
 			controller: 'ViewLeaguesController',
 			controllerAs: 'vm'
 		}).state('SingleLeague', {
 			url: '/leagues/:id',
-			templateUrl: 'views/single_league.html',
+			templateUrl: 'templates/single_league.html',
 			controller: 'ViewLeaguesController',
 			controllerAs: 'vm'
 		}).state('TeamPage', {
 			url: '/team/:id',
-			templateUrl: 'views/team_page.html',
+			templateUrl: 'templates/team_page.html',
 			controller: 'ViewLeaguesController',
 			controllerAs: 'vm'
 		}).state('SingleMatch', {
 			url: '/match/:id',
-			templateUrl: 'views/single_match.html',
+			templateUrl: 'templates/single_match.html',
 			controller: 'ViewLeaguesController',
 			controllerAs: 'vm'
 		}).state('About', {
 			url: '/about',
-			templateUrl: 'views/about.html'
+			templateUrl: 'templates/about.html'
 		}).state('Login', {
 			url: '/login',
-			templateUrl: 'views/login.html'
+			templateUrl: 'templates/login.html'
 		}).state('Register', {
 			url: '/register',
-			templateUrl: 'views/register.html'
+			templateUrl: 'templates/register.html'
 		}).state('AdminRegister', {
 			url: '/admin/register',
-			templateUrl: 'views/admin_register.html'
+			templateUrl: 'templates/admin_register.html'
 		}).state('Admin', {
 			url: '/admin/manager',
-			templateUrl: 'views/admin.html',
+			templateUrl: 'templates/admin.html',
 			controller: 'AdminController',
 			controllerAs: 'vm'
 		}).state('Admin.league',{
@@ -74,15 +74,15 @@
 			templateUrl: '../admin_views/league_schedule.html'
 		}).state('TestView', {
 			url: '/test',
-			templateUrl: 'views/test_view.html'
+			templateUrl: 'templates/test_view.html'
 		}).state('Newsletter', {
 			url: '/leaguenews',
-			templateUrl: 'views/league_news.html',
+			templateUrl: 'templates/league_news.html',
 			controller: 'ViewNewsController',
 			controllerAs: 'vm'
 		}).state('SingleNewsletter', {
 			url: '/leaguenews/:id',
-			templateUrl: 'views/newsletter.html',
+			templateUrl: 'templates/newsletter.html',
 			controller: 'ViewNewsController',
 			controllerAs: 'vm'
 		}).state('Admin.storedarticles', {
@@ -90,25 +90,25 @@
 			templateUrl: '../admin_views/stored_articles.html'
 		}).state('ViewProfile', {
 			url: '/profile/:id',
-			templateUrl: 'views/all_profiles.html',
+			templateUrl: 'templates/all_profiles.html',
 			controller: "ViewProfileController",
 			controllerAs: 'vm'
 		}).state('Profile', {
 			url: '/profile/settings/:id',
-			templateUrl: 'views/profile_settings.html',
+			templateUrl: 'templates/profile_settings.html',
 			controller: "ProfileController",
 			controllerAs: 'vm'
 		}).state('EditProfile', {
 			url: '/EditProfile/:id',
-			templateUrl: 'views/edit_profile.html',
+			templateUrl: 'templates/edit_profile.html',
 			controller: "ProfileController",
 			controllerAs: 'vm'
 		}).state('PasswordReset', {
 			url: '/PasswordReset/:id',
-			templateUrl: 'views/password_reset.html'
+			templateUrl: 'templates/password_reset.html'
 		}).state("Token", {
 			url: '/auth/token/:token',
-			templateUrl: 'views/authenticating.html',
+			templateUrl: 'templates/authenticating.html',
 			controller: 'TokenController',
 			resolve: {
 				token: ["$stateParams", function($stateParams) {
