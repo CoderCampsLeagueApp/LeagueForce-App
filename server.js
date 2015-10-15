@@ -15,7 +15,7 @@ require('./models/Comments');
 require('./models/Newsletter');
 require('./config/passport') ;
 
-mongoose.connect('mongodb://localhost/league');
+// mongoose.connect('mongodb://localhost/league');
 
 // MongoLabs sets the correct URI in the environment
 var db = process.env.MONGOLAB_URI || 'mongodb://localhost/league' ;
