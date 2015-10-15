@@ -29,11 +29,6 @@
 			templateUrl: 'views/team_page.html',
 			controller: 'ViewTeamController',
 			controllerAs: 'vm'
-		}).state('SingleMatch', {
-			url: '/match/:id',
-			templateUrl: 'views/single_match.html',
-			controller: 'ViewTeamController',
-			controllerAs: 'vm'
 		}).state('About', {
 			url: '/about',
 			templateUrl: 'views/about.html'
@@ -72,9 +67,6 @@
 		}).state('Admin.schedule', {
 			url: '/schedule',
 			templateUrl: '../admin_views/league_schedule.html'
-		}).state('TestView', {
-			url: '/test',
-			templateUrl: 'views/test_view.html'
 		}).state('Newsletter', {
 			url: '/leaguenews',
 			templateUrl: 'views/league_news.html',

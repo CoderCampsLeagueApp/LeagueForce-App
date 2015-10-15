@@ -2,7 +2,8 @@
 	<div style="margin-top: 40px;" class="col-md-12"></div>
 	<div class="col-md-4 nopadding">
 		<h6><a ui-sref="SingleLeague({id: vm.league._id})" style="text-decoration: none;">Back To League Page</a></h6>
-		<img style="float: left;" width="160" class="img-responsive img-circle" ng-src="{{vm.team.logo}}">
+		<img style="float: left;" width="160" class="img-responsive img-thumbnail" ng-src="{{vm.team.logo}}">
+		<h3>{{vm.team.name}}</h3>
 	</div>
 	<div class="row">
 		<div class="coachOverflowDisplay col-md-8" style="padding-top:10px;">
@@ -37,7 +38,6 @@
 				</thead>
 				<tbody>
 					<tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='m in vm.schedule track by $index' ng-class-odd="'odd'" ng-class-even="'even'">
-						{{m}}
 						<th>{{m.date | date:"M/d hh:mma"}}</th>
 						<th>{{m.t1name}} <em>vs.</em> {{m.t2name}}</th>
 						<th>{{m.googleLocation.address}}</th>
