@@ -55,6 +55,13 @@
           </div>
         </div>
 
+
+        <div class="form-group">
+          <label class="col-md-2 control-label">Background Image </label>  
+          <div class="col-md-10">
+            <input type="text" class="nameinput" ng-model='vm.league.background' type="text" placeholder="URL..">   
+          </div>
+        </div>
       
 
 
@@ -97,37 +104,37 @@
           </div>
         </div>
         <div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">League Location</label>
+          <div class="form-group">
+            <label class="col-md-2 control-label">League Location</label>
             <div class="col-md-10" id="gmapsearchbox"> 
               <script type="text/ng-template" id="searchbox.tpl.html">
                 <input id='address' class='nameinput' type="text" placeholder="Search Box">
               </script>               
-          </div>
+            </div>
           </div>
           
           
-                   
+          
 
-         <!-- Google Maps____ -->
-<!-- parentdiv="searchBox.parentdiv" -->
+          <!-- Google Maps____ -->
+          <!-- parentdiv="searchBox.parentdiv" -->
 
-    <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
+          <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
 
-      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-      <ui-gmap-search-box template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentDiv"></ui-gmap-search-box>
-        <ui-gmap-marker options="{ draggable: true }" idKey='1' coords='marker' >
-      </ui-gmap-marker>
-    </ui-gmap-google-map>
-  
-
-
+          <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+          <ui-gmap-search-box template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentDiv"></ui-gmap-search-box>
+          <ui-gmap-marker options="{ draggable: true }" idKey='1' coords='marker' >
+        </ui-gmap-marker>
+      </ui-gmap-google-map>
+      
 
 
-    <label class="col-md-3 control-label"></label>
-    <div class="col-md-7">                     
-      <input style=" margin-top: 15px" class="btn btn-success btn-block" ng-click='vm.createLeague(vm.league)' value='Save League'>
-    </div>
-  </fieldset>
-</form>
+
+
+      <label class="col-md-3 control-label"></label>
+      <div class="col-md-7">                     
+        <input style=" margin-top: 15px" class="btn btn-success btn-block" ng-click='vm.createLeague(vm.league)' value='Save League'>
+      </div>
+    </fieldset>
+  </form>
 </div>

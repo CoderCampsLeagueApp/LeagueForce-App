@@ -46,21 +46,28 @@
 		//-------------Leagues----------------------
 		o.getLeague = function(id) {
 			var q = $q.defer();
-			$http.get('/api/league/' + id).success(function(res) {
+			$http.get('/api/views/league/' + id).success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise;
 		}
 		o.getLeagues = function() {
 			var q = $q.defer();
-			$http.get('/api/league/').success(function(res) {
+			$http.get('/api/views/league/').success(function(res) {
 				q.resolve(res);
 			});
 			return q.promise;
 		};
 
 		//-------------Teams-----------------------
-
+		o.getTeam = function(id) {
+			var q = $q.defer();
+			$http.get('/api/views/team/' + id).success(function(res) {
+				console.log(res);
+				q.resolve(res);
+			});
+			return q.promise;
+		}
 
 		return o;
 	}

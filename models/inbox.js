@@ -7,7 +7,7 @@ var InboxSchema = new mongoose.Schema({
 	messages: [{
 		body: String,
 		created: Date,
-		sender: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
+		sender: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
 	}]
 });
 

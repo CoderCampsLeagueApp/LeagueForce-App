@@ -81,10 +81,14 @@
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 
-					<button ng-click="nav.forgot()" class="btn btn-default btn-block">
+					<button ng-click="vm.sentPassword=true;nav.forgot()" class="btn btn-default btn-block">
 						Send Password to Email
 					</button>
 				</div>
+			</div>
+
+			<div ng-show="vm.sentPassword">
+				Please check your email.
 			</div>
 
 		</div>

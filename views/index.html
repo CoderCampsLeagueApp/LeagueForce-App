@@ -14,74 +14,74 @@
 </head>
 <body >	
 	<div ng-controller="NavController as nav" ng-cloak> 
-	<div class="container-fluid nopadding">
-		<nav ng-hide="nav.status.id" class='col-md-12 nopadding'>
-			<ul>
-				<li class="col-md-3">
-					<img width="50" height="50" src="http://res.cloudinary.com/josemedina760/image/upload/v1444790611/force_logo_svh4rp.png">
-					<a style="font-size:22px" ui-sref='Home'>League Force</a>
-				</li>
-				<li class="col-md-5"></li>
-				<li class="col-md-1 drop">
-					<a ui-sref="Leagues">Leagues</a>
-					<div class="dropdownContain">
-						<div class="dropOut">
-							<div class="triangle"></div>
-							<ul>
-								<li ui-sref="Leagues">Browse Leagues</li>
-								<li ui-sref="Newsletter">League News</li>
-							</ul>
-						</div>
-				</li>
-				
-			
+		<div class="container-fluid nopadding">
+			<nav ng-hide="nav.status.id" class='col-md-12 nopadding'>
+				<ul>
+					<li class="col-md-3">
+						<img width="50" height="50" src="http://res.cloudinary.com/josemedina760/image/upload/v1444790611/force_logo_svh4rp.png">
+						<a style="font-size:22px" ui-sref='Home'>League Force</a>
+					</li>
+					<li class="col-md-5"></li>
+					<li class="col-md-1 drop">
+						<a ui-sref="Leagues">Leagues</a>
+						<div class="dropdownContain">
+							<div class="dropOut">
+								<div class="triangle"></div>
+								<ul>
+									<li ui-sref="Leagues">Browse Leagues</li>
+									<li ui-sref="Newsletter">League News</li>
+								</ul>
+							</div>
+						</li>
+						
+						
 
-				<li class="col-md-1"><a ui-sref="About">About</a></li>
-				<li class="col-md-2"><a ui-sref="Login">Sign up/Login</a></li>				
-			</ul>
-		</nav>
-			<!-- Displays when the user logs in -->
-		<nav ng-show="nav.status.id" class='col-md-12 nopadding'>
-			<ul>
-				<li class="col-md-3">
-					<img width="50" height="50" src="http://www.ultimatefightworkout.org/wp-content/uploads/logo_small_bw.png">
-					<a style="font-size:22px" ui-sref='Home'>League Force</a>
-				</li>
-				<li class="col-md-5"></li>
-				<li class="col-md-1 drop">
-					<a ui-sref="Leagues">Leagues</a>
-					<div class="dropdownContain">
-						<div class="dropOut">
-							<div class="triangle"></div>
-							<ul>
-								<li ui-sref="Leagues">Browse Leagues</li>
-								<li ui-sref="Newsletter">League News</li>
-							</ul>
-						</div>
-				</li>
+						<li class="col-md-1"><a ui-sref="About">About</a></li>
+						<li class="col-md-2"><a ui-sref="Login">Sign up/Login</a></li>				
+					</ul>
+				</nav>
+				<!-- Displays when the user logs in -->
+				<nav ng-show="nav.status.id" class='col-md-12 nopadding'>
+					<ul>
+						<li class="col-md-3">
+							<img width="50" height="50" src="http://www.ultimatefightworkout.org/wp-content/uploads/logo_small_bw.png">
+							<a style="font-size:22px" ui-sref='Home'>League Force</a>
+						</li>
+						<li class="col-md-5"></li>
+						<li class="col-md-1 drop">
+							<a ui-sref="Leagues">Leagues</a>
+							<div class="dropdownContain">
+								<div class="dropOut">
+									<div class="triangle"></div>
+									<ul>
+										<li ui-sref="Leagues">Browse Leagues</li>
+										<li ui-sref="Newsletter">League News</li>
+									</ul>
+								</div>
+							</li>
 
-				<li class="col-md-1"><a ui-sref="About">About</a></li>
-				<li class="col-md-1 drop">
-					<a ui-sref="ViewProfile({id: nav.status.id})">
-						{{ nav.status.username | limitTo: 20}}{{nav.status.username.length > 20 ? '...' : ''}}
-					</a>
-					
-					<div class="dropdownContain">
-						<div class="dropOut">
-							<div class="triangle"></div>
-							<ul>
-								<li ui-sref="Inbox({id: nav.status.id})">Inbox</li>
-								<li ui-sref="Profile">Account Settings</li>
-								<li ui-sref="Admin.home">Admin</li>
-								<li style="background-color:#F2DEDE" ng-click="nav.logout()">Sign Out</li>
-							</ul>
-						</div>
-					</div>
-				
-				</li>				
-			</ul>
-		</nav>
-	</div>
+							<li class="col-md-1"><a ui-sref="About">About</a></li>
+							<li class="col-md-1 drop">
+								<a ui-sref="ViewProfile({id: nav.status.id})">
+									{{ nav.status.username | limitTo: 20}}{{nav.status.username.length > 20 ? '...' : ''}}
+								</a>
+								
+								<div class="dropdownContain">
+									<div class="dropOut">
+										<div class="triangle"></div>
+										<ul>
+											<li ui-sref="Inbox({id: nav.status.id})">Inbox</li>
+											<li ui-sref="Profile">Account Settings</li>
+											<li ui-sref="Admin.home">Admin</li>
+											<li style="background-color:#F2DEDE" ng-click="nav.logout()">Sign Out</li>
+										</ul>
+									</div>
+								</div>
+								
+							</li>				
+						</ul>
+					</nav>
+				</div>
 
 
 <!--
@@ -111,53 +111,53 @@
 		</div>
 	</div> -->
 
-<ui-view></ui-view>
+	<ui-view></ui-view>
 </div>
 
 
 
-	<!-- Ext Libs -->
-	<script src="angular/angular.min.js"></script>
-	<script src="ng-file-upload/ng-file-upload.min.js"></script>
-	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script src="angular-modal-service/dst/angular-modal-service.min.js"></script>
-	<script src='textAngular/dist/textAngular-rangy.min.js'></script>
-	<script src='textAngular/dist/textAngular-sanitize.min.js'></script>
-	<script src='textAngular/dist/textAngular.min.js'></script>
-	<script src="ng-img-crop/compile/minified/ng-img-crop.js"></script>
-	<!-- Global Src -->
-	<script src="/javascript/app.js"></script>
-	<!-- Angular Bootstrap -->
-	<script src="/angular-bootstrap/ui-bootstrap.min.js"></script>
-	<script src="/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<!-- Ext Libs -->
+<script src="angular/angular.min.js"></script>
+<script src="ng-file-upload/ng-file-upload.min.js"></script>
+<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="angular-modal-service/dst/angular-modal-service.min.js"></script>
+<script src='textAngular/dist/textAngular-rangy.min.js'></script>
+<script src='textAngular/dist/textAngular-sanitize.min.js'></script>
+<script src='textAngular/dist/textAngular.min.js'></script>
+<script src="ng-img-crop/compile/minified/ng-img-crop.js"></script>
+<!-- Global Src -->
+<script src="/javascript/app.js"></script>
+<!-- Angular Bootstrap -->
+<script src="/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
-	<!-- Google Maps -->
-	<script src='/lodash/lodash.min.js'></script>
-	<script src='/angular-simple-logger/dist/index.js'></script>
-	<script src='/angular-google-maps/dist/angular-google-maps.min.js'></script>
-	<!-- Factories -->
-	<script src="/javascript/services/LeagueFactory.js"></script>
-	<script src="/javascript/services/UserFactory.js"></script>
-	<script src="/javascript/services/ProfileFactory.js"></script>
-	<script src="/javascript/services/AdminFactory.js"></script>
-	<script src="/javascript/services/WebsiteFactory.js"></script>
-	<script src="/javascript/services/InboxFactory.js"></script>
-	<!-- Controllers -->
-	<script src="/javascript/controllers/viewctrl/ViewLeaguesController.js"></script>
-	<script src="/javascript/controllers/viewctrl/ViewNewsController.js"></script>
-	<script src="/javascript/controllers/viewctrl/ViewProfileController.js"></script>
-	<script src="/javascript/controllers/viewctrl/ModalController.js"></script>
-	<script src="/javascript/controllers/ProfileController.js"></script>
-	<script src="/javascript/controllers/LeagueController.js"></script>
-	<script src="/javascript/controllers/TeamController.js"></script>
-	<script src="/javascript/controllers/PlayerController.js"></script>
-	<script src="/javascript/controllers/NavController.js"></script>
-	<script src="/javascript/controllers/InboxController.js"></script>
-	<script src="/javascript/controllers/AdminController.js"></script>
-	<script src="/javascript/controllers/TokenController.js"></script>
-	<script src="/javascript/controllers/NewsletterController.js"></script>
-	<script src="/javascript/controllers/UploadController.js"></script>
-	<script src="/javascript/controllers/AdminUploadController.js"></script>
+<!-- Google Maps -->
+<script src='/lodash/lodash.min.js'></script>
+<script src='/angular-simple-logger/dist/index.js'></script>
+<script src='/angular-google-maps/dist/angular-google-maps.min.js'></script>
+<!-- Factories -->
+<script src="/javascript/services/LeagueFactory.js"></script>
+<script src="/javascript/services/UserFactory.js"></script>
+<script src="/javascript/services/ProfileFactory.js"></script>
+<script src="/javascript/services/AdminFactory.js"></script>
+<script src="/javascript/services/WebsiteFactory.js"></script>
+<script src="/javascript/services/InboxFactory.js"></script>
+<!-- Controllers -->
+<script src="/javascript/controllers/viewctrl/ViewTeamController.js"></script>
+<script src="/javascript/controllers/viewctrl/ViewSingleLeagueController.js"></script>
+<script src="/javascript/controllers/viewctrl/ViewLeaguesController.js"></script>
+<script src="/javascript/controllers/viewctrl/ViewNewsController.js"></script>
+<script src="/javascript/controllers/viewctrl/ViewProfileController.js"></script>
+<script src="/javascript/controllers/viewctrl/ModalController.js"></script>
+<script src="/javascript/controllers/ProfileController.js"></script>
+<script src="/javascript/controllers/NavController.js"></script>
+<script src="/javascript/controllers/InboxController.js"></script>
+<script src="/javascript/controllers/AdminController.js"></script>
+<script src="/javascript/controllers/TokenController.js"></script>
+<script src="/javascript/controllers/NewsletterController.js"></script>
+<script src="/javascript/controllers/UploadController.js"></script>
+<script src="/javascript/controllers/AdminUploadController.js"></script>
+
 
 </body>
 </html>

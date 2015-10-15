@@ -7,6 +7,7 @@ var LeagueSchema = new mongoose.Schema({
 	features: Array, //list of features the leahue offers.
 	logo: String, //bson or img url.
 	images: Array, //bson or img url.
+	background: String,
 	teams: [{type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
 	recentMatches: [{type: mongoose.Schema.Types.ObjectId, ref: 'Week'}],
 	weeks: [{

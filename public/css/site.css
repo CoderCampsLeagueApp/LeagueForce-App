@@ -9,27 +9,27 @@ body {
   height: 100%;
 }
 .cropArea {
-    background: #E4E4E4;
-    overflow: hidden;
-    width:100%;
-    height:350px;
+  background: #E4E4E4;
+  overflow: hidden;
+  width:100%;
+  height:350px;
 }
 .dropArea {
-    background: #E4E4E4;
-    overflow: hidden;
-    width: 100%;
-    height: 220px;
-    border: #666666 dashed 1px;
-    cursor: pointer;
+  background: #E4E4E4;
+  overflow: hidden;
+  width: 100%;
+  height: 220px;
+  border: #666666 dashed 1px;
+  cursor: pointer;
 }
 .thumb {
-    height: auto;
-    max-width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 .dropboxtext{
 	font-size: 24px;
-    position: relative;
-    bottom: 36px;
+  position: relative;
+  bottom: 36px;
 }
 .dropboxposition{
 	color: #757575;
@@ -37,29 +37,29 @@ body {
 }
 
 .percent {
-    position: absolute;
-    text-shadow: 1px 1px 1px black;
-    width: 100%;
-    height: 30px;
-    z-index: 1;
-    line-height: 33px;
-    text-align: center;
-    font-size: 18px;
-    color: white;
-    padding-left: 10px;
-    padding-right: 40px;
+  position: absolute;
+  text-shadow: 1px 1px 1px black;
+  width: 100%;
+  height: 30px;
+  z-index: 1;
+  line-height: 33px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 40px;
 }
 .pg-bar {
 	width: 100%;
-    height: 30px;
-    border-radius: 4px;
-    background-color: #DDDDDD;
+  height: 30px;
+  border-radius: 4px;
+  background-color: #DDDDDD;
 }
 .uploaded {
-    width:0;
-    height: 30px;
-    border-radius: 3px;
-    background-color: #FF8800;
+  width:0;
+  height: 30px;
+  border-radius: 3px;
+  background-color: #FF8800;
 }
 
 .angular-google-map-container { 
@@ -229,69 +229,102 @@ form .progress {
 }
 /* Header Home Page */
 #head {
-    min-height: 500px;
-    text-align: center;
-    padding-top: 140px;
-    color: white;
-    font-family: "Open sans", Helvetica, Arial;
-    font-weight: 300;
+  min-height: 500px;
+  text-align: center;
+  padding-top: 140px;
+  color: white;
+  font-family: "Open sans", Helvetica, Arial;
+  font-weight: 300;
 }
 #head.secondary {
-    height: 100px;
-    min-height: 100px;
-    padding-top: 0px;
+  height: 100px;
+  min-height: 100px;
+  padding-top: 0px;
 }
 #head .lead {
-    text-shadow: -2px 2px 4px black;
-    font-family: "Open sans", Helvetica, Arial;
-    font-size: 44px;
-    margin-bottom: 6px;
-    color: white;
-    line-height: 1.15em;
+  text-shadow: -2px 2px 4px black;
+  font-family: "Open sans", Helvetica, Arial;
+  font-size: 44px;
+  margin-bottom: 6px;
+  color: white;
+  line-height: 1.15em;
 }
 #head .tagline {
-    color: rgba(255, 255, 255, 0.75);
-    margin-bottom: 25px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 25px;
 }
 #head .tagline a {
-    color: #fff;
+  color: #fff;
 }
 #head .btn-default {
-    background: transparent;
-    color: #d6d6d6;
-    box-shadow: inset 0px 0px 0px 3px rgba(255, 255, 255, .5);
-    background: rgba(20, 20, 20, 0.30);
+  background: transparent;
+  color: #d6d6d6;
+  box-shadow: inset 0px 0px 0px 3px rgba(255, 255, 255, .5);
+  background: rgba(20, 20, 20, 0.30);
 }
 #head .btn-default:hover,
 #head .btn-default:focus {
-    color: rgba(255, 255, 255, .8);
-    -webkit-box-shadow: inset 0px 0px 0px 3px rgba(255, 255, 255, .8);
-    -moz-box-shadow: inset 0px 0px 0px 3px rgba(255, 255, 255, .8);
-    box-shadow: inset 0px 0px 0px 3px rgba(255, 255, 255, .8);
-    background: transparent;
+  color: rgba(255, 255, 255, .8);
+  -webkit-box-shadow: inset 0px 0px 0px 3px rgba(255, 255, 255, .8);
+  -moz-box-shadow: inset 0px 0px 0px 3px rgba(255, 255, 255, .8);
+  box-shadow: inset 0px 0px 0px 3px rgba(255, 255, 255, .8);
+  background: transparent;
 }
 #head .btn-default:active,
 #head .btn-default.active {
-    color: #fff;
-    -webkit-box-shadow: inset 0px 0px 0px 3px #fff;
-    -moz-box-shadow: inset 0px 0px 0px 3px #fff;
-    box-shadow: inset 0px 0px 0px 3px #fff;
-    background: transparent;
+  color: #fff;
+  -webkit-box-shadow: inset 0px 0px 0px 3px #fff;
+  -moz-box-shadow: inset 0px 0px 0px 3px #fff;
+  box-shadow: inset 0px 0px 0px 3px #fff;
+  background: transparent;
 }
 @media (max-width: 767px) {
-    #head {
-        min-height: 420px;
-        padding-top: 160px;
-    }
-    #head .lead {
-        font-size: 34px;
-    }
+  #head {
+    min-height: 420px;
+    padding-top: 160px;
+  }
+  #head .lead {
+    font-size: 34px;
+  }
 }
 .jumbotron{
   margin-bottom: 0;
 }
 
+/* League Views */
+#slides_control > div{
+  height: 200px;
+}
 
+#slides_control {
+  position:absolute;
+  width: 400px;
+  left:50%;
+  top:20px;
+  margin-left:-200px;
+}
 
- 
+.leagueHome {
+  width: 900px;
+  height: 100%;
+  margin-bottom: 200px;
+  color: #fff;
+  background-color: rgba(10, 10, 10, 0.5);
+  border: 1px outset;
+  margin: auto auto;
+  padding: 40px;
+  padding-bottom: 60px;
+  border-radius: 4px; 
+  box-shadow: 0 0 10px black;
+}
+
+.teamBackground {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: blue; /* blue is only temporary */
+  height: 200px;
+  width: 100%;
+  border: 1px solid black;
+}
+
 

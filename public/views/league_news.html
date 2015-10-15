@@ -11,7 +11,7 @@
 								<img class="img img-thumbnail img-responsive" style="float: left;" ng-src="{{n.image}}"/>
 							</div>
 						</div>
-						<div  class="col-md-5" style="word-wrap: break-word;" ta-bind ng-model="n.body" style="clear: both;"></div>
+						<!-- <div  class="col-md-5" style="word-wrap: break-word;" ta-bind ng-model="n.body" style="clear: both;"></div> -->
 					</div>
 					<div ng-show="n.comments.length > 0">
 						<button class='btn btn-md btn-info' ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">View All {{n.comments.length}} Comments</button>
@@ -24,5 +24,3 @@
 		</div>
 	</div>
 </div>
-<!-- fix Read more !!!!!!!!!!!!! -->
-<!--  n.body.length >= 100 ? 'Read more...' : '' -->

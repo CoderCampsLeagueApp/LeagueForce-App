@@ -7,8 +7,9 @@
             <thead>
               <tr style="background: #333333; color:white">
                 <th style="width: 150px;">Date</th>
-                <th>Teams</th>
-                <th style="width: 100px;">Remove Match</th>
+                <th style="width: 250px;">Teams</th>
+                <th>Location</th>
+                <th style="width: 110px;">Remove Match</th>
               </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
 
                 <th>{{m.date | date:"M/d hh:mma"}}</th>
                 <th>{{m.t1name}} <em>vs.</em> {{m.t2name}}</th>
+                <th>{{m.googleLocation.address}}</th>
                 <th class="text-center"><span class='text-dangerpointer' ng-click='vm.removeMatch($index)'>X</span></th>
               </tr>
             </tbody>
@@ -64,26 +66,35 @@
         <label class="col-md-2 control-label">Date and Time</label>  
         <div class="col-md-8">
           <input ng-model='vm.match.date'  type="datetime-local" class="nameinput">
-
-
-     <!--  <div class="form-group">
-        <label class="col-md-2 control-label">Match Location</label>
-        <div class="col-md-10">                     
-          <input ng-model="vm.match.location.name" class="nameinput" placeholder='Enter Location..' type="text">
         </div>
-      </div> -->
+      </div>
 
-      <!-- ______________________Google Maps__________________________-->
+      <div class="form-group">
+        <label class="col-md-2 control-label">Match Location</label>
+        <div class="col-md-10" id="gmapsearchbox"> 
+          <script type="text/ng-template" id="searchbox.tpl.html">
+            <input id='address' class='nameinput' type="text" placeholder="Search Box">
+          </script>               
+        </div>
+      </div>
 
 
-      <!-- <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
-      <ui-gmap-google-map center='vm.map.center' zoom='vm.map.zoom'>
-      <ui-gmap-marker ng-model="vm.match.location.coordinates" options="{ draggable: true }" idKey='1' coords='vm.marker' >
+
+
+      <!-- Google Maps____ -->
+      <!-- parentdiv="searchBox.parentdiv" -->
+
+      <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
+
+      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+      <ui-gmap-search-box template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentDiv"></ui-gmap-search-box>
+      <ui-gmap-marker options="{ draggable: true }" idKey='1' coords='marker' >
     </ui-gmap-marker>
-  </ui-gmap-google-map> -->
+  </ui-gmap-google-map>
+
 
   <a ng-click='vm.addMatch(vm.match)' style="margin-top:50px;" class="btn btn-info btn-block">Add Match</a>
- 
+
 
   <label class="col-md-3 control-label"></label>
   <div class="col-md-7">                     

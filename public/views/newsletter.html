@@ -26,25 +26,23 @@
 			<img ui-sref='ViewProfile({id: c.user._id})' ng-src="{{c.user.pic}}" class="img-thumbnail pointer" style="height: 75px"/>
 		</div>
 		<div class="col-md-11 well">
-		<a ui-sref='ViewProfile({id: c.user._id})'><b>{{c.user.name}}</b></a> <i>{{c.created | date:"M/d/yyyy hh:mma"}}</i><br>{{c.body}}<br>
-		<br>
-		
-		<!-- <a ng-click="vm.startCommentEdit(c)">Edit</a> 
-		finish comment editing-->
-		<a style="color:red" ng-click="vm.deleteComment(c._id, vm.newsletter._id)">Remove</a>
-		<a ng-click="replyBox = true">Reply</a>
-		<div class="well" ng-show="replyBox">
-			<textarea ng-model="vm.comment.reply.body"></textarea><br>
-			<a ng-click="replyBox = false">Cancel</a>
-			<a ng-click="vm.postReply(c._id); replyBox=false;">Reply</a>
-		</div>
-		<!-- Replies -->
-		<div class="well" ng-repeat="r in c.reply">
-			<img ng-src="{{r.user.pic}}" class="img img-thumbnail" style="height: 50px"/>
-			<b>{{r.user.name}}</b>
-			<i>{{r.created | date:"M/d/yyyy hh:mma"}}</i>
-			<p>{{r.body}}</p>
-		</div>
+			<a ui-sref='ViewProfile({id: c.user._id})'><b>{{c.user.name}}</b></a> <i>{{c.created | date:"M/d/yyyy hh:mma"}}</i><br>{{c.body}}<br>
+			<br>
+
+			<a style="color:red" ng-click="vm.deleteComment(c._id, vm.newsletter._id)">Remove</a>
+			<a ng-click="replyBox = true">Reply</a>
+			<div class="well" ng-show="replyBox">
+				<textarea ng-model="vm.comment.reply.body"></textarea><br>
+				<a ng-click="replyBox = false">Cancel</a>
+				<a ng-click="vm.postReply(c._id); replyBox=false;">Reply</a>
+			</div>
+			<!-- Replies -->
+			<div class="well" ng-repeat="r in c.reply">
+				<img ng-src="{{r.user.pic}}" class="img img-thumbnail" style="height: 50px"/>
+				<b>{{r.user.name}}</b>
+				<i>{{r.created | date:"M/d/yyyy hh:mma"}}</i>
+				<p>{{r.body}}</p>
+			</div>
 		</div>
 	</div>
 </div>

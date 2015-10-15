@@ -2,27 +2,23 @@
 	angular.module('app')
 	.controller('ViewLeaguesController', ViewLeaguesController);
 
-	ViewLeaguesController.$inject = ['UserFactory', '$state', '$stateParams', '$rootScope', 'ProfileFactory', 'AdminFactory'];
+	ViewLeaguesController.$inject = ['$state', '$stateParams', '$rootScope', 'WebsiteFactory','$timeout'];
 
-	function ViewLeaguesController(UserFactory, $state, $stateParams, $rootScope, ProfileFactory, AdminFactory){
+	function ViewLeaguesController($state, $stateParams, $rootScope, WebsiteFactory, $timeout){
 		var vm = this;
-		vm.newsletter = {};
+		vm.leagues = [];
+		vm.league = {};
 
-		if($stateParams.id) {
-			UserFactory.getUserLoggedIn($stateParams.id).then(function(res) {
-				vm.user = res;
-			});
-		}
+		//------------Leagues--------------
 
-		// Checks if user is logged in
-		if($rootScope._user) {
-			console.log("DEBUG: ProfileController: Looking for user") ;
-			console.log("DEBUG: $rootScope._user.id = " + $rootScope._user.id) ;
-			UserFactory.getUserLoggedIn($rootScope._user.id).then(function(res) {
-				vm.userLoggedIn = res ;
-			}) ;
-		}
 
+		WebsiteFactory.getLeagues().then(function(res) {
+			vm.leagues = res;
+		});
+		
+
+
+		//------------Teams-----------------
 		
 	} 
 

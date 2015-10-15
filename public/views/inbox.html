@@ -7,20 +7,20 @@
 				<ul class="nopadding" style="list-style-type: none;">
 					<div ng-repeat='inbox in vm.inbox' ng-click='vm.showMessage(inbox)'>
 						<li style="border-bottom:solid 1px #d6d6d6" ng-if='inbox.user1._id === nav.status.id' class="inboxMessages pointer">
-							<img style="float:left" width="70" height="65" ng-src="{{inbox.user2.pic}}">
+							<img style="float:left" width="70" height="65" ng-src="{{inbox.user2.pic || nav.noPic}}">
 							
-								<a style='font-weight: bold;color:#23527c'>{{inbox.user2.name}}</a>
-								<i class='pull-right' style='font-size: 10px'>{{inbox.messages[inbox.messages.length - 1].created | date:'medium' }}</i>
-								<br>
-								<span class='inboxSub'>{{inbox.messages[inbox.messages.length - 1].body | limitTo: 80 }}{{inbox.messages[inbox.messages.length - 1].body.length > 80 ? '...' : ''}}</span>
+							<a style='font-weight: bold;color:#23527c'>{{inbox.user2.name}}</a>
+							<i class='pull-right' style='font-size: 10px'>{{inbox.messages[inbox.messages.length - 1].created | date:'medium' }}</i>
+							<br>
+							<span class='inboxSub'>{{inbox.messages[inbox.messages.length - 1].body | limitTo: 80 }}{{inbox.messages[inbox.messages.length - 1].body.length > 80 ? '...' : ''}}</span>
 						</li>
 						<li style="border-bottom:solid 1px #d6d6d6" ng-if='inbox.user1._id != nav.status.id' class="inboxMessages pointer">
-							<img style="float:left" width="70" height="65" ng-src="{{inbox.user1.pic}}">
+							<img style="float:left" width="70" height="65" ng-src="{{inbox.user1.pic || nav.noPic}}">
 							
-								<a style='font-weight: bold;color:#23527c'>{{inbox.user1.name}}</a>
-								<i class='pull-right' style='font-size: 10px'>{{inbox.messages[inbox.messages.length - 1].created | date:'short' }}</i>
-								<br>
-								<span class='inboxSub'>{{inbox.messages[inbox.messages.length - 1].body | limitTo: 80 }}{{inbox.messages[inbox.messages.length - 1].body.length > 80 ? '...' : ''}}</span>
+							<a style='font-weight: bold;color:#23527c'>{{inbox.user1.name}}</a>
+							<i class='pull-right' style='font-size: 10px'>{{inbox.messages[inbox.messages.length - 1].created | date:'short' }}</i>
+							<br>
+							<span class='inboxSub'>{{inbox.messages[inbox.messages.length - 1].body | limitTo: 80 }}{{inbox.messages[inbox.messages.length - 1].body.length > 80 ? '...' : ''}}</span>
 						</li>
 					</div>
 				</ul>
@@ -30,7 +30,7 @@
 			<div ng-class='{"hideMessage": !vm.messageDisplay}' class="messageDisplay">
 				<div ng-repeat='m in vm.inboxMessage.messages' class="col-md-12">
 					<div class="col-md-1">
-						<img style="position: relative;top: 15px;" ng-hide=' m.sender._id === nav.status.id' class="img-circle" width="60" height="60" ng-src="{{m.sender.pic}}">
+						<img style="position: relative;top: 15px;" ng-hide=' m.sender._id === nav.status.id' class="img-circle" width="60" height="60" ng-src="{{m.sender.pic || nav.noPic}}">
 					</div>
 					<div class="col-md-11">
 						<div ng-class="{'messageSender': m.sender._id === nav.status.id, 'messageRecipient': m.sender._id != nav.status.id }">
@@ -39,12 +39,12 @@
 						</div>
 					</div>
 					
-			</div>
+				</div>
 			</div>
 			<div class="col-xs-12" style="background-color: #fff">
 				<div class="col-xs-10"><textarea style="margin-top:5px" ng-model='vm.msg.message' class="form-control"></textarea></div>
-				 <div class="col-xs-2"><button style="margin-top:5px"  ng-click='vm.reply()' class="btn btn-default"><a style="font-size: 30px">SEND</a></button></div>
+				<div class="col-xs-2"><button style="margin-top:5px"  ng-click='vm.reply(vm.inboxMessage._id, vm.msg.message)' class="btn btn-default"><a style="font-size: 30px">SEND</a></button></div>
 			</div>
-		
+
+		</div>
 	</div>
-</div>

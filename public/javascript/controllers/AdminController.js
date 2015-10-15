@@ -11,45 +11,44 @@
 		vm.title = 'Welcome to our App!';
 		vm.uiRouterState = $state;
 
-		vm.def = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 		$state.go('Admin.home');
 
 		// -----------Google Maps---------------------
 
 		var events = {
-		    places_changed: function (searchBox) {
-		        var place = searchBox.getPlaces();
+			places_changed: function (searchBox) {
+				var place = searchBox.getPlaces();
 		        // console.log(place);
 		        if (!place || place == 'undefined' || place.length == 0) {
-		            console.log('no place data :(');
-		            return;
-		        }
-
-		        $scope.map = {
-		            "center": {
-		                "latitude": place[0].geometry.location.lat(),
-		                "longitude": place[0].geometry.location.lng()
-		            },
-		            "zoom": 18
-		        };
-		        $scope.marker = {
-		                latitude: place[0].geometry.location.lat(),
-		                longitude: place[0].geometry.location.lng()
-		        };
-		        $scope.address = {};
-		        $scope.address.format = place[0].formatted_address;
-		       	if(place[0].address_components){
-		        for(var i = 0; i < place[0].address_components.length; i++){
-		        	var x = parseInt(place[0].address_components[i].short_name);
-		        	if(x > 10000 && x < 99999){
-		        		$scope.address.zip = x;
+		        	console.log('no place data :(');
+		        		return;
 		        	}
+
+		        	$scope.map = {
+		        		"center": {
+		        			"latitude": place[0].geometry.location.lat(),
+		        			"longitude": place[0].geometry.location.lng()
+		        		},
+		        		"zoom": 18
+		        	};
+		        	$scope.marker = {
+		        		latitude: place[0].geometry.location.lat(),
+		        		longitude: place[0].geometry.location.lng()
+		        	};
+		        	$scope.address = {};
+		        	$scope.address.format = place[0].formatted_address;
+		        	if(place[0].address_components){
+		        		for(var i = 0; i < place[0].address_components.length; i++){
+		        			var x = parseInt(place[0].address_components[i].short_name);
+		        			if(x > 10000 && x < 99999){
+		        				$scope.address.zip = x;
+		        			}
+		        		}
+		        	}
+		        	
 		        }
-		    }
-		        
-		    }
-		};
-        $scope.searchbox = { template:'searchbox.tpl.html', events:events, parentDiv: 'gmapsearchbox'};
+		    };
+		    $scope.searchbox = { template:'searchbox.tpl.html', events:events, parentDiv: 'gmapsearchbox'};
 
 		$scope.map = { center: { latitude: 40, longitude: -100 }, zoom: 4 }; //center of map
 
@@ -174,6 +173,17 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			}
 
 		};
+
+		vm.publishLeague = function(id) {
+			var leaguePublish = {
+				_id: id,
+				isDisplay: true
+			};
+			AdminFactory.editLeague(leaguePublish).then(function(res) {
+				$state.go('Leagues');
+			})
+		}
+
 		vm.addFeature = function(feature){
 			vm.league.features.push(feature);
 		};
@@ -192,9 +202,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			console.log(idx);
 			vm.league.images.splice(idx, 1);
 		};
-
-
-		//creating League finished 
 
 		//Editing League ------------------------------------------------
 
@@ -222,6 +229,16 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.team.teamMembers = [];
 
 		//Creating & Editing Team---------------------------------------------
+		vm.clearTeam = function() {
+			delete vm.team;
+			delete vm.coach;
+			delete vm.player;
+			vm.team = {};
+			vm.team.teamMembers = [];
+			vm.coach = {};
+			vm.player = {};
+		};
+		
 		vm.createTeam = function(team){
 			team.league = vm.adminLeague._id;
 			AdminFactory.createTeam(team).then(function(res){
@@ -232,6 +249,13 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.editTeam = function(team){
 			console.log(team); 
 			AdminFactory.editTeam(team).then(function(res){
+				delete vm.team;
+				delete vm.coach;
+				delete vm.player;
+				vm.team = {};
+				vm.team.teamMembers = [];
+				vm.coach = {};
+				vm.player = {};
 				$state.go('Admin.home');
 			}); 
 		};
@@ -330,9 +354,16 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 				if(copy.team2 === vm.adminLeague.teams[i]._id ){
 					copy.t2name = vm.adminLeague.teams[i].name;
 				}
-			}
+			};
+
+			copy.googleLocation = {
+				address: $scope.address.format,
+				zip: $scope.address.zip,
+				latitude: $scope.marker.latitude,
+				longitude: $scope.marker.longitude
+			};
+			console.log(copy);
 			vm.allmatches.push(copy);
-			
 			vm.match.date = '';
 			vm.match.googleLocation = '';
 			vm.match.team1 = '';
@@ -348,7 +379,8 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			
 			var leagueWeek = {
 				weekId: vm.week,
-				leagueId: vm.adminLeague._id
+				leagueId: vm.adminLeague._id,
+
 			};
 			AdminFactory.createMatch(matches, leagueWeek).then(function(res) {
 				var match = true;
