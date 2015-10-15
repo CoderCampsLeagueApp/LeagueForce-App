@@ -16,7 +16,14 @@ require('./models/Comments');
 require('./models/Newsletter');
 require('./config/passport') ;
 
-mongoose.connect('mongodb://localhost/league');
+// mongoose.connect('mongodb://localhost/league');
+
+// MongoLabs sets the correct URI in the environment
+var db = process.env.MONGOLAB_URI || 'mongodb://localhost/league' ;
+mongoose.connect(db, function(err) {
+	if(err) return console.log("Error connecting to db: %s", db) ;
+	console.log("Connected to %s", db) ;
+}) ;
 
 app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client

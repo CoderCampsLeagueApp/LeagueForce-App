@@ -11,20 +11,20 @@
 
 		vm.editpic = function(user){
 			var picmodal = $modal.open({
-			templateUrl: "/views/modalviews/profilepic_upload.html",
-			size: "md",
-			animation: true,
-			controller: 'UploadController',
-			controllerAs: "uc",
-			backdrop: 'static',
-			resolve: {
-				user: function () { return user }
-			}
+				templateUrl: "/templates/modalviews/profilepic_upload.html",
+				size: "md",
+				animation: true,
+				controller: 'UploadController',
+				controllerAs: "uc",
+				backdrop: 'static',
+				resolve: {
+					user: function () { return user }
+				}
 			});
 			picmodal.result.then(function(res){
 				console.log(res);
 				vm.prof.pic = res;
-		});
+			});
 		};
 		
 		
