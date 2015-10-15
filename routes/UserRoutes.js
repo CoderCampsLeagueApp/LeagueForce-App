@@ -155,7 +155,9 @@ router.post('/login', function(req, res, next) {
 
 	// calling from passport
 	passport.authenticate('local', function(err, user, info) { 
-		if(!user) return res.status(400).send(info);
+		// if(!user) return res.status(400).send(info);
+		// Should send Incorrect Password
+		if(!user) return res.status(400).send("Invalid Email or Password");
 
 		// generate a token when we find a user in the collection
 		res.send({ token: user.generateJWT() }); 
