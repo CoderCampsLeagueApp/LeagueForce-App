@@ -29,11 +29,6 @@
 			templateUrl: 'views/team_page.html',
 			controller: 'ViewTeamController',
 			controllerAs: 'vm'
-		}).state('SingleMatch', {
-			url: '/match/:id',
-			templateUrl: 'views/single_match.html',
-			controller: 'ViewTeamController',
-			controllerAs: 'vm'
 		}).state('About', {
 			url: '/about',
 			templateUrl: 'views/about.html'
