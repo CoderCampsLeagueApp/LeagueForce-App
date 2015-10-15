@@ -28,9 +28,14 @@
 			<p>Location: {{vm.adminLeague.googleLocation.latitude}}, {{vm.adminLeague.googleLocation.longitude}} </p>
 			<div>
 				<p>League Photos : </p>
-				<div ng-repeat='i in vm.adminLeague.images track by $index'>
-					<img class="col-md-4" width="130" height="100" ng-src="{{i}}">
-				</div>
+				
+					<div style="height:200px" class="teamOverflow col-md-12">
+						<div>						
+							<img style="margin:10px" ng-repeat='i in vm.adminLeague.images track by $index' class="col-md-3"  ng-src="{{i}}">
+						</div>
+
+					</div>
+				
 			</div>
 
 		</div>
