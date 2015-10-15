@@ -30,10 +30,10 @@
 			<div ng-class='{"hideMessage": !vm.messageDisplay}' class="messageDisplay">
 				<div ng-repeat='m in vm.inboxMessage.messages' class="col-md-12">
 					<div class="col-md-1">
-						<img style="position: relative;top: 15px;" ng-hide=' m.sender._id === nav.status.id' class="img-circle" width="60" height="60" ng-src="{{m.sender.pic || nav.noPic}}">
+						<img style="position: relative;top: 15px;" class="img-circle" width="60" height="60" ng-src="{{m.sender.pic || nav.noPic}}">
 					</div>
 					<div class="col-md-11">
-						<div ng-class="{'messageSender': m.sender._id === nav.status.id, 'messageRecipient': m.sender._id != nav.status.id }">
+						<div ng-class="{'messageSender': m.sender === nav.status.id, 'messageRecipient': m.sender !== nav.status.id }">
 							<p>{{m.sender.name}}, <i> {{m.created | date:'short'}}</i></p>
 							<p><b>{{m.body}}</b></p>
 						</div>
@@ -43,7 +43,7 @@
 			</div>
 			<div class="col-xs-12" style="background-color: #fff">
 				<div class="col-xs-10"><textarea style="margin-top:5px" ng-model='vm.msg.message' class="form-control"></textarea></div>
-				<div class="col-xs-2"><button style="margin-top:5px"  ng-click='vm.reply(vm.inboxMessage._id, vm.msg.message)' class="btn btn-default"><a style="font-size: 30px">SEND</a></button></div>
+				<div class="col-xs-2"><button style="margin-top:5px"  ng-click='vm.reply(vm.inboxMessage._id, vm.msg.message, nav.status.id)' class="btn btn-default"><a style="font-size: 30px">SEND</a></button></div>
 			</div>
 
 		</div>
