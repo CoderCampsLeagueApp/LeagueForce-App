@@ -5,6 +5,8 @@ var League = mongoose.model('League');
 var Team = mongoose.model('Team');
 var User = mongoose.model('User') ;
 var jwt = require('express-jwt');
+var cloudinary = require('cloudinary');
+var multiparty = require('multiparty');
 
 
 var auth = jwt({
@@ -15,16 +17,16 @@ var auth = jwt({
 
 
 // Middleware checks if user is admin.
-router.use('/', auth, function(req, res, next) {
-	User.findOne({
-		_id : req.payload.id
-	}, function(err, user) {
-		req.user = user ;
-		if(user.admin) {
-			next() ;
-		} ;
-	}) ;
-}) ;
+// router.use('/', auth, function(req, res, next) {
+// 	User.findOne({
+// 		_id : req.payload.id
+// 	}, function(err, user) {
+// 		req.user = user ;
+// 		if(user.admin) {
+// 			next() ;
+// 		} ;
+// 	}) ;
+// }) ;
 
 
 
@@ -74,7 +76,7 @@ router.put('/:id', auth, function(req, res) {
 		console.log('put---------------------------------------------');
 		if(err) return res.status(500).send({err: "Error getting league to edit"});
 		if(!league) return res.status(400).send({err: "League to edit does not exist"});
-		res.send(req.body);
+		res.send();
 	});
 });
 
@@ -153,6 +155,31 @@ router.post('/match', auth, function(req, res) {
 		res.send(x);
 
 
+	});
+});
+
+cloudinary.config({
+	cloud_name: 'josemedina760',
+	api_key: '276662693546377',
+	api_secret: 'A7GxUka_ZvG2NHNFU54GcDcO_Rw'
+});
+
+
+router.post('/leagueLogoUpload', function(req, res) {
+	var form = new multiparty.Form();
+	form.parse(req, function(err, data, fileObject){
+		console.log(data);
+		console.log('-----------------------------------');
+		console.log(fileObject);
+		
+		cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
+			League.update({_id: data.leagueid[0]}, {logo: picInfo.url})
+			.exec(function(err, user){
+				if(err) return res.status(500).send({err:"Server Issues"});
+				if(!user) return res.status(500).send({err:"Could not find the users"});
+				res.send(picInfo.url);
+			});
+		});
 	});
 });
 

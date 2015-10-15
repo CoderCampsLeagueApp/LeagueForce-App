@@ -24,6 +24,7 @@ var UserSchema = new mongoose.Schema({
 	// facebookId: String,
 	pic: String, //array of images either bson or img url.
 	bio: String,
+	background: String,
 	passwordHash: String,
 	salt: String,
 	created: Date, //date user created.

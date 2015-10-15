@@ -11,7 +11,7 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Name </label>  
         <div class="col-md-10">
-          <input type="text" class="nameinput" ng-model='vm.league.name' placeholder="League name" required>
+          <input type="text" class="nameinput" ng-model='vm.league.name' placeholder="League Name" required>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
         <label class="col-md-2 control-label">Features</label>
         <div class="col-md-10">
           <div class="input-group">
-            <input type="text" class="appendinput" ng-model='vm.feature' placeholder="features">
+            <input type="text" class="appendinput" ng-model='vm.feature' placeholder="Features">
             <span ng-click='vm.addFeature(vm.feature); vm.feature = ""' class="input-group-addon pointer">Add feature</span>
 
           </div>
@@ -55,29 +55,14 @@
           </div>
         </div>
 
-        <!-- Text input-->
+
         <div class="form-group">
-          <label class="col-md-2 control-label">Logo </label>  
+          <label class="col-md-2 control-label">Background Image </label>  
           <div class="col-md-10">
-            <input type="text" class="nameinput" ng-model='vm.league.logo' type="text" placeholder="url for now..">   
+            <input type="text" class="nameinput" ng-model='vm.league.background' type="text" placeholder="URL..">   
           </div>
         </div>
-        <!-- <ng-form name="form">
-        Single Image with validations
-        <button class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-resize="{width: 600, height: 600}" THIS APPLIES MAX SIZE TO PHOTO ngf-min-height="100">Select</button> -->
-
-        <!-- ngf-resize="{width: 100, height: 100}" THIS APPLIES MAX SIZE TO PHOTO-->
-
-        <!-- Drop files:
-        <div ngf-drop ng-model="files" class="drop-box">Drop</div>
-        <button ng-click="submit()">submit</button>
       
-      Image thumbnail:
-      <img ngf-thumbnail="file">
-
-      <div style="margin: auto;" ng-show='vm.loading' layout='row' layout-sm='column' layout-align='space-around'>
-        <md-progress-circular md-mode='indeterminate' md-diameter='80'></md-progress-circular>
-      </div> -->
 
 
       <!-- Weeks -->
@@ -87,9 +72,6 @@
           <a type="btn" class="btn btn-success btn-md" ng-click="vm.addWeek()"><span class="glyphicon glyphicon-plus"></span></a>
           <a type="btn" class="btn btn-danger btn-md" ng-click="vm.subtractWeek()"><span class="glyphicon glyphicon-minus"></span></a>
           <span style="font-size: 32px; padding-left: 10px;">{{vm.league.weeks.length}}</span>
-            <!-- <div class="input-group">
-              <input type="number" class="appendinput" ng-model='vm.league.weeks' placeholder="Weeks"/>
-            </div> -->
           </div> 
         </div>
 
@@ -98,7 +80,7 @@
           <label class="col-md-2 control-label">Images</label>
           <div class="col-md-10">
             <div class="input-group">
-              <input type="text" class="appendinput" ng-model='vm.image' placeholder="images" type="text">
+              <input type="text" class="appendinput" ng-model='vm.image' placeholder="Images" type="text">
               <span ng-click='vm.addImage(vm.image); vm.image = ""' class="input-group-addon pointer">Add Image</span>
             </div>
             <div class="leagueOverflow col-md-12" style=" padding-top:10px;">
@@ -115,41 +97,41 @@
         <div class="form-group">
           <label class="col-md-2 control-label">League Description</label>
           <div class="col-md-10">                     
-            <textarea ng-model='vm.league.description' class="wpcf7-form-control wpcf7-textarea" placeholder='what the league can offer' required></textarea>
+            <textarea ng-model='vm.league.description' class="wpcf7-form-control wpcf7-textarea" placeholder='What Does Your League Offer?' required></textarea>
           </div>
         </div>
         <div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">League Location</label>
+          <div class="form-group">
+            <label class="col-md-2 control-label">League Location</label>
             <div class="col-md-10" id="gmapsearchbox"> 
               <script type="text/ng-template" id="searchbox.tpl.html">
                 <input id='address' class='nameinput' type="text" placeholder="Search Box">
               </script>               
-          </div>
+            </div>
           </div>
           
           
-                   
+          
 
-         <!-- Google Maps____ -->
-<!-- parentdiv="searchBox.parentdiv" -->
+          <!-- Google Maps____ -->
+          <!-- parentdiv="searchBox.parentdiv" -->
 
-    <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
+          <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
 
-      <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-      <ui-gmap-search-box template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentDiv"></ui-gmap-search-box>
-        <ui-gmap-marker options="{ draggable: true }" idKey='1' coords='marker' >
-      </ui-gmap-marker>
-    </ui-gmap-google-map>
-  
-
-
+          <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+          <ui-gmap-search-box template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentDiv"></ui-gmap-search-box>
+          <ui-gmap-marker options="{ draggable: true }" idKey='1' coords='marker' >
+        </ui-gmap-marker>
+      </ui-gmap-google-map>
+      
 
 
-    <label class="col-md-3 control-label"></label>
-    <div class="col-md-7">                     
-      <input style=" margin-top: 15px" class="btn btn-success btn-block" ng-click='vm.createLeague(vm.league)' value='Save League'>
-    </div>
-  </fieldset>
-</form>
+
+
+      <label class="col-md-3 control-label"></label>
+      <div class="col-md-7">                     
+        <input style=" margin-top: 15px" class="btn btn-success btn-block" ng-click='vm.createLeague(vm.league)' value='Save League'>
+      </div>
+    </fieldset>
+  </form>
 </div>

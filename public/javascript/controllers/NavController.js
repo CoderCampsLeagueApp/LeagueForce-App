@@ -8,44 +8,17 @@
 	function NavController($state, $stateParams, $rootScope, UserFactory, $scope, Upload, $timeout, $interval, $window){
 		var vm = this;
 		vm.user = {} ;
-		vm.status = $rootScope._user ;
+
+		vm.status = $rootScope._user;
 		vm.noPic = "http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette.png";
-		vm.noLogo = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
+  		vm.noLogo = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
+
 		vm.form2 = false;
 
 
 
 
-		$scope.upload = function(dataUrl) {
-		// 	console.log(dataUrl);
-		
-		// Upload.upload({
-  //           url: '/api/user/profilePicUpload',
-  //           data: {
-  //               file: Upload.dataUrltoBlob(dataUrl)
-  //           },
-  //       })
-  //   	.then(function (response) {
-  //           $timeout(function () {
-  //               $scope.result = response.data;
-  //           });
-  //       }, function (response) {
-  //           if (response.status > 0) $scope.errorMsg = response.status 
-  //               + ': ' + response.data;
-  //           console.log($scope.errorMsg);
-  //       }, function (evt) {
-  //       	$scope.picFile = null;
-  //       	$scope.progress = 0;
-  //       	var interv = $interval(function(){
-  //   			if ($scope.progress ==100){
-  //     				$interval.cancel(interv);
-  //   				}
-  //   			else{ $scope.progress += 1 }
-  // 				}, 30);
-  //       		$scope.picSubmitted = true;
-  //       	});
-
-};
+	
 
 
 vm.register = function() {

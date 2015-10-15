@@ -22,17 +22,12 @@
 		}).state('SingleLeague', {
 			url: '/leagues/:id',
 			templateUrl: 'templates/single_league.html',
-			controller: 'ViewLeaguesController',
+			controller: 'ViewSingleLeagueController',
 			controllerAs: 'vm'
 		}).state('TeamPage', {
 			url: '/team/:id',
 			templateUrl: 'templates/team_page.html',
-			controller: 'ViewLeaguesController',
-			controllerAs: 'vm'
-		}).state('SingleMatch', {
-			url: '/match/:id',
-			templateUrl: 'templates/single_match.html',
-			controller: 'ViewLeaguesController',
+			controller: 'ViewTeamController',
 			controllerAs: 'vm'
 		}).state('About', {
 			url: '/about',
@@ -72,9 +67,6 @@
 		}).state('Admin.schedule', {
 			url: '/schedule',
 			templateUrl: '../admin_views/league_schedule.html'
-		}).state('TestView', {
-			url: '/test',
-			templateUrl: 'templates/test_view.html'
 		}).state('Newsletter', {
 			url: '/leaguenews',
 			templateUrl: 'templates/league_news.html',

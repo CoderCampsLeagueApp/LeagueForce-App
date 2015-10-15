@@ -3,9 +3,9 @@
   .controller('UploadController', UploadController);
 
 
-  UploadController.$inject = ['$state', '$stateParams', '$rootScope', 'UserFactory', '$scope', 'Upload', '$timeout', '$interval', 'user', "$modalInstance"];
+  UploadController.$inject = ['$state', '$stateParams', '$rootScope', 'UserFactory', '$scope', 'Upload', '$timeout', 'user', '$interval', '$modalInstance'];
 
-  function UploadController($state, $stateParams, $rootScope, UserFactory, $scope, Upload, $timeout, $interval, user, $modalInstance){
+  function UploadController($state, $stateParams, $rootScope, UserFactory, $scope, Upload, $timeout, user, $interval, $modalInstance){
     var vm = this;
     vm.user = user;
     $scope.cb = "";
