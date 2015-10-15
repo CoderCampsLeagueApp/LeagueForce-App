@@ -42,7 +42,7 @@ app.set('view options', {
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-var userRoutes = require('./routes/UserRoutes');
+var userRoutes = require('../routes/UserRoutes');
 var inboxRoutes = require('./routes/InboxRoutes');
 var leagueRoutes = require('./routes/LeagueRoutes');
 var teamRoutes = require('./routes/TeamRoutes');
