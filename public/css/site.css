@@ -327,3 +327,16 @@ form .progress {
 }
 
 
+.teamHome{
+  width: 900px;
+  height: 100%;
+  margin-bottom: 200px;
+  color: #fff;
+  background-color: rgba(10, 10, 10, 0.5);
+  border: 1px outset;
+  margin: auto auto;
+  padding: 40px;
+  padding-bottom: 60px;
+  border-radius: 4px; 
+  box-shadow: 0 0 10px black;
+}
