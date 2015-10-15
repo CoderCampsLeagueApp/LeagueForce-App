@@ -72,9 +72,6 @@
 		}).state('Admin.schedule', {
 			url: '/schedule',
 			templateUrl: '../admin_views/league_schedule.html'
-		}).state('TestView', {
-			url: '/test',
-			templateUrl: 'views/test_view.html'
 		}).state('Newsletter', {
 			url: '/leaguenews',
 			templateUrl: 'views/league_news.html',

@@ -2,13 +2,13 @@
 	<div class="col-md-6">
 		<h2 style="word-wrap: break-word;"><a ng-click="vm.getNews()">{{vm.newsletter.title}}</a></h2>
 
-		<span style="font-size: .9em; color: gray;">Posted on <a style="text-decoration: none;" ng-click="vm.getNews()">{{vm.newsletter.created | date:"M/d/yyyy hh:mma"}}</a> by {{vm.newsletter.user.name}}</span>
+		<span style="font-size: .9em; color: gray;">Posted on <a style="text-decoration: none;" ng-click="vm.getNews()">{{vm.newsletter.created | date:"M/d/yyyy hh:mma"}}</a> by <a ui-sref="ViewProfile({id: vm.newsletter.user._id})">{{vm.newsletter.user.name}}</a></span>
 		<br>
 		<br>
 		<div ng-show="vm.newsletter.image">
 			<img style="float: left;" ng-src="{{vm.newsletter.image}}" class="img img-thumbnail singleNewsImage"/>
 		</div><br>	
-		<div style="word-wrap: break-word;" ta-bind ng-model="vm.newsletter.body " style="clear: both;"></div><hr>
+		<div style="word-wrap: break-word; clear: both;" ta-bind ng-model="vm.newsletter.body " style="clear: both;"></div><hr>
 	</div>
 	<div class="col-md-6"></div>
 </div>

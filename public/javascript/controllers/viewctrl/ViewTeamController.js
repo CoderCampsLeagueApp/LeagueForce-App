@@ -11,7 +11,8 @@
 		vm.schedule = [];
 
 		//------------Leagues--------------
-
+		//Brings back the single team id and loops through the weeks in the league to bring back the matches only THAT
+		//team will play in. Also brings back the whole team object by looping through the league that was brought earlier
 		if($stateParams.id) {
 			WebsiteFactory.getTeam($stateParams.id).then(function(res) {
 				vm.team = res;

@@ -11,7 +11,7 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Name </label>  
         <div class="col-md-10">
-          <input type="text" class="nameinput" ng-model='vm.league.name' placeholder="League name" required>
+          <input type="text" class="nameinput" ng-model='vm.league.name' placeholder="League Name" required>
         </div>
       </div>
 
@@ -44,7 +44,7 @@
         <label class="col-md-2 control-label">Features</label>
         <div class="col-md-10">
           <div class="input-group">
-            <input type="text" class="appendinput" ng-model='vm.feature' placeholder="features">
+            <input type="text" class="appendinput" ng-model='vm.feature' placeholder="Features">
             <span ng-click='vm.addFeature(vm.feature); vm.feature = ""' class="input-group-addon pointer">Add feature</span>
 
           </div>
@@ -93,9 +93,6 @@
           <a type="btn" class="btn btn-success btn-md" ng-click="vm.addWeek()"><span class="glyphicon glyphicon-plus"></span></a>
           <a type="btn" class="btn btn-danger btn-md" ng-click="vm.subtractWeek()"><span class="glyphicon glyphicon-minus"></span></a>
           <span style="font-size: 32px; padding-left: 10px;">{{vm.league.weeks.length}}</span>
-            <!-- <div class="input-group">
-              <input type="number" class="appendinput" ng-model='vm.league.weeks' placeholder="Weeks"/>
-            </div> -->
           </div> 
         </div>
 
@@ -104,7 +101,7 @@
           <label class="col-md-2 control-label">Images</label>
           <div class="col-md-10">
             <div class="input-group">
-              <input type="text" class="appendinput" ng-model='vm.image' placeholder="images" type="text">
+              <input type="text" class="appendinput" ng-model='vm.image' placeholder="Images" type="text">
               <span ng-click='vm.addImage(vm.image); vm.image = ""' class="input-group-addon pointer">Add Image</span>
             </div>
             <div class="leagueOverflow col-md-12" style=" padding-top:10px;">
@@ -121,7 +118,7 @@
         <div class="form-group">
           <label class="col-md-2 control-label">League Description</label>
           <div class="col-md-10">                     
-            <textarea ng-model='vm.league.description' class="wpcf7-form-control wpcf7-textarea" placeholder='what the league can offer' required></textarea>
+            <textarea ng-model='vm.league.description' class="wpcf7-form-control wpcf7-textarea" placeholder='What Does Your League Offer?' required></textarea>
           </div>
         </div>
         <div>

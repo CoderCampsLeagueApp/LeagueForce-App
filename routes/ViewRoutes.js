@@ -8,6 +8,11 @@ var jwt = require('express-jwt');
 
 router.get('/league', function(req, res) {
 	League.find({})
+	.populate({
+		path: 'admin',
+		model: 'User',
+		select: 'name username'
+	})
 	.exec(function(err, league) {
 		if(err) return res.status(500).send({err: "Error getting all leagues"});
 		if(!league) return res.status(400).send({err: "Leagues do not exist"});

@@ -5,39 +5,40 @@
 				<img class="img-responsive img-circle" ng-src="{{vm.league.logo}}">
 			</div>
 			<div class="col-md-8">
-				<p>NAME : {{vm.league.name}}</p>
-				<p>DIVISIONS : {{vm.league.division}}</p>
-				<p>WEEKS : {{vm.league.weeks.length}}</p>
-				<p>features: {{vm.league.features}}</p>
-				<p>Location: {{vm.league.googleLocation.latitude}}, {{vm.league.googleLocation.longitude}} </p>
+				<p>Managed by <a>{{vm.league}}</a>
+					<p>NAME : {{vm.league.name}}</p>
+					<p>DIVISIONS : {{vm.league.division}}</p>
+					<p>WEEKS : {{vm.league.weeks.length}}</p>
+					<p>features: {{vm.league.features}}</p>
+					<p>Location: {{vm.league.googleLocation.address}} </p>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid" ng-show="vm.league.description">
+			<section>
+				<h2>About Us:</h2>
+				<p>{{vm.league.description}}</p>
+			</section>
+
+
+			<!-- League Photos Carousel -->
+
+			<carousel>
+				<slide ng-repeat="i in vm.league.images track by $index" active="slide.active">
+					<img class="img-responsive" style="width: 400px; height: 260px;" src="{{i}}">
+				</slide>
+			</carousel>
+		</div>
+		<div class="teamBackground">
+			<h2 style="margin-top: 70px;" class="text-center">Teams</h2>
+		</div>
+		<div class="row">
+			<div ng-repeat="t in vm.league.teams track by $index" class="col-md-3">
+				<div class="text-center">
+					<img ui-sref="TeamPage({id: t._id})" width="100" height="100" src="{{t.logo}}"/><br>
+					<h3><a style="text-decoration: none;" ui-sref="TeamPage({id: t._id})">{{t.name}}</a></h3>
+					<button ui-sref="TeamPage({id: t._id})" class="btn btn-info btn-sm">View Team</button>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid" ng-show="vm.league.description">
-		<section>
-			<h2>About Us:</h2>
-			<p>{{vm.league.description}}</p>
-		</section>
-		
-
-		<!-- League Photos Carousel -->
-
-		<carousel>
-			<slide ng-repeat="i in vm.league.images track by $index" active="slide.active">
-				<img class="img-responsive" style="width: 400px; height: 260px;" src="{{i}}">
-			</slide>
-		</carousel>
-	</div>
-	<div class="teamBackground">
-		<h2 style="margin-top: 70px;" class="text-center">Teams</h2>
-	</div>
-	<div class="row">
-		<div ng-repeat="t in vm.league.teams track by $index" class="col-md-3">
-			<div class="text-center">
-				<img ui-sref="TeamPage({id: t._id})" width="100" height="100" src="{{t.logo}}"/><br>
-				<h3><a style="text-decoration: none;" ui-sref="TeamPage({id: t._id})">{{t.name}}</a></h3>
-				<button ui-sref="TeamPage({id: t._id})" class="btn btn-info btn-sm">View Team</button>
-			</div>
-		</div>
-	</div>
-</div>

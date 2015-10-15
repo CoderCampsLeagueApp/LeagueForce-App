@@ -18,7 +18,6 @@
 			});
 		}
 		
-		//$timeout( function(){ vm.getLeague(); }, 10);
 
 		vm.getTeam = function(team) {
 			WebsiteFactory.getTeam(team).then(function(res) {
@@ -28,7 +27,6 @@
 			});
 			
 		}; 
-		//$timeout( function(){ vm.getTeam(); }, 10);
 		
 	} 
 

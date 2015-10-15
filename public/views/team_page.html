@@ -37,12 +37,11 @@
 				</thead>
 				<tbody>
 					<tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='m in vm.schedule track by $index' ng-class-odd="'odd'" ng-class-even="'even'">
-						{{m}}
-						<th>{{m.date | date:"M/d hh:mma"}}</th>
-						<th>{{m.t1name}} <em>vs.</em> {{m.t2name}}</th>
-						<th>{{m.googleLocation.address}}</th>
+						<th ui-sref="SingleMatch({id: m._id})">{{m.date | date:"M/d hh:mma"}}</th>
+						<th ui-sref="SingleMatch({id: m._id})">{{m.t1name}} <em>vs.</em> {{m.t2name}}</th>
+						<th ui-sref="SingleMatch({id: m._id})">{{m.googleLocation.address}}</th>
 						<form>
-							<th><input style="width: 30px" type="number"/>{{m.team1score}} - <input style="width: 30px" type="number"/>{{m.team2score}}</th>
+							<th ui-sref="SingleMatch({id: m._id})"><input style="width: 30px" type="number"/>{{m.team1score}} - <input style="width: 30px" type="number"/>{{m.team2score}}</th>
 						</form>
 					</tr>
 				</tbody>

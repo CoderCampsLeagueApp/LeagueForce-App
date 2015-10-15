@@ -1,4 +1,3 @@
-<h1>Regular user register page</h1>
 <form ng-show='!nav.form2' class="form-horizontal animated fadeIn" ng-submit="nav.register()">
   <fieldset>
 
@@ -26,7 +25,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Password</label>
       <div class="col-md-4">
-        <input type="password" placeholder="password" class="form-control input-md" required ng-model="nav.user.password" required/>
+        <input type="password" placeholder="Password" class="form-control input-md" required ng-model="nav.user.password" required/>
       </div>
     </div>
 
@@ -34,7 +33,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label">Confirm Password</label>
       <div class="col-md-4">
-        <input type="password" placeholder="comfirm password" class="form-control input-md" required ng-model="nav.user.confirmPass" required/>
+        <input type="password" placeholder="Confirm password" class="form-control input-md" required ng-model="nav.user.confirmPass" required/>
       </div>
     </div>
 
@@ -51,13 +50,13 @@
         <input style="width:40px" type="checkbox" class="form-control" ng-model="nav.user.admin" />
       </div>
     </div>
-     <!-- Textarea -->
+    <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label">Bio(optional)</label>
+      <label class="col-md-4 control-label">Bio (optional)</label>
       <div class="col-md-4">                     
         <textarea class="form-control" placeholder="Bio" class="form-control input-md" ng-model="nav.user.bio"></textarea>
       </div>
-  </div>
+    </div>
 
     <!-- Text input for link to profile pic -->
 
