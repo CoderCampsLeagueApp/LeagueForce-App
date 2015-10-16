@@ -8,12 +8,12 @@ var port = process.env.PORT || 3000;
 var passport = require('passport') ;
 
 
-require('./models/User');
-require('./models/Inbox');
-require('./models/League');
-require('./models/Team');
-require('./models/Comments');
-require('./models/Newsletter');
+require('./models/user');
+require('./models/inbox');
+require('./models/league');
+require('./models/team');
+require('./models/comments');
+require('./models/newsletter');
 require('./config/passport') ;
 
 // mongoose.connect('mongodb://localhost/league');
