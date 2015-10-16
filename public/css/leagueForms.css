@@ -130,7 +130,7 @@
   box-shadow: 0 0 10px black;
 }
 
-.admin h1 {
+/*.admin h1 {
  color: #fff; 
  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
  text-align: center;
@@ -139,7 +139,19 @@
  font-weight: 700;
  font-family: 'Source Sans Pro', sans-serif;
  margin: 0px;
+ }*/
+
+ .admin h1 {
+  color: #fff; 
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+  text-align: center;
+  padding-top: 30px;
+  font-size: 100px; 
+  font-weight: 700;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0px;
 }
+
 .homebtn { 
   background: linear-gradient(to bottom, rgba(100,50,50,0.25) 20%, rgba(25,0,0,0.75) 100%) repeat-x;
   border-top: 1px solid rgba(255,255,255,0.75);

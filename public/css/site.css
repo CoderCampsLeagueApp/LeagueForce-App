@@ -177,19 +177,19 @@ p.article {
   visibility: hidden;
 }
 form .progress {
-    line-height: 15px;
+  line-height: 15px;
 }
 
 .progress {
-    display: inline-block;
-    width: 100px;
-    border: 3px groove #CCC;
+  display: inline-block;
+  width: 100px;
+  border: 3px groove #CCC;
 }
 
 .progress div {
-    font-size: smaller;
-    background: orange;
-    width: 0;
+  font-size: smaller;
+  background: orange;
+  width: 0;
 }
 .profBox{
   background-color: #fff;
@@ -321,10 +321,22 @@ form .progress {
 .teamBackground {
   margin-top: 30px;
   margin-bottom: 30px;
-  background: blue; /* blue is only temporary */
-  height: 200px;
+  background: ;
+  height: 100px;
   width: 100%;
-  border: 1px solid black;
 }
 
 
+.teamHome{
+  width: 900px;
+  height: 100%;
+  margin-bottom: 200px;
+  color: #fff;
+  background-color: rgba(10, 10, 10, 0.5);
+  border: 1px outset;
+  margin: auto auto;
+  padding: 40px;
+  padding-bottom: 60px;
+  border-radius: 4px; 
+  box-shadow: 0 0 10px black;
+}

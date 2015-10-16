@@ -1,14 +1,9 @@
-
-
-
 <div ng-show='vm.adminLeague'>
-
-
 	<div style="margin-top:60px" class="adminHome">
 		<div ng-controller='AdminUploadController as au'>
 			<div class="col-md-4 nopadding">
 				<div style="height:250px; width:100%;">
-					<img style="height:inherit" class="img-responsive" ng-src="{{au.logopic || vm.adminLeague.logo || nav.noLogo}}">
+					<img style="height:inherit" class="img-responsive" ui-sref="SingleLeague({id: vm.adminLeague._id})" ng-src="{{au.logopic || vm.adminLeague.logo || nav.noLogo}}">
 				</div>
 				
 				<button style="width:100%" class="homebtn" type="file" ngf-select="au.uploadFiles($file, vm.adminLeague._id)"
@@ -19,18 +14,23 @@
 		</div>
 
 		<div class="col-md-8">
-			<p>NAME : {{vm.adminLeague.name}}</p>
-			<p>DIVISIONS : {{vm.adminLeague.division}}</p>
-			<p>WEEKS : {{vm.adminLeague.weeks.length}}</p>
-			<p>ABOUT : {{vm.adminLeague.description | limitTo : 200}}{{vm.adminLeague.description.length >= 201 ? '...' : ''}}</p>
-
-			<p>features: {{vm.adminLeague.features}}</p>
-			<p>Location: {{vm.adminLeague.googleLocation.latitude}}, {{vm.adminLeague.googleLocation.longitude}} </p>
+			<p>Name: {{vm.adminLeague.name}}</p>
+			<p>Divisions: {{vm.adminLeague.division}}</p>
+			<p>Weeks: {{vm.adminLeague.weeks.length}}</p>
+			<p>About: {{vm.adminLeague.description | limitTo : 200}}{{vm.adminLeague.description.length >= 201 ? '...' : ''}}</p>
+			<p>Features: {{vm.adminLeague.features.join(', ')}}</p>
+			<p>Location: {{vm.adminLeague.googleLocation.address}} </p>
 			<div>
+
 				<p>League Photos : </p>
-				<div ng-repeat='i in vm.adminLeague.images track by $index'>
-					<img class="col-md-4" width="130" height="100" ng-src="{{i}}">
+				
+				<div style="height:200px" class="teamOverflow col-md-12">
+					<div>						
+						<img style="margin:10px" ng-repeat='i in vm.adminLeague.images track by $index' class="col-md-3"  ng-src="{{i}}">
+					</div>
+
 				</div>
+				
 			</div>
 
 		</div>
@@ -40,8 +40,6 @@
 			<button class="homebtnEdit" ng-click='vm.startAddTeam()'>Add teams</button>
 		</div>
 	</div>
-
-
 	<br>
 </div>
 
@@ -49,10 +47,8 @@
 <div class="adminHomeTeams container-fluid">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:10px">
-
-
 			<div ng-repeat='t in vm.adminLeague.teams track by $index' class="col-lg-3 col-md-3 col-sm-6">
-				<img class="img-responsive"  width="170" height="170" ng-src="{{t.logo}}">
+				<img ui-sref="TeamPage({id: t._id})" class="img-responsive"  width="170" height="170" ng-src="{{t.logo}}">
 				<p style="text-align:center">{{t.name}}</p>
 				<div class="col-md-6 col-md-offset-3">
 					<button  ng-click='vm.startTeamEdit(t)'class="btn btn-warning btn-block">Edit</button>
@@ -62,4 +58,4 @@
 		</div>
 	</div>
 </div>
-</div>
+
