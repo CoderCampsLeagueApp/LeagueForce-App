@@ -143,7 +143,7 @@
 
 		o.createMatch = function(matches, leagueWeek) {
 			var q = $q.defer();
-			var match = {matches : matches, leagueWeek: leagueWeek}
+			var match = {matches, leagueWeek}
 			console.log(match);
 			$http.post('/api/league/match/', match, getAuth()).success(function(res) {
 				q.resolve(res);
