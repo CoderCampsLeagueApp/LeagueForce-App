@@ -1,20 +1,20 @@
 <div style="background-attachment: fixed" ng-style="{'background-image': 'url(' + vm.league.background + ')' }">
-<div style="padding-top:50px; padding-bottom:35px">
-	<div style='height:400px' class="adminHome animated fadeIn">
+	<div style="padding-top:50px; padding-bottom:35px">
+		<div style='height:400px' class="adminHome animated fadeIn">
 			<div class="col-md-4 nopadding">
 				<div style="height:250px; width:100%;">
 					<img style="height:inherit" class="img-responsive" ui-sref="Leagues" ng-src="{{vm.league.logo || nav.noLogo}}">
 				</div>
 
-		</div>
+			</div>
 
-		<div class="col-md-8">
-			<h4>Name: {{vm.league.name}}</h4>
-			<h4>Divisions: {{vm.league.division}}</h4>
-			<h4>Weeks: {{vm.league.weeks.length}}</h4>
-			<h4>Location: {{vm.league.googleLocation.address}} </h4>
+			<div class="col-md-8">
+				<h4>Name: {{vm.league.name}}</h4>
+				<h4>Divisions: {{vm.league.division}}</h4>
+				<h4>Weeks: {{vm.league.weeks.length}}</h4>
+				<h4>Location: {{vm.league.googleLocation.address}} </h4>
+			</div>
 		</div>
-	</div>
 	</div>
 
 	<div style="background-color: #eaeaea; padding:40px" class="container-fluid" ng-show="vm.league.description">
@@ -24,36 +24,34 @@
 			
 			<p>{{vm.league.description}}</p>
 			<br>
-		<br>
+			<br>
 		</div>
 		
 		
 		<!-- League Photos Carousel -->
 		<div class="col-md-12">
-		<carousel>
-			<slide ng-repeat="i in vm.league.images track by $index" active="slide.active">
-				<img class="img-responsive" style="width: 500px; height: 400px;" src="{{i}}">
-			</slide>
-		</carousel>
-	</div>
+			<carousel>
+				<slide ng-repeat="i in vm.league.images track by $index" active="slide.active">
+					<img class="img-responsive" style="width: 500px; height: 400px;" src="{{i}}">
+				</slide>
+			</carousel>
+		</div>
 	</div>
 
 	<div class="teamBackground">
 		<h1 style="margin-top: 70px;font-size:60px;color: white; text-shadow: 1px 1px 1px black" class="text-center">Teams</h1>
 	</div>
 	<div class="container-fluid" style="background-color:white; padding-bottom:50px">
-	<div class="row"  style="padding-top:60px" class="leagueHome">
-		<div ng-repeat="t in vm.league.teams track by $index" class="col-md-3">
-			<div class="text-center">
-				<img ui-sref="TeamPage({id: t._id})" width="100" height="100" src="{{t.logo}}"/><br>
-				<h3><a style="text-decoration: none;" ui-sref="TeamPage({id: t._id})">{{t.name}}</a></h3>
-				<button ui-sref="TeamPage({id: t._id})" class="btn btn-info btn-sm">View Team</button>
+		<div class="row"  style="padding-top:60px" class="leagueHome">
+			<div ng-repeat="t in vm.league.teams track by $index" class="col-md-3">
+				<div class="text-center">
+					<img ui-sref="TeamPage({id: t._id})" width="100" height="100" src="{{t.logo}}"/><br>
+					<h3><a style="text-decoration: none;" ui-sref="TeamPage({id: t._id})">{{t.name}}</a></h3>
+					<button ui-sref="TeamPage({id: t._id})" class="btn btn-info btn-sm">View Team</button>
+				</div>
 			</div>
 		</div>
-	</div>
-	</div>
-	
-</div>
+	</div>	
 </div>
 
 <!-- ng-style="{'background-image': 'url(' + vm.league.background + ')' }" -->
