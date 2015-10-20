@@ -20,6 +20,7 @@
         <label class="col-md-2 control-label">Divisions</label>
         <div class="col-md-10">
           <select ng-model='vm.league.division' class="form-control" required>
+            <option value="None">None</option>
             <option value="U5">U5</option>
             <option value="U6">U6</option>
             <option value="U7">U7</option>
@@ -62,16 +63,16 @@
             <input type="text" class="nameinput" ng-model='vm.league.background' type="text" placeholder="URL..">   
           </div>
         </div>
-      
+        
 
 
-      <!-- Weeks -->
-      <div class="form-group" ng-show='!vm.league._id'>
-        <label class="col-md-2 control-label">Weeks In A Season</label>
-        <div class="col-md-10">
-          <a type="btn" class="btn btn-success btn-md" ng-click="vm.addWeek()"><span class="glyphicon glyphicon-plus"></span></a>
-          <a type="btn" class="btn btn-danger btn-md" ng-click="vm.subtractWeek()"><span class="glyphicon glyphicon-minus"></span></a>
-          <span style="font-size: 32px; padding-left: 10px;">{{vm.league.weeks.length}}</span>
+        <!-- Weeks -->
+        <div class="form-group" ng-show='!vm.league._id'>
+          <label class="col-md-2 control-label">Weeks In A Season</label>
+          <div class="col-md-10">
+            <a type="btn" class="btn btn-success btn-md" ng-click="vm.addWeek()"><span class="glyphicon glyphicon-plus"></span></a>
+            <a type="btn" class="btn btn-danger btn-md" ng-click="vm.subtractWeek()"><span class="glyphicon glyphicon-minus"></span></a>
+            <span style="font-size: 32px; padding-left: 10px;">{{vm.league.weeks.length}}</span>
           </div> 
         </div>
 
