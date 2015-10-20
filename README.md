@@ -4,4 +4,4 @@ This web application was created by <a href="https://github.com/halhassen">Hamad
 
 JavaScript, HTML5, CSS3, Bootstrap, AngularJS, Node.js, Express, MongoDB, Mongoose, Passport.js, Google Maps API, Google Auth API, FaceBook Auth API, and Cloudinary API.
 
-Test out the app at <a href="leagueforce.us">leagueforce.us</a>
+Test out the app at <a href="www.leagueforce.us">leagueforce.us</a>
