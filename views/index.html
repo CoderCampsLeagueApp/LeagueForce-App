@@ -17,7 +17,7 @@
 		<div class="container-fluid nopadding">
 			<nav ng-hide="nav.status.id" class='col-md-12 nopadding'>
 				<ul>
-					<li class="col-md-3" style="width: 100%">
+					<li class="col-md-3">
 						<img width="50" height="50" src="http://res.cloudinary.com/josemedina760/image/upload/v1444790611/force_logo_svh4rp.png">
 						<a style="font-size:22px" ui-sref='Home'>League Force</a>
 					</li>
@@ -62,7 +62,7 @@
 							<a ui-sref="ViewProfile({id: nav.status.id})">
 								{{ nav.status.username | limitTo: 20}}{{nav.status.username.length > 20 ? '...' : ''}}
 							</a>
-							
+
 							<div class="dropdownContain">
 								<div class="dropOut">
 									<div class="triangle"></div>
@@ -74,7 +74,7 @@
 									</ul>
 								</div>
 							</div>
-							
+
 						</li>				
 					</ul>
 				</nav>
