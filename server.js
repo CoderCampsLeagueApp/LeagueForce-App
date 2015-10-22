@@ -116,7 +116,8 @@ app.use('/api/comment', commentRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/views/', viewRoutes)
 
+
 var server = app.listen(port, function() {
 	var host = server.address().address;
-	console.log('Example app listening at http://localhost:' + port);
+	console.log('Example app listening at ' +  host + port);
 });
