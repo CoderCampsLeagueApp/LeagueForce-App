@@ -150,7 +150,7 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 					AdminFactory.editLeague(league).then(function(){
 						AdminFactory.getLeague($rootScope._user.id).then(function(res){
 							vm.adminLeague = res;
-							$state.go('Admin.schedule');
+							$state.go('Admin.home');
 						}); 			
 					});
 				}
@@ -395,13 +395,12 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.newsletter = angular.copy(edit);
 		};
 
-		vm.postNewsletter = function(newsletter) {
+		vm.postNewsletter = function(newsletter, idx) {
 			if(!newsletter._id) {
 				vm.newsletter.created = new Date();
 				vm.newsletter.isPublished = true;
 				AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
-					vm.getNewsletters();
-					console.log(vm.newsletter + ' | created!');
+					vm.adminLeague.newsletter.push(res);
 					delete vm.newsletter;
 					$state.go('Newsletter');
 				});
@@ -409,8 +408,7 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 
 			else {
 				AdminFactory.editNewsletter(vm.newsletter).then(function(res) {
-					vm.getNewsletters();
-					console.log(vm.newsletter + ' | edited!');
+					vm.adminLeague.newsletter.splice(idx, 1, newsletter);
 					delete vm.newsletter;
 					$state.go('Admin.storedarticles');
 				});
@@ -419,18 +417,9 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		};
 
 
-		vm.getNewsletters = function() {
-			AdminFactory.getNewsletters().then(function(res) {
-				vm.newsletters = res;
-			});
-		};
-
-		vm.getNewsletters();
-
-		vm.deleteNewsletter = function(newsletter) {
+		vm.deleteNewsletter = function(newsletter, idx) {
 			AdminFactory.deleteNewsletter(newsletter).then(function(res) {
-				vm.newsletters.splice(vm.newsletters.indexOf(newsletter), 1);
-				console.log(newsletter);
+				vm.newsletters.splice(idx, 1);
 			});
 		};
 

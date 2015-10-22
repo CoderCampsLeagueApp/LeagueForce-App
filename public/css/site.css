@@ -8,6 +8,43 @@ body {
 	background: #fff;
   height: 100%;
 }
+.leagueimg{
+  height: 250px;
+  position:relative !important;
+}
+.leaguetxtbox{
+  height: 250px;
+  text-align: center;
+  text-shadow: 2px 2px 1px black;
+  position:relative !important;
+  opacity: 1.0 !important;
+  position:relative !important;
+  z-index: 2;
+}
+
+.rowbg{
+    background: url(http://waves.wavgroup.com/wp-content/uploads/2015/07/Grass.jpg);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1500px;
+    height: 250px;
+    opacity: 0.8;
+}
+
+.leaguetxt{
+  color: #fff;
+  display: inline-block;
+  vertical-align: middle !important;
+  line-height: normal;
+  position: relative !important;
+}
+.table>tbody>tr>th,{
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: middle; 
+    border-top: 1px solid #ddd;
+}
 .cropArea {
   background: #E4E4E4;
   overflow: hidden;

@@ -15,13 +15,13 @@
 <body >	
 	<div ng-controller="NavController as nav" ng-cloak> 
 		<div class="container-fluid nopadding">
-			<nav ng-hide="nav.status.id" class='col-md-12 nopadding'>
+			<nav style="z-index:5 !important" ng-hide="nav.status.id" class='col-md-12 nopadding' ng-cloak>
 				<ul>
-					<li class="col-md-3" style="width: 100%">
+					<li class="col-md-3">
 						<img width="50" height="50" src="http://res.cloudinary.com/josemedina760/image/upload/v1444790611/force_logo_svh4rp.png">
 						<a style="font-size:22px" ui-sref='Home'>League Force</a>
 					</li>
-					<li class="col-md-5"></li>
+					<li class="col-md-6"></li>
 					<li class="col-md-1 drop">
 						<a ui-sref="Leagues">Leagues</a>
 						<div class="dropdownContain">
@@ -38,13 +38,13 @@
 				</ul>
 			</nav>
 			<!-- Displays when the user logs in -->
-			<nav ng-show="nav.status.id" class='col-md-12 nopadding'>
+			<nav style="z-index:5 !important" ng-show="nav.status.id" class='col-md-12 nopadding' ng-cloak>
 				<ul>
 					<li class="col-md-3">
-						<img width="50" height="50" src="http://www.ultimatefightworkout.org/wp-content/uploads/logo_small_bw.png">
+						<img width="50" height="50" src="http://res.cloudinary.com/josemedina760/image/upload/v1444790611/force_logo_svh4rp.png">
 						<a style="font-size:22px" ui-sref='Home'>League Force</a>
 					</li>
-					<li class="col-md-5"></li>
+					<li class="col-md-6"></li>
 					<li class="col-md-1 drop">
 						<a ui-sref="Leagues">Leagues</a>
 						<div class="dropdownContain">
@@ -79,34 +79,6 @@
 					</ul>
 				</nav>
 			</div>
-
-
-<!--
-			<ul ng-show="nav.status.id" c
-				<li style="z-index: 1" class="dropdown col-md-1">
-					<a ui-sref="Leagues">Leagues</a>
-					<ul>
-						<li>
-							<a class="pointer">League Search</a>
-						</li>
-						<li >
-							<a ui-sref="Newsletter">League News</a>
-						</li>
-					</ul>
-				</li>
-				<li class="col-md-1"><a ui-sref="TestView">Test</a></li>
-
-				<li style="z-index: 1" class="col-md-2 dropdown">
-					<a style="text-align:center" ui-sref="Profile">{{ nav.status.username | limitTo: 15}}{{nav.status.username.length >= 16 ? '...' : ''}}</a>
-					<ul>
-						<li class="profile">
-							<a href="/api/user/auth/facebook"  style="background-color: #4D65A3">Facebook</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div> -->
 
 	<ui-view></ui-view>
 </div>

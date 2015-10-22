@@ -22,7 +22,12 @@ router.post('/', auth, function(req, res) {
 	news.save(function(err, newsResult) {
 		if(err) return res.status(500).send({err: "Issues with server"});
 		if(!newsResult) return res.status(400).send({err: "Could not post news"});
+	League.findOneAndUpdate({admin: news.user}, {$push: {newsletter: {_id : newsResult._id}}},
+		function(err, result){
+		if(err) return res.status(500).send({err: "Issues with server"});
+		if(!newsResult) return res.status(400).send({err: "Could not find league to post to"});
 		res.send();
+	});
 	});
 });
 

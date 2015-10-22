@@ -1,6 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
 .admin {
  background:#2d3b36 url(http://www.mrwallpaper.com/wallpapers/football-stadium.jpg)no-repeat center center fixed;
+ z-index: -3;
+ width: 100%;
 }
 .adminHome{
   width: 900px;

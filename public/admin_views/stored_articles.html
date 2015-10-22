@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="col-md-6">
-				<div ng-repeat="n in vm.newsletters | orderBy: 'createdate': true">
+				<div ng-repeat="n in vm.adminLeague.newsletter | orderBy: 'createdate': true">
 					<div class="well">
 						<h2 style="word-wrap: break-word;"><a ui-sref="SingleNewsletter({id: n._id})">{{n.title}}</a></h2> 
 						<p><b>{{n.user.name}} - <span style="color: green;" ng-show="{{n.isPublished}}">Published on {{n.created | date:"M/d/yyyy hh:mma"}}</span><span style="color: red;" ng-hide="{{n.isPublished}}">Not Published</span></b></p>
@@ -10,8 +10,8 @@
 							<img style="float: left;" ng-src="{{n.image}}" class="img-responsive newsImage"/>
 						</div>
 						<div ta-bind ng-model="n.body" style="word-wrap: break-word; clear: both;"></div>
-						<button class="btn btn-md btn-danger" ng-click="vm.deleteNewsletter(n)">Delete Newsletter</button>
-						<button class="btn btn-md btn-warning" ng-click="vm.toEditPage(n)">Edit Newsletter</button>
+						<button class="btn btn-md btn-danger" ng-click="vm.deleteNewsletter(n, $index)">Delete Newsletter</button>
+						<button class="btn btn-md btn-warning" ng-click="vm.toEditPage(n, $index)">Edit Newsletter</button>
 					</div>
 				</div>
 			</div>

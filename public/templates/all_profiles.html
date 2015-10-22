@@ -10,7 +10,7 @@
 
 				<div class="col-md-3 profBox">
 					<img class='img-responsive' ng-src="{{profile.pic}}"/>
-					<button style="margin-top:10px" class="btn btn-primary btn-block" ng-click='openSendMessage()'>Message</button>
+					<button ng-hide='nav.status.id = profile._id' style="margin-top:10px" class="btn btn-primary btn-block" ng-click='openSendMessage()'>Message</button>
 
 					<h2>{{profile.name}}</h2>
 					<p>{{profile.bio | limitTo: 40}}{{profile.bio.length > 40 ? '...' : ''}}</p>

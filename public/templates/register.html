@@ -1,4 +1,4 @@
-<form ng-show='!nav.form2' class="form-horizontal animated fadeIn" ng-submit="nav.register()">
+<form ng-show='nav.form' class="form-horizontal animated fadeIn" ng-submit="nav.register()">
   <fieldset>
 
     <!-- Form Name -->
@@ -68,6 +68,8 @@
     </div>
   </fieldset>
 </form>
+
+<h1 ng-hide='nav.form' style="text-align:center; padding-top:50px" class="text-success">Please Confirm Email To continue</h1>
 
 
 

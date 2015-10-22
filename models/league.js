@@ -25,15 +25,7 @@ var LeagueSchema = new mongoose.Schema({
 			}
 		}],
 	}],
-	newsletter: [{
-		body: String,
-		title: String,
-		isPublished: Boolean,
-		created: Date,
-		image: String,
-		comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comments"}],
-		username: {type: mongoose.Schema.Types.ObjectId, ref: "User"}
-	}],
+	newsletter: [{type: mongoose.Schema.Types.ObjectId, ref: 'Newsletter'}],
 	googleLocation: {
 		address: String,
 		latitude: String,

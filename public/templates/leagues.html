@@ -1,25 +1,47 @@
-<h1>Leagues</h1>
-<div class="playerOverflow" style="color:black">
-	<table class="table table-bordered">
-		<thead>
-			<tr class="text-center" style="background: #333333; color:white">
-				<th class="text-center">Logo</th>
-				<th class="text-center">League Name</th>
-				<th class="text-center">Teams</th>
-				<th class="text-center">Weeks</th>
-				<th class="text-center">Division</th>
-				<th class="text-center">Location</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr style="color:rgb(64, 64, 64)" class="pointer" ng-repeat='l in vm.leagues track by $index' ng-class-odd="'odd'" ng-class-even="'even'" ng-show="l.isDisplay">
-				<th class="text-center" ui-sref="SingleLeague({id: l._id})"><img width="30" height="30" ng-src="{{l.logo}}"></th>
-				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.name}}</th>
-				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.teams.length}}</th>
-				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.weeks.length}}</th>
-				<th class="text-center" ui-sref="SingleLeague({id: l._id})">{{l.division}}</th>
-				<th class="text-center" style="width: 50%" ui-sref="SingleLeague({id: l._id})">{{l.googleLocation.address}}</th>
-			</tr>
-		</tbody>
-	</table>
+
+<div class="admin" style="padding-bottom:50px; height:100vh">
+		<table class="table">
+			<thead>
+				<tr class="text-center" style="background: #828282; color:white">
+					<th></th>
+					<th class="text-center">Logo</th>
+					<th class="text-center">League Name</th>
+					<th class="text-center">Teams</th>
+					<th class="text-center">Weeks</th>
+					<th class="text-center">Division</th>
+					<th class="text-center">Location</th>
+				</tr>
+			</thead>
+			<tbody> 
+				<tr style="position: relative !important;overflow: hidden;" style="height:250px; width:100%" class="pointer" ng-repeat='l in vm.leagues track by $index' ng-show="l.isDisplay">
+					<th>
+							<div style="position:relative; width:100%">
+						      <img class="rowbg" ng-src="{{l.background}}">
+						    </div>
+						<th class="leaguetxtbox" style="height:250px;width:400px;" class="text-center" ui-sref="SingleLeague({id: l._id})">
+							<div style="height:250px;width:400px">
+								<img style="max-height: 250px;" class="img-responsive" ng-src="{{l.logo}}">
+							</div>
+						</th>
+						<th style="vertical-align: middle !important;" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
+							<h2 class="leaguetxt nopadding">{{l.name}}</h2>
+						</th>
+						<th style="vertical-align: middle !important;"  class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
+							<p class="leaguetxt">{{l.teams.length}}</p>
+						</th>
+						<th style="vertical-align: middle !important;" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
+							<p class="leaguetxt">{{l.weeks.length}}</p>
+						</th>
+						<th  style="vertical-align: middle !important;" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
+							<p class="leaguetxt">{{l.division}}</p>
+						</th>
+						<th  style="vertical-align: middle !important;" class="leaguetxtbox" style="width: 50%" ui-sref="SingleLeague({id: l._id})">
+							<p class="leaguetxt">{{l.googleLocation.address}}</p>
+						</th>
+						</th>
+				</tr>
+				
+			</tbody>
+		</table>
+	
 </div>

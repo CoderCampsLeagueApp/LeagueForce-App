@@ -9,6 +9,9 @@
 		vm.leagues = [];
 		vm.league = {};
 		vm.schedule = [];
+		vm.schedule.t1 = {};
+		vm.schedule.t2 = {};
+		vm.currentMatch = {};
 
 		//------------Leagues--------------
 		//Brings back the single team id and loops through the weeks in the league to bring back the matches only THAT
@@ -30,26 +33,41 @@
 					};
 
 					for(var i = 0; i < vm.schedule.length; i++) {
+							vm.schedule[i].t1 = {};
+							vm.schedule[i].t2 = {};
 						for(var j = 0; j < vm.league.teams.length; j++) {
 							if(vm.schedule[i].team1 === vm.league.teams[j]._id) {
-								vm.schedule[i].t1name = vm.league.teams[j].name
+								vm.schedule[i].t1.name = vm.league.teams[j].name;
+								vm.schedule[i].t1.logo = vm.league.teams[j].logo;
 							};
 							if(vm.schedule[i].team2 === vm.league.teams[j]._id) {
-								vm.schedule[i].t2name = vm.league.teams[j].name	
+								vm.schedule[i].t2.name = vm.league.teams[j].name;	
+								vm.schedule[i].t2.logo = vm.league.teams[j].logo;	
 							};
 						};
 					};
-					console.log(vm.league);
+					vm.currentMatch = vm.schedule[0];
+					var coords = {
+						latitude: vm.schedule[0].googleLocation.latitude,
+						longitude: vm.schedule[0].googleLocation.longitude
+					};
+					vm.currentMatch.marker = angular.copy(coords);
+					vm.currentMatch.coords = coords;
 				});
-				console.log(res);
 			});
 		};
 
-		vm.getMatch = function(match) {
-			
-			$state.go('SingleMatch', {id: match});
-			console.log(match);
-		}
+		vm.showMatch = function(idx){
+			vm.currentMatch = vm.schedule[idx];
+			var coords = {
+				latitude: vm.schedule[idx].googleLocation.latitude,
+				longitude: vm.schedule[idx].googleLocation.longitude
+			};
+			vm.currentMatch.marker = angular.copy(coords);
+			vm.currentMatch.coords = coords;
+			console.log('switched..');
+			console.log(vm.currentMatch.coords);
+		};
 
 
 		

@@ -13,7 +13,7 @@
 		vm.noPic = "http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette.png";
   		vm.noLogo = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg";
 
-		vm.form2 = false;
+		vm.form = true;
 
 
 
@@ -25,7 +25,7 @@ vm.register = function() {
 	console.log("DEBUG: NavController vm.register called.") ;
 	UserFactory.register(vm.user).then(function() {
 		vm.user = {} ;
-		$state.go('Home') ;
+		vm.form = false;
 	}) ;
 } ;
 
@@ -38,7 +38,7 @@ vm.login = function() {
 			vm.confirm = res ;
 		} else {
 			vm.status = $rootScope._user ;
-			$state.go('Home') ;
+			$state.go('Profile') ;
 		}
 	}) ;
 } ;

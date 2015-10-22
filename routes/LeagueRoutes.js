@@ -38,6 +38,9 @@ router.get('/:id', auth, function(req, res) {
 		path: 'weeks.matches.team1 weeks.matches.team2',
 		model: 'Team',
 		select: 'name'
+	}).populate({
+		path: 'newsletter',
+		model: 'Newsletter'
 	})
 	.exec(function(err, league){
 		if(err) return res.status(500).send({err: "Error inside the server"});
