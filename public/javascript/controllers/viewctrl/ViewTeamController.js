@@ -55,7 +55,9 @@
 					vm.currentMatch.marker = angular.copy(coords);
 					vm.currentMatch.coords = coords;
 					vm.currentMatch.index = 0;
-					vm.map = true;
+					var map = $timeout(function(){ 
+						vm.map = true;
+					 }, 800); 
 				});
 			});
 		};

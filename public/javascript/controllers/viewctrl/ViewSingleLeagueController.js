@@ -2,13 +2,13 @@
 	angular.module('app')
 	.controller('ViewSingleLeagueController', ViewSingleLeagueController);
 
-	ViewSingleLeagueController.$inject = ['$state', '$stateParams', '$window', 'WebsiteFactory','$timeout', '$anchorScroll', '$location', '$rootScope', 'UserFactory'];
+	ViewSingleLeagueController.$inject = ['$state', '$stateParams', '$timeout', 'WebsiteFactory','$timeout', '$anchorScroll', '$location', '$rootScope', 'UserFactory'];
 
-	function ViewSingleLeagueController($state, $stateParams, $window, WebsiteFactory, $timeout, $anchorScroll, $location, $rootScope, UserFactory){
+	function ViewSingleLeagueController($state, $stateParams, $timeout, WebsiteFactory, $timeout, $anchorScroll, $location, $rootScope, UserFactory){
 		var vm = this;
 		vm.leagues = [];
 		vm.league = {};
-		vm.animation = false;
+		vm.map = false;
 
 		//------------Leagues--------------
 
@@ -25,6 +25,9 @@
 					vm.league.marker = angular.copy(coords);
 					vm.league.coords = coords;
 					UserFactory.getUserLoggedIn($rootScope._user.id).then(function(res){
+						var map = $timeout(function(){ 
+							vm.map = true;
+						 }, 800); 
 						if(res.leagueSubscribed.length != 0){
 						for(var i = 0; i < res.leagueSubscribed.length; i++){
 							if(res.leagueSubscribed[i]._id === vm.league._id){

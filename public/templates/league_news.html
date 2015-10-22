@@ -18,7 +18,7 @@
 					</div>
 					<p class="text-center" style="padding-top:20px">
 					<button ng-show="n.comments.length > 0" class='btn btn-lg btn-info' ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">View All {{n.comments.length}} Comments</button>
-					<button class="btn btn-primary btn-lg">Read Article</button>
+					<button ui-sref="SingleNewsletter({id: n._id})" class="btn btn-primary btn-lg" ng-click="vm.getNews()">Read Article</button>
 					</p>
 					<br><br>
 				</div>

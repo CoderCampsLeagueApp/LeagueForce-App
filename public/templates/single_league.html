@@ -74,7 +74,7 @@
 			<h2 style="font-size:45px;text-align:center;color:#337ab7;margin:0;">Location</h2>
 			<p style="font-size:20px;text-align:center;color:#1c5787;margin:0;">{{vm.league.googleLocation.address}}</p>
 		</div>
-		<div class="col-md-8 col-md-offset-2" style="padding-bottom:50px">		
+		<div ng-if='vm.map' class="col-md-8 col-md-offset-2" style="padding-bottom:50px">		
 			<ui-gmap-google-map center='vm.league.coords' zoom='16'>
 	          <ui-gmap-marker idKey='1' coords='vm.league.marker' >
 				</ui-gmap-marker>

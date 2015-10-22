@@ -1,5 +1,5 @@
 <div style="background-attachment: fixed" ng-style="{'background-image': 'url(' + vm.league.background + ')' }">
-	<div id='tops' class="container" style="padding-top:100px;padding-bottom:100px">
+	<div class="container" style="padding-top:100px;padding-bottom:100px">
 	<a class="btn btn-primary" ui-sref="SingleLeague({id: vm.league._id})" style="text-decoration: none;">Back To League Page</a>
 		<div style="margin-top:40px" class="teamHome container-fluid">
 			<div class="row">
@@ -17,7 +17,7 @@
 					<div ng-repeat='c in vm.team.teamMembers'>
 						<div ng-hide='c.isPlayer' class="col-md-12" style=" border-bottom: solid 1px #454563;padding-bottom: 15px;">
 							<img style="float:left; padding-left:8px" class="img-circle" width="100" height="100" src="{{c.pic || nav.noLogo}}">
-								<span style="font-size: 30px;color: white;">{{c.name}}</span>
+								<span style="font-size: 26px;color: white;">{{c.name}}</span>
 								<span style="color: white;"><i ng-show='c.isCoach'>Head Coach</i></span>
 								<span style="color: white;"><i ng-hide='c.isCoach'>Coach</i></span>
 								<p style="padding-left:10px; color: white;">{{c.bio | limitTo: 300}}{{c.bio.length > 300 ? '...' : ''}}</p>

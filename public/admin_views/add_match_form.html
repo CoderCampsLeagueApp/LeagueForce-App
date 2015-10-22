@@ -1,6 +1,5 @@
 <div id="top" class="leagueform">
   <form style="color:#fff" class="form-horizontal" name="addMatch">
-    <fieldset>
       <div style="margin-top: 50px">
         <div class="playerOverflow" style="color:black">
           <table class="table table-bordered">
@@ -84,7 +83,6 @@
       <!-- Google Maps____ -->
       <!-- parentdiv="searchBox.parentdiv" -->
 
-      <a ng-click='vm.getLocation()' class="btn btn-lg">Get location</a>
 
       <ui-gmap-google-map center='map.center' zoom='map.zoom'>
       <ui-gmap-search-box template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentDiv"></ui-gmap-search-box>
@@ -98,8 +96,7 @@
 
   <label class="col-md-3 control-label"></label>
   <div class="col-md-7">                     
-    <button ng-disabled="addMatch.team1 === addMatch.team2" style=" margin-top: 15px" class="btn btn-success btn-block" ng-click='vm.createMatch(vm.allmatches)'>Submit Week</button>
+    <a ng-disabled="addMatch.team1 === addMatch.team2" style=" margin-top: 15px" class="btn btn-success btn-block" ng-click='vm.createMatch(vm.allmatches)'>Submit Week</a>
   </div>
-</fieldset>
 </form>
 </div>

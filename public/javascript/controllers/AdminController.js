@@ -138,8 +138,10 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 					league.googleLocation.address = $scope.address.format;
 					league.googleLocation.zip = $scope.address.zip;
 					}
+					console.log(league);
 					AdminFactory.editLeague(league).then(function(res){
 						vm.adminLeague = res;
+						console.log(res);
 						$state.go('Admin.home');
 					});
 				};

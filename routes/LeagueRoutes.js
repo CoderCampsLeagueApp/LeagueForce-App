@@ -72,7 +72,8 @@ router.post('/', auth, function(req, res) {
 
 //------------Editing a League------------
 router.put('/:id', auth, function(req, res) {
-	League.update({_id: req.body._id}, req.body)
+	console.log(req.body);
+	League.update({_id: req.body._id}, { $set: req.body})
 	.exec(function(err, league) {
 		if(err) return res.status(500).send({err: "Error getting league to edit"});
 		if(!league) return res.status(400).send({err: "League to edit does not exist"});

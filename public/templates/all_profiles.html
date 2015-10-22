@@ -26,10 +26,10 @@
 					<div class="profLeague col-md-12">
 						<div ng-repeat='l in profile.leagueSubscribed'>
 							<div class="col-md-4" style="height:180px">
-								<img style="max-height:140px" class="img-responsive" ng-src="{{l.logo}}">
+								<img  ui-sref="SingleLeague({id: l._id})"style="max-height:140px" class="img-responsive pointer" ng-src="{{l.logo}}">
 								<p class="text-center text-info">{{l.name}}
 								<br>
-								<button class="text-center btn btn-info btn-sm">View League</button>
+								<button ui-sref="SingleLeague({id: l._id})" class="text-center btn btn-info btn-sm">View League</button>
 								</p>
 							</div>	
 						</div>

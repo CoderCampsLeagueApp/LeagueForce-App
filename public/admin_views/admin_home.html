@@ -1,19 +1,20 @@
 <div ng-show='vm.adminLeague'>
-	<div style="margin-top:60px" class="adminHome">
+<div class="container">
+	<div style="margin-top:60px" class="teamHome container-fluid">
 		<div ng-controller='AdminUploadController as au'>
-			<div class="col-md-4 nopadding">
-				<div style="height:250px; width:100%;">
-					<img style="height:inherit" class="img-responsive" ui-sref="SingleLeague({id: vm.adminLeague._id})" ng-src="{{au.logopic || vm.adminLeague.logo || nav.noLogo}}">
+			<div class="col-md-4" style="padding:5px">
+				<div style="height:300px; width:100%;">
+					<img style="max-height:300px" class="img-responsive" ui-sref="SingleLeague({id: vm.adminLeague._id})" ng-src="{{au.logopic || vm.adminLeague.logo || nav.noLogo}}">
 				</div>
 				
-				<button style="width:100%" class="homebtn" type="file" ngf-select="au.uploadFiles($file, vm.adminLeague._id)"
+				<button style="width:100%;margin-top:10px" class="homebtn" type="file" ngf-select="au.uploadFiles($file, vm.adminLeague._id)"
 				accept="image/*" ngf-max-size="8MB">Upload Logo</button>
 
 				{{errorMsg}}
 			</div>
 		</div>
 
-		<div class="col-md-8">
+		<div class="col-md-8" style="padding:5px">
 			<p>Name: {{vm.adminLeague.name}}</p>
 			<p>Divisions: {{vm.adminLeague.division}}</p>
 			<p>Weeks: {{vm.adminLeague.weeks.length}}</p>
@@ -24,7 +25,7 @@
 
 				<p>League Photos : </p>
 				
-				<div style="height:200px" class="teamOverflow col-md-12">
+				<div style="height:200px;background-color: rgba(21, 22, 39, 0.7);border-radius:2px;" class="teamOverflow col-md-12">
 					<div>						
 						<img style="margin:10px" ng-repeat='i in vm.adminLeague.images track by $index' class="col-md-3"  ng-src="{{i}}">
 					</div>
@@ -34,6 +35,7 @@
 			</div>
 
 		</div>
+
 		<div class="col-md-12 nopadding" style="margin-top:30px">
 			<button class="homebtn" ng-hide="vm.adminLeague.isDisplay" ng-click="vm.publishLeague(vm.adminLeague._id)">Publish</button>
 			<button class="homebtnEdit" ng-click='vm.startLeagueEdit(vm.adminLeague._id)'>Edit League</button>
@@ -41,6 +43,7 @@
 		</div>
 	</div>
 	<br>
+	</div>
 </div>
 <div style="clear: both;">
 	<h1>Teams</h1>
@@ -49,13 +52,14 @@
 			<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:10px">
 				<div ng-repeat='t in vm.adminLeague.teams track by $index' class="col-lg-3 col-md-3 col-sm-6">
 					<div style="height:220px">
-						<img style="max-height:200px" ui-sref="TeamPage({id: t._id})" class="img-responsive"  ng-src="{{t.logo}}">
+						<img style="max-height:200px" ui-sref="TeamPage({id: t._id})" class="img-responsive pointer"  ng-src="{{t.logo}}">
 					</div>
-					<p style="text-align:center">{{t.name}}</p>
-					<div class="col-md-6 col-md-offset-3">
-						<button  ng-click='vm.startTeamEdit(t)'class="btn btn-warning btn-block">Edit</button>
-						<button  ng-click='vm.deleteTeam(t, $index)'class="btn btn-danger btn-block">Delete</button>
-					</div>
+						<p ui-sref="TeamPage({id: t._id})" style="text-align:center;color:#31708f;font-size:24px;cursor:pointer">{{t.name}}
+						<br>
+						<button style="width:50%"  ng-click='vm.startTeamEdit(t)'class="btn btn-warning">Edit</button>
+						<br>
+						<button style="width:50%"  ng-click='vm.deleteTeam(t, $index)'class="btn btn-danger">Delete</button>
+						</p>
 				</div>
 			</div>
 		</div>
