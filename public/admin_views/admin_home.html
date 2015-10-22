@@ -48,7 +48,9 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12" style="margin-top:10px">
 				<div ng-repeat='t in vm.adminLeague.teams track by $index' class="col-lg-3 col-md-3 col-sm-6">
-					<img ui-sref="TeamPage({id: t._id})" class="img-responsive"  width="170" height="170" ng-src="{{t.logo}}">
+					<div style="height:220px">
+						<img style="max-height:200px" ui-sref="TeamPage({id: t._id})" class="img-responsive"  ng-src="{{t.logo}}">
+					</div>
 					<p style="text-align:center">{{t.name}}</p>
 					<div class="col-md-6 col-md-offset-3">
 						<button  ng-click='vm.startTeamEdit(t)'class="btn btn-warning btn-block">Edit</button>

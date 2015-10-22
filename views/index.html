@@ -3,7 +3,7 @@
 <head>
 	<title>League Force</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
 	<link rel="stylesheet" href="/css/animate.css">
@@ -15,7 +15,7 @@
 <body >	
 	<div ng-controller="NavController as nav" ng-cloak> 
 		<div class="container-fluid nopadding">
-			<nav style="z-index:5 !important" ng-hide="nav.status.id" class='col-md-12 nopadding' ng-cloak>
+			<nav style="z-index:5 !important" ng-hide="nav.status.id" class='col-md-12 nopadding noDisplay' ng-cloak>
 				<ul>
 					<li class="col-md-3">
 						<img width="50" height="50" src="http://res.cloudinary.com/josemedina760/image/upload/v1444790611/force_logo_svh4rp.png">
@@ -38,7 +38,7 @@
 				</ul>
 			</nav>
 			<!-- Displays when the user logs in -->
-			<nav style="z-index:5 !important" ng-show="nav.status.id" class='col-md-12 nopadding' ng-cloak>
+			<nav style="z-index:5 !important" ng-show="nav.status.id" class='col-md-12 nopadding noDisplay' ng-cloak>
 				<ul>
 					<li class="col-md-3">
 						<img width="50" height="50" src="http://res.cloudinary.com/josemedina760/image/upload/v1444790611/force_logo_svh4rp.png">
@@ -78,9 +78,29 @@
 						</li>				
 					</ul>
 				</nav>
+				<div id="mobile">
+					<div class="mobile-nav-bar" ng-click='!vm.dropdown ? vm.dropdown = true : vm.dropdown = false'>
+					  <div class="mobile-nav-button">
+					    <i class="bar"></i>
+					    <i class="bar"></i>
+					    <i class="bar"></i>
+					  </div> <!-- mobile-nav-button -->
+					</div>
+
+					<nav class="mobile-nav" ng-class="{'show-mobile-nav': vm.dropdown}">
+					  <ul>
+					    <li ng-click='vm.dropdown = false'><a  ui-sref='Home'>Home</a></li>
+					    <li ng-click='vm.dropdown = false'><a  ui-sref='Leagues'>Leagues</a></li>
+					    <li ng-click='vm.dropdown = false'><a  ui-sref="Newsletter">Newsletters</a></li>
+					    <li ng-click='vm.dropdown = false' ng-show="nav.status.id"><a ui-sref="Profile">Account</a></li>
+					    <li ng-click='vm.dropdown = false' ng-show="nav.status.id"><a  ui-sref='Admin'>Admin</a></li>
+					    <li ng-click='vm.dropdown = false' ng-show="!nav.status.id"><a  ui-sref='Login'>Register/Login</a></li>
+					  </ul>
+					</nav>
+				</div>
 			</div>
 
-	<ui-view></ui-view>
+	<ui-view autoscroll="true"></ui-view>
 </div>
 
 

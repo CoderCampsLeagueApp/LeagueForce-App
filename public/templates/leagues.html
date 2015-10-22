@@ -1,47 +1,52 @@
 
-<div class="admin" style="padding-bottom:50px; height:100vh">
-		<table class="table">
+<div class="container-fluid" style="padding-bottom:50px; height:100vh;background: url(http://res.cloudinary.com/josemedina760/image/upload/v1445490673/leaguebg_yweyf1.jpg)">
+	<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top:50px">
+		<div class="row">
+		<div class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+		<table class="table table-responsive" style="width:">
 			<thead>
 				<tr class="text-center" style="background: #828282; color:white">
 					<th></th>
-					<th class="text-center">Logo</th>
-					<th class="text-center">League Name</th>
-					<th class="text-center">Teams</th>
-					<th class="text-center">Weeks</th>
-					<th class="text-center">Division</th>
-					<th class="text-center">Location</th>
+					<th style="padding:15px" class="text-center">Logo</th>
+					<th style="padding:15px" class="text-center">League Name</th>
+					<th style="padding:15px" class="text-center">Teams</th>
+					<th style="padding:15px" class="text-center">Weeks</th>
+					<th style="padding:15px" class="text-center">Division</th>
+					<th style="padding:15px" class="text-center">Location</th>
 				</tr>
 			</thead>
 			<tbody> 
-				<tr style="position: relative !important;overflow: hidden;" style="height:250px; width:100%" class="pointer" ng-repeat='l in vm.leagues track by $index' ng-show="l.isDisplay">
-					<th>
-							<div style="position:relative; width:100%">
-						      <img class="rowbg" ng-src="{{l.background}}">
+				<tr style="position: relative !important;overflow: hidden; border-bottom:solid 1px #dddddd" class="pointer bghover nopadding" ng-repeat='l in vm.leagues track by $index' ng-show="l.isDisplay" ng-class="{'defbg' : !l.background}">
+					<td>
+							<div class="col-md-12 col-sm-12 col-xs-12" ng-show='l.background' style="position:absolute;padding: 0 !important;">	
+						      		<img style="border: ridge 1px #fff;padding: 0 !important;" class="rowbg" ng-src="{{l.background}}">
 						    </div>
-						<th class="leaguetxtbox" style="height:250px;width:400px;" class="text-center" ui-sref="SingleLeague({id: l._id})">
-							<div style="height:250px;width:400px">
-								<img style="max-height: 250px;" class="img-responsive" ng-src="{{l.logo}}">
+						<td style="width:300px" class="leaguetxtbox" class="text-center" ui-sref="SingleLeague({id: l._id})">
+							<div style="height:190px; width:300px">
+								<img class="leagueimg" style="padding-top:10px" style="max-height: 190px;" class="img-responsive" ng-src="{{l.logo}}">
 							</div>
-						</th>
-						<th style="vertical-align: middle !important;" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
+						</td>
+						<td style="vertical-align: middle !important;width:300px" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
 							<h2 class="leaguetxt nopadding">{{l.name}}</h2>
-						</th>
-						<th style="vertical-align: middle !important;"  class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
+						</td>
+						<td style="vertical-align: middle !important;width:300px"  class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
 							<p class="leaguetxt">{{l.teams.length}}</p>
-						</th>
-						<th style="vertical-align: middle !important;" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
+						</td>
+						<td style="vertical-align: middle !important;width:300px" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
 							<p class="leaguetxt">{{l.weeks.length}}</p>
-						</th>
-						<th  style="vertical-align: middle !important;" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
+						</td>
+						<td  style="vertical-align: middle !important;width:300px" class="leaguetxtbox" ui-sref="SingleLeague({id: l._id})">
 							<p class="leaguetxt">{{l.division}}</p>
-						</th>
-						<th  style="vertical-align: middle !important;" class="leaguetxtbox" style="width: 50%" ui-sref="SingleLeague({id: l._id})">
+						</td>
+						<td  style="vertical-align: middle !important;width:300px" class="leaguetxtbox" style="width: 50%" ui-sref="SingleLeague({id: l._id})">
 							<p class="leaguetxt">{{l.googleLocation.address}}</p>
-						</th>
-						</th>
+						</td>
+						</td>
 				</tr>
 				
 			</tbody>
 		</table>
-	
+		</div>
+		</div>
+	</div>
 </div>

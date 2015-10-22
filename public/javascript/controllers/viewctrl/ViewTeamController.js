@@ -2,10 +2,11 @@
 	angular.module('app')
 	.controller('ViewTeamController', ViewTeamController);
 
-	ViewTeamController.$inject = ['$state', '$stateParams', '$rootScope', 'WebsiteFactory','$timeout'];
+	ViewTeamController.$inject = ['$state', '$stateParams', 'WebsiteFactory', '$location', '$anchorScroll', '$timeout'];
 
-	function ViewTeamController($state, $stateParams, $rootScope, WebsiteFactory, $timeout){
+	function ViewTeamController($state, $stateParams, WebsiteFactory, $location, $anchorScroll, $timeout){
 		var vm = this;
+		vm.animation = false;
 		vm.leagues = [];
 		vm.league = {};
 		vm.schedule = [];
@@ -53,20 +54,30 @@
 					};
 					vm.currentMatch.marker = angular.copy(coords);
 					vm.currentMatch.coords = coords;
+					vm.currentMatch.index = 0;
+					vm.map = true;
 				});
 			});
 		};
 
 		vm.showMatch = function(idx){
+			vm.map = false;
+			if(!vm.animation){
+				vm.animation = true;
+			}
 			vm.currentMatch = vm.schedule[idx];
+			var map = $timeout(function(){ 
+				vm.map = true;
+			 }, 2001); 
 			var coords = {
 				latitude: vm.schedule[idx].googleLocation.latitude,
 				longitude: vm.schedule[idx].googleLocation.longitude
 			};
 			vm.currentMatch.marker = angular.copy(coords);
 			vm.currentMatch.coords = coords;
-			console.log('switched..');
-			console.log(vm.currentMatch.coords);
+			vm.currentMatch.index = idx;
+			$location.hash('schedule' + idx);
+      		$anchorScroll();
 		};
 
 

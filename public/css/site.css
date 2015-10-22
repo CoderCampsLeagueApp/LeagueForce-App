@@ -9,11 +9,14 @@ body {
   height: 100%;
 }
 .leagueimg{
-  height: 250px;
+  height: 190px;
   position:relative !important;
 }
+.bghover:hover{
+  opacity: 0.8;
+}
 .leaguetxtbox{
-  height: 250px;
+  height: 200px;
   text-align: center;
   text-shadow: 2px 2px 1px black;
   position:relative !important;
@@ -21,17 +24,6 @@ body {
   position:relative !important;
   z-index: 2;
 }
-
-.rowbg{
-    background: url(http://waves.wavgroup.com/wp-content/uploads/2015/07/Grass.jpg);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 1500px;
-    height: 250px;
-    opacity: 0.8;
-}
-
 .leaguetxt{
   color: #fff;
   display: inline-block;
@@ -39,11 +31,39 @@ body {
   line-height: normal;
   position: relative !important;
 }
-.table>tbody>tr>th,{
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: middle; 
-    border-top: 1px solid #ddd;
+.imgcenter{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.rowbg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 200px;
+    opacity: 0.85;
+}
+.defbg{
+  background-color: rgba(14, 32, 56, 0.8);
+  border: ridge 1px #fff;
+}
+.center{
+  display: block;
+  margin: 0 auto;
+}
+.matchbox{
+  background-color: rgba(230, 230, 244, 0.9);
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 1px 7px 5px #262626;
+}
+
+.table > tbody > tr > td{
+    padding: 0px;
 }
 .cropArea {
   background: #E4E4E4;
@@ -103,7 +123,26 @@ body {
   height: 400px; 
   width: 100%;
 }
-
+.map{
+  height: 300px;
+  width: 100%;
+}
+.map .angular-google-map-container{
+  height: 300px;
+  width: 100%;
+}
+.col-md-12{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.col-sm-12{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.col-xs-12{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 .nopadding{
 	padding: 0;
 }
@@ -317,11 +356,11 @@ form .progress {
 }
 @media (max-width: 767px) {
   #head {
-    min-height: 420px;
-    padding-top: 160px;
+    min-height: 300px;
+    padding-top: 40px;
   }
   #head .lead {
-    font-size: 34px;
+    font-size: 20px;
   }
 }
 .jumbotron{
@@ -357,8 +396,8 @@ form .progress {
 
 .teamBackground {
   margin-top: 30px;
-  margin-bottom: 30px;
-  background: ;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
   height: 100px;
   width: 100%;
 }
@@ -376,4 +415,7 @@ form .progress {
   padding-bottom: 60px;
   border-radius: 4px; 
   box-shadow: 0 0 10px black;
+}
+@media only screen and (min-width: 200px) and (max-width: 1499px) {
+
 }

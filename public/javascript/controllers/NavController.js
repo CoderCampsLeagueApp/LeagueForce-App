@@ -8,6 +8,7 @@
 	function NavController($state, $stateParams, $rootScope, UserFactory, $scope, Upload, $timeout, $interval, $window){
 		var vm = this;
 		vm.user = {} ;
+		vm.dropdown = false;
 
 		vm.status = $rootScope._user;
 		vm.noPic = "http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette.png";

@@ -114,4 +114,86 @@ ul li:hover .dropdownContain { top: 65px; }
 ul li:hover .underline { border-bottom-color: #777; }
 ul li:hover .dropOut { opacity: 1; margin-top: 8px; }
 
+.mobile-nav-bar {
+  background: #606060;
+  min-height: 47px;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  z-index: 20;
+}
+.mobile-nav-bar .mobile-nav-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: inline-block;
+  width: 31px;
+  height: 30px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.mobile-nav-bar .mobile-nav-button .bar {
+  width: 100%;
+  float: left;
+  height: 4px;
+  margin-bottom: 5px;
+  background-color: white;
+}
+.mobile-nav-bar .mobile-nav-button .bar:last-of-type {
+  margin-bottom: 0;
+}
+
+.mobile-nav {
+  height: 0;
+  z-index: 10;
+}
+.mobile-nav ul {
+  z-index: 25;
+  position: fixed;
+  background-color: #333;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  transform: translate(0, -300px);
+  -ms-transform: translate(0, -300px);
+  -webkit-transform: translate(0, -300px);
+  transition: all .2s ease-in-out;
+}
+.mobile-nav ul:hover{
+	border-color: 
+}
+.mobile-nav ul li a {
+  display: block;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  background: #222;
+}
+.mobile-nav ul li a:active {
+  background: maroon;
+}
+.mobile-nav.show-mobile-nav {
+  height: auto;
+}
+.mobile-nav.show-mobile-nav ul {
+  transform: translate(0px);
+  -ms-transform: translate(0px);
+  -webkit-transform: translate(0px);
+}
+@media screen and (min-width: 1500px) and (max-width: 3000px) {
+  #mobile { 
+  	display: none; 
+  	}   /* hide it elsewhere */
+}
+@media only screen and (min-width: 200px) and (max-width: 1499px) {
+ 	.noDisplay {
+       display: none !important;
+   }
+   #mobile{
+   	display: block;
+   }
+}
+
 

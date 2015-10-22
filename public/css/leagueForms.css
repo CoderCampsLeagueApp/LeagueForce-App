@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
 .admin {
- background:#2d3b36 url(http://www.mrwallpaper.com/wallpapers/football-stadium.jpg)no-repeat center center fixed;
+ background:#2d3b36 url(http://res.cloudinary.com/josemedina760/image/upload/v1445490673/leaguebg_yweyf1.jpg)no-repeat center center fixed;
  z-index: -3;
  width: 100%;
 }
@@ -145,13 +145,21 @@
 
  .admin h1 {
   color: #fff; 
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+  text-shadow: -2px 2px 1px #212121;
   text-align: center;
   padding-top: 30px;
   font-size: 100px; 
   font-weight: 700;
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0px;
+}
+.teamh1{
+  color: #fff; 
+  text-shadow: -2px 2px 1px black;
+  text-align: center;
+  font-size: 120px; 
+  font-weight: 700;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .homebtn { 
