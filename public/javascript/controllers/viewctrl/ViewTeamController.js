@@ -68,7 +68,7 @@
 			vm.currentMatch = vm.schedule[idx];
 			var map = $timeout(function(){ 
 				vm.map = true;
-			 }, 2001); 
+			 }, 1300); 
 			var coords = {
 				latitude: vm.schedule[idx].googleLocation.latitude,
 				longitude: vm.schedule[idx].googleLocation.longitude

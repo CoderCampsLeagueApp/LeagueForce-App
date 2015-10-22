@@ -1,26 +1,28 @@
-<div class="container-fluid">
+<div class="container">
 	<div class="row">
-		<div class="col-md-12">
-			<div class="col-md-8">
-				<div ng-repeat="n in vm.newsletters | orderBy: 'createdate': true">
-					<h2 style="word-wrap: break-word;"><a ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">{{n.title}}</a></h2>
-					<span style="font-size: .9em; color: gray;">Posted on <a style="text-decoration: none;" ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">{{n.created | date:"M/d/yyyy hh:mma"}}</a> by <a ui-sref="ViewProfile({id: n.user._id})">{{n.user.name}}</a></span><br><br>
-					<div class="col-md-12">
-						<div class="col-md-7" ng-show="n.image">
-							<div class="newsImage">
-								<img class="img img-thumbnail img-responsive" style="float: left;" ng-src="{{n.image}}"/>
-							</div>
-						</div>
-						<!-- <div  class="col-md-5" style="word-wrap: break-word;" ta-bind ng-model="n.body" style="clear: both;"></div> -->
+		<div class="col-md-10">
+			<div style="margin-top: 50px;">
+				<div ng-repeat="n in vm.newsletters | orderBy: 'createdate': true" style="border-bottom: 2px solid #cecece;    padding: 5px 15px 30px 30px;" ng-class-odd="'lodd'" ng-class-even="'leven'">
+					<h1 style="word-wrap: break-word;"><a ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">{{n.title}}</a></h1>
+					<span style="font-size: .9em; color: gray;">Posted on 
+						<a style="text-decoration: none;" ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">
+						{{n.created | date:"M/d/yyyy hh:mma"}}
+						</a> by 
+						<a ui-sref="ViewProfile({id: n.user._id})">
+						{{n.user.name}}
+							<img class="img-circle" width="60" height="60" ng-src="{{n.user.pic}}">
+						</a>
+					</span>
+					<div ng-show="n.image" style="margin-top:25px;">
+						<img style="max-height:700px" class="img img-responsive" ng-src="{{n.image}}"/>
 					</div>
-					<div ng-show="n.comments.length > 0">
-						<button class='btn btn-md btn-info' ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">View All {{n.comments.length}} Comments</button>
-					</div>
-					<br>
-					<div style="border-bottom: 2px #bfbfbf solid; clear: both;"></div>
+					<p class="text-center" style="padding-top:20px">
+					<button ng-show="n.comments.length > 0" class='btn btn-lg btn-info' ui-sref="SingleNewsletter({id: n._id})" ng-click="vm.getNews()">View All {{n.comments.length}} Comments</button>
+					<button class="btn btn-primary btn-lg">Read Article</button>
+					</p>
+					<br><br>
 				</div>
 			</div>
-			<div style="height: 700px; width: 200px;" class="col-md-4"></div>
 		</div>
 	</div>
 </div>

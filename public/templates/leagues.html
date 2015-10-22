@@ -3,23 +3,23 @@
 	<div class="col-md-12 col-sm-12 col-xs-12" style="padding-top:50px">
 		<div class="row">
 		<div class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-		<table class="table table-responsive" style="width:">
+		<table class="table table-responsive" style="border:none">
 			<thead>
-				<tr class="text-center" style="background: #828282; color:white">
+				<tr class="text-center" style="background:#545454; color:white; border: solid 1px #4f4f4f;">
 					<th></th>
-					<th style="padding:15px" class="text-center">Logo</th>
-					<th style="padding:15px" class="text-center">League Name</th>
-					<th style="padding:15px" class="text-center">Teams</th>
-					<th style="padding:15px" class="text-center">Weeks</th>
-					<th style="padding:15px" class="text-center">Division</th>
-					<th style="padding:15px" class="text-center">Location</th>
+					<th class="text-center thborder">Logo</th>
+					<th class="text-center thborder">League Name</th>
+					<th class="text-center thborder">Teams</th>
+					<th class="text-center thborder">Weeks</th>
+					<th class="text-center thborder">Division</th>
+					<th class="text-center thborder">Location</th>
 				</tr>
 			</thead>
 			<tbody> 
 				<tr style="position: relative !important;overflow: hidden; border-bottom:solid 1px #dddddd" class="pointer bghover nopadding" ng-repeat='l in vm.leagues track by $index' ng-show="l.isDisplay" ng-class="{'defbg' : !l.background}">
 					<td>
 							<div class="col-md-12 col-sm-12 col-xs-12" ng-show='l.background' style="position:absolute;padding: 0 !important;">	
-						      		<img style="border: ridge 1px #fff;padding: 0 !important;" class="rowbg" ng-src="{{l.background}}">
+						      		<img style="padding: 0 !important;" class="rowbg" ng-src="{{l.background}}">
 						    </div>
 						<td style="width:300px" class="leaguetxtbox" class="text-center" ui-sref="SingleLeague({id: l._id})">
 							<div style="height:190px; width:300px">

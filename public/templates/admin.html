@@ -1,8 +1,15 @@
-<div class="admin" style="padding-top:15px">
-	<button class="homebtn" ui-sref='Admin.home' ng-click="vm.clearTeam();">Admin Home</button>
-	<button class="homebtn" ng-show='vm.adminLeague' ui-sref='Admin.schedule'>League Schedule</button>
-	<button class="homebtn" ng-show='!vm.adminLeague' ui-sref='Admin.league'>Create League</button>
-	<button class="homebtn" ng-show='vm.adminLeague' ui-sref='Admin.newsletter'>Create Newsletter</button>
-	<button class="homebtn" ng-show='vm.adminLeague' ui-sref='Admin.storedarticles'>Your Newsletters</button>
+<div class="admin">
+	<div ng-show='!vm.adminLeague'>
+		<button style="margin-top:30px" class="homebtn" ui-sref='Admin.home' ng-click="vm.clearTeam();">Admin Home</button>
+		<button class="homebtn"  ui-sref='Admin.league'>Create League</button>
+		<button class="homebtn">...</button>
+		<button class="homebtn">...</button>
+	</div>
+	<div ng-show='vm.adminLeague'>
+		<button style="margin-top:30px" class="homebtn" ui-sref='Admin.home' ng-click="vm.clearTeam();">Admin Home</button>
+		<button class="homebtn" ui-sref='Admin.newsletter'>Create Newsletter</button>
+		<button class="homebtn" ui-sref='Admin.storedarticles'>Your Newsletters</button>
+		<button class="homebtn" ui-sref='Admin.schedule'>League Schedule</button>
+	</div>
 	<div ui-view></div>
 </div>

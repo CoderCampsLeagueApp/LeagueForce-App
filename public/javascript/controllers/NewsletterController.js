@@ -19,7 +19,6 @@
 			vm.newsletter.isPublished = true;
 			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
 				vm.getNewsletters();
-				console.log(vm.newsletter);
 				delete vm.newsletter;
 				$state.go('Newsletter');
 			});
@@ -39,7 +38,6 @@
 		vm.deleteNewsletter = function(newsletter) {
 			AdminFactory.deleteNewsletter(newsletter).then(function(res) {
 				vm.newsletters.splice(vm.newsletters.indexOf(newsletter), 1);
-				console.log(newsletter);
 			});
 		};
 
@@ -56,7 +54,6 @@
 			vm.newsletter.isPublished = false;
 			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {
 				$state.go('Admin.draftsmodal')
-				//console.log(newsletter);
 				delete vm.newsletter;
 			});
 		};
@@ -85,8 +82,6 @@
 			vm.newsletter = "";
 			vm.newsletter = {};
 			$state.go('Admin.home');
-			console.log(vm.newsletter);
-			console.log(newsletter);
 		};
 
 		vm.current = function() {

@@ -1,6 +1,6 @@
-<div id='tops' style="background-attachment: fixed" ng-style="{'background-image': 'url(' + vm.league.background + ')' }">
-	<div style="padding-top:50px; padding-bottom:35px">
-		<div style='height:400px' class="adminHome animated fadeIn">
+<div style="background-attachment: fixed" ng-style="{'background-image': 'url(' + vm.league.background + ')' }">
+	<div style="padding-top:120px; padding-bottom:35px">
+		<div style='height:400px' class="adminHome">
 			<div class="col-md-5 nopadding">
 				<div style="height:325px; width:100%;">
 					<img style="max-height:325px" class="img-responsive" ui-sref="Leagues" ng-src="{{vm.league.logo || nav.noLogo}}">
@@ -13,6 +13,13 @@
 				<h4>Divisions: {{vm.league.division}}</h4>
 				<h4>Weeks: {{vm.league.weeks.length}}</h4>
 				<h4>Location: {{vm.league.googleLocation.address}} </h4>
+				<br><br><br>
+				<div class="animated tada" ng-show='vm.subs' style="padding-left:20%;padding-right: 20%;">
+					<button class="homebtn" style="width:100%" ng-click='vm.subscribe(vm.league._id)'>Subscribe</button>
+				</div>
+				<div class="animated tada" ng-show='vm.subbed' style="padding-left:20%;padding-right: 20%;">
+					<h3 style="color:#7cc17a;text-align:center">**Currently subscribing**</h3>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -39,12 +39,19 @@ router.get('/team/:id', function(req, res) {
 	Team.findOne({_id: req.params.id})
 	.populate('matches')
 	.exec(function(err, team) {
-		console.log(team);
 		if(err) return res.status(500).send({err: 'Error inside server for finding a team'});
 		if(!team) return res.status(400).send({err: "That team does not exist!"});
 		res.send(team);
 	})
-})
+});
+router.put('/subscribe', function(req, res){
+	User.findOneAndUpdate({_id: req.body.user}, {$push: {leagueSubscribed: {_id: req.body.league}}})
+	.exec(function(err, result){
+		if(err) return res.status(500).send({err: 'Error inside server for finding a user'});
+		if(!result) return res.status(400).send({err: "problem pushing the id to the user"});
+		res.send();
+	});
+});
 
 
 module.exports = router;

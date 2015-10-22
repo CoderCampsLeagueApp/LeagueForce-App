@@ -1,22 +1,31 @@
 <div class="container">
-	<div class="col-md-6">
+	<div class="col-md-8">
 		<h2 style="word-wrap: break-word;"><a ng-click="vm.getNews()">{{vm.newsletter.title}}</a></h2>
 
 		<span style="font-size: .9em; color: gray;">Posted on <a style="text-decoration: none;" ng-click="vm.getNews()">{{vm.newsletter.created | date:"M/d/yyyy hh:mma"}}</a> by <a ui-sref="ViewProfile({id: vm.newsletter.user._id})">{{vm.newsletter.user.name}}</a></span>
 		<br>
 		<br>
 		<div ng-show="vm.newsletter.image">
-			<img style="float: left;" ng-src="{{vm.newsletter.image}}" class="img img-thumbnail singleNewsImage"/>
-		</div><br>	
-		<div style="word-wrap: break-word; clear: both;" ta-bind ng-model="vm.newsletter.body " style="clear: both;"></div><hr>
+			<img style="max-height:500px" ng-src="{{vm.newsletter.image}}" class="img img-thumbnail img-responsive"/>
+		</div>
+		<br>	
+		<div style="word-wrap: break-word; clear: both; padding-top:30px" ta-bind ng-model="vm.newsletter.body " style="clear: both;"></div>
+		<hr>
 	</div>
-	<div class="col-md-6"></div>
+	<br>
 </div>
 <div class="container">
-	<h3>Post A Comment</h3>
-	<div style="">
-		<textarea class="form-group" ng-model="vm.comment.body" placeholder="Comment..."></textarea><br>
-		<button class="btn btn-success" ng-click="vm.createComment(vm.newsletter._id);">Submit</button><br><br>
+	<h2 class="text-center" style="padding-bottom:20px">Post A Comment</h2>
+	<div ng-show='nav.status.id'>
+		<div class="col-md-6">
+			<textarea style="height:60px" class="form-control" ng-model="vm.comment.body" placeholder="Comment..."></textarea>
+		</div>
+		<div class="col-md-2">
+			<button style="height:60px" class="btn btn-success" ng-click="vm.createComment(vm.newsletter._id);">Submit</button><br><br>
+		</div>
+	</div>
+	<div ng-show='!nav.status.id'>
+		<h4 class="text-center text-warning" style="padding-bottom:25px">Please sign in to comment...</h4>
 	</div>
 </div>
 <!-- Comments -->
@@ -29,8 +38,8 @@
 			<a ui-sref='ViewProfile({id: c.user._id})'><b>{{c.user.name}}</b></a> <i>{{c.created | date:"M/d/yyyy hh:mma"}}</i><br>{{c.body}}<br>
 			<br>
 
-			<a style="color:red" ng-click="vm.deleteComment(c._id, vm.newsletter._id)">Remove</a>
-			<a ng-click="replyBox = true">Reply</a>
+			<a ng-show='vm.status.id === c.user._id' style="color:red" ng-click="vm.deleteComment(c._id, vm.newsletter._id)">Remove</a>
+			<a ng-show='vm.status.id' ng-click="replyBox = true">Reply</a>
 			<div class="well" ng-show="replyBox">
 				<textarea ng-model="vm.comment.reply.body"></textarea><br>
 				<a ng-click="replyBox = false">Cancel</a>

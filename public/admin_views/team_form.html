@@ -11,9 +11,11 @@
       <div class="form-group">
 
         <div class="teamOverflow col-md-12">
-          <img class="col-md-4 img-responsive" style="float:left" ng-src="{{vm.team.logo || nav.noLogo}}">
-          <h3>{{vm.team.name}}</h3>
+          <div class="col-md-4">
+            <img style="max-height:250px" class="img-responsive" ng-src="{{vm.team.logo || nav.noLogo}}">
+          </div>
           <div style="display:inline" class="col-md-8">
+            <h3>{{vm.team.name}}</h3>
             <div ng-repeat='img in vm.team.images track by $index' style="display:inline" class="col-md-3 nopadding">
               <img height="115" width="125" ng-src="{{img}}">
               <div ng-click='vm.removeTeamImage($index)' class="teamimgRemove pointer">
@@ -78,7 +80,9 @@
             <div ng-repeat='c in vm.team.teamMembers'>
               <div ng-hide='c.isPlayer' class="col-md-12" style=" border-bottom: solid 1px;padding-bottom: 15px;">
                 <img style="float:left" class="img-circle" width="120" height="120" src="{{c.pic || nav.noLogo}}">
-                <h4>{{c.name}}</h4>
+                <h4>{{c.name}} 
+                <button ng-click='vm.team.teamMembers.splice($index,1);' style="margin-right: 15px;" class="pull-right btn btn-danger">Delete coach <i class="fa fa-trash-o"></i></button>
+                </h4>
                 <p><i ng-show='c.isCoach'>Head Coach</i></p>
                 <p><i ng-hide='c.isCoach'>Coach</i></p>
                 <p style="padding-left:10px">{{c.bio | limitTo: 300}}{{c.bio.length > 300 ? '...' : ''}}</p>
@@ -151,7 +155,7 @@
       <fieldset>
 
         <div class="playerOverflow" style="color:black">
-          <table class="table table-bordered">
+          <table class="table table-bordered table-condensed">
             <thead>
               <tr style="background: #333333; color:white">
                 <th>pic.</th>
@@ -159,6 +163,7 @@
                 <th>Name</th>
                 <th>position</th>
                 <th>d.o.b.</th>
+                <th>delete</th>
               </tr>
             </thead>
             <tbody>
@@ -168,6 +173,7 @@
                 <th>{{p.name}}</th>
                 <th>{{p.position}}</th>
                 <th>{{p.dob | date}}</th>
+                <th ng-click='vm.team.teamMembers.splice($index,1);'  style="color:red"><i class="fa fa-trash-o"></i></th>
               </tr>
             </tbody>
           </table>

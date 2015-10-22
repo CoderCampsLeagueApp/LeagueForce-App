@@ -66,17 +66,14 @@ router.post('/', auth, function(req, res) {
 	league.save(function(err, league) {
 		if(err) return res.status(500).send({err: "Issues with the server"});
 		if(!league) return res.status(400).send({err: "Could not create a league"});
-		console.log(league);
 		res.send(league);
 	});
 });
 
 //------------Editing a League------------
 router.put('/:id', auth, function(req, res) {
-	console.log(req.body);
 	League.update({_id: req.body._id}, req.body)
 	.exec(function(err, league) {
-		console.log('put---------------------------------------------');
 		if(err) return res.status(500).send({err: "Error getting league to edit"});
 		if(!league) return res.status(400).send({err: "League to edit does not exist"});
 		res.send(req.body);
@@ -102,7 +99,7 @@ router.post('/team', auth, function(req, res) {
 		if(err) return res.status(500).send({err: "Issues with the server"});
 		if(!result) return res.status(400).send({err: "Could not create a league"}); 
 		
-		League.update({_id: team.league}, {$push: {teams: {_id: result._id}}} , function(err, result){ console.log('hi');res.send()} );
+		League.update({_id: team.league}, {$push: {teams: {_id: result._id}}} , function(err, result){res.send()} );
 	});
 });
 
@@ -144,17 +141,12 @@ router.post('/match', auth, function(req, res) {
 		for(var i = 0; i < League.weeks.length; i++) {
 			if(League.weeks[i]._id.toString() === match.leagueWeek.weekId) {
 				idx = i;
-				console.log(i);
-			}
+			};
 		};
 		
 
 		var  x = League;
 		x.weeks[idx].matches = match.matches;
-		
-		// for(var i = 0; i < x.weeks.length; i++){
-		// 	console.log(x.weeks[i].matches);
-		// }
 		res.send(x);
 
 
@@ -171,9 +163,6 @@ cloudinary.config({
 router.post('/leagueLogoUpload', function(req, res) {
 	var form = new multiparty.Form();
 	form.parse(req, function(err, data, fileObject){
-		console.log(data);
-		console.log('-----------------------------------');
-		console.log(fileObject);
 		
 		cloudinary.uploader.upload(fileObject.file[0].path, function(picInfo){
 			League.update({_id: data.leagueid[0]}, {logo: picInfo.url})

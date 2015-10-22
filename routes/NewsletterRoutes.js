@@ -18,7 +18,6 @@ var auth = jwt({
 router.post('/', auth, function(req, res) {
 	var news = new News(req.body);
 	news.user = req.payload.id;
-	console.log(news);
 	news.save(function(err, newsResult) {
 		if(err) return res.status(500).send({err: "Issues with server"});
 		if(!newsResult) return res.status(400).send({err: "Could not post news"});
@@ -85,7 +84,6 @@ router.put('/:id', function(req, res) {
 router.delete('/:id', function(req, res) {
 	News.remove({_id: req.params.id})
 	.exec(function(err, news) {
-		console.log(err);
 		if(err) return res.status(500).send({err: "Error with deleting the posts"});
 		if(!news) return res.status(400).send({err: "News does not exist!"});
 		res.send();

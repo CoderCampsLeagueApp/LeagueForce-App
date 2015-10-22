@@ -24,6 +24,13 @@
 			});
 			return q.promise;
 		};
+		o.unsubscribe = function(league){
+			var q = $q.defer();
+			$http.put('/api/user/unsubscribe/', league, getAuth()).success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise;
+		}
 		
 
 		o.createComment = function(comment) {
@@ -37,7 +44,6 @@
 		o.editComment = function(edit) {
 			var q = $q.defer();
 			$http.put('/api/comment/' + edit.id, edit).success(function(res) {
-				console.log(edit);
 				q.resolve(res);
 			});
 			return q.promise;

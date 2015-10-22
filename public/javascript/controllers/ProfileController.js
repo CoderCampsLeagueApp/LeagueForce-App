@@ -22,18 +22,20 @@
 				}
 			});
 			picmodal.result.then(function(res){
-				console.log(res);
 				vm.prof.pic = res;
 			});
 		};
+		vm.unsubscribe = function(league, idx){
+			ProfileFactory.unsubscribe(league).then(function(res){
+				vm.prof.leagueSubscribed.splice(idx, 1);
+			})
+		}
 		
 		
 
 
 		// Checks if user is logged in
 		if($rootScope._user) {
-			console.log("DEBUG: ProfileController: Looking for user") ;
-			console.log("DEBUG: $rootScope._user.id = " + $rootScope._user.id) ;
 			UserFactory.getUserLoggedIn($rootScope._user.id).then(function(res) {
 				vm.prof = res;
 			}) ;
@@ -43,7 +45,6 @@
 
 		vm.editProfile = function(profile) {
 			UserFactory.editProfile(vm.prof).then(function(res){
-				console.log(res);
 				vm.prof = res;
 				$state.go('ViewProfile', {'id': $rootScope._user.id });
 			})

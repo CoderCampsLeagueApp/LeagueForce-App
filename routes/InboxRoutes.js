@@ -16,7 +16,6 @@ router.post('/post', auth, function(req,res){
   msg.messages[0].sender = req.payload.id;
   msg.isdeleted = false;
   msg.user1 = req.payload.id;
-  console.log(msg);
   msg.save(function(err, result){
     if (err) return res.status(500).send({
       err: "Server Error"
@@ -66,9 +65,7 @@ router.post('/reply', auth, function(req, res){
   var message = req.body;
   message.created = new Date();
   message.sender = req.payload.id;
-  console.log('--------------------------------------');
   var id = req.body.id; 
-  console.log(message);
   
   Inbox.update({_id: id}, {$push: {messages: message}} )
   .exec(function(err, result){

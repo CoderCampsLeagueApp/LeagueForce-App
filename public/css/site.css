@@ -13,7 +13,7 @@ body {
   position:relative !important;
 }
 .bghover:hover{
-  opacity: 0.8;
+  opacity: 0.85;
 }
 .leaguetxtbox{
   height: 200px;
@@ -31,6 +31,10 @@ body {
   line-height: normal;
   position: relative !important;
 }
+.thborder{
+  border:solid 1px #4f4f4f;
+  padding: 15px;
+}
 .imgcenter{
   position: absolute;
   margin: auto;
@@ -45,11 +49,10 @@ body {
     top: 0;
     width: 100%;
     height: 200px;
-    opacity: 0.85;
+    opacity: 0.80;
 }
 .defbg{
-  background-color: rgba(14, 32, 56, 0.8);
-  border: ridge 1px #fff;
+  background-color: rgba(14, 32, 56, 0.9);
 }
 .center{
   display: block;
@@ -171,10 +174,6 @@ body {
 /* NewsLetter and Comments */
 
 
-.newsImage {
-	float: left;
-	padding-bottom: 30px;
-}
 
 .singleNewsImage {
 	height: 350px;
@@ -194,8 +193,12 @@ p.article {
 	width: 50em; 
 	word-wrap: break-word;
 }
-
-
+.lodd{
+  background-color: #e2e2e2;
+}
+.leven{
+  background-color: #fff;
+}
 /*Inbox Styling*/
 .msgModal{
   padding: 30px;
@@ -366,7 +369,6 @@ form .progress {
 .jumbotron{
   margin-bottom: 0;
 }
-
 /* League Views */
 #slides_control > div{
   height: 200px;

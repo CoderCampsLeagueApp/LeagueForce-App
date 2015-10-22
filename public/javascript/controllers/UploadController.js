@@ -28,7 +28,6 @@
         }, function (response) {
             if (response.status > 0) $scope.errorMsg = response.status 
                 + ': ' + response.data;
-            console.log($scope.errorMsg);
         }, function (evt) {
               vm.stat = true;
               $scope.progressVisible = true;

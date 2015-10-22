@@ -1,7 +1,7 @@
-<div ng-show='profile.background' style="height:400px; width:100%; background-color:#000000">
-	<img style="height:inherit" class="img-responsive" ng-src="{{profile.background}}">
+<div ng-show='profile.background' style="height:400px; width:100%;background-color:#000000;margin-top:50px;z-index:-4;position:relative">
+	<img style="max-height:550px;z-index:-4" class="img-responsive" ng-src="{{profile.background}}">
 </div>
-<div style="background-color:#d3d3d3">
+<div style="background-color:#d3d3d3;z-index:1">
 
 	<div class="container">
 		<div class="row">
@@ -23,8 +23,16 @@
 					</div>
 					<hr>
 					<h2 style="text-align:center">Subscribed Leagues</h2>
-					<div class="profLeague">
-						<h4>None</h4>
+					<div class="profLeague col-md-12">
+						<div ng-repeat='l in profile.leagueSubscribed'>
+							<div class="col-md-4" style="height:180px">
+								<img style="max-height:140px" class="img-responsive" ng-src="{{l.logo}}">
+								<p class="text-center text-info">{{l.name}}
+								<br>
+								<button class="text-center btn btn-info btn-sm">View League</button>
+								</p>
+							</div>	
+						</div>
 					</div>
 					<div class="hr"></div>
 					<h2 style="text-align:center">Comments</h2>

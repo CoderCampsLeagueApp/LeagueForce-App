@@ -17,7 +17,6 @@ router.post('/', auth, function(req, res) {
 	var comment = new Comment(req.body);
 	comment.created = new Date();
 	comment.user = req.payload.id;
-	console.log(comment);
 	comment.save(function(err, commentResult) {
 		if(err) return res.status(500).send({err: "Issues with server"});
 		if(!commentResult) return res.status(400).send({err: "Could not post comment"});
@@ -87,7 +86,6 @@ router.post('/reply', auth, function(req, res) {
 	var reply = req.body;
 	reply.created = new Date();
 	reply.user = req.payload.id;
-	console.log(reply);
 	Comment.update({_id: reply.comment}, {$push: {reply: reply}})
 	.populate({
 		path: 'reply.user',

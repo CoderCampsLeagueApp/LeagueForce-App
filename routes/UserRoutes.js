@@ -2,7 +2,7 @@ var express = require('express') ;
 var router = express.Router() ;
 var mongoose = require('mongoose') ;
 var User = mongoose.model('User') ;
-var jwt = require('jsonwebtoken') ;
+var jwt = require('express-jwt');
 var passport = require('passport') ;
 var cloudinary = require('cloudinary');
 var multiparty = require('multiparty');
@@ -12,7 +12,10 @@ var flash = require('express-flash') ;
 var async = require("async");
 var crypto = require('crypto') ;
 
-
+var auth = jwt({
+	userProperty: 'payload',
+	secret: '_secret_sauce'
+});
 
 router.post('/register', function (req, res) {
 	var smtpTransport = nodemailer.createTransport("SMTP", {
@@ -29,7 +32,6 @@ router.post('/register', function (req, res) {
 	// Set created date
 	req.body.created = new Date() ;
 
-	console.log(req.body);
 
 	// Bring in request, and add document from schema
 	var user = new User(req.body) ;
@@ -52,8 +54,6 @@ router.post('/register', function (req, res) {
 		// Nodemailer code
 		// rand = Math.floor((Math.random() * 100) + 54) ;
 		host = req.get('host') ;
-		console.log('DEBUG: UserRoutes.js: host: ') ;
-		console.log(host) ;
 		link = "http://" + req.get('host') + "/api/user/verify?id=" + rand + "&email=" + user.username;
 		mailOptions = {
 		to : user.username, // req.query.to,
@@ -61,7 +61,6 @@ router.post('/register', function (req, res) {
 		// html : 'Hello, <br> Please Click on the link to verify your email.<br><a href="' + link + '">Click here to verify</a>"' 
 		html : 'Hello, <br> Please Click on the link to verify your email.<br><a href="' + link + '">Click here to verify</a>' 
 	}
-	console.log(mailOptions) ;
 	smtpTransport.sendMail(mailOptions, function(error, response) {
 		if(error) {
 			console.log(error) ;
@@ -79,15 +78,11 @@ router.post('/register', function (req, res) {
 }) ;
 
 // router.get('/verify', function(req, res) {
-// 	console.log(req.protocol + ":/" + req.get('host')) ;
 // 	if((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
-// 		console.log("Domain matched. Information from Authentic email") ;
 // 		// get rand from the database
 // 		if(req.query.id == rand) {
-// 			console.log("Email verified") ;
 // 			res.end("<h1>Email " + mailOptions.to + " has been successfully verified") ;
 // 		} else {
-// 			console.log("Email is not verified") ;
 // 			res.end("<h1>Bad Request</h1>") ;
 // 		}
 // 	} else {
@@ -99,10 +94,6 @@ router.get('/verify', function(req, res) {
 	// Gets rand and email from URL.
 	var rand = req.query.id ;
 	var email = req.query.email ;
-	console.log("DEBUG: UserRoutes.js router.get(verify): id:") ;
-	console.log(rand) ;
-	console.log("DEBUG: UserRoutes.js router.get(verify): email:") ;
-	console.log(email) ;
 
 
 	// Need to find username on db
@@ -111,19 +102,13 @@ router.get('/verify', function(req, res) {
 
 	User.findOne({ username : email }, function(err, user) {
 		if(rand == user.rand) {
-			console.log("DEBUG: UserRoutes: router verify: Rand matched.") ;
 			// Now need to set isValidated to true.
 			user.isValidated = true ;
-			console.log("DEBUG: UserRoutes: router verify: " + user.isValidated) ;
 
 			// Getting host from req.
 			var host = req.get('host') ;
 
 			var appUrl = "http://" + host ;
-
-			console.log("DEBUG=======================appUrl==============================") ;
-			console.log("appUrl: " + appUrl) ;
-			console.log("============================appUrl==============================") ;
 
 
 			User.update({ _id : user.id }, user)
@@ -142,7 +127,6 @@ router.get('/verify', function(req, res) {
 // Login router
 router.post('/login', function(req, res, next) { 
 
-	console.log("Username from req.body: " + req.body.username) ;
 	var email = req.body.username ;
 
 	var isUserValidated ;
@@ -193,7 +177,6 @@ router.post('/forgot', function(req, res, next) {
 		if(err) console.log(err) ;
 		if(err) return res.status(500).send({ err: "Issues with the server" }) ;
 		if(!user) {
-			console.log("DEBUG: UserRoutes.js: router.post(/forgot): User not found") ;
 			return res.send("Error: No account with that email address.") ;
 		}
 
@@ -227,7 +210,6 @@ router.put('/resetPassword/:id', function(req, res) {
 			return res.send("Error: Not found.") ;
 		}
 		user.setPassword(req.body.password) ;
-		console.log(user) ;
 		User.update({ _id: req.body.id }, user)
 		.exec(function(err, user) {
 			if(err) ;
@@ -238,7 +220,7 @@ router.put('/resetPassword/:id', function(req, res) {
 	// userProfile.setPassword(req.body.password) ;
 	
 
-	// console.log(userProfile) ;
+
 	// User.update({ _id : req.body._id }, userProfile)
 	// .exec(function(err, user) {
 	// 	if(err) return res.status(500).send({ err: "error getting user to edit" }) ;
@@ -265,8 +247,7 @@ router.put('/resetPassword/:id', function(req, res) {
 // 					// return res.redirect('/forgot') ;
 // 				}
 
-// 				console.log("DEBUG: UserRoutes router post(/forgot) user = ") ;
-// 				console.log(user) ;
+
 
 // 				user.resetPasswordToken = token ;
 // 				user.resetPasswordExpires = Date.now() + 3600000 ; // 1 hour
@@ -312,7 +293,15 @@ router.put('/resetPassword/:id', function(req, res) {
 router.param('id', function(req, res, next, id) {
 	User.findOne({
 		_id : id
-	}) .exec(function(err, user) {
+	}).populate({
+		path: 'comments',
+		model: 'Comments',
+		select: 'created user body news'
+	}).populate({
+		path: 'leagueSubscribed',
+		model: 'League',
+		select: 'logo name'
+	}).exec(function(err, user) {
 		if(err) return next({
 			err : err,
 			type : 'client'
@@ -340,6 +329,14 @@ router.get('/:id', function(req, res) {
 	res.send(req.user) ;
 }) ;
 
+router.put('/unsubscribe',auth, function(req, res){
+	User.findOneAndUpdate({_id: req.payload.id}, {$pull: {leagueSubscribed: req.body._id}})
+	.exec(function(err, result){
+		if(err) return res.status(500).send({err: 'Error inside server for finding a user'});
+		if(!result) return res.status(400).send({err: "problem deleting the id to the user"});
+		res.send();
+	});
+});
 
 // Following is from Isaiah's app
 // May need it for generating JWT token
@@ -382,7 +379,6 @@ router.get('/auth/facebook/callback',
 	passport.authenticate('facebook', { failureRedirect: '/login' }),
 	function(req, res) {
 		if(req.user) {
-			console.log("DEBUG: router callback called.  generating token...") ;
 			var token = { token : req.user.generateJWT() }
 			res.redirect("/#/auth/token/" + token.token) ;
 		} else {
@@ -400,7 +396,6 @@ router.get('/auth/google/callback',
 	passport.authenticate('google', { failureRedirect: '/login' }),
 	function(req, res) {
 		if(req.user) {
-			console.log("DEBUG: router callback called.  generating token...") ;
 			var token = { token : req.user.generateJWT() }
 			res.redirect("/#/auth/token/" + token.token) ;
 		} else {
@@ -429,6 +424,10 @@ router.get('/profile/:id', function(req, res){
 		path: 'comments',
 		model: 'Comments',
 		select: 'created user body news'
+	}).populate({
+		path: 'leagueSubscribed',
+		model: 'League',
+		select: 'logo name'
 	})
 	.exec(function(err, user) {
 		if(err) return res.status(500).send({ err: "error getting user to edit" }) ;

@@ -13,7 +13,6 @@
 		
 		InboxFactory.getMessages($stateParams.id).then(function(res){
 			vm.inbox  = res;
-			console.log('All messages retrieved');
 		});
 
 		vm.showMessage = function(inbox){
@@ -51,7 +50,6 @@
 					pic: senderPic
 				};
 				
-				console.log(message);
 				vm.inboxMessage.messages.push(res);
 				vm.msg.message = "";
 			});

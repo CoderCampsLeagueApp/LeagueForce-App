@@ -64,8 +64,6 @@ passport.use(new FacebookStrategy({
 function(accessToken, refreshToken, profile, done) {
 	// process.nextTick is a Node.js function for asynchronous
 	// Waits for data to come back before continuing.
-	console.log("DEBUG: passport.js: Contents from profile") ;
-	console.log(profile) ;
 	process.nextTick(function() {
 		// Information for accessing our database
 		// Whatever is returned will be stored in profile.
@@ -156,8 +154,7 @@ function(accessToken, refreshToken, profile, done) {
 		// Whatever is returned will be stored in profile.
 		// Returns err if it cannot connect
 		User.findOne({ 'google.id' : profile.id }, function(err, user) {
-			// console.log("DEBUG: Contents of profile:") ;
-			// console.log(profile) ;
+
 			if(err) {
 				console.log('DEBUG: Error connecting') ;
 				return done(err) ;

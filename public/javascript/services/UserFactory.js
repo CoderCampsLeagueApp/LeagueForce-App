@@ -51,7 +51,6 @@
 		} ;
 
 		o.forgot = function(user) {
-			console.log(user) ;
 			var q = $q.defer() ;
 			$http.post('/api/user/forgot', user).success(function(res) {
 				q.resolve() ;
@@ -113,13 +112,11 @@
 		}
 
 		o.saveToken = function(token) {
-			console.log("DEBUG: UserFactory saveToken called") ;
 			window.localStorage.setItem("token", token) ;
 		}
 
 
 		o.editProfile = function(edit) {
-			console.log(edit);
 			var q = $q.defer();
 			$http.put('/api/user/' + edit._id, edit).success(
 				function(res) {
@@ -130,7 +127,6 @@
 
 		o.resetPassword = function(editedUser) {
 			var q = $q.defer() ;
-			console.log(editedUser) ;
 			$http.put('/api/user/resetPassword/' + editedUser.id, editedUser).success(
 				function(res) {
 					q.resolve(res) ;

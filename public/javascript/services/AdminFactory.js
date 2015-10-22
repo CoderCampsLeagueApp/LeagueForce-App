@@ -18,7 +18,6 @@
 		};
 
 		o.createLeague = function(league){
-			console.log(league);
 			var q = $q.defer();
 			$http.post('/api/league/', league, getAuth()).success(function(res){
 				q.resolve(res);
@@ -41,27 +40,22 @@
 		};
 
 		o.editLeague = function(league) {
-			console.log(league);
 			var q = $q.defer();
 			$http.put('/api/league/' + league._id, league, getAuth()).success(function(res) {
-				console.log('league edited');
 				q.resolve(res);
 			});
 			return q.promise;
 		};
 		//---------------------team--------------------------
 		o.createTeam = function(team){
-			console.log(team);
 			var q = $q.defer();
 			$http.post('/api/league/team', team, getAuth()).success(function(res) {
 				q.resolve();
-				console.log('hello');
 			});
 			return q.promise;
 		};
 
 		o.editTeam = function(team){
-			console.log(team);
 			var q = $q.defer();
 			$http.put('/api/league/team/edit', team, getAuth()).success(function(res) {
 				q.resolve();
@@ -72,11 +66,7 @@
 		o.deleteTeam = function(team){
 			var q = $q.defer();
 			var leagueId = {league: team.league };
-			console.log(team._id);
-			console.log("---------------------------");
-			console.log(leagueId);
 			$http.put('/api/league/team/delete/' + team._id, leagueId, getAuth()).success(function(res){
-				console.log('has been deleted');
 				q.resolve();
 			});
 			return q.promise;
@@ -144,7 +134,6 @@
 		o.createMatch = function(matches, leagueWeek) {
 			var q = $q.defer();
 			var match = {matches, leagueWeek}
-			console.log(match);
 			$http.post('/api/league/match/', match, getAuth()).success(function(res) {
 				q.resolve(res);
 			});

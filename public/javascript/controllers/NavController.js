@@ -23,7 +23,6 @@
 
 
 vm.register = function() {
-	console.log("DEBUG: NavController vm.register called.") ;
 	UserFactory.register(vm.user).then(function() {
 		vm.user = {} ;
 		vm.form = false;
@@ -31,14 +30,12 @@ vm.register = function() {
 } ;
 
 vm.login = function() {
-
-	console.log("DEBUG: NavController vm.login called.") ;
 	UserFactory.login(vm.user).then(function(res) {
 		if(res) {
-			console.log(res) ;
 			vm.confirm = res ;
 		} else {
-			vm.status = $rootScope._user ;
+			vm.status = $rootScope._user;
+			vm.status.subs = 
 			$state.go('Profile') ;
 		}
 	}) ;

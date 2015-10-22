@@ -5,11 +5,9 @@
 	ViewProfileController.$inject = ['InboxFactory', '$state', '$stateParams', '$rootScope', 'ProfileFactory', '$uibModal', '$scope'];
 
 	function ViewProfileController(InboxFactory, $state, $stateParams, $rootScope, ProfileFactory, $modal, $scope){
-		console.log($stateParams)
 		if($stateParams){
 		ProfileFactory.getProfile($stateParams.id).then(function(res){
 			$scope.profile = res;
-			console.log($scope.profile);
 		});
 		
 		}

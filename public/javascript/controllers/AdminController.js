@@ -18,9 +18,8 @@
 		var events = {
 			places_changed: function (searchBox) {
 				var place = searchBox.getPlaces();
-		        // console.log(place);
+
 		        if (!place || place == 'undefined' || place.length == 0) {
-		        	console.log('no place data :(');
 		        		return;
 		        	}
 
@@ -55,13 +54,11 @@
 		//Geolocation HTML5, using $scope.$apply-- digest cycle applies changes
 		vm.getLocation = function(){
 			$window.navigator.geolocation.getCurrentPosition(function(position){
-				console.log(position);
 				$scope.marker = {
 					latitude: position.coords.latitude,
 					longitude: position.coords.longitude
 				}
 				var newCenter = angular.copy($scope.marker);
-				console.log(newCenter.latitude);
 				$scope.$apply(function(){
 					$scope.map = { center: { latitude: newCenter.latitude, longitude: newCenter.longitude}, zoom: 14};
 				});
@@ -69,29 +66,6 @@
 			});
 		}
 
-
-		//--------------------Cloudinary-----------------------
-
-    // upload on file select or drop
-//     $scope.upload = function (file) {
-//     	// console.log(file);
-//     // 	vm.loading = true;
-//     // 	Upload.upload({
-//     // 		url: '/api/user/uploadPhoto',
-//     // 		data: {file: file, 'userId': vm.status._user.id}
-//     // 	}).then(function (resp) {
-// 				// vm.loading = false;
-
-//     // 		console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-//     // 	}, function (resp) {
-// 				// vm.loading = false;
-				
-//     // 		console.log('Error status: ' + resp.status);
-//     // 	}, function (evt) {
-//     // 		var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-//     // 		console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-//     // 	});
-// };
 
 
 
@@ -166,7 +140,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 					}
 					AdminFactory.editLeague(league).then(function(res){
 						vm.adminLeague = res;
-						console.log(res); 
 						$state.go('Admin.home');
 					});
 				};
@@ -190,7 +163,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 
 
 		vm.removeFeature = function(idx){
-			console.log(idx);
 			vm.league.features.splice(idx, 1);
 		};
 
@@ -199,7 +171,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		};
 
 		vm.removeImage = function(idx){
-			console.log(idx);
 			vm.league.images.splice(idx, 1);
 		};
 
@@ -247,7 +218,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			});
 		};
 		vm.editTeam = function(team){
-			console.log(team); 
 			AdminFactory.editTeam(team).then(function(res){
 				delete vm.team;
 				delete vm.coach;
@@ -262,7 +232,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.deleteTeam = function(team, idx){
 			
 			AdminFactory.deleteTeam(team).then(function(res){
-				console.log('has been deleted');
 				vm.adminLeague.teams.splice(idx, 1);
 			})
 		}
@@ -277,13 +246,9 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.team.teamMembers = [];
 			vm.coach = {};
 			vm.player = {};
-			console.log(vm.team);
-			console.log(vm.coach);
-			console.log(vm.player);
 		};
 
 		vm.addCoach = function(coach){
-			console.log(coach);
 			if (coach.isCoach  != true) coach.isSubCoach = true;
 			var copy = angular.copy(coach);
 			vm.team.teamMembers.push(copy);
@@ -296,7 +261,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			player.isPlayer = true;
 			var copy = angular.copy(player);
 			vm.team.teamMembers.push(copy);
-			console.log(player);
 			vm.player.name = '';
 			vm.player.teamMember = '';
 			vm.player.position = '';
@@ -330,9 +294,7 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 						vm.allmatches[i].t2name = vm.adminLeague.teams[j].name;
 					}
 				}
-				console.log(vm.allmatches);
 			}
-			// console.log(vm.allmatches);
 			$state.go('Admin.addmatch', {id: vm.week._id});
 		};
 
@@ -362,7 +324,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 				latitude: $scope.marker.latitude,
 				longitude: $scope.marker.longitude
 			};
-			console.log(copy);
 			vm.allmatches.push(copy);
 			vm.match.date = '';
 			vm.match.googleLocation = '';
@@ -371,7 +332,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		};
 
 		vm.removeMatch = function(idx){
-			console.log(idx);
 			vm.allmatches.splice(idx, 1);
 		};
 
@@ -432,7 +392,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		vm.draftRequest = function(draft) {
 			vm.newsletter.isPublished = false;
 			AdminFactory.postNewsletter(vm.newsletter).then(function(res) {				
-				//console.log(newsletter);
 				delete vm.newsletter;
 				$state.go('Admin.draftsmodal')
 			});
@@ -466,8 +425,6 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 			vm.newsletter = "";
 			vm.newsletter = {};
 			$state.go('Admin.home');
-			console.log(vm.newsletter);
-			console.log(newsletter);
 		};
 
 		

@@ -24,14 +24,12 @@
 		}
 		o.sendMessage = function(message){
 			var q = $q.defer();
-			console.log(message);
 			$http.post('/api/inbox/post', message, getAuth()).success(function(res){
 				q.resolve(res);
 			});
 			return q.promise;
 		}
 		o.reply = function(message){
-			console.log(message);
 			var q = $q.defer();
 			$http.post('/api/inbox/reply', message, getAuth()).success(function(res){
 				q.resolve(res);

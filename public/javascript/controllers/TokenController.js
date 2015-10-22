@@ -7,7 +7,6 @@
 
 	function TokenController(UserFactory, token, $state, $rootScope, $window) {
 		var vm = this ;
-		console.log("DEBUG: TokenController") ;
 		UserFactory.saveToken(token);
 
 		// $state.go('Profile') ;

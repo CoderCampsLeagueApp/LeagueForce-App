@@ -58,12 +58,18 @@
 			});
 			return q.promise;
 		};
+		o.subscribe = function(subscriber){
+			var q = $q.defer();
+			$http.put('/api/views/subscribe/', subscriber).success(function(res) {
+				q.resolve(res);
+			});
+			return q.promise;
+		}
 
 		//-------------Teams-----------------------
 		o.getTeam = function(id) {
 			var q = $q.defer();
 			$http.get('/api/views/team/' + id).success(function(res) {
-				console.log(res);
 				q.resolve(res);
 			});
 			return q.promise;

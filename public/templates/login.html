@@ -1,36 +1,37 @@
 <div class="container-fluid">
 	<div class="row">
 		<div ng-hide="vm.forgotPassword">
-			<div class="col-md-3">
-			</div>
-			<div class="col-md-6">
+			<!-- <div class="col-md-3">
+			</div> -->
+			<div class="col-md-12">
 				<form class="form-horizontal" role="form" ng-submit="nav.login()">
 					<div class="form-group">
 						<h3 class="text-center">Enter Your Login Credentials Below</h3>
-						<label for="inputEmail3" class="col-sm-2 control-label">
-							Email
+						<label for="inputEmail3" class="col-sm-4 control-label">
+							Email &nbsp&nbsp
 						</label>
-						<div class="col-sm-10">
+						<div class="col-sm-4">
 							<input type="text" class="form-control" id="inputEmail3" ng-model="nav.user.username" />
 						</div>
 					</div>
 					<div class="form-group">
 
-						<label for="inputPassword3" class="col-sm-2 control-label">
-							Password
+						<label for="inputPassword3" class="col-sm-4 control-label">
+							Password &nbsp&nbsp
 						</label>
-						<div class="col-sm-10">
+						<div class="col-sm-4">
 							<input type="password" class="form-control" id="inputPassword3" ng-model="nav.user.password" />
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="row col-sm-offset-2 col-sm-10">
-							<div class="col-md-offset-3 checkbox">
+						<div class="col-sm-offset-4 col-sm-4">
+							<div class="col-md-6 text-center">
 								<label>
 									<a ng-click="vm.forgotPassword=true">Forgot Password?</a>
 								</label>
-
-								<label>
+							</div>
+								<div>
+								<label class="col-md-6 text-center">
 									<a ui-sref='Register'>Register</a>
 								</label>
 							</div>
@@ -38,7 +39,7 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-4 col-sm-4">
 
 							<div class="alert alert-danger" ng-show="nav.confirm">
 								<strong>{{nav.confirm}}</strong> 
@@ -47,7 +48,7 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-4 col-sm-4">
 
 							<button type="submit" class="btn btn-default btn-block" ng-disabled="!nav.user.username || !nav.user.password">
 								Sign in
@@ -58,7 +59,7 @@
 			</div>
 			
 			<div class="form-group">
-				<div class="col-sm-offset-4 col-sm-5">
+				<div class="col-sm-offset-4 col-sm-4">
 
 					<a href="/api/user/auth/facebook" style="background-color:#4D65A3;color:white" class="btn btn-block">
 						Facebook 
@@ -69,17 +70,18 @@
 				</div>
 			</div>
 		</div>
-		<div ng-show="vm.forgotPassword">
+		<div ng-show="vm.forgotPassword" style="margin-top:150px">
 			<div ng-show="!vm.sentPassword">
 				<div class="form-group" style="margin-top:25px">
-					<label style="padding-left:20%" class="col-md-4">Confirm Password</label>
+					<label style="padding-left: 25%;" class="col-md-4">Type in Email :</label>
 					<div class="col-md-4">
 						<input class="form-control" placeholder="Confirm Password..." required ng-model="nav.user.username" />
 					</div>
 				</div>
 				<br>
 				<br>
-				<div class="form-group">
+				<br>
+				<div style="margin-top:12px">
 					<label class="col-md-4"></label>
 					<div class='col-md-4'>
 						<button class='btn btn-success btn-block' type="submit" ng-click="vm.sentPassword=true;nav.forgot()">Submit</button>

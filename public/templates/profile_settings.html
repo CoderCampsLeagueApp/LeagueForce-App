@@ -54,20 +54,33 @@
 				</div>
 				<hr>
 				<h2 style="text-align:center">Subscribed Leagues</h2>
-				<div class="profLeague">
-					<h4>None</h4>
-				</div>
+				<div class="profLeague col-md-12">
+						<div ng-repeat='l in vm.prof.leagueSubscribed track by $index'>
+							<div class="col-md-4" style="height:200px">
+								<img style="max-height:140px" class="img-responsive" ng-src="{{l.logo}}">
+								<p class="text-center text-info">{{l.name}}
+								<br>
+								<button ui-sref="SingleLeague({id: l._id})" class="text-center btn btn-info btn-sm">View League</button>
+								<br>
+								<button ng-click='vm.unsubscribe(l, $index)' class="text-center btn btn-danger btn-sm">Unsubscribe to League</button>
+								</p>
+							</div>	
+						</div>
+					</div>
 				<div class="hr"></div>
 				<h2 style="text-align:center">Comments</h2>
 				<div class="profComments">
-					<h4>none</h4>
-				</div>
+						<div ng-repeat="c in vm.prof.comments | orderBy: 'createdate': true">
+							<p><strong>Your Comment on {{c.created | date:"M/d/yyyy hh:mma"}}</strong>: {{c.body}}</p>
+							<h5><a ui-sref="SingleNewsletter({ id: c.news})">View Newsletter</a></h5>
+							<hr>
+						</div>
+					</div>
 				<div class="hr"></div>
 
 			</div>
 
 			
-			<!-- <a type="btn" ui-sref="EditProfile({id:vm.userLoggedIn._id})" class="btn btn-info">Edit Profile</a> -->
 		</div>
 	</div>
 </div>

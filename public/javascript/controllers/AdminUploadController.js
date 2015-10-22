@@ -32,7 +32,6 @@
     };
     
     vm.uploadimages = function (files) {
-        console.log(files);
         vm.files = files;
         if (files && files.length) {
             Upload.upload({

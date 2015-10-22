@@ -17,7 +17,6 @@
 				WebsiteFactory.getNewsletter($stateParams.id).then(function(res) {
 					vm.newsletter = res;
 					WebsiteFactory.getComments($stateParams.id).then(function(res) {
-						console.log(res)
 						vm.comments = res;
 					})
 				});
