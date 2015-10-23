@@ -69,9 +69,9 @@
 
 
 
-AdminFactory.getLeague($rootScope._user.id).then(function(res){
-	vm.adminLeague = res;
-});
+		AdminFactory.getLeague($rootScope._user.id).then(function(res){
+			vm.adminLeague = res;
+		});
 
 		//news
 		vm.newsletter = {};
@@ -104,6 +104,7 @@ AdminFactory.getLeague($rootScope._user.id).then(function(res){
 		//league ----------------------------------------
 		//creating League or editing
 		vm.createLeague = function(league, match){
+			console.log(league);
 			if(!league._id){
 				league.googleLocation = {};
 				if($scope.marker){

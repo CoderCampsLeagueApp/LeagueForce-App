@@ -323,6 +323,16 @@ router.get('/', function(req, res) {
 	}) ;
 }) ;
 
+router.get('/checkAdmin/:id', function(req, res) {
+	console.log(req.params.id);
+	User.findOne({_id: req.params.id})
+	.exec(function(err, user) {
+		if(err) return res.status(500).send({ err: "Error inside the server" });
+		if(!user) return res.status(400).send({ err: "Could not retrieve user." });
+		res.send(user.admin);
+	});
+});
+
 
 // Get user
 router.get('/:id', function(req, res) {

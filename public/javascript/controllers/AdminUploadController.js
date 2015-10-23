@@ -2,7 +2,7 @@
 	angular.module('app')
 	.controller('AdminUploadController', AdminUploadController);
 
-	AdminUploadController.$inject = ['$scope', 'Upload', '$timeout'];
+	AdminUploadController.$inject = ['$scope', 'Upload', '$timeout', '$rootScope'];
 
 	function AdminUploadController($scope, Upload, $timeout){
 		var vm = this;

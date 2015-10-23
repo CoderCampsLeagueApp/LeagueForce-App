@@ -19,7 +19,7 @@
 
 		o.createLeague = function(league){
 			var q = $q.defer();
-			$http.post('/api/league/', league, getAuth()).success(function(res){
+			$http.post('/api/league/l/', league, getAuth()).success(function(res){
 				q.resolve(res);
 			});
 			return q.promise;

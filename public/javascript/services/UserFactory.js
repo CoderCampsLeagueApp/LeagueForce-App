@@ -39,7 +39,13 @@
 				return false ;
 			}
 		} ;
-
+		o.checkAdmin = function(user){
+			var q = $q.defer();
+			$http.get('/api/user/checkAdmin/' +  user.id).success(function(res) {
+				q.resolve(res);
+			})
+			return q.promise;
+		};
 
 		o.register = function(user) {
 

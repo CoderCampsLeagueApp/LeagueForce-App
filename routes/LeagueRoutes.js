@@ -16,17 +16,16 @@ var auth = jwt({
 
 
 
-// Middleware checks if user is admin.
-// router.use('/', auth, function(req, res, next) {
-// 	User.findOne({
-// 		_id : req.payload.id
-// 	}, function(err, user) {
-// 		req.user = user ;
-// 		if(user.admin) {
-// 			next() ;
-// 		} ;
-// 	}) ;
-// }) ;
+router.use('/l', auth, function(req, res, next) {
+	User.findOne({
+		_id : req.payload.id
+	}, function(err, user) {
+		req.user = user ;
+		if(user.admin) {
+			next() ;
+		}else console.log('access Denied');
+	}) ;
+}) ;
 
 
 
@@ -49,17 +48,17 @@ router.get('/:id', auth, function(req, res) {
 	});
 });
 
-router.get('/', auth, function(req, res) {
-	League.find({})
-	.exec(function(err, league) {
-		if(err) return res.status(500).send({err: "Error getting all leagues"});
-		if(!league) return res.status(400).send({err: "Leagues do not exist"});
-		res.send(league);
-	});
-});
+// router.get('/', auth, function(req, res) {
+// 	League.find({})
+// 	.exec(function(err, league) {
+// 		if(err) return res.status(500).send({err: "Error getting all leagues"});
+// 		if(!league) return res.status(400).send({err: "Leagues do not exist"});
+// 		res.send(league);
+// 	});
+// });
 
 //------------Creating a League-----------
-router.post('/', auth, function(req, res) {
+router.post('/l', auth, function(req, res) {
 	var league = new League(req.body);
 	league.admin = req.payload.id;
 	league.isDisplay = false;
